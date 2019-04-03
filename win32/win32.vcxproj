@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\externals\glew\include\GL;..\externals\glfw\include\GLFW;$(IncludePath)</IncludePath>
+    <IncludePath>..\externals\glew\include\GL;..\externals\glfw\include\GLFW;..\externals\rapidjson;$(IncludePath)</IncludePath>
     <LibraryPath>..\externals\glew\bin\Release\Win32;..\externals\glew\lib\Release\Win32;..\externals\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
     <SourcePath>..\classes;$(SourcePath)</SourcePath>
   </PropertyGroup>
@@ -124,7 +124,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\classes\FileUtils.cpp" />
     <ClCompile Include="..\classes\main.cpp" />
+    <ClCompile Include="..\classes\ResourcesManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\classes\FileUtils.h" />
+    <ClInclude Include="..\classes\ResourcesManager.h" />
+    <ClInclude Include="..\classes\VECommon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
