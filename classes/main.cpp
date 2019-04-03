@@ -2,12 +2,17 @@
 #include <vector>
 #include <queue>
 
+#include "FileUtils.h"
+#include "ResourcesManager.h"
+
 // GLEW
 #define GLEW_STATIC
 #include <glew.h>
 
 // GLFW
 #include <glfw3.h>
+
+_USEVE
 
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -36,6 +41,10 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 // The MAIN function, from here we start the application and run the game loop
 int main()
 {
+	RESOURCES->parceResConfig( "resdb/resources.json" );
+
+
+
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
     // Init GLFW
     glfwInit();

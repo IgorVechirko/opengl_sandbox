@@ -1,0 +1,4 @@
+{
+	"VERTES_SHADER" : "shaders/fragment.fsh",
+	"FRAGMENT_SHADER" : "shaders/vertex.vsh"
+}
