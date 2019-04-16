@@ -3,6 +3,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <map>
@@ -15,6 +16,13 @@
 
 #include <rapidjson.h>
 #include <document.h>
+
+// GLEW
+#define GLEW_STATIC
+#include <glew.h>
+
+// GLFW
+#include <glfw3.h>
 
 #define _VESTART namespace VEngine {
 

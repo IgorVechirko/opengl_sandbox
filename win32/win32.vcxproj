@@ -127,10 +127,12 @@
     <ClCompile Include="..\classes\FileUtils.cpp" />
     <ClCompile Include="..\classes\main.cpp" />
     <ClCompile Include="..\classes\ResourcesManager.cpp" />
+    <ClCompile Include="..\classes\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\FileUtils.h" />
     <ClInclude Include="..\classes\ResourcesManager.h" />
+    <ClInclude Include="..\classes\ShaderProgram.h" />
     <ClInclude Include="..\classes\VECommon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

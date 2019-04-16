@@ -19,6 +19,9 @@
     <Filter Include="Source Files\data">
       <UniqueIdentifier>{ec573eaa-4114-4b66-8cb3-f4148cc1c481}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\shaders">
+      <UniqueIdentifier>{d945a962-1597-4e0a-9772-1766e68a849c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="..\classes\ResourcesManager.cpp">
       <Filter>Source Files\data</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\ShaderProgram.cpp">
+      <Filter>Source Files\shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -40,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="..\classes\ResourcesManager.h">
       <Filter>Source Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\ShaderProgram.h">
+      <Filter>Source Files\shaders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
