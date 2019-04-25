@@ -81,6 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\externals\glm\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\externals\glew\bin\Release\Win32;..\externals\glew\lib\Release\Win32;..\externals\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -124,13 +125,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\classes\Line.cpp" />
+    <ClCompile Include="..\classes\Point.cpp" />
+    <ClCompile Include="..\classes\Primitive.cpp" />
     <ClCompile Include="..\classes\FileUtils.cpp" />
     <ClCompile Include="..\classes\main.cpp" />
+    <ClCompile Include="..\classes\Rectangle.cpp" />
     <ClCompile Include="..\classes\ResourcesManager.cpp" />
     <ClCompile Include="..\classes\ShaderProgram.cpp" />
+    <ClCompile Include="..\classes\VECommon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\classes\Line.h" />
+    <ClInclude Include="..\classes\Point.h" />
+    <ClInclude Include="..\classes\Primitive.h" />
     <ClInclude Include="..\classes\FileUtils.h" />
+    <ClInclude Include="..\classes\Rectangle.h" />
     <ClInclude Include="..\classes\ResourcesManager.h" />
     <ClInclude Include="..\classes\ShaderProgram.h" />
     <ClInclude Include="..\classes\VECommon.h" />

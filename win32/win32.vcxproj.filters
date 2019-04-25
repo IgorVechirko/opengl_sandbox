@@ -22,6 +22,9 @@
     <Filter Include="Source Files\shaders">
       <UniqueIdentifier>{d945a962-1597-4e0a-9772-1766e68a849c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\primitives">
+      <UniqueIdentifier>{36d6b0c0-c25f-4f8c-bf15-b0687bb07d2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -36,6 +39,21 @@
     <ClCompile Include="..\classes\ShaderProgram.cpp">
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\Rectangle.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Primitive.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\VECommon.cpp">
+      <Filter>Source Files\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Line.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Point.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -49,6 +67,18 @@
     </ClInclude>
     <ClInclude Include="..\classes\ShaderProgram.h">
       <Filter>Source Files\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Rectangle.h">
+      <Filter>Source Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Primitive.h">
+      <Filter>Source Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Line.h">
+      <Filter>Source Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Point.h">
+      <Filter>Source Files\primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

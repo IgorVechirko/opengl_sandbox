@@ -17,6 +17,8 @@
 #include <rapidjson.h>
 #include <document.h>
 
+#include "glm.hpp"
+
 // GLEW
 #define GLEW_STATIC
 #include <glew.h>
@@ -29,5 +31,56 @@
 #define _VEEND }
 
 #define _USEVE using namespace::VEngine;
+
+
+_VESTART
+
+typedef glm::vec2 Size;
+typedef glm::vec2 Vec;
+
+struct RGBA
+{
+	float _r;
+	float _g;
+	float _b;
+	float _a;
+
+	RGBA()
+		: _r(0.0f)
+		, _g(0.0f)
+		, _b(0.0f)
+		, _a(0.0f)
+	{};
+
+	RGBA(float r, float g, float b, float a = 1.0f )
+	{
+		_r = r;
+		_g = g;
+		_b = b;
+		_a = a;
+	};
+
+	static const RGBA WHITE;
+	static const RGBA RED;
+	static const RGBA BLACK;
+};
+
+struct Vertex
+{
+	Vec _pos;
+	RGBA _color;
+
+	Vertex()
+	{};
+
+	Vertex( const Vec& pos, const RGBA& color )
+	{
+		_pos = pos;
+		_color = color; 
+	}
+};
+
+_VEEND
+
 
 #endif
