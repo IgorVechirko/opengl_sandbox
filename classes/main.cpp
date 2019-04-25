@@ -7,6 +7,7 @@
 #include "Rectangle.h"
 #include "Line.h"
 #include "Point.h"
+#include "Triangle.h"
 
 _USEVE
 
@@ -45,6 +46,11 @@ int main()
 	auto newPoint = Point::create();
 	newPoint->setColor(RGBA::BLACK);
 	primitives.push_back(newPoint);
+
+	auto newTriangle = Triangle::create();
+	newTriangle->setPoints(Vec(0.0f, 0.9f), Vec(-0.9f, -0.9f));
+	newTriangle->setColor(RGBA::GREEN);
+	primitives.push_back(newTriangle);
 
     // Game loop
     while (true)

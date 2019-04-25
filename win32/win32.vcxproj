@@ -133,6 +133,7 @@
     <ClCompile Include="..\classes\Rectangle.cpp" />
     <ClCompile Include="..\classes\ResourcesManager.cpp" />
     <ClCompile Include="..\classes\ShaderProgram.cpp" />
+    <ClCompile Include="..\classes\Triangle.cpp" />
     <ClCompile Include="..\classes\VECommon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,7 @@
     <ClInclude Include="..\classes\Rectangle.h" />
     <ClInclude Include="..\classes\ResourcesManager.h" />
     <ClInclude Include="..\classes\ShaderProgram.h" />
+    <ClInclude Include="..\classes\Triangle.h" />
     <ClInclude Include="..\classes\VECommon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

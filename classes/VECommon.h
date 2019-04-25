@@ -63,6 +63,7 @@ struct RGBA
 	static const RGBA WHITE;
 	static const RGBA RED;
 	static const RGBA BLACK;
+	static const RGBA GREEN;
 };
 
 struct Vertex

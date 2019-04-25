@@ -54,6 +54,9 @@
     <ClCompile Include="..\classes\Point.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\Triangle.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -78,6 +81,9 @@
       <Filter>Source Files\primitives</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Point.h">
+      <Filter>Source Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Triangle.h">
       <Filter>Source Files\primitives</Filter>
     </ClInclude>
   </ItemGroup>
