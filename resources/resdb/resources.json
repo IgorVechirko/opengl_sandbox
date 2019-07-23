@@ -1,4 +1,6 @@
 {
 	"FRAGMENT_SHADER" : "shaders/fragment.fsh",
-	"VERTES_SHADER" : "shaders/vertex.vsh"
+	"VERTES_SHADER" : "shaders/vertex.vsh",
+
+	"CONTAINER" : "textures/container.jpg"
 }
