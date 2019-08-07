@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\classes\AutoRelesaePool.cpp" />
     <ClCompile Include="..\classes\Line.cpp" />
     <ClCompile Include="..\classes\Point.cpp" />
     <ClCompile Include="..\classes\Primitive.cpp" />
@@ -134,20 +135,21 @@
     <ClCompile Include="..\classes\Rectangle.cpp" />
     <ClCompile Include="..\classes\ResourcesManager.cpp" />
     <ClCompile Include="..\classes\ShaderProgram.cpp" />
-    <ClCompile Include="..\classes\Sprite.cpp" />
+    <ClCompile Include="..\classes\Ref.cpp" />
     <ClCompile Include="..\classes\Texture2D.cpp" />
     <ClCompile Include="..\classes\Triangle.cpp" />
     <ClCompile Include="..\classes\VECommon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\classes\AutoRelesaePool.h" />
     <ClInclude Include="..\classes\Line.h" />
     <ClInclude Include="..\classes\Point.h" />
     <ClInclude Include="..\classes\Primitive.h" />
     <ClInclude Include="..\classes\FileUtils.h" />
     <ClInclude Include="..\classes\Rectangle.h" />
+    <ClInclude Include="..\classes\Ref.h" />
     <ClInclude Include="..\classes\ResourcesManager.h" />
     <ClInclude Include="..\classes\ShaderProgram.h" />
-    <ClInclude Include="..\classes\Sprite.h" />
     <ClInclude Include="..\classes\Texture2D.h" />
     <ClInclude Include="..\classes\Triangle.h" />
     <ClInclude Include="..\classes\VECommon.h" />
