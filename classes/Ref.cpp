@@ -34,6 +34,7 @@ void Ref::autorelease()
 {
 	if ( !_autorelesed )
 	{
+		_autorelesed = true;
 		AutoReleasePool::getInstance()->addRef( this );
 	}
 }

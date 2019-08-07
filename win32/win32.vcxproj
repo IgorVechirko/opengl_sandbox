@@ -127,7 +127,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\AutoRelesaePool.cpp" />
+    <ClCompile Include="..\classes\GLRender.cpp" />
     <ClCompile Include="..\classes\Line.cpp" />
+    <ClCompile Include="..\classes\Node.cpp" />
     <ClCompile Include="..\classes\Point.cpp" />
     <ClCompile Include="..\classes\Primitive.cpp" />
     <ClCompile Include="..\classes\FileUtils.cpp" />
@@ -142,7 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\AutoRelesaePool.h" />
+    <ClInclude Include="..\classes\GLRender.h" />
     <ClInclude Include="..\classes\Line.h" />
+    <ClInclude Include="..\classes\Node.h" />
     <ClInclude Include="..\classes\Point.h" />
     <ClInclude Include="..\classes\Primitive.h" />
     <ClInclude Include="..\classes\FileUtils.h" />

@@ -32,6 +32,7 @@ void AutoReleasePool::addRef( Ref* newRef )
 	auto findIt = std::find( _refs.begin(), _refs.end(), newRef );
 	if ( findIt == _refs.end() )
 	{
+		newRef->retain();
 		_refs.push_back( newRef );
 	}
 }

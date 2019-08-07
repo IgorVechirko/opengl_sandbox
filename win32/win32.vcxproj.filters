@@ -34,6 +34,12 @@
     <Filter Include="Source Files\autorelease">
       <UniqueIdentifier>{79d8c4dd-4c6e-4a29-b095-5384be042c40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\nodes">
+      <UniqueIdentifier>{5f8d9951-3a7b-407c-a07f-e7b41970c0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\render">
+      <UniqueIdentifier>{6f550add-cb65-42a5-b218-d3f1a0a5ddfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -75,6 +81,12 @@
     <ClCompile Include="..\classes\Ref.cpp">
       <Filter>Source Files\autorelease</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\Node.cpp">
+      <Filter>Source Files\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\GLRender.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -112,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="..\classes\Ref.h">
       <Filter>Source Files\autorelease</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Node.h">
+      <Filter>Source Files\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\GLRender.h">
+      <Filter>Source Files\render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
