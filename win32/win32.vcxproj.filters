@@ -25,6 +25,9 @@
     <Filter Include="Source Files\primitives">
       <UniqueIdentifier>{36d6b0c0-c25f-4f8c-bf15-b0687bb07d2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\textures">
+      <UniqueIdentifier>{94988e3d-354d-4f81-b165-6453ceb56bab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -57,6 +60,12 @@
     <ClCompile Include="..\classes\Triangle.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\Texture2D.cpp">
+      <Filter>Source Files\textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Sprite.cpp">
+      <Filter>Source Files\textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -85,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="..\classes\Triangle.h">
       <Filter>Source Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Texture2D.h">
+      <Filter>Source Files\textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Sprite.h">
+      <Filter>Source Files\textures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

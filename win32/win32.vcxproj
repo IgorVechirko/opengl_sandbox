@@ -134,6 +134,8 @@
     <ClCompile Include="..\classes\Rectangle.cpp" />
     <ClCompile Include="..\classes\ResourcesManager.cpp" />
     <ClCompile Include="..\classes\ShaderProgram.cpp" />
+    <ClCompile Include="..\classes\Sprite.cpp" />
+    <ClCompile Include="..\classes\Texture2D.cpp" />
     <ClCompile Include="..\classes\Triangle.cpp" />
     <ClCompile Include="..\classes\VECommon.cpp" />
   </ItemGroup>
@@ -145,6 +147,8 @@
     <ClInclude Include="..\classes\Rectangle.h" />
     <ClInclude Include="..\classes\ResourcesManager.h" />
     <ClInclude Include="..\classes\ShaderProgram.h" />
+    <ClInclude Include="..\classes\Sprite.h" />
+    <ClInclude Include="..\classes\Texture2D.h" />
     <ClInclude Include="..\classes\Triangle.h" />
     <ClInclude Include="..\classes\VECommon.h" />
   </ItemGroup>
