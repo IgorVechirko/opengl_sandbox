@@ -3,17 +3,25 @@
 
 #include "VECommon.h"
 
+#include "Ref.h"
+
 _VESTART
 
-class ShaderProgram
+class ShaderProgram : public Ref
 {
 
 	GLuint _programID;
 
+
+	ShaderProgram();
+
+	bool init( const std::string& verPath, const std::string& fragPath );
+
 	public:
 
-		ShaderProgram( const std::string& verPath, const std::string& fragPath );
 		virtual ~ShaderProgram();
+
+		static ShaderProgram* create( const std::string& verPath, const std::string& fragPath );
 
 		GLuint getProgramID();
 };

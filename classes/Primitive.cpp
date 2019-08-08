@@ -1,23 +1,35 @@
 #include "Primitive.h"
 
 #include "ResourcesManager.h"
+#include "ShaderProgram.h"
 
 _USEVE
 
 Primitive::Primitive()
-	: _program( RES_PATH("VERTES_SHADER"), RES_PATH("FRAGMENT_SHADER") )
+	: _program( nullptr )
 	, _verticesDirty(true)
 	, _vao(0)
 	, _vbo(0)
 	, _ebo(0)
 	, _position(0.0f,0.0f)
 {
+	_program = ShaderProgram::create( RES_PATH("VERTES_SHADER"), RES_PATH("FRAGMENT_SHADER" ) );
+	if ( _program )
+	{
+		_program->retain();
+	}
+
 	glGenVertexArrays(1, &_vao);
 	glGenBuffers(1, &_vbo);
 	glGenBuffers(1, &_ebo);
 }
 Primitive::~Primitive()
 {
+	if ( _program )
+	{
+		_program->release();
+	}
+
 	glDeleteVertexArrays(1, &_vao);
 	glDeleteBuffers(1, &_vbo);
 	glDeleteBuffers(2, &_ebo);
@@ -82,7 +94,9 @@ void Primitive::draw()
 		_verticesDirty = false;
 	}
 
-	glUseProgram(_program.getProgramID());
+	if ( _program )
+		glUseProgram(_program->getProgramID());
+
 	glBindVertexArray(_vao);
 
 	glDrawElements(getDrawElement(), _indices.size(), GL_UNSIGNED_INT, 0);

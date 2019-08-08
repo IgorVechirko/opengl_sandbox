@@ -1,23 +1,30 @@
 #ifndef Texture2D_H
 #define Texture2D_H
 
-#include "VECommon.h"
+#include "Ref.h"
+
+_VESTART
 
 
-class Texture2D
+class Texture2D : public Ref
 {
 	GLuint _textureID;
 
 
+	Texture2D();
+
+	bool init( const std::string& aTextPath );
+
 	public:
 
-		Texture2D() = delete;
-		Texture2D( const std::string& aTextPath );
 		virtual ~Texture2D();
+
+		static Texture2D* create( const std::string& aTextPath );
 
 		GLuint getTextureID();
 };
 
+_VEEND
 
 
 #endif

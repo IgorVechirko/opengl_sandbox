@@ -3,7 +3,6 @@
 
 
 #include "VECommon.h"
-#include "ShaderProgram.h"
 
 
 #define CREATE_DRAW_PRIMITIVE_FUNC( __TYPE__ )\
@@ -16,7 +15,7 @@ static __TYPE__* create()\
 
 _VESTART
 
-
+class ShaderProgram;
 class Primitive
 {
 
@@ -31,7 +30,7 @@ class Primitive
 	GLuint _vao;
 	GLuint _ebo;
 
-	ShaderProgram _program;
+	ShaderProgram* _program;
 
 
 	void fillBuffers();

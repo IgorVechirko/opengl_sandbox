@@ -4,8 +4,31 @@
 
 _USEVE
 
-Texture2D::Texture2D( const std::string& aTextPath )
+Texture2D::Texture2D()
 	: _textureID( 0 )
+{
+}
+Texture2D::~Texture2D()
+{
+	glDeleteTextures( 1, &_textureID );
+	_textureID = 0;
+}
+Texture2D* Texture2D::create(const std::string& aTextPath)
+{
+	Texture2D* ret = new Texture2D();
+
+	if ( ret && ret->init( aTextPath ) )
+	{
+		ret->autorelease();
+		return ret;
+	}
+	else
+	{
+		delete ret;
+		return nullptr;
+	}
+}
+bool Texture2D::init( const std::string& aTextPath )
 {
 	glGenTextures( 1, &_textureID );
 	glBindTexture( GL_TEXTURE_2D, _textureID );
@@ -17,12 +40,10 @@ Texture2D::Texture2D( const std::string& aTextPath )
 
 	SOIL_free_image_data(image);
 	glBindTexture( GL_TEXTURE_2D, 0 );
+
+	return true;
 }
-Texture2D::~Texture2D()
-{
-	glDeleteTextures( 1, &_textureID );
-	_textureID = 0;
-}
+
 GLuint Texture2D::getTextureID()
 {
 	return _textureID;

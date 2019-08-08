@@ -4,8 +4,30 @@
 
 _USEVE
 
-ShaderProgram::ShaderProgram(const std::string& verPath, const std::string& fragPath)
+ShaderProgram::ShaderProgram()
 	: _programID(NULL)
+{
+}
+ShaderProgram::~ShaderProgram()
+{
+	glDeleteProgram(_programID);
+}
+ShaderProgram* ShaderProgram::create(const std::string& verPath, const std::string& fragPath)
+{
+	ShaderProgram* ret = new ShaderProgram();
+
+	if ( ret && ret->init( verPath, fragPath ) )
+	{
+		ret->autorelease();
+		return ret;
+	}
+	else
+	{
+		delete ret;
+		return nullptr;
+	}
+}
+bool ShaderProgram::init( const std::string& verPath, const std::string& fragPath )
 {
 	std::string vertexSource = FileUtils::getInstance()->getStringFromFile(verPath);
 	std::string fragmentSource = FileUtils::getInstance()->getStringFromFile(fragPath);
@@ -25,6 +47,8 @@ ShaderProgram::ShaderProgram(const std::string& verPath, const std::string& frag
 		std::cout << "vertex shader compile error: " + std::string(infoLog);
 		delete[] infoLog;
 		logSize = 0;
+
+		return false;
 	}
 
 
@@ -40,6 +64,8 @@ ShaderProgram::ShaderProgram(const std::string& verPath, const std::string& frag
 		std::cout << "fragment shader compile error: " + std::string(infoLog);
 		delete[] infoLog;
 		logSize = 0;
+
+		return false;
 	}
 
 
@@ -55,14 +81,14 @@ ShaderProgram::ShaderProgram(const std::string& verPath, const std::string& frag
 		glGetProgramInfoLog( _programID, logSize, NULL, infoLog );
 		std::cout << "program compile error: " + std::string(infoLog);
 		delete [] infoLog;
+
+		return false;
 	}
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-}
-ShaderProgram::~ShaderProgram()
-{
-	glDeleteProgram(_programID);
+
+	return true;
 }
 GLuint ShaderProgram::getProgramID()
 {
