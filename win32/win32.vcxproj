@@ -138,6 +138,7 @@
     <ClCompile Include="..\classes\ResourcesManager.cpp" />
     <ClCompile Include="..\classes\ShaderProgram.cpp" />
     <ClCompile Include="..\classes\Ref.cpp" />
+    <ClCompile Include="..\classes\Sprite.cpp" />
     <ClCompile Include="..\classes\Texture2D.cpp" />
     <ClCompile Include="..\classes\Triangle.cpp" />
     <ClCompile Include="..\classes\VECommon.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="..\classes\Ref.h" />
     <ClInclude Include="..\classes\ResourcesManager.h" />
     <ClInclude Include="..\classes\ShaderProgram.h" />
+    <ClInclude Include="..\classes\Sprite.h" />
     <ClInclude Include="..\classes\Texture2D.h" />
     <ClInclude Include="..\classes\Triangle.h" />
     <ClInclude Include="..\classes\VECommon.h" />

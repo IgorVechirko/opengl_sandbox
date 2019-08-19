@@ -24,6 +24,8 @@ class ShaderProgram : public Ref
 		static ShaderProgram* create( const std::string& verPath, const std::string& fragPath );
 
 		GLuint getProgramID();
+
+		void useProgram();
 };
 
 _VEEND

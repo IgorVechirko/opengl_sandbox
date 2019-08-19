@@ -84,6 +84,9 @@
     <ClCompile Include="..\classes\GLRender.cpp">
       <Filter>Source Files\render</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\Sprite.cpp">
+      <Filter>Source Files\nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="..\classes\GLRender.h">
       <Filter>Source Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Sprite.h">
+      <Filter>Source Files\nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

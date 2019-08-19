@@ -1,6 +1,9 @@
 {
 	"FRAGMENT_SHADER" : "shaders/fragment.fsh",
 	"VERTES_SHADER" : "shaders/vertex.vsh",
+	"SPRITE_FRAGMENT" : "shaders/sprite_fragment.fsh",
+	"SPRITE_VERTEX" : "shaders/sprite_vertex.vsh",
 
-	"CONTAINER" : "textures/container.jpg"
+	"CONTAINER" : "textures/container.jpg",
+	"SMILE" : "textures/smile.png"
 }

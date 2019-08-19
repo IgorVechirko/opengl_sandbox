@@ -26,9 +26,9 @@ _VESTART
 class Node : public Ref
 {
 
-	Node();
-
 protected:
+
+	Node();
 
 public:
 

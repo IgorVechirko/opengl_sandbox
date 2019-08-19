@@ -11,6 +11,7 @@
 #include "GLRender.h"
 #include "Node.h"
 #include "AutoRelesaePool.h"
+#include "Sprite.h"
 
 _USEVE
 
@@ -25,9 +26,9 @@ int main()
 
 	GLRender::getInstance()->init();
 
-	auto myNode = Node::create();
+	auto mySprite = Sprite::create( RES_PATH("SMILE") );
 
-	GLRender::getInstance()->addNodeForDraw( myNode );
+	GLRender::getInstance()->addNodeForDraw( mySprite );
 
     // Game loop
     while (true)
