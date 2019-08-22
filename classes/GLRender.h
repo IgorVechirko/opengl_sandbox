@@ -32,6 +32,9 @@ public:
 	void addNodeForDraw( Node* node );
 	void delNodeFromDraw( Node* node );
 
+	GLuint getWindowWidth();
+	GLuint getWindowHeight();
+
 	void draw();
 };
 

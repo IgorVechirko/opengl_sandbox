@@ -6,8 +6,8 @@ _USEVE
 
 GLRender::GLRender()
 	: _window( nullptr )
-	, _windowWidth( 800 )
-	, _windowHeight( 600 )
+	, _windowWidth( 1024 )
+	, _windowHeight( 1024 )
 {
 }
 GLRender::~GLRender()
@@ -68,6 +68,14 @@ void GLRender::delNodeFromDraw( Node* node )
 		node->release();
 		_nodes.erase( findIt );
 	}
+}
+GLuint GLRender::getWindowWidth()
+{
+	return _windowWidth;
+}
+GLuint GLRender::getWindowHeight()
+{
+	return _windowHeight;
 }
 void GLRender::draw()
 {

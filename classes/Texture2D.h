@@ -8,6 +8,9 @@ _VESTART
 
 class Texture2D : public Ref
 {
+	int _pixelsWidth;
+	int _pixelsHeight;
+
 	GLuint _textureID;
 
 
@@ -22,6 +25,9 @@ class Texture2D : public Ref
 		static Texture2D* create( const std::string& aTextPath );
 
 		GLuint getTextureID();
+
+		int getPixelthWidth();
+		int getPixelthHeight();
 };
 
 _VEEND

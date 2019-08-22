@@ -24,6 +24,8 @@ class Sprite : public Node
 	GLuint _vao;
 	GLuint _ebo;
 
+	void updateVertices( const Size& size );
+
 protected:
 
 	Sprite();
