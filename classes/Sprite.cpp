@@ -115,7 +115,15 @@ void Sprite::draw()
 		glBindTexture(GL_TEXTURE_2D, _texture->getTextureID() );
 
 	if( _shader )
+	{
+		GLuint transformLoc = glGetUniformLocation( _shader->getProgramID(), "transform" );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transformLoc, 1, GL_FALSE, glm::value_ptr( getTransMatrix() ) );
+
 		_shader->useProgram();
+	}
+
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
 	glBindVertexArray(_vao);
 	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0);

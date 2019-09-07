@@ -16,9 +16,6 @@
     <Filter Include="Source Files\base">
       <UniqueIdentifier>{c5dece37-8a74-4f89-b339-0188d701140d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\data">
-      <UniqueIdentifier>{ec573eaa-4114-4b66-8cb3-f4148cc1c481}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\shaders">
       <UniqueIdentifier>{d945a962-1597-4e0a-9772-1766e68a849c}</UniqueIdentifier>
     </Filter>
@@ -37,16 +34,19 @@
     <Filter Include="Source Files\render">
       <UniqueIdentifier>{6f550add-cb65-42a5-b218-d3f1a0a5ddfa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\files_utils">
+      <UniqueIdentifier>{ec573eaa-4114-4b66-8cb3-f4148cc1c481}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\FileUtils.cpp">
-      <Filter>Source Files\data</Filter>
+      <Filter>Source Files\files_utils</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\ResourcesManager.cpp">
-      <Filter>Source Files\data</Filter>
+      <Filter>Source Files\files_utils</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\ShaderProgram.cpp">
       <Filter>Source Files\shaders</Filter>
@@ -93,10 +93,10 @@
       <Filter>Source Files\base</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\FileUtils.h">
-      <Filter>Source Files\data</Filter>
+      <Filter>Source Files\files_utils</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\ResourcesManager.h">
-      <Filter>Source Files\data</Filter>
+      <Filter>Source Files\files_utils</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\ShaderProgram.h">
       <Filter>Source Files\shaders</Filter>

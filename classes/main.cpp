@@ -27,6 +27,10 @@ int main()
 	GLRender::getInstance()->init();
 
 	auto mySprite = Sprite::create( RES_PATH("SMILE") );
+	mySprite->setPosition( Vec(-0.2f,-0.55f) );
+	mySprite->setRotate( -10.0f );
+	mySprite->setScale( Vec(-1.0, 2.0f) );
+
 
 	GLRender::getInstance()->addNodeForDraw( mySprite );
 

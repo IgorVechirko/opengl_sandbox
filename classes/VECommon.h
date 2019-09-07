@@ -20,6 +20,8 @@
 #include <document.h>
 
 #include "glm.hpp"
+#include "gtc/matrix_transform.hpp"
+#include "gtc/type_ptr.hpp"
 
 // GLEW
 #define GLEW_STATIC
