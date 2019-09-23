@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\AutoRelesaePool.cpp" />
+    <ClCompile Include="..\classes\Camera.cpp" />
     <ClCompile Include="..\classes\GLRender.cpp" />
     <ClCompile Include="..\classes\Line.cpp" />
     <ClCompile Include="..\classes\Node.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\AutoRelesaePool.h" />
+    <ClInclude Include="..\classes\Camera.h" />
     <ClInclude Include="..\classes\GLRender.h" />
     <ClInclude Include="..\classes\Line.h" />
     <ClInclude Include="..\classes\Node.h" />

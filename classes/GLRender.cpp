@@ -1,13 +1,14 @@
 #include "GLRender.h"
 
 #include "Node.h"
+#include "Camera.h"
 
 _USEVE
 
 GLRender::GLRender()
 	: _window( nullptr )
 	, _windowWidth( 1024 )
-	, _windowHeight( 1024 )
+	, _windowHeight( 768 )
 {
 }
 GLRender::~GLRender()
@@ -49,13 +50,15 @@ void GLRender::init()
 		int width, height;
 		glfwGetFramebufferSize(_window, &width, &height);  
 		glViewport(0, 0, width, height);
+
+		glDisable( GL_DEPTH_TEST );
 	}
 }
 void GLRender::addNodeForDraw( Node* node )
 {
 	auto findIt = std::find(_nodes.begin(), _nodes.end(), node );
 	if ( findIt == _nodes.end() )
-	{
+	{ 
 		node->retain();
 		_nodes.push_back( node );
 	}
@@ -77,16 +80,42 @@ GLuint GLRender::getWindowHeight()
 {
 	return _windowHeight;
 }
+void GLRender::setCamera( Camera* camera )
+{
+	if ( _camera && camera != _camera )
+	{
+		_camera->release();
+		_camera = nullptr;
+	}
+
+	_camera = camera;
+	_camera->retain();
+}
+Camera* GLRender::getCamera()
+{
+	return _camera;
+}
 void GLRender::draw()
 {
+	//glClear( GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT );
+
 	glfwPollEvents();
 
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	auto projection = glm::ortho(0.0f, (float)_windowWidth, 0.0f, (float)_windowHeight, 0.1f, 100.0f );
+	Mat4 view(1.0f);
+
+	if ( _camera )
+	{
+		projection = _camera->getProjection();
+		view = _camera->getView();
+	}
+
 	for ( auto node : _nodes )
 	{
-		node->draw();
+		node->draw( projection, view );
 	}
 
 	glfwSwapBuffers(_window);

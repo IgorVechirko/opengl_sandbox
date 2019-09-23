@@ -5,6 +5,7 @@
 
 _VESTART
 
+class Camera;
 class Node;
 class GLRender
 {
@@ -16,6 +17,8 @@ class GLRender
 	GLFWwindow* _window;
 	GLuint _windowWidth;
 	GLuint _windowHeight;
+
+	Camera* _camera;
 
 	GLRender();
 
@@ -34,6 +37,9 @@ public:
 
 	GLuint getWindowWidth();
 	GLuint getWindowHeight();
+
+	void setCamera( Camera* camera );
+	Camera* getCamera();
 
 	void draw();
 };

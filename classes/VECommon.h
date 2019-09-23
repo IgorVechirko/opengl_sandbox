@@ -41,6 +41,8 @@ _VESTART
 
 typedef glm::vec2 Size;
 typedef glm::vec2 Vec;
+typedef glm::vec3 Vec3;
+typedef glm::mat4 Mat4;
 
 struct RGBA
 {
@@ -84,6 +86,24 @@ struct Vertex
 		_color = color; 
 	}
 };
+
+
+
+#define AUTORELEASE_CREATE_FUNC(__TYPE__)\
+static __TYPE__* create()\
+{\
+__TYPE__* ret = new __TYPE__();\
+if ( ret && ret->init() )\
+{\
+	ret->autorelease();\
+}\
+else\
+{\
+delete ret;\
+ret = nullptr;\
+}\
+return ret;\
+}\
 
 _VEEND
 

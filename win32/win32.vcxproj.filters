@@ -87,6 +87,9 @@
     <ClCompile Include="..\classes\Sprite.cpp">
       <Filter>Source Files\nodes</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\Camera.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="..\classes\Sprite.h">
       <Filter>Source Files\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Camera.h">
+      <Filter>Source Files\render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

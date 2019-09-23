@@ -69,7 +69,7 @@ void Sprite::setTexture( Texture2D* texture )
 		_texture = texture;
 		_texture->retain();
 
-		Size textSize( (float)_texture->getPixelthWidth() * 2.0f/(float)GLRender::getInstance()->getWindowWidth(), (float)_texture->getPixelthHeight() * 2.0f/(float)GLRender::getInstance()->getWindowHeight() );
+		Size textSize( (float)_texture->getPixelthWidth(), (float)_texture->getPixelthHeight() );
 
 
 		_vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -109,17 +109,22 @@ void Sprite::setTexture( Texture2D* texture )
 		glBindVertexArray(0);
 	}
 }
-void Sprite::draw()
+void Sprite::draw( const Mat4& projection, const Mat4& view )
 {
 	if ( _texture )
 		glBindTexture(GL_TEXTURE_2D, _texture->getTextureID() );
 
 	if( _shader )
 	{
-		GLuint transformLoc = glGetUniformLocation( _shader->getProgramID(), "transform" );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transformLoc, 1, GL_FALSE, glm::value_ptr( getTransMatrix() ) );
-
 		_shader->useProgram();
+
+		GLuint modelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
+		GLuint viewLoc = glGetUniformLocation( _shader->getProgramID(), "view" );
+		GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
+
+		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr( getTransMatrix() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( view ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr(projection) );
 	}
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );

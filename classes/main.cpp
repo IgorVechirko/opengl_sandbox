@@ -12,6 +12,7 @@
 #include "Node.h"
 #include "AutoRelesaePool.h"
 #include "Sprite.h"
+#include "Camera.h"
 
 _USEVE
 
@@ -26,11 +27,16 @@ int main()
 
 	GLRender::getInstance()->init();
 
-	auto mySprite = Sprite::create( RES_PATH("SMILE") );
-	mySprite->setPosition( Vec(-0.2f,-0.55f) );
-	mySprite->setRotate( -10.0f );
-	mySprite->setScale( Vec(-1.0, 2.0f) );
+	auto customCamera = Camera::create();
 
+	Size wndSize( GLRender::getInstance()->getWindowWidth(), GLRender::getInstance()->getWindowHeight() );
+	Mat4 projection = glm::ortho( -1.0f * wndSize.x/2.0f, wndSize.x/2.0f, -1.0f * wndSize.y/2.0f, wndSize.y/2.0f, 0.1f, 100.0f );
+	customCamera->setProjection(projection);
+	GLRender::getInstance()->setCamera( customCamera );
+
+	auto mySprite = Sprite::create( RES_PATH("MOUNTAIN") );
+
+	mySprite->setPosition( Vec3( 0.0f, 0.0f, -0.1f ) );
 
 	GLRender::getInstance()->addNodeForDraw( mySprite );
 

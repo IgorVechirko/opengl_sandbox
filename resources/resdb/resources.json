@@ -5,5 +5,6 @@
 	"SPRITE_VERTEX" : "shaders/sprite_vertex.vsh",
 
 	"CONTAINER" : "textures/container.jpg",
-	"SMILE" : "textures/smile.png"
+	"SMILE" : "textures/smile.png",
+	"MOUNTAIN" : "textures/mountain.jpg"
 }
