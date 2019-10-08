@@ -1,4 +1,4 @@
-#include "AutoRelesaePool.h"
+#include "AutoReleasePool.h"
 
 #include "Ref.h"
 
@@ -9,11 +9,6 @@ AutoReleasePool::AutoReleasePool()
 }
 AutoReleasePool::~AutoReleasePool()
 {
-}
-AutoReleasePool* AutoReleasePool::getInstance()
-{
-	static AutoReleasePool instance;
-	return &instance;
 }
 void AutoReleasePool::releaseRef( Ref* ref )
 {
@@ -36,7 +31,7 @@ void AutoReleasePool::addRef( Ref* newRef )
 		_refs.push_back( newRef );
 	}
 }
-void AutoReleasePool::checkAutorelease()
+void AutoReleasePool::chechPool()
 {
 	for ( auto refIt = _refs.begin(); refIt != _refs.end(); )
 	{

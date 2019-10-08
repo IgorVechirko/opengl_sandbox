@@ -1,6 +1,6 @@
 #include "Ref.h"
 
-#include "AutoRelesaePool.h"
+#include "Director.h"
 
 _USEVE
 
@@ -19,7 +19,7 @@ void Ref::release()
 
 	if ( _autorelesed && _refCount == 1 )
 	{
-		AutoReleasePool::getInstance()->releaseRef( this );
+		RELEASE_POOL->releaseRef( this );
 	}
 }
 void Ref::retain()
@@ -35,6 +35,6 @@ void Ref::autorelease()
 	if ( !_autorelesed )
 	{
 		_autorelesed = true;
-		AutoReleasePool::getInstance()->addRef( this );
+		RELEASE_POOL->addRef( this );
 	}
 }

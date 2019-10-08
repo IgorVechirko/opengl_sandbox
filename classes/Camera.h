@@ -11,7 +11,7 @@ class Camera : public Ref
 
 protected:
 
-	bool init(){return true;};
+	virtual bool init(){return true;};
 
 public:
 

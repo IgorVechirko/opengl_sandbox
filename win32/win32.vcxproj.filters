@@ -19,9 +19,6 @@
     <Filter Include="Source Files\shaders">
       <UniqueIdentifier>{d945a962-1597-4e0a-9772-1766e68a849c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\primitives">
-      <UniqueIdentifier>{36d6b0c0-c25f-4f8c-bf15-b0687bb07d2a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\textures">
       <UniqueIdentifier>{94988e3d-354d-4f81-b165-6453ceb56bab}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,15 @@
     </Filter>
     <Filter Include="Source Files\files_utils">
       <UniqueIdentifier>{ec573eaa-4114-4b66-8cb3-f4148cc1c481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\app">
+      <UniqueIdentifier>{491fd79d-cd89-420a-863f-a18fe7e902e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\content">
+      <UniqueIdentifier>{1b0c27ee-2b34-417f-b8a5-3e03ee8d72af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\nodes\primitives">
+      <UniqueIdentifier>{36d6b0c0-c25f-4f8c-bf15-b0687bb07d2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,28 +58,25 @@
       <Filter>Source Files\shaders</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\Rectangle.cpp">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\Primitive.cpp">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\VECommon.cpp">
       <Filter>Source Files\base</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\Line.cpp">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\Point.cpp">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\Triangle.cpp">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\Texture2D.cpp">
       <Filter>Source Files\textures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\classes\AutoRelesaePool.cpp">
-      <Filter>Source Files\autorelease</Filter>
     </ClCompile>
     <ClCompile Include="..\classes\Ref.cpp">
       <Filter>Source Files\autorelease</Filter>
@@ -90,6 +93,24 @@
     <ClCompile Include="..\classes\Camera.cpp">
       <Filter>Source Files\render</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\GLView.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Director.cpp">
+      <Filter>Source Files\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Applicationcpp.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Scene.cpp">
+      <Filter>Source Files\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\TestScene.cpp">
+      <Filter>Source Files\content</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\AutoReleasePool.cpp">
+      <Filter>Source Files\autorelease</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -105,25 +126,22 @@
       <Filter>Source Files\shaders</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Rectangle.h">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Primitive.h">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Line.h">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Point.h">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Triangle.h">
-      <Filter>Source Files\primitives</Filter>
+      <Filter>Source Files\nodes\primitives</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Texture2D.h">
       <Filter>Source Files\textures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\classes\AutoRelesaePool.h">
-      <Filter>Source Files\autorelease</Filter>
     </ClInclude>
     <ClInclude Include="..\classes\Ref.h">
       <Filter>Source Files\autorelease</Filter>
@@ -139,6 +157,24 @@
     </ClInclude>
     <ClInclude Include="..\classes\Camera.h">
       <Filter>Source Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Scene.h">
+      <Filter>Source Files\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\GLView.h">
+      <Filter>Source Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Director.h">
+      <Filter>Source Files\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Application.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\TestScene.h">
+      <Filter>Source Files\content</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\AutoReleasePool.h">
+      <Filter>Source Files\autorelease</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

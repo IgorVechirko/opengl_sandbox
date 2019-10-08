@@ -13,17 +13,15 @@ class AutoReleasePool
 	std::vector<Ref*> _refs;
 
 
-	AutoReleasePool();
-
 public:
 
+	AutoReleasePool();
 	virtual ~AutoReleasePool();
-
-	static AutoReleasePool* getInstance();
 
 	void releaseRef( Ref* ref );
 	void addRef( Ref* newRef );
-	void checkAutorelease();
+
+	void chechPool();
 };
 
 _VEEND

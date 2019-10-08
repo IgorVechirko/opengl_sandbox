@@ -1,6 +1,6 @@
 #include "ResourcesManager.h"
 
-#include "FileUtils.h"
+#include "Director.h"
 
 _USEVE
 
@@ -11,14 +11,13 @@ ResourcesManager::ResourcesManager()
 ResourcesManager::~ResourcesManager()
 {
 }
-ResourcesManager* ResourcesManager::getInstance()
+void ResourcesManager::init()
 {
-	static ResourcesManager instance;
-	return &instance;
+	parseResConfig( "resdb/resources.json" );
 }
-void ResourcesManager::parceResConfig( const std::string& aConfigPath )
+void ResourcesManager::parseResConfig( const std::string& aConfigPath )
 {
-	std::string fileStr = FILES->getStringFromFile( aConfigPath );
+	std::string fileStr = FILE_UTILS->getStringFromFile( aConfigPath );
 
 	rapidjson::Document jsonDoc;
 	jsonDoc.Parse<0>( fileStr.c_str() );

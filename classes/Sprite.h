@@ -32,6 +32,8 @@ protected:
 
 	bool init( const std::string& filePath );
 
+	virtual void draw( GLRender* render, const Mat4& transform ) override;
+
 public:
 
 	virtual ~Sprite();
@@ -40,8 +42,6 @@ public:
 
 	void setShaderProgram( ShaderProgram* program );
 	void setTexture( Texture2D* texture );
-
-	virtual void draw( const Mat4& projection, const Mat4& view ) override;
 };
 
 

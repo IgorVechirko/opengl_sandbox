@@ -11,15 +11,15 @@ class ResourcesManager
 
 	std::map<std::string,std::string> _resIDs;
 
+public:
 
 	ResourcesManager();
 	virtual ~ResourcesManager();
 
-public:
 
-	static ResourcesManager* getInstance();
+	void init();
 
-	void parceResConfig( const std::string& aConfigPath );
+	void parseResConfig( const std::string& aConfigPath );
 
 	const std::string& getResPath( const std::string& aResID ) const;
 

@@ -3,6 +3,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <stdio.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -87,8 +88,8 @@ struct Vertex
 	}
 };
 
-
-
+#define DEF_WIN_SIZE Size( 1024, 768 )
+#define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );
 #define AUTORELEASE_CREATE_FUNC(__TYPE__)\
 static __TYPE__* create()\
 {\

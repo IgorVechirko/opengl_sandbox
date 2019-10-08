@@ -8,14 +8,15 @@ _VESTART
 class FileUtils
 {
 
+
+public:
+
 	FileUtils();
 	virtual ~FileUtils();
 
-	public:
+	void init();
 
-		static FileUtils* getInstance();
-
-		std::string getStringFromFile( const std::string& aPath );
+	std::string getStringFromFile( const std::string& aPath );
 
 };
 

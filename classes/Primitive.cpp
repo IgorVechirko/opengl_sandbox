@@ -1,6 +1,6 @@
 #include "Primitive.h"
 
-#include "ResourcesManager.h"
+#include "Director.h"
 #include "ShaderProgram.h"
 
 _USEVE

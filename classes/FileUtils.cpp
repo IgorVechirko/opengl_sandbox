@@ -9,10 +9,8 @@ FileUtils::FileUtils()
 FileUtils::~FileUtils()
 {
 }
-FileUtils* FileUtils::getInstance()
+void FileUtils::init()
 {
-	static FileUtils instance;
-	return &instance;
 }
 std::string FileUtils::getStringFromFile( const std::string& aPath )
 {

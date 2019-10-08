@@ -2,8 +2,7 @@
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
-#include "ResourcesManager.h"
-#include "GLRender.h"
+#include "Director.h"
 
 _USEVE
 
@@ -48,9 +47,34 @@ bool Sprite::init( const std::string& filePath )
 	else
 		return false;
 }
+void Sprite::draw( GLRender* render, const Mat4& transform )
+{
+	if ( _texture )
+		glBindTexture(GL_TEXTURE_2D, _texture->getTextureID() );
+
+	if( _shader )
+	{
+		_shader->useProgram();
+
+		GLuint modelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
+		GLuint viewLoc = glGetUniformLocation( _shader->getProgramID(), "view" );
+		GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
+
+		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(transform) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
+	}
+
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+	glBindVertexArray(_vao);
+	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+}
 void Sprite::setShaderProgram( ShaderProgram* program )
 {
-	if ( program )
+	if ( program && _shader != program )
 	{
 		if ( _shader )
 			_shader->release();
@@ -61,7 +85,7 @@ void Sprite::setShaderProgram( ShaderProgram* program )
 }
 void Sprite::setTexture( Texture2D* texture )
 {
-	if ( texture )
+	if ( texture && texture != _texture )
 	{
 		if ( _texture )
 			_texture->release();
@@ -69,13 +93,13 @@ void Sprite::setTexture( Texture2D* texture )
 		_texture = texture;
 		_texture->retain();
 
-		Size textSize( (float)_texture->getPixelthWidth(), (float)_texture->getPixelthHeight() );
-
+		Size textSize( (float)_texture->getWidth(), (float)_texture->getHeight() );
+		//Size textSize( 1.0f, 1.0f );
 
 		_vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-				  0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-				  textSize.x, textSize.y, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-				  textSize.x, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+				  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+				  textSize.x, textSize.y, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
+				  textSize.x, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f };
 
 		_indices = { 0, 1, 2,
 					 1, 2, 3 };
@@ -108,29 +132,4 @@ void Sprite::setTexture( Texture2D* texture )
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
-}
-void Sprite::draw( const Mat4& projection, const Mat4& view )
-{
-	if ( _texture )
-		glBindTexture(GL_TEXTURE_2D, _texture->getTextureID() );
-
-	if( _shader )
-	{
-		_shader->useProgram();
-
-		GLuint modelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
-		GLuint viewLoc = glGetUniformLocation( _shader->getProgramID(), "view" );
-		GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
-
-		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr( getTransMatrix() ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( view ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr(projection) );
-	}
-
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-
-	glBindVertexArray(_vao);
-	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
 }

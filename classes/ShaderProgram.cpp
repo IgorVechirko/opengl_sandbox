@@ -1,6 +1,6 @@
 #include "ShaderProgram.h"
 
-#include "FileUtils.h"
+#include "Director.h"
 
 _USEVE
 
@@ -29,8 +29,8 @@ ShaderProgram* ShaderProgram::create(const std::string& verPath, const std::stri
 }
 bool ShaderProgram::init( const std::string& verPath, const std::string& fragPath )
 {
-	std::string vertexSource = FileUtils::getInstance()->getStringFromFile(verPath);
-	std::string fragmentSource = FileUtils::getInstance()->getStringFromFile(fragPath);
+	std::string vertexSource = FILE_UTILS->getStringFromFile(verPath);
+	std::string fragmentSource = FILE_UTILS->getStringFromFile(fragPath);
 	const char* vertexChar = vertexSource.c_str();
 	const char* fragmentChar = fragmentSource.c_str();
 

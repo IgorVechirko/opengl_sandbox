@@ -8,8 +8,8 @@ _VESTART
 
 class Texture2D : public Ref
 {
-	int _pixelsWidth;
-	int _pixelsHeight;
+	int _width;
+	int _height;
 
 	GLuint _textureID;
 
@@ -26,8 +26,8 @@ class Texture2D : public Ref
 
 		GLuint getTextureID();
 
-		int getPixelthWidth();
-		int getPixelthHeight();
+		int getWidth();
+		int getHeight();
 };
 
 _VEEND

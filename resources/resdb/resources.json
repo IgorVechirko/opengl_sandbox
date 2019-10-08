@@ -6,5 +6,6 @@
 
 	"CONTAINER" : "textures/container.jpg",
 	"SMILE" : "textures/smile.png",
-	"MOUNTAIN" : "textures/mountain.jpg"
+	"MOUNTAIN" : "textures/mountain.jpg",
+	"SMALL_IMAGE" : "textures/small_image.png"
 }
