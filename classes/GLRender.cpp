@@ -15,6 +15,7 @@ void GLRender::init()
 }
 void GLRender::drawScene( Scene* scene )
 {
+	glEnable(GL_DEPTH_TEST);
 	glClear( GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT );
 
 	glfwPollEvents();

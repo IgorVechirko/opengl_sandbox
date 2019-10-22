@@ -81,7 +81,7 @@ void Node::sortChildren()
 	if ( !_isChildrenSorted )
 	{
 		std::sort( _children.begin(), _children.end(), [](Node* a, Node* b)-> bool {
-			return a->_zOrder >= b->_zOrder;
+			return a->_zOrder > b->_zOrder;
 		});
 
 		_isChildrenSorted = true;

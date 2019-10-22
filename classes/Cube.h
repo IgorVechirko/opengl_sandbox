@@ -1,5 +1,5 @@
-#ifndef Sprite_H
-#define Sprite_H
+#ifndef Cube_H
+#define Cube_H
 
 
 #include "Node.h"
@@ -9,7 +9,7 @@ _VESTART
 
 class Texture2D;
 class ShaderProgram;
-class Sprite : public Node
+class Cube : public Node
 {
 	typedef Node Parent;
 	
@@ -28,20 +28,20 @@ class Sprite : public Node
 
 protected:
 
-	Sprite();
+	Cube();
 
 	bool init( const std::string& filePath );
 
+	virtual void draw( GLRender* render, const Mat4& transform ) override;
+
 public:
 
-	virtual ~Sprite();
+	virtual ~Cube();
 
-	static Sprite* create( const std::string& filePath );
+	static Cube* create( const std::string& filePath );
 
 	void setShaderProgram( ShaderProgram* program );
 	void setTexture( Texture2D* texture );
-
-	virtual void draw( const Mat4& projection, const Mat4& view ) override;
 };
 
 

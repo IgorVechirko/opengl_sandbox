@@ -43,6 +43,12 @@
     <Filter Include="Source Files\nodes\primitives">
       <UniqueIdentifier>{36d6b0c0-c25f-4f8c-bf15-b0687bb07d2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\nodes\2d">
+      <UniqueIdentifier>{193c6e75-7f1d-4ec4-90f5-edfb6f68c097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\nodes\3d">
+      <UniqueIdentifier>{4717b8c9-be04-4079-83f1-4cff7b12645d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -87,9 +93,6 @@
     <ClCompile Include="..\classes\GLRender.cpp">
       <Filter>Source Files\render</Filter>
     </ClCompile>
-    <ClCompile Include="..\classes\Sprite.cpp">
-      <Filter>Source Files\nodes</Filter>
-    </ClCompile>
     <ClCompile Include="..\classes\Camera.cpp">
       <Filter>Source Files\render</Filter>
     </ClCompile>
@@ -110,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="..\classes\AutoReleasePool.cpp">
       <Filter>Source Files\autorelease</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Sprite.cpp">
+      <Filter>Source Files\nodes\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Cube.cpp">
+      <Filter>Source Files\nodes\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +161,6 @@
     <ClInclude Include="..\classes\GLRender.h">
       <Filter>Source Files\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\classes\Sprite.h">
-      <Filter>Source Files\nodes</Filter>
-    </ClInclude>
     <ClInclude Include="..\classes\Camera.h">
       <Filter>Source Files\render</Filter>
     </ClInclude>
@@ -175,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="..\classes\AutoReleasePool.h">
       <Filter>Source Files\autorelease</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Sprite.h">
+      <Filter>Source Files\nodes\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Cube.h">
+      <Filter>Source Files\nodes\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,13 +1,12 @@
-#include "Sprite.h"
+#include "Cube.h"
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
-#include "ResourcesManager.h"
-#include "GLRender.h"
+#include "Director.h"
 
 _USEVE
 
-Sprite::Sprite()
+Cube::Cube()
 	: _texture( nullptr )
 	, _shader( nullptr )
 	, _vbo( 0 )
@@ -15,12 +14,12 @@ Sprite::Sprite()
 	, _ebo( 0 )
 {
 }
-Sprite::~Sprite()
+Cube::~Cube()
 {
 }
-Sprite* Sprite::create( const std::string& filePath )
+Cube* Cube::create( const std::string& filePath )
 {
-	Sprite* ret = new Sprite();
+	Cube* ret = new Cube();
 
 	if ( ret && ret->init( filePath ) )
 	{
@@ -33,10 +32,10 @@ Sprite* Sprite::create( const std::string& filePath )
 		return nullptr;
 	}
 }
-void Sprite::updateVertices( const Size& size )
+void Cube::updateVertices( const Size& size )
 {
 }
-bool Sprite::init( const std::string& filePath )
+bool Cube::init( const std::string& filePath )
 {	
 	auto texture = Texture2D::create( filePath );
 
@@ -48,7 +47,7 @@ bool Sprite::init( const std::string& filePath )
 	else
 		return false;
 }
-void Sprite::setShaderProgram( ShaderProgram* program )
+void Cube::setShaderProgram( ShaderProgram* program )
 {
 	if ( program )
 	{
@@ -59,7 +58,7 @@ void Sprite::setShaderProgram( ShaderProgram* program )
 		_shader->retain();
 	}
 }
-void Sprite::setTexture( Texture2D* texture )
+void Cube::setTexture( Texture2D* texture )
 {
 	if ( texture )
 	{
@@ -69,7 +68,7 @@ void Sprite::setTexture( Texture2D* texture )
 		_texture = texture;
 		_texture->retain();
 
-		Size textSize( _texture->getPixelthWidth(), _texture->getPixelthHeight() );
+		Size textSize( _texture->getWidth(), _texture->getHeight() );
 
 
 		_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
@@ -117,7 +116,7 @@ void Sprite::setTexture( Texture2D* texture )
 		_indices = { 0, 1, 2,
 					 1, 2, 3 };
 
-		setShaderProgram( ShaderProgram::create( RES_PATH("SPRITE_VERTEX"), RES_PATH("SPRITE_FRAGMENT") ) );
+		setShaderProgram( ShaderProgram::create( RES_PATH("CUBE_VERTEX"), RES_PATH("CUBE_FRAGMENT") ) );
 
 		glGenVertexArrays(1, &_vao);
 		glGenBuffers(1, &_vbo);
@@ -139,14 +138,11 @@ void Sprite::setTexture( Texture2D* texture )
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLvoid*)(3*sizeof(GLfloat)));
 		glEnableVertexAttribArray(1);
 
-		//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(6*sizeof(GLfloat)));
-		//glEnableVertexAttribArray(2);
-
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
 }
-void Sprite::draw( const Mat4& projection, const Mat4& view )
+void Cube::draw( GLRender* render, const Mat4& transform )
 {
 	if ( _texture )
 		glBindTexture(GL_TEXTURE_2D, _texture->getTextureID() );
@@ -164,9 +160,9 @@ void Sprite::draw( const Mat4& projection, const Mat4& view )
 		GLuint transViewLoc = glGetUniformLocation ( _shader->getProgramID(), "view" );
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
 
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( getTransMatrix() ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( view ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( projection ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 	}

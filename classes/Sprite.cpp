@@ -94,7 +94,6 @@ void Sprite::setTexture( Texture2D* texture )
 		_texture->retain();
 
 		Size textSize( (float)_texture->getWidth(), (float)_texture->getHeight() );
-		//Size textSize( 1.0f, 1.0f );
 
 		_vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 				  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,

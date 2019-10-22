@@ -143,6 +143,7 @@
     <ClCompile Include="..\classes\ShaderProgram.cpp" />
     <ClCompile Include="..\classes\Ref.cpp" />
     <ClCompile Include="..\classes\Scene.cpp" />
+    <ClCompile Include="..\classes\Cube.cpp" />
     <ClCompile Include="..\classes\Sprite.cpp" />
     <ClCompile Include="..\classes\TestScene.cpp" />
     <ClCompile Include="..\classes\Texture2D.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="..\classes\ResourcesManager.h" />
     <ClInclude Include="..\classes\Scene.h" />
     <ClInclude Include="..\classes\ShaderProgram.h" />
+    <ClInclude Include="..\classes\Cube.h" />
     <ClInclude Include="..\classes\Sprite.h" />
     <ClInclude Include="..\classes\TestScene.h" />
     <ClInclude Include="..\classes\Texture2D.h" />
