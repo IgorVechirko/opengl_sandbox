@@ -18,6 +18,8 @@ protected:
 
 	bool init() override;
 
+	virtual void update( float deltaTime ) override;
+
 public:
 
 	virtual ~TestScene();

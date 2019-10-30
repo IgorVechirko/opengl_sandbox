@@ -1,6 +1,6 @@
 #include "Node.h"
 
-#include "GLRender.h"
+#include "Director.h"
 
 _USEVE
 
@@ -14,6 +14,8 @@ Node::Node()
 }
 Node::~Node()
 {
+	unscheduleUpdate();
+
 	bool stop = true;
 }
 const glm::mat4& Node::getTransform()
@@ -92,7 +94,7 @@ void Node::setPosition( const Vec3& pos )
 	if ( pos != _pos )
 	{
 		_pos = pos;
-		_transDirty;
+		_transDirty = true;;
 	}
 }
 const Vec3& Node::getPosition() const
@@ -104,7 +106,7 @@ void Node::setRotate( const Vec3& rotate )
 	if ( rotate != _rotate )
 	{
 		_rotate = rotate;
-		_transDirty;
+		_transDirty = true;;
 	}
 }
 const Vec3& Node::getRotate() const
@@ -116,7 +118,7 @@ void Node::setScale( const Vec3& scale )
 	if ( scale != _scale )
 	{
 		_scale = scale;
-		_transDirty;
+		_transDirty = true;;
 	}
 }
 const Vec3& Node::getScale() const
@@ -162,6 +164,14 @@ void Node::removeChild( Node* child )
 	{
 		_children.erase( findIt );
 	}
+}
+void Node::scheduleUpdate()
+{
+	SCHEDULER->addUpdateFunc( std::bind(&Node::update, this, std::placeholders::_1  ), this );
+}
+void Node::unscheduleUpdate()
+{
+	SCHEDULER->delUpdateFunc( this );
 }
 const std::vector<Node*>& Node::getChildren()
 {

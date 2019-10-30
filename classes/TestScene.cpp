@@ -21,6 +21,8 @@ bool TestScene::init()
 	{
 		addChild( _mySprite );
 		_mySprite->setPosition( Vec3( 0.0f, 0.0f, 0.0f ) );
+
+		_mySprite->setRotate( Vec3( 0.0f, 0.0f, 90.0f ) );
 	}
 
 	auto smallImage = Cube::create( RES_PATH( "SMALL_IMAGE" ) );
@@ -38,5 +40,17 @@ bool TestScene::init()
 	CAMERA->setView( view );
 	CAMERA->setProjection( projection );
 
+	scheduleUpdate();
+
 	return true;
+}
+void TestScene::update( float deltaTime )
+{
+	if ( _mySprite )
+	{
+		auto rotation = _mySprite->getRotate();
+		rotation.z += ( deltaTime * 10.0f );
+
+		_mySprite->setRotate( rotation );
+	}
 }

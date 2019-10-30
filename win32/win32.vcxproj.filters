@@ -49,6 +49,9 @@
     <Filter Include="Source Files\nodes\3d">
       <UniqueIdentifier>{4717b8c9-be04-4079-83f1-4cff7b12645d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\events">
+      <UniqueIdentifier>{b3a24983-14c2-4316-9068-cb8e7255b8d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -120,6 +123,9 @@
     <ClCompile Include="..\classes\Cube.cpp">
       <Filter>Source Files\nodes\3d</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\TimeScheduler.cpp">
+      <Filter>Source Files\events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -187,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="..\classes\Cube.h">
       <Filter>Source Files\nodes\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\TimeScheduler.h">
+      <Filter>Source Files\events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

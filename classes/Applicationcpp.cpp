@@ -16,13 +16,6 @@ Application* Application::getInstance()
 	static Application app;
 	return &app;
 }
-void Application::mainLoop()
-{
-	while( true )
-	{
-		Director::getInstance()->drawScene();
-	}
-}
 void Application::initView()
 {
 }
@@ -38,7 +31,7 @@ int Application::run()
 	VIEW->setupWindowSize( (int)DEF_WIN_SIZE.x, (int)DEF_WIN_SIZE.y );
 	initContent();
 
-	mainLoop();
+	Director::getInstance()->runMainLoop();
 
 	return 0;
 }

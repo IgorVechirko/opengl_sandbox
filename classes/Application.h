@@ -12,8 +12,6 @@ class Application
 
 	Application();
 
-	void mainLoop();
-
 protected:
 
 	virtual void initView();

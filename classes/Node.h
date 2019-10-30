@@ -48,9 +48,12 @@ protected:
 
 	Node();
 
+	const glm::mat4& getTransform();
+
+
 	virtual bool init(){return true;};
 
-	const glm::mat4& getTransform();
+	virtual void update( float delatTime ){};
 
 	virtual void visit( GLRender* render, const Mat4& parentTransform );
 	virtual void draw( GLRender* render, const Mat4& transform ){};
@@ -83,6 +86,9 @@ public:
 
 	void addChild( Node* child );
 	void removeChild( Node* child );
+
+	void scheduleUpdate();
+	void unscheduleUpdate();
 
 	const std::vector<Node*>& getChildren();
 	Node* getChild( const std::string& childName );

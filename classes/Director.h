@@ -8,13 +8,15 @@
 #include "ResourcesManager.h"
 #include "Scene.h"
 #include "AutoReleasePool.h"
+#include "TimeScheduler.h"
+
+#include <chrono>
 
 _VESTART
 
 class Application;
 class Director
 {
-	friend Application;
 
 	GLView* _view;
 	GLRender* _render;
@@ -25,11 +27,19 @@ class Director
 
 	AutoReleasePool* _releasePool;
 
+	TimeScheduler* _timeScheduler;
+
 	Scene* _scene;
+
+	std::chrono::time_point<std::chrono::steady_clock> _lastUpdateTime;
 
 	Director();
 
 	void drawScene();
+
+	float calcDeltaTime();
+
+	void loopWait();
 
 public:
 
@@ -38,6 +48,8 @@ public:
 	static Director* getInstance(); 
 
 	void init();
+
+	void runMainLoop();
 
 	void setView( GLView* view );
 	GLView* getView();
@@ -54,6 +66,8 @@ public:
 	ResourcesManager* getResMng();
 
 	AutoReleasePool* getReleasePool();
+
+	TimeScheduler* getTimeScheduler();
 };
 
 #define VIEW Director::getInstance()->getView()
@@ -62,6 +76,7 @@ public:
 #define FILE_UTILS Director::getInstance()->getFileUtils()
 #define RES_MNG Director::getInstance()->getResMng()
 #define RELEASE_POOL Director::getInstance()->getReleasePool()
+#define SCHEDULER Director::getInstance()->getTimeScheduler()
 #define RES_PATH(__RES_ID__) Director::getInstance()->getResMng()->getResPath(__RES_ID__)
 
 _VEEND
