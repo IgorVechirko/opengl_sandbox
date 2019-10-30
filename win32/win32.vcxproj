@@ -126,7 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\classes\Applicationcpp.cpp" />
+    <ClCompile Include="..\classes\Application.cpp" />
     <ClCompile Include="..\classes\AutoReleasePool.cpp" />
     <ClCompile Include="..\classes\Camera.cpp" />
     <ClCompile Include="..\classes\Director.cpp" />
