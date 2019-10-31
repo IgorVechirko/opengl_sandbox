@@ -42,6 +42,8 @@ bool TestScene::init()
 
 	scheduleUpdate();
 
+	KEYS->setKeyboardCondtrollerListener( this );
+
 	return true;
 }
 void TestScene::update( float deltaTime )
@@ -53,4 +55,16 @@ void TestScene::update( float deltaTime )
 
 		_mySprite->setRotate( rotation );
 	}
+}
+void TestScene::onKeyPressed( int aKeyCode )
+{
+	LOG( "key %d pressed\n", aKeyCode );
+}
+void TestScene::onKeyPressRepeate( int aKeyCode )
+{
+	LOG( "key %d press repeat\n", aKeyCode );
+}
+void TestScene::onKeyReleased( int aKeyCode )
+{
+	LOG( "key %d release\n", aKeyCode );
 }

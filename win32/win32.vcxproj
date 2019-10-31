@@ -130,6 +130,7 @@
     <ClCompile Include="..\classes\AutoReleasePool.cpp" />
     <ClCompile Include="..\classes\Camera.cpp" />
     <ClCompile Include="..\classes\Director.cpp" />
+    <ClCompile Include="..\classes\KeyboardController.cpp" />
     <ClCompile Include="..\classes\TimeScheduler.cpp" />
     <ClCompile Include="..\classes\GLRender.cpp" />
     <ClCompile Include="..\classes\GLView.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="..\classes\AutoReleasePool.h" />
     <ClInclude Include="..\classes\Camera.h" />
     <ClInclude Include="..\classes\Director.h" />
+    <ClInclude Include="..\classes\KeyboardController.h" />
     <ClInclude Include="..\classes\TimeScheduler.h" />
     <ClInclude Include="..\classes\GLRender.h" />
     <ClInclude Include="..\classes\GLView.h" />

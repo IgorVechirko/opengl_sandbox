@@ -3,11 +3,14 @@
 
 #include "Scene.h"
 
+#include "KeyboardController.h"
+
 _VESTART
 
 
 class Sprite;
 class TestScene : public Scene
+				, public KeyboardControllerListener
 {
 
 	Sprite* _mySprite;
@@ -19,6 +22,10 @@ protected:
 	bool init() override;
 
 	virtual void update( float deltaTime ) override;
+
+	virtual void onKeyPressed( int aKeyCode ) override;
+	virtual void onKeyPressRepeate( int aKeyCode ) override;
+	virtual void onKeyReleased( int aKeyCode ) override;
 
 public:
 

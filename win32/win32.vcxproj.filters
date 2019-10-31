@@ -52,6 +52,9 @@
     <Filter Include="Source Files\events">
       <UniqueIdentifier>{b3a24983-14c2-4316-9068-cb8e7255b8d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\keys">
+      <UniqueIdentifier>{96dcaa33-5cde-4539-af24-39e54f9a8622}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -126,6 +129,9 @@
     <ClCompile Include="..\classes\Application.cpp">
       <Filter>Source Files\app</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\KeyboardController.cpp">
+      <Filter>Source Files\keys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -196,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="..\classes\TimeScheduler.h">
       <Filter>Source Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\KeyboardController.h">
+      <Filter>Source Files\keys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

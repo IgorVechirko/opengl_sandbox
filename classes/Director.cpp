@@ -14,6 +14,7 @@ Director::Director()
 	, _scene( nullptr )
 	, _releasePool( nullptr )
 	, _timeScheduler( nullptr )
+	, _keyboardController( nullptr )
 {
 	_fileUtils = new FileUtils();
 	_resMng = new ResourcesManager();
@@ -24,9 +25,17 @@ Director::Director()
 	_releasePool = new AutoReleasePool();
 
 	_timeScheduler = new TimeScheduler();
+
+	_keyboardController = new KeyboardController();
 }
 Director::~Director()
 {
+	delete _fileUtils;
+	delete _resMng;
+	delete _view;
+	delete _render;
+	delete _releasePool;
+	delete _timeScheduler;
 }
 Director* Director::getInstance()
 {
@@ -55,8 +64,6 @@ float Director::calcDeltaTime()
 	float result = std::chrono::duration_cast<std::chrono::milliseconds>( time - _lastUpdateTime ).count() / 1000.0f;
 
 	_lastUpdateTime = time;
-
-	LOG( "%f\n", result );
 
 	return result;
 }
@@ -136,4 +143,8 @@ AutoReleasePool* Director::getReleasePool()
 TimeScheduler* Director::getTimeScheduler()
 {
 	return _timeScheduler;
+}
+KeyboardController* Director::getKeyboardController()
+{
+	return _keyboardController;
 }
