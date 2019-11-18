@@ -8,6 +8,7 @@ _USEVE
 
 TestScene::TestScene()
 	: _mySprite( nullptr )
+	, _cameraController()
 {
 }
 TestScene::~TestScene()
@@ -29,20 +30,12 @@ bool TestScene::init()
 	if( smallImage )
 	{
 		addChild( smallImage );
-		smallImage->setPosition( Vec3( 110.0f, 110.0f, 1.0f ) );
+		smallImage->setPosition( Vec3( 110.0f, 110.0f, -256.0f ) );
 	}
 
-	auto wndSize = VIEW->getWindowSize();
-	Mat4 projection = glm::perspective( glm::radians(45.0f), wndSize.x/wndSize.y, 0.1f, 10000.0f );
-	Mat4 view(1.0f);
-	view = glm::translate( view, Vec3(0.0f, 0.0f, -927.0f ) );
-	
-	CAMERA->setView( view );
-	CAMERA->setProjection( projection );
+	_cameraController.init();
 
 	scheduleUpdate();
-
-	KEYS->setKeyboardCondtrollerListener( this );
 
 	return true;
 }
@@ -55,16 +48,4 @@ void TestScene::update( float deltaTime )
 
 		_mySprite->setRotate( rotation );
 	}
-}
-void TestScene::onKeyPressed( int aKeyCode )
-{
-	LOG( "key %d pressed\n", aKeyCode );
-}
-void TestScene::onKeyPressRepeate( int aKeyCode )
-{
-	LOG( "key %d press repeat\n", aKeyCode );
-}
-void TestScene::onKeyReleased( int aKeyCode )
-{
-	LOG( "key %d release\n", aKeyCode );
 }

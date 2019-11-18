@@ -31,7 +31,7 @@ int Application::run()
 	VIEW->setupWindowSize( (int)DEF_WIN_SIZE.x, (int)DEF_WIN_SIZE.y );
 	initContent();
 
-	KEYS->init();
+	INPUT->init();
 
 	Director::getInstance()->runMainLoop();
 

@@ -3,17 +3,18 @@
 
 #include "Scene.h"
 
-#include "KeyboardController.h"
+#include "CameraMovementController.h"
 
 _VESTART
 
 
 class Sprite;
 class TestScene : public Scene
-				, public KeyboardControllerListener
 {
 
 	Sprite* _mySprite;
+
+	CameraMovementController _cameraController;
 
 protected:
 
@@ -23,9 +24,6 @@ protected:
 
 	virtual void update( float deltaTime ) override;
 
-	virtual void onKeyPressed( int aKeyCode ) override;
-	virtual void onKeyPressRepeate( int aKeyCode ) override;
-	virtual void onKeyReleased( int aKeyCode ) override;
 
 public:
 

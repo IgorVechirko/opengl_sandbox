@@ -14,7 +14,7 @@ Director::Director()
 	, _scene( nullptr )
 	, _releasePool( nullptr )
 	, _timeScheduler( nullptr )
-	, _keyboardController( nullptr )
+	, _inputController( nullptr )
 {
 	_fileUtils = new FileUtils();
 	_resMng = new ResourcesManager();
@@ -26,7 +26,7 @@ Director::Director()
 
 	_timeScheduler = new TimeScheduler();
 
-	_keyboardController = new KeyboardController();
+	_inputController = new InputController();
 }
 Director::~Director()
 {
@@ -144,7 +144,7 @@ TimeScheduler* Director::getTimeScheduler()
 {
 	return _timeScheduler;
 }
-KeyboardController* Director::getKeyboardController()
+InputController* Director::getInputController()
 {
-	return _keyboardController;
+	return _inputController;
 }

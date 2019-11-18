@@ -52,7 +52,7 @@
     <Filter Include="Source Files\events">
       <UniqueIdentifier>{b3a24983-14c2-4316-9068-cb8e7255b8d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\keys">
+    <Filter Include="Source Files\io_system">
       <UniqueIdentifier>{96dcaa33-5cde-4539-af24-39e54f9a8622}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -129,8 +129,11 @@
     <ClCompile Include="..\classes\Application.cpp">
       <Filter>Source Files\app</Filter>
     </ClCompile>
-    <ClCompile Include="..\classes\KeyboardController.cpp">
-      <Filter>Source Files\keys</Filter>
+    <ClCompile Include="..\classes\CameraMovementController.cpp">
+      <Filter>Source Files\content</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\InputController.cpp">
+      <Filter>Source Files\io_system</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,8 +206,11 @@
     <ClInclude Include="..\classes\TimeScheduler.h">
       <Filter>Source Files\events</Filter>
     </ClInclude>
-    <ClInclude Include="..\classes\KeyboardController.h">
-      <Filter>Source Files\keys</Filter>
+    <ClInclude Include="..\classes\CameraMovementController.h">
+      <Filter>Source Files\content</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\InputController.h">
+      <Filter>Source Files\io_system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

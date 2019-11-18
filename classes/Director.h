@@ -9,7 +9,7 @@
 #include "Scene.h"
 #include "AutoReleasePool.h"
 #include "TimeScheduler.h"
-#include "KeyboardController.h"
+#include "InputController.h"
 
 #include <chrono>
 
@@ -30,7 +30,7 @@ class Director
 
 	TimeScheduler* _timeScheduler;
 
-	KeyboardController* _keyboardController;
+	InputController* _inputController;
 
 	Scene* _scene;
 
@@ -73,7 +73,7 @@ public:
 
 	TimeScheduler* getTimeScheduler();
 
-	KeyboardController* getKeyboardController();
+	InputController* getInputController();
 };
 
 #define VIEW Director::getInstance()->getView()
@@ -84,7 +84,7 @@ public:
 #define RELEASE_POOL Director::getInstance()->getReleasePool()
 #define SCHEDULER Director::getInstance()->getTimeScheduler()
 #define RES_PATH(__RES_ID__) Director::getInstance()->getResMng()->getResPath(__RES_ID__)
-#define KEYS Director::getInstance()->getKeyboardController()
+#define INPUT Director::getInstance()->getInputController()
 
 _VEEND
 
