@@ -75,7 +75,7 @@ public:
 	void setScale( const Vec3& scale );
 	const Vec3& getScale() const;
 
-	void setSize( const Size& size );
+	virtual void setSize( const Size& size );
 	const Size& getSize() const;
 
 	void setName( const std::string& name );

@@ -39,9 +39,6 @@ class CameraMovementController : public InputControllerListener
 
 	void updaeTime( float deltaTme );
 
-	float getAbsoluteXPos( double posX );
-	float getAbsoluteYPos( double posY );
-
 
 protected:
 

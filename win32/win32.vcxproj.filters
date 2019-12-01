@@ -55,6 +55,9 @@
     <Filter Include="Source Files\io_system">
       <UniqueIdentifier>{96dcaa33-5cde-4539-af24-39e54f9a8622}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\nodes\lihgt">
+      <UniqueIdentifier>{4a39d22d-7cb3-4a5c-bc46-460b0b3de082}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -135,6 +138,9 @@
     <ClCompile Include="..\classes\InputController.cpp">
       <Filter>Source Files\io_system</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\LightSource.cpp">
+      <Filter>Source Files\nodes\lihgt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -211,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="..\classes\InputController.h">
       <Filter>Source Files\io_system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\LightSource.h">
+      <Filter>Source Files\nodes\lihgt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

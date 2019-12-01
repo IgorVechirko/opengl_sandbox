@@ -5,9 +5,13 @@
 
 _VESTART
 
+class LightSource;
 class Scene;
 class GLRender
 {
+
+
+	LightSource* _lightSource;
 
 public:
 
@@ -17,6 +21,9 @@ public:
 	void init();
 
 	void drawScene( Scene* scene );
+
+	void setLightSource( LightSource* source );
+	LightSource* getLightSource();
 };
 
 _VEEND

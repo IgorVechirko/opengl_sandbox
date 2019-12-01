@@ -3,6 +3,7 @@
 #include "ShaderProgram.h"
 #include "Texture2D.h"
 #include "Director.h"
+#include "LightSource.h"
 
 _USEVE
 
@@ -71,47 +72,47 @@ void Cube::setTexture( Texture2D* texture )
 		Size textSize( _texture->getWidth(), _texture->getHeight() );
 
 
-		_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
-						 textSize.x, 0.0f, 0.0f,  1.0f, 0.0f,
-						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,
-						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,
-						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,
-						0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
+		_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
+						 textSize.x, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f, 0.0f, -1.0f,
+						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
+						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
+						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f, 0.0f, 0.0f, -1.0f,
+						0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
 
-						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,
-						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,
-						 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,
-						 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,
-						0.0f,  textSize.x,  textSize.x,  0.0f, 1.0f,
-						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,
+						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
+						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f,  0.0f,  1.0f,
+						 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
+						 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
+						0.0f,  textSize.x,  textSize.x,  0.0f, 1.0f,  0.0f,  0.0f,  1.0f,
+						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
 
-						0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f,
-						0.0f,  textSize.x, 0.0f,  1.0f, 1.0f,
-						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
-						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
-						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,
-						0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f,
+						0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+						0.0f,  textSize.x, 0.0f,  1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+						0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+						0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+						0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
 
-						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,
-						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,
-						 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,
-						 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,
-						 textSize.x, 0.0f,  textSize.x,  0.0f, 0.0f,
-						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,
+						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+						 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+						 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+						 textSize.x, 0.0f,  textSize.x,  0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
 
-						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
-						 textSize.x, 0.0f, 0.0f,  1.0f, 1.0f,
-						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,
-						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,
-						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,
-						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f,
+						 textSize.x, 0.0f, 0.0f,  1.0f, 1.0f,  0.0f, -1.0f,  0.0f,
+						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
+						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
+						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f, -1.0f,  0.0f,
+						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f,
 
-						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,
-						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,
-						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,
-						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,
-						0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f,
-						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f };
+						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+						 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f,  1.0f,  0.0f,
+						 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f,  1.0f,  0.0f,
+						0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f,  0.0f,  1.0f,  0.0f,
+						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f,  1.0f,  0.0f, };
 
 		_indices = { 0, 1, 2,
 					 1, 2, 3 };
@@ -132,11 +133,14 @@ void Cube::setTexture( Texture2D* texture )
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*_indices.size(), indices, GL_STATIC_DRAW );
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLvoid*)0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0);
 		glEnableVertexAttribArray(0);
 
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLvoid*)(3*sizeof(GLfloat)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GLfloat)));
 		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(5*sizeof(GLfloat)));
+		glEnableVertexAttribArray(2);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
@@ -159,10 +163,28 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		GLuint transModelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
 		GLuint transViewLoc = glGetUniformLocation ( _shader->getProgramID(), "view" );
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
+		GLuint lightColorLoc = glGetUniformLocation( _shader->getProgramID(), "lightColor" );
+		GLuint lightSourcePosLoc = glGetUniformLocation( _shader->getProgramID(), "lightSourcePos" );
+		GLuint cameraPosLoc = glGetUniformLocation( _shader->getProgramID(), "cameraPos" );
+
+
+		glm::vec4 lightColor( 1.0f, 1.0f, 1.0f, 1.0f );
+		glm::vec3 lightSourcePos( 0.0f, 0.0f, 0.0f );
+		auto lightSource = RENDER->getLightSource();
+		if ( lightSource )
+		{
+			lightColor = lightSource->getLightColor();
+			lightSourcePos = lightSource->getPosition();
+		}
+
+		auto& cameraPos = CAMERA->getCameraPos();
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
+		glProgramUniform4f( _shader->getProgramID(), lightColorLoc, lightColor.r, lightColor.g, lightColor.b, lightColor.a );
+		glProgramUniform3f( _shader->getProgramID(), lightSourcePosLoc, lightSourcePos.x, lightSourcePos.y, lightSourcePos.z );
+		glProgramUniform3f( _shader->getProgramID(), cameraPosLoc, cameraPos.x, cameraPos.y, cameraPos.z );
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 	}

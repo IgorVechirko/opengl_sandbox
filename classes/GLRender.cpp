@@ -5,6 +5,7 @@
 _USEVE
 
 GLRender::GLRender()
+	: _lightSource( nullptr )
 {
 }
 GLRender::~GLRender()
@@ -27,4 +28,12 @@ void GLRender::drawScene( Scene* scene )
 
 	glfwSwapBuffers( VIEW->getWindow() );
 
+}
+void GLRender::setLightSource( LightSource* source )
+{
+	_lightSource = source;
+}
+LightSource* GLRender::getLightSource()
+{
+	return _lightSource;
 }

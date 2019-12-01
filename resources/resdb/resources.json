@@ -5,6 +5,8 @@
 	"SPRITE_VERTEX" : "shaders/sprite_vertex.vsh",
 	"CUBE_FRAGMENT" : "shaders/cube_fragment.fsh",
 	"CUBE_VERTEX" : "shaders/cube_vertex.vsh",
+	"ILLUMINAT_FRAGMENT" : "shaders/illuminat_fragment.fsh",
+	"ILLUMINAT_VERTEX" : "shaders/illuminat_vertex.vsh",
 
 	"CONTAINER" : "textures/container.jpg",
 	"SMILE" : "textures/smile.png",

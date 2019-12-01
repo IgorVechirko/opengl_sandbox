@@ -131,6 +131,7 @@
     <ClCompile Include="..\classes\Camera.cpp" />
     <ClCompile Include="..\classes\CameraMovementController.cpp" />
     <ClCompile Include="..\classes\Director.cpp" />
+    <ClCompile Include="..\classes\LightSource.cpp" />
     <ClCompile Include="..\classes\InputController.cpp" />
     <ClCompile Include="..\classes\TimeScheduler.cpp" />
     <ClCompile Include="..\classes\GLRender.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\classes\Camera.h" />
     <ClInclude Include="..\classes\CameraMovementController.h" />
     <ClInclude Include="..\classes\Director.h" />
+    <ClInclude Include="..\classes\LightSource.h" />
     <ClInclude Include="..\classes\InputController.h" />
     <ClInclude Include="..\classes\TimeScheduler.h" />
     <ClInclude Include="..\classes\GLRender.h" />
