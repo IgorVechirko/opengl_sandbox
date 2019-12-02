@@ -12,9 +12,10 @@ class InputControllerListener
 
 	public:
 
-		virtual void onKeyPressed( int aKeyCode ){};
-		virtual void onKeyPressRepeate( int aKeyCode ){};
-		virtual void onKeyReleased( int aKeyCode ){};
+		virtual void onKeyPressed( int keyCode ){};
+		virtual void onKeyPressRepeate( int keyCode ){};
+		virtual void onKeyReleased( int keyCode ){};
+		virtual void onWheelScrolled( float xoffset, float yoffset ){};
 
 		virtual void onMouseMoved( double posX, double posY ){};
 
@@ -35,6 +36,7 @@ public:
 
 	void onKeyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers );
 	void onMouseMoved( GLFWwindow* window, double posX, double posY );
+	void onWheelScrolled( GLFWwindow* window, double xoffset, double yoffset );
 
 	void setInputCondtrollerListener( InputControllerListener* lst );
 	InputControllerListener* getInputCondtrollerListener();

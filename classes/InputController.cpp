@@ -11,9 +11,12 @@ void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int 
 
 void mouseMoved( GLFWwindow* window, double posX, double posY )
 {
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
 	INPUT->onMouseMoved( window, posX, posY );
+}
+
+void wheelScrolled( GLFWwindow* window, double xoffset, double yoffset )
+{
+	INPUT->onWheelScrolled( window, xoffset, yoffset );
 }
 
 InputController::InputController()
@@ -26,9 +29,13 @@ InputController::~InputController()
 
 void InputController::init()
 {
-	auto ret = glfwSetKeyCallback( VIEW->getWindow(), &keyPressed );
+	glfwSetKeyCallback( VIEW->getWindow(), &keyPressed );
 
 	glfwSetCursorPosCallback( VIEW->getWindow(), &mouseMoved );
+
+	glfwSetScrollCallback( VIEW->getWindow(), &wheelScrolled );
+
+	glfwSetInputMode( VIEW->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED );
 
 	bool stop = true;
 }
@@ -57,6 +64,13 @@ void InputController::onMouseMoved( GLFWwindow* window, double posX, double posY
 	if ( _inputControllerListener )
 	{
 		_inputControllerListener->onMouseMoved( posX, posY );
+	}
+}
+void InputController::onWheelScrolled( GLFWwindow* window, double xoffset, double yoffset )
+{
+	if( _inputControllerListener )
+	{
+		_inputControllerListener->onWheelScrolled( xoffset, yoffset );
 	}
 }
 void InputController::setInputCondtrollerListener( InputControllerListener* lst )

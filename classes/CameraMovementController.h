@@ -23,6 +23,8 @@ class CameraMovementController : public InputControllerListener
 	eAxisDirection _yDirection;
 	eAxisDirection _zDirection;
 
+	float _fovAngle;
+
 	float _cameraMoveSpeed;
 
 	float _cameraRotateSensitivity;
@@ -48,6 +50,8 @@ protected:
 	virtual void onKeyReleased( int aKeyCode ) override;
 
 	virtual void onMouseMoved( double posX, double posY ) override;
+
+	virtual void onWheelScrolled( float xoffset, float yoffset ) override;
 
 
 public:

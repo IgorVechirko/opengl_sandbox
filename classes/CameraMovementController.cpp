@@ -9,6 +9,7 @@ CameraMovementController::CameraMovementController()
 	, _cameraRotateSensitivity( 0.1f )
 	, _mousePos( 0.0f, 0.0f )
 	, _mousePosInited( false )
+	, _fovAngle( 45.0f )
 {
 }
 CameraMovementController::~CameraMovementController()
@@ -173,10 +174,17 @@ void CameraMovementController::onMouseMoved( double posX, double posY )
 
 	_mousePos = newMousePos;
 }
+void CameraMovementController::onWheelScrolled( float xoffset, float yoffset )
+{
+	_fovAngle += yoffset;
+
+	auto wndSize = VIEW->getWindowSize();
+	CAMERA->setProjection( glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f ) );
+}
 void CameraMovementController::init()
 {
 	auto wndSize = VIEW->getWindowSize();
-	Mat4 projection = glm::perspective( glm::radians(45.0f), wndSize.x/wndSize.y, 0.1f, 10000.0f );
+	Mat4 projection = glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f );
 	CAMERA->setProjection( projection );
 
 	CAMERA->setCameraPos( Vec3( 0.0f, 0.0f, 927.0f ) );
