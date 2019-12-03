@@ -88,6 +88,35 @@ struct Vertex
 	}
 };
 
+struct Material 
+{
+	Vec3 ambient;
+	Vec3 diffuse;
+	Vec3 specular;
+	float shininess;
+
+	Material()
+		: shininess( 0.0f )
+		, ambient( 1.0f, 1.0f, 1.0f )
+		, diffuse( 1.0f, 1.0f, 1.0f )
+		, specular( 1.0f, 1.0f, 1.0f )
+	{};
+};
+
+struct LightProperties
+{
+	Vec3 ambient;
+	Vec3 diffuse;
+	Vec3 specular;
+
+	LightProperties()
+		: ambient( 0.0f, 0.0f, 0.0f )
+		, diffuse( 0.0f, 0.0f, 0.0f )
+		, specular( 0.0f, 0.0f, 0.0f )
+	{
+	};
+};
+
 #define DEF_WIN_SIZE Size( 1024, 768 )
 #define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );
 #define AUTORELEASE_CREATE_FUNC(__TYPE__)\

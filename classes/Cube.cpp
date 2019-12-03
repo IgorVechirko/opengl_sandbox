@@ -163,17 +163,26 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		GLuint transModelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
 		GLuint transViewLoc = glGetUniformLocation ( _shader->getProgramID(), "view" );
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
-		GLuint lightColorLoc = glGetUniformLocation( _shader->getProgramID(), "lightColor" );
-		GLuint lightSourcePosLoc = glGetUniformLocation( _shader->getProgramID(), "lightSourcePos" );
+
 		GLuint cameraPosLoc = glGetUniformLocation( _shader->getProgramID(), "cameraPos" );
 
+		GLuint materialAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "material.ambient" );
+		GLuint materialDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "material.diffuse" );
+		GLuint materialSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "material.specular" );
+		GLuint materialShininessLoc = glGetUniformLocation( _shader->getProgramID(), "material.shininess" );
 
-		glm::vec4 lightColor( 1.0f, 1.0f, 1.0f, 1.0f );
+		GLuint lightPropAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.ambient" );
+		GLuint lightPropDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.diffuse" );
+		GLuint lightPropSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.specular" );
+		GLuint lightPropPosLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.pos" );
+
+
+		LightProperties lightProperties;
 		glm::vec3 lightSourcePos( 0.0f, 0.0f, 0.0f );
 		auto lightSource = RENDER->getLightSource();
 		if ( lightSource )
 		{
-			lightColor = lightSource->getLightColor();
+			lightProperties = lightSource->getLightProperties();
 			lightSourcePos = lightSource->getPosition();
 		}
 
@@ -182,9 +191,18 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
-		glProgramUniform4f( _shader->getProgramID(), lightColorLoc, lightColor.r, lightColor.g, lightColor.b, lightColor.a );
-		glProgramUniform3f( _shader->getProgramID(), lightSourcePosLoc, lightSourcePos.x, lightSourcePos.y, lightSourcePos.z );
 		glProgramUniform3f( _shader->getProgramID(), cameraPosLoc, cameraPos.x, cameraPos.y, cameraPos.z );
+
+		glProgramUniform3f( _shader->getProgramID(), materialAmbientLoc, _material.ambient.r, _material.ambient.g, _material.ambient.b );
+		glProgramUniform3f( _shader->getProgramID(), materialDiffuseLoc, _material.diffuse.r, _material.diffuse.g, _material.diffuse.b );
+		glProgramUniform3f( _shader->getProgramID(), materialSpecularLoc, _material.specular.r, _material.specular.g, _material.specular.b );
+		glProgramUniform1f( _shader->getProgramID(), materialShininessLoc, _material.shininess );
+
+		glProgramUniform3f( _shader->getProgramID(), lightPropAmbientLoc, lightProperties.ambient.r, lightProperties.ambient.g, lightProperties.ambient.b );
+		glProgramUniform3f( _shader->getProgramID(), lightPropDiffuseLoc, lightProperties.diffuse.r, lightProperties.diffuse.g, lightProperties.diffuse.b );
+		glProgramUniform3f( _shader->getProgramID(), lightPropSpecularLoc, lightProperties.specular.r, lightProperties.specular.g, lightProperties.specular.b );
+		glProgramUniform3f( _shader->getProgramID(), lightPropPosLoc, lightSourcePos.x, lightSourcePos.y, lightSourcePos.z );
+		
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 	}
@@ -192,4 +210,12 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 	
 	
 	glBindVertexArray(0);
+}
+void Cube::setMaterial( const Material& material )
+{
+	_material = material;
+}
+const Material& Cube::getMaterial()
+{
+	return _material;
 }

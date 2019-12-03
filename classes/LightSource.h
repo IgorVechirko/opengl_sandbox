@@ -20,9 +20,9 @@ class LightSource : public Node
 	GLuint _vao;
 	GLuint _ebo;
 
-	glm::vec4 _lightColor;
-
 	ShaderProgram* _shader;
+
+	LightProperties _properties;
 
 
 	void updateVertices();
@@ -46,8 +46,8 @@ class LightSource : public Node
 
 		virtual void setSize( const Size& size ) override;
 
-		void setLightColor( const glm::vec4& color );
-		const glm::vec4& getLightColor();
+		void setLightProperties( const LightProperties& properties );
+		const LightProperties& getLightProperties();
 };
 
 

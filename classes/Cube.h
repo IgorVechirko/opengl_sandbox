@@ -24,6 +24,8 @@ class Cube : public Node
 	GLuint _vao;
 	GLuint _ebo;
 
+	Material _material;
+
 	void updateVertices( const Size& size );
 
 protected:
@@ -42,6 +44,9 @@ public:
 
 	void setShaderProgram( ShaderProgram* program );
 	void setTexture( Texture2D* texture );
+
+	void setMaterial( const Material& material );
+	const Material& getMaterial();
 };
 
 

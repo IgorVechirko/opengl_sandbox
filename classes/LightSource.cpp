@@ -7,8 +7,7 @@ _VESTART
 
 
 LightSource::LightSource()
-	: _lightColor( 1.0f, 1.0f, 1.0f, 1.0f )
-	, _verticesDirty( false )
+	: _verticesDirty( false )
 	, _vbo( 0 )
 	, _vao( 0 )
 	, _ebo( 0 )
@@ -142,12 +141,12 @@ void LightSource::draw( GLRender* render, const Mat4& transform )
 		GLuint transModelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
 		GLuint transViewLoc = glGetUniformLocation ( _shader->getProgramID(), "view" );
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
-		//GLuint colorLoc = glGetUniformLocation( _shader->getProgramID(), "lightColor" );
+		GLuint colorLoc = glGetUniformLocation( _shader->getProgramID(), "lightColor" );
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
-		//glProgramUniform4f( _shader->getProgramID(), colorLoc, _lightColor.r, _lightColor.g, _lightColor.b, _lightColor.a );
+		glProgramUniform4f( _shader->getProgramID(), colorLoc, _properties.specular.r, _properties.specular.g, _properties.specular.b, 1.0f );
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 	}
@@ -161,19 +160,13 @@ void LightSource::setSize( const Size& size )
 
 	_verticesDirty = true;
 }
-void LightSource::setLightColor( const glm::vec4& color )
+void LightSource::setLightProperties( const LightProperties& properties )
 {
-	_lightColor = color;
-
-	if ( _shader )
-	{
-		auto lightColorLoc = glGetUniformLocation( _shader->getProgramID(), "lightColor" );
-		glProgramUniform4f( _shader->getProgramID(), lightColorLoc, _lightColor.r, _lightColor.g, _lightColor.b, _lightColor.a );
-	}
-
+	_properties = properties;
 }
-const glm::vec4& LightSource::getLightColor()
+const LightProperties& LightSource::getLightProperties()
 {
-	return _lightColor;
+	return _properties;
 }
+
 _VEEND
