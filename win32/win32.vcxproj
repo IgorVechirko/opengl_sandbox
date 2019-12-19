@@ -130,19 +130,16 @@
     <ClCompile Include="..\classes\AutoReleasePool.cpp" />
     <ClCompile Include="..\classes\Camera.cpp" />
     <ClCompile Include="..\classes\CameraMovementController.cpp" />
+    <ClCompile Include="..\classes\DirectLightSource.cpp" />
     <ClCompile Include="..\classes\Director.cpp" />
-    <ClCompile Include="..\classes\LightSource.cpp" />
+    <ClCompile Include="..\classes\PointLightSource.cpp" />
     <ClCompile Include="..\classes\InputController.cpp" />
     <ClCompile Include="..\classes\TimeScheduler.cpp" />
     <ClCompile Include="..\classes\GLRender.cpp" />
     <ClCompile Include="..\classes\GLView.cpp" />
-    <ClCompile Include="..\classes\Line.cpp" />
     <ClCompile Include="..\classes\Node.cpp" />
-    <ClCompile Include="..\classes\Point.cpp" />
-    <ClCompile Include="..\classes\Primitive.cpp" />
     <ClCompile Include="..\classes\FileUtils.cpp" />
     <ClCompile Include="..\classes\main.cpp" />
-    <ClCompile Include="..\classes\Rectangle.cpp" />
     <ClCompile Include="..\classes\ResourcesManager.cpp" />
     <ClCompile Include="..\classes\ShaderProgram.cpp" />
     <ClCompile Include="..\classes\Ref.cpp" />
@@ -151,7 +148,6 @@
     <ClCompile Include="..\classes\Sprite.cpp" />
     <ClCompile Include="..\classes\TestScene.cpp" />
     <ClCompile Include="..\classes\Texture2D.cpp" />
-    <ClCompile Include="..\classes\Triangle.cpp" />
     <ClCompile Include="..\classes\VECommon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,18 +155,15 @@
     <ClInclude Include="..\classes\AutoReleasePool.h" />
     <ClInclude Include="..\classes\Camera.h" />
     <ClInclude Include="..\classes\CameraMovementController.h" />
+    <ClInclude Include="..\classes\DirectLightSource.h" />
     <ClInclude Include="..\classes\Director.h" />
-    <ClInclude Include="..\classes\LightSource.h" />
+    <ClInclude Include="..\classes\PointLIghtSource.h" />
     <ClInclude Include="..\classes\InputController.h" />
     <ClInclude Include="..\classes\TimeScheduler.h" />
     <ClInclude Include="..\classes\GLRender.h" />
     <ClInclude Include="..\classes\GLView.h" />
-    <ClInclude Include="..\classes\Line.h" />
     <ClInclude Include="..\classes\Node.h" />
-    <ClInclude Include="..\classes\Point.h" />
-    <ClInclude Include="..\classes\Primitive.h" />
     <ClInclude Include="..\classes\FileUtils.h" />
-    <ClInclude Include="..\classes\Rectangle.h" />
     <ClInclude Include="..\classes\Ref.h" />
     <ClInclude Include="..\classes\ResourcesManager.h" />
     <ClInclude Include="..\classes\Scene.h" />
@@ -179,7 +172,6 @@
     <ClInclude Include="..\classes\Sprite.h" />
     <ClInclude Include="..\classes\TestScene.h" />
     <ClInclude Include="..\classes\Texture2D.h" />
-    <ClInclude Include="..\classes\Triangle.h" />
     <ClInclude Include="..\classes\VECommon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

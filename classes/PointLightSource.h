@@ -1,5 +1,5 @@
-#ifndef LightSource_H
-#define LightSource_H
+#ifndef PointLightSource_H
+#define PointLightSource_H
 
 #include "Node.h"
 
@@ -7,7 +7,7 @@
 _VESTART
 
 class ShaderProgram;
-class LightSource : public Node
+class PointLightSource : public Node
 {
 
 	typedef Node Parent;
@@ -23,6 +23,7 @@ class LightSource : public Node
 	ShaderProgram* _shader;
 
 	LightProperties _properties;
+	LightAttenuationCoefs _attenuationCoefs;
 
 
 	void updateVertices();
@@ -31,7 +32,7 @@ class LightSource : public Node
 
 	protected:
 
-		LightSource();
+		PointLightSource();
 
 		virtual bool init() override;
 
@@ -39,9 +40,9 @@ class LightSource : public Node
 
 	public:
 
-		virtual ~LightSource();
+		virtual ~PointLightSource();
 
-		CREATE_FUNC(LightSource);
+		CREATE_FUNC(PointLightSource);
 
 
 		virtual void setSize( const Size& size ) override;

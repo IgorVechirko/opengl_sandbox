@@ -9,17 +9,12 @@ _VESTART
 
 
 class Cube;
-class LightSource;
 class Sprite;
 class TestScene : public Scene
 {
 
 	Sprite* _mySprite;
 	Cube* _cube; 
-	LightSource* _lightSource;
-	
-	float _lightAngle;
-	float _distToCenter;
 
 	CameraMovementController _cameraController;
 

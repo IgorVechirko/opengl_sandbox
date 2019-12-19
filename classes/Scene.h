@@ -6,8 +6,11 @@
 _VESTART
 
 class GLRender;
+class DirectLightSource;
 class Scene : public Node
 {
+
+	DirectLightSource* _directionLight;
 
 
 protected:
@@ -21,6 +24,9 @@ public:
 	CREATE_FUNC(Scene);
 
 	void visit( GLRender* render );
+
+	void setDirectionLight( DirectLightSource* directionLight );
+	DirectLightSource* getDirectionLight();
 
 };
 

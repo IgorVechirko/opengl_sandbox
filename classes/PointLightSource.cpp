@@ -1,4 +1,4 @@
-#include "LightSource.h"
+#include "PointLightSource.h"
 
 #include "ShaderProgram.h"
 #include "Director.h"
@@ -6,7 +6,7 @@
 _VESTART
 
 
-LightSource::LightSource()
+PointLightSource::PointLightSource()
 	: _verticesDirty( false )
 	, _vbo( 0 )
 	, _vao( 0 )
@@ -14,10 +14,10 @@ LightSource::LightSource()
 	, _shader( nullptr )
 {
 }
-LightSource::~LightSource()
+PointLightSource::~PointLightSource()
 {
 }
-void LightSource::updateVertices()
+void PointLightSource::updateVertices()
 {
 	_vertices.clear();
 	_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
@@ -75,7 +75,7 @@ void LightSource::updateVertices()
 		glBindVertexArray(0);
 	}
 }
-void LightSource::setShaderProgram( ShaderProgram* program )
+void PointLightSource::setShaderProgram( ShaderProgram* program )
 {
 	if ( program )
 	{
@@ -86,7 +86,7 @@ void LightSource::setShaderProgram( ShaderProgram* program )
 		_shader->retain();
 	}
 }
-bool LightSource::init()
+bool PointLightSource::init()
 {
 	setSize( Size( 50.0f, 50.0f ) );
 	updateVertices();
@@ -121,7 +121,7 @@ bool LightSource::init()
 
 	return true;
 }
-void LightSource::draw( GLRender* render, const Mat4& transform )
+void PointLightSource::draw( GLRender* render, const Mat4& transform )
 {
 	if ( _verticesDirty )
 	{
@@ -154,17 +154,17 @@ void LightSource::draw( GLRender* render, const Mat4& transform )
 	
 	glBindVertexArray(0);
 }
-void LightSource::setSize( const Size& size )
+void PointLightSource::setSize( const Size& size )
 {
 	Parent::setSize( size );
 
 	_verticesDirty = true;
 }
-void LightSource::setLightProperties( const LightProperties& properties )
+void PointLightSource::setLightProperties( const LightProperties& properties )
 {
 	_properties = properties;
 }
-const LightProperties& LightSource::getLightProperties()
+const LightProperties& PointLightSource::getLightProperties()
 {
 	return _properties;
 }

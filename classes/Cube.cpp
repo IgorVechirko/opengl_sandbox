@@ -3,7 +3,10 @@
 #include "ShaderProgram.h"
 #include "Texture2D.h"
 #include "Director.h"
-#include "LightSource.h"
+
+
+#include "PointLightSource.h"
+#include "DirectLightSource.h"
 
 _USEVE
 
@@ -163,29 +166,7 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		GLuint transModelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
 		GLuint transViewLoc = glGetUniformLocation ( _shader->getProgramID(), "view" );
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
-
 		GLuint cameraPosLoc = glGetUniformLocation( _shader->getProgramID(), "cameraPos" );
-
-		GLuint materialAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "material.ambient" );
-		GLuint materialDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "material.diffuse" );
-		GLuint materialSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "material.specular" );
-		GLuint materialShininessLoc = glGetUniformLocation( _shader->getProgramID(), "material.shininess" );
-
-		GLuint lightPropAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.ambient" );
-		GLuint lightPropDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.diffuse" );
-		GLuint lightPropSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.specular" );
-		GLuint lightPropPosLoc = glGetUniformLocation( _shader->getProgramID(), "lightProperties.pos" );
-
-
-		LightProperties lightProperties;
-		glm::vec3 lightSourcePos( 0.0f, 0.0f, 0.0f );
-		auto lightSource = RENDER->getLightSource();
-		if ( lightSource )
-		{
-			lightProperties = lightSource->getLightProperties();
-			lightSourcePos = lightSource->getPosition();
-		}
-
 		auto& cameraPos = CAMERA->getCameraPos();
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
@@ -193,21 +174,40 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
 		glProgramUniform3f( _shader->getProgramID(), cameraPosLoc, cameraPos.x, cameraPos.y, cameraPos.z );
 
+
+		GLuint materialAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "material.ambient" );
+		GLuint materialDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "material.diffuse" );
+		GLuint materialSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "material.specular" );
+		GLuint materialShininessLoc = glGetUniformLocation( _shader->getProgramID(), "material.shininess" );
+
 		glProgramUniform3f( _shader->getProgramID(), materialAmbientLoc, _material.ambient.r, _material.ambient.g, _material.ambient.b );
 		glProgramUniform3f( _shader->getProgramID(), materialDiffuseLoc, _material.diffuse.r, _material.diffuse.g, _material.diffuse.b );
 		glProgramUniform3f( _shader->getProgramID(), materialSpecularLoc, _material.specular.r, _material.specular.g, _material.specular.b );
 		glProgramUniform1f( _shader->getProgramID(), materialShininessLoc, _material.shininess );
 
+
+		GLuint lightPropAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.ambient" );
+		GLuint lightPropDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.diffuse" );
+		GLuint lightPropSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.specular" );
+		GLuint lightPropDirectLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.direction" );
+
+		LightProperties lightProperties;
+		glm::vec3 lightDirection( 0.0f, 0.0f, 0.0f );
+		auto lightSource = RENDER->getDirectionLight();
+		if ( lightSource )
+		{
+			lightProperties = lightSource->getLightProperties();
+			lightDirection = lightSource->getDirection();
+		}
+		
 		glProgramUniform3f( _shader->getProgramID(), lightPropAmbientLoc, lightProperties.ambient.r, lightProperties.ambient.g, lightProperties.ambient.b );
 		glProgramUniform3f( _shader->getProgramID(), lightPropDiffuseLoc, lightProperties.diffuse.r, lightProperties.diffuse.g, lightProperties.diffuse.b );
 		glProgramUniform3f( _shader->getProgramID(), lightPropSpecularLoc, lightProperties.specular.r, lightProperties.specular.g, lightProperties.specular.b );
-		glProgramUniform3f( _shader->getProgramID(), lightPropPosLoc, lightSourcePos.x, lightSourcePos.y, lightSourcePos.z );
+		glProgramUniform3f( _shader->getProgramID(), lightPropDirectLoc, lightDirection.x, lightDirection.y, lightDirection.z );
 		
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 	}
-
-	
 	
 	glBindVertexArray(0);
 }

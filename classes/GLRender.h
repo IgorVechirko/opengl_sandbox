@@ -5,13 +5,10 @@
 
 _VESTART
 
-class LightSource;
 class Scene;
+class DirectLightSource;
 class GLRender
 {
-
-
-	LightSource* _lightSource;
 
 public:
 
@@ -22,8 +19,7 @@ public:
 
 	void drawScene( Scene* scene );
 
-	void setLightSource( LightSource* source );
-	LightSource* getLightSource();
+	DirectLightSource* getDirectionLight();
 };
 
 _VEEND

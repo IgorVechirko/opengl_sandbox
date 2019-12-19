@@ -117,6 +117,19 @@ struct LightProperties
 	};
 };
 
+struct LightAttenuationCoefs
+{
+	float constant;
+	float linear;
+	float quadratic;
+
+	LightAttenuationCoefs()
+		: constant( 1.0f )
+		, linear( 0.0f )
+		, quadratic( 0.0f )
+	{};
+};
+
 #define DEF_WIN_SIZE Size( 1024, 768 )
 #define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );
 #define AUTORELEASE_CREATE_FUNC(__TYPE__)\
