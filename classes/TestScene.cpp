@@ -11,7 +11,6 @@ _USEVE
 
 TestScene::TestScene()
 	: _mySprite( nullptr )
-	, _cameraController()
 {
 }
 TestScene::~TestScene()
@@ -19,14 +18,9 @@ TestScene::~TestScene()
 }
 bool TestScene::init()
 {
+	Parent::init();
 
-	auto colorCube = ColorCube::create();
-	colorCube->setCubeSize( 400.0f );
-	colorCube->setColor( RGBA::RED );
-	//colorCube->setPosition( Vec3( 110.0f, 110.0f, -256.0f ) );
-	addChild( colorCube );
-
-	//_cube = Cube::create( RES_PATH( "MOUNTAIN" ) );
+	_cube = Cube::create( RES_PATH( "MOUNTAIN" ) );
 	if( _cube )
 	{
 		addChild( _cube );
@@ -41,7 +35,7 @@ bool TestScene::init()
 		_cube->setMaterial( emerald );
 	}
 
-	/*DirectLightSource* directionLight = DirectLightSource::create();
+	DirectLightSource* directionLight = DirectLightSource::create();
 	if ( directionLight )
 	{
 		directionLight->setDirection( Vec3( 0.0f, 0.0f, -1.0f ) );
@@ -53,9 +47,9 @@ bool TestScene::init()
 		directionLight->setLightProperties( lightProperties );
 
 		setDirectionLight( directionLight );
-	}*/
+	}
 
-	_cameraController.init();
+	CameraMovementController::init();
 
 	scheduleUpdate();
 
@@ -66,4 +60,8 @@ void TestScene::update( float deltaTime )
 
 	//if( _cube )
 		//_cube->setRotate( _cube->getRotate() + Vec3( 1.0f, 0.0f, 0.0f ) * 0.25f );
+}
+Camera* TestScene::getCamera()
+{
+	return Parent::getCamera();
 }

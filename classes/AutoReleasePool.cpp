@@ -31,7 +31,7 @@ void AutoReleasePool::addRef( Ref* newRef )
 		_refs.push_back( newRef );
 	}
 }
-void AutoReleasePool::chechPool()
+void AutoReleasePool::checkPool()
 {
 	for ( auto refIt = _refs.begin(); refIt != _refs.end(); )
 	{

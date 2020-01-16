@@ -42,8 +42,6 @@ void GLView::setupWindowSize( GLuint width, GLuint height )
 		glViewport( 0, 0, width, height );
 
 		glDisable( GL_DEPTH_TEST );
-
-		CAMERA->setProjection( glm::ortho( 0.0f, DEF_WIN_SIZE.x, 0.0f, DEF_WIN_SIZE.y, -1.0f, 100.0f ) );
 	}
 }
 Size GLView::getWindowSize()

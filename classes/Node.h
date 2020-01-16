@@ -26,14 +26,15 @@ _VESTART
 class GLRender;
 class Node : public Ref
 {
-	Vec3 _pos;
-	Vec3 _rotate;
-	Vec3 _scale;
 
 	glm::mat4 _transform;
 	bool _transDirty;
 
 protected:
+
+	Vec3 _pos;
+	Vec3 _rotate;
+	Vec3 _scale;
 
 	std::string _name;
 
@@ -65,7 +66,7 @@ public:
 
 	CREATE_FUNC(Node);
 
-	void setPosition( const Vec3& pos );
+	virtual void setPosition( const Vec3& pos );
 	const Vec3& getPosition() const;
 
 	void setRotate( const Vec3& rotate );

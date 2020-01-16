@@ -1,27 +1,28 @@
-#include "Ref.h"
+#include "Node.h"
 
 _VESTART
 
-class Camera : public Ref
+class Camera : public Node
 {
+	typedef Node Parent;
+
 	Mat4 _projection;
 	Mat4 _view;
 
 	bool _viewDirty;
 
-	Vec3 _cameraPos;
 	Vec3 _cameraFront;
-	Vec3 _cameraUp;
+	const Vec3 _cameraUp;
 
 	float _cameraPitch;
 	float _cameraYaw;
 	float _cameraRoll;
 
-	Camera();
-
+	
 protected:
 
-	virtual bool init(){return true;};
+	Camera();
+
 
 public:
 
@@ -33,8 +34,7 @@ public:
 	void setView( const Mat4& view );
 	const Mat4& getView();
 
-	void setCameraPos( const Vec3& pos );
-	const Vec3& getCameraPos() const;
+	virtual void setPosition( const Vec3& pos ) override;
 
 	void moveAhead( float shift );
 	void moveBack( float shift );

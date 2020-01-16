@@ -5,10 +5,13 @@
 
 _VESTART
 
-class GLRender;
+class Camera;
 class DirectLightSource;
 class Scene : public Node
 {
+	typedef Node Parent;
+
+	Camera* _camera;
 
 	DirectLightSource* _directionLight;
 
@@ -16,6 +19,8 @@ class Scene : public Node
 protected:
 
 	Scene();
+
+	virtual bool init() override;
 
 public:
 
@@ -27,6 +32,9 @@ public:
 
 	void setDirectionLight( DirectLightSource* directionLight );
 	DirectLightSource* getDirectionLight();
+
+	void setCamera( Camera* camera );
+	Camera* getCamera();
 
 };
 

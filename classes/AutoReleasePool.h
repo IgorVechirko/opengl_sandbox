@@ -21,7 +21,7 @@ public:
 	void releaseRef( Ref* ref );
 	void addRef( Ref* newRef );
 
-	void chechPool();
+	void checkPool();
 };
 
 _VEEND

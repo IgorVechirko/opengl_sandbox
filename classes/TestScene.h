@@ -11,12 +11,13 @@ _VESTART
 class Cube;
 class Sprite;
 class TestScene : public Scene
+				, public CameraMovementController
 {
+
+	typedef Scene Parent;
 
 	Sprite* _mySprite;
 	Cube* _cube; 
-
-	CameraMovementController _cameraController;
 
 protected:
 
@@ -25,6 +26,8 @@ protected:
 	bool init() override;
 
 	virtual void update( float deltaTime ) override;
+
+	virtual Camera* getCamera() override;
 
 
 public:

@@ -3,6 +3,7 @@
 #include "ShaderProgram.h"
 #include "Texture2D.h"
 #include "Director.h"
+#include "Camera.h"
 
 
 #include "PointLightSource.h"
@@ -168,7 +169,7 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
 		GLuint cameraPosLoc = glGetUniformLocation( _shader->getProgramID(), "cameraPos" );
 
-		auto& cameraPos = CAMERA->getCameraPos();
+		auto& cameraPos = CAMERA->getPosition();
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );

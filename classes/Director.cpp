@@ -8,7 +8,6 @@ _USEVE
 Director::Director()
 	: _view( nullptr )
 	, _render( nullptr )
-	, _camera( nullptr )
 	, _fileUtils( nullptr )
 	, _resMng( nullptr )
 	, _scene( nullptr )
@@ -46,16 +45,13 @@ void Director::init()
 {
 	_resMng->init();
 
-	setCamera( Camera::create() );
-	setScene( Scene::create() );
-
 	_lastUpdateTime = std::chrono::steady_clock::now();
 }
 void Director::drawScene()
 {
-	_releasePool->chechPool();
+	_releasePool->checkPool();
 
-	RENDER->drawScene( _scene );
+	_render->drawScene( _scene );
 }
 float Director::calcDeltaTime()
 {
@@ -69,7 +65,7 @@ float Director::calcDeltaTime()
 }
 void Director::loopWait()
 {
-	std::this_thread::sleep_for( std::chrono::milliseconds( (long)(1.0f/60.0f*1000.0f ) ) );
+	std::this_thread::sleep_for( std::chrono::milliseconds( (long)( (1.0f/60.0f) * 1000.0f ) ) );
 }
 void Director::runMainLoop()
 {
@@ -82,10 +78,6 @@ void Director::runMainLoop()
 		loopWait();
 	}
 }
-void Director::setView( GLView* view )
-{
-	_view = view;
-}
 GLView* Director::getView()
 {
 	return _view;
@@ -93,24 +85,6 @@ GLView* Director::getView()
 GLRender* Director::getRender()
 {
 	return _render;
-}
-void Director::setCamera( Camera* camera )
-{
-	if ( camera && camera != _camera )
-	{
-		if ( _camera )
-		{
-			_camera->release();
-			_camera	= nullptr;
-		}
-
-		_camera = camera;
-		_camera->retain();
-	}
-}
-Camera* Director::getCamera()
-{
-	return _camera;
 }
 void Director::setScene( Scene* scene )
 {

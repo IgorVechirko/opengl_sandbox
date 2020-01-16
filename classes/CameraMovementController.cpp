@@ -1,5 +1,7 @@
 #include "CameraMovementController.h"
 
+#include "Camera.h"
+
 
 _USEVE
 
@@ -29,11 +31,13 @@ void CameraMovementController::updaeTime( float deltaTme )
 	{
 		if ( _xDirection == eAxisDirection::POSITIV )
 		{
-			CAMERA->moveRight( shift );
+			if ( getCamera() )
+				getCamera()->moveRight( shift );
 		}
 		else
 		{
-			CAMERA->moveLeft( shift );
+			if ( getCamera() )
+				getCamera()->moveLeft( shift );
 		}
 	}
 
@@ -41,11 +45,13 @@ void CameraMovementController::updaeTime( float deltaTme )
 	{
 		if ( _zDirection == eAxisDirection::POSITIV )
 		{
-			CAMERA->moveAhead( shift );
+			if ( getCamera() )
+				getCamera()->moveAhead( shift );
 		}
 		else
 		{
-			CAMERA->moveBack( shift );
+			if ( getCamera() )
+				getCamera()->moveBack( shift );
 		}
 	}
 
@@ -53,11 +59,13 @@ void CameraMovementController::updaeTime( float deltaTme )
 	{
 		if ( _yDirection == eAxisDirection::POSITIV )
 		{
-			CAMERA->moveUp( shift );
+			if ( getCamera() )
+				getCamera()->moveUp( shift );
 		}
 		else
 		{
-			CAMERA->moveDown( shift );
+			if ( getCamera() )
+				getCamera()->moveDown( shift );
 		}
 	}
 }
@@ -169,8 +177,11 @@ void CameraMovementController::onMouseMoved( double posX, double posY )
 	Vec moveDelta = _mousePos - newMousePos;
 	moveDelta *= _cameraRotateSensitivity;
 
-	CAMERA->spinPitch( moveDelta.y );
-	CAMERA->spinYaw( moveDelta.x );
+	if ( getCamera() )
+	{
+		getCamera()->spinPitch( moveDelta.y );
+		getCamera()->spinYaw( moveDelta.x );
+	}
 
 	_mousePos = newMousePos;
 }
@@ -179,15 +190,21 @@ void CameraMovementController::onWheelScrolled( float xoffset, float yoffset )
 	_fovAngle += yoffset;
 
 	auto wndSize = VIEW->getWindowSize();
-	CAMERA->setProjection( glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f ) );
+
+	if ( getCamera() )
+		getCamera()->setProjection( glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f ) );
 }
 void CameraMovementController::init()
 {
 	auto wndSize = VIEW->getWindowSize();
 	Mat4 projection = glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f );
-	CAMERA->setProjection( projection );
 
-	CAMERA->setCameraPos( Vec3( 0.0f, 0.0f, 927.0f ) );
+	if ( getCamera() )
+	{
+		getCamera()->setProjection( projection );
+
+		getCamera()->setPosition( Vec3( 0.0f, 0.0f, 927.0f ) );
+	}
 
 	SCHEDULER->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );
 

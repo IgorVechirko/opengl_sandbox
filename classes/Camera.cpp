@@ -1,11 +1,12 @@
 #include "Camera.h"
 
+#include "Director.h"
+
 _USEVE
 
 Camera::Camera()
 	: _projection( 1.0f )
 	, _view( 1.0f )
-	, _cameraPos( 0.0f, 0.0f, 1.0f )
 	, _cameraFront( 0.0f, 0.0f, -1.0f )
 	, _cameraUp( 0.0f, 1.0f, 0.0f )
 	, _cameraPitch( 0.0f )
@@ -13,6 +14,9 @@ Camera::Camera()
 	, _cameraRoll( 0.0f )
 	, _viewDirty( false )
 {
+	setProjection( glm::ortho( 0.0f, VIEW->getWindowSize().x, 0.0f, VIEW->getWindowSize().y, -1.0f, 100.0f ) );
+
+	setPosition( Vec3( 0.0f, 0.0f, 1.0f ) );
 }
 Camera::~Camera()
 {
@@ -28,6 +32,7 @@ const Mat4& Camera::getProjection() const
 void Camera::setView( const Mat4& view )
 {
 	_view = view;
+	_viewDirty = true;
 }
 const Mat4& Camera::getView()
 {
@@ -39,48 +44,47 @@ const Mat4& Camera::getView()
 		_cameraFront.y = glm::sin( glm::radians(_cameraPitch) );
 		_cameraFront.z = glm::cos( glm::radians(_cameraPitch) ) * glm::sin( glm::radians(_cameraYaw) );
 
-		_view = glm::lookAt( _cameraPos, _cameraPos + _cameraFront, _cameraUp );
+		_view = glm::lookAt( getPosition(), getPosition() + _cameraFront, _cameraUp );
 	}
 
 	return _view;
 }
-void Camera::setCameraPos( const Vec3& pos )
+void Camera::setPosition( const Vec3& pos )
 {
-	_cameraPos = pos;
-	_viewDirty = true;
-}
-const Vec3& Camera::getCameraPos() const
-{
-	return _cameraPos;
+	if ( pos != _pos )
+	{
+		_viewDirty = true;
+		Parent::setPosition( pos );
+	}
 }
 void Camera::moveAhead( float shift )
 {
-	_cameraPos += shift * _cameraFront;
+	Parent::setPosition( getPosition() + shift * _cameraFront );
 	_viewDirty = true;
 }
 void Camera::moveBack( float shift )
 {
-	_cameraPos -= shift * _cameraFront;
+	Parent::setPosition( getPosition() - shift * _cameraFront );
 	_viewDirty = true;
 }
 void Camera::moveRight( float shift )
 {
-	_cameraPos += glm::normalize( glm::cross( _cameraFront, _cameraUp ) ) * shift;
+	setPosition( getPosition() + glm::normalize( glm::cross( _cameraFront, _cameraUp ) ) * shift );
 	_viewDirty = true;
 }
 void Camera::moveLeft( float shift )
 {
-	_cameraPos -= glm::normalize( glm::cross( _cameraFront, _cameraUp ) ) * shift;
+	setPosition( getPosition() - glm::normalize( glm::cross( _cameraFront, _cameraUp ) ) * shift );
 	_viewDirty = true;
 }
 void Camera::moveUp( float shift )
 {
-	_cameraPos += shift * _cameraUp;
+	setPosition( getPosition() + shift * _cameraUp );
 	_viewDirty = true;
 }
 void Camera::moveDown( float shift )
 {
-	_cameraPos -= shift * _cameraUp;
+	setPosition( getPosition() - shift * _cameraUp );
 	_viewDirty = true;
 }
 void Camera::spinPitch( float shift )

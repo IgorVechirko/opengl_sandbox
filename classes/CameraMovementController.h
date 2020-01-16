@@ -5,7 +5,7 @@
 
 _VESTART
 
-
+class Camera;
 class CameraMovementController : public InputControllerListener
 {
 	enum class eAxisDirection
@@ -14,10 +14,6 @@ class CameraMovementController : public InputControllerListener
 		POSITIV,
 		NEGATIVE
 	};
-
-	Vec3 _cameraPos;
-	Vec3 _cameraFront;
-	Vec3 _cameraUp;
 
 	eAxisDirection _xDirection;
 	eAxisDirection _yDirection;
@@ -29,18 +25,11 @@ class CameraMovementController : public InputControllerListener
 
 	float _cameraRotateSensitivity;
 
-	float _cameraPitch;
-	float _cameraYaw;
-	float _cameraRoll;
-	bool _anglesDirty;
-
 	bool _mousePosInited;
 	Vec _mousePos;
 
 
-
 	void updaeTime( float deltaTme );
-
 
 protected:
 
@@ -52,6 +41,8 @@ protected:
 	virtual void onMouseMoved( double posX, double posY ) override;
 
 	virtual void onWheelScrolled( float xoffset, float yoffset ) override;
+
+	virtual Camera* getCamera(){ return nullptr; };
 
 
 public:

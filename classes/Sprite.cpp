@@ -3,6 +3,7 @@
 #include "ShaderProgram.h"
 #include "Texture2D.h"
 #include "Director.h"
+#include "Camera.h"
 
 _USEVE
 

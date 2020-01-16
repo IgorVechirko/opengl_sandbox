@@ -2,6 +2,7 @@
 
 #include "ShaderProgram.h"
 #include "Director.h"
+#include "Camera.h"
 
 _VESTART
 

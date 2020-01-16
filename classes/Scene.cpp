@@ -1,14 +1,14 @@
 #include "Scene.h"
 
-#include "Director.h"
 
-
+#include "Camera.h"
 #include "DirectLightSource.h"
 
 _USEVE
 
 Scene::Scene()
 	: _directionLight( nullptr )
+	, _camera( nullptr )
 {
 }
 Scene::~Scene()
@@ -18,6 +18,12 @@ Scene::~Scene()
 		_directionLight->release();
 		_directionLight = nullptr;
 	}
+}
+bool Scene::init()
+{
+	setCamera( Camera::create() );
+
+	return true;
 }
 void Scene::visit( GLRender* render )
 {
@@ -44,4 +50,23 @@ void Scene::setDirectionLight( DirectLightSource* directionLight )
 DirectLightSource* Scene::getDirectionLight()
 {
 	return _directionLight;
+}
+void Scene::setCamera( Camera* camera )
+{
+	if ( camera && _camera != camera )
+	{
+		auto oldCamera = _camera;
+
+		addChild( camera );
+		_camera = camera;
+
+		if ( oldCamera )
+		{
+			removeChild( oldCamera );
+		}
+	}
+}
+Camera* Scene::getCamera()
+{
+	return _camera;
 }

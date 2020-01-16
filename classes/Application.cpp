@@ -29,9 +29,15 @@ int Application::run()
 
 	initView();
 	VIEW->setupWindowSize( (int)DEF_WIN_SIZE.x, (int)DEF_WIN_SIZE.y );
+	INPUT->init();
 	initContent();
 
-	INPUT->init();
+	if ( !CUR_SCENE )
+	{
+		Director::getInstance()->setScene( Scene::create() );
+	}
+
+	
 
 	Director::getInstance()->runMainLoop();
 
