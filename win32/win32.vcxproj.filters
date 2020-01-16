@@ -55,6 +55,9 @@
     <Filter Include="Source Files\render\light">
       <UniqueIdentifier>{4a39d22d-7cb3-4a5c-bc46-460b0b3de082}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\nodes\3d\cube">
+      <UniqueIdentifier>{b2208204-ef5d-4c6c-b88d-2f4fcaf9e0bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -126,6 +129,12 @@
     <ClCompile Include="..\classes\PointLightSource.cpp">
       <Filter>Source Files\render\light</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\NodeExtentions.cpp">
+      <Filter>Source Files\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\ColorCube.cpp">
+      <Filter>Source Files\nodes\3d\cube</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -191,8 +200,14 @@
     <ClInclude Include="..\classes\DirectLightSource.h">
       <Filter>Source Files\render\light</Filter>
     </ClInclude>
-    <ClInclude Include="..\classes\PointLIghtSource.h">
+    <ClInclude Include="..\classes\PointLightSource.h">
       <Filter>Source Files\render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\NodeExtentions.h">
+      <Filter>Source Files\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\ColorCube.h">
+      <Filter>Source Files\nodes\3d\cube</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

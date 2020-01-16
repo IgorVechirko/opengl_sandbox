@@ -167,6 +167,7 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		GLuint transViewLoc = glGetUniformLocation ( _shader->getProgramID(), "view" );
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
 		GLuint cameraPosLoc = glGetUniformLocation( _shader->getProgramID(), "cameraPos" );
+
 		auto& cameraPos = CAMERA->getCameraPos();
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
@@ -208,6 +209,10 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 	}
+
+	//TODO is necessary unbind texture ?
+	//if ( _texture )
+		//glBindTexture(GL_TEXTURE_2D, NULL );
 	
 	glBindVertexArray(0);
 }

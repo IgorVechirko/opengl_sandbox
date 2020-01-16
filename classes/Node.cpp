@@ -125,14 +125,6 @@ const Vec3& Node::getScale() const
 {
 	return _scale;
 }
-void Node::setSize( const Size& size )
-{
-	_size = size;
-}
-const Size& Node::getSize() const
-{
-	return _size;
-}
 void Node::setName( const std::string& name )
 {
 	_name = name;

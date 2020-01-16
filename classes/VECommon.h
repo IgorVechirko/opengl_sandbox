@@ -41,6 +41,7 @@
 _VESTART
 
 typedef glm::vec2 Size;
+typedef glm::vec3 Size3;
 typedef glm::vec2 Vec;
 typedef glm::vec3 Vec3;
 typedef glm::mat4 Mat4;
@@ -86,6 +87,11 @@ struct Vertex
 		_pos = pos;
 		_color = color; 
 	}
+};
+
+struct PosVertex
+{
+	float pos[3];
 };
 
 struct Material 

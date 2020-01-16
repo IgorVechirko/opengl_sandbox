@@ -29,7 +29,6 @@ class Node : public Ref
 	Vec3 _pos;
 	Vec3 _rotate;
 	Vec3 _scale;
-	Size _size;
 
 	glm::mat4 _transform;
 	bool _transDirty;
@@ -74,9 +73,6 @@ public:
 
 	void setScale( const Vec3& scale );
 	const Vec3& getScale() const;
-
-	virtual void setSize( const Size& size );
-	const Size& getSize() const;
 
 	void setName( const std::string& name );
 	const std::string& getName() const;

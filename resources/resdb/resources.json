@@ -11,5 +11,8 @@
 	"CONTAINER" : "textures/container.jpg",
 	"SMILE" : "textures/smile.png",
 	"MOUNTAIN" : "textures/mountain.jpg",
-	"SMALL_IMAGE" : "textures/small_image.png"
+	"SMALL_IMAGE" : "textures/small_image.png",
+
+	"VERTEX_POS_UCOLOR_VSH" : "shaders/vertex_pos_ucolor.vsh",
+	"VERTEX_POS_UCOLOR_FSH" : "shaders/vertex_pos_ucolor.fsh"
 }

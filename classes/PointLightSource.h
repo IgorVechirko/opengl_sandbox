@@ -14,7 +14,6 @@ class PointLightSource : public Node
 
 	std::vector<GLfloat> _vertices;
 	std::vector<GLuint> _indices;
-	bool _verticesDirty;
 
 	GLuint _vbo;
 	GLuint _vao;
@@ -30,6 +29,8 @@ class PointLightSource : public Node
 
 	void setShaderProgram( ShaderProgram* program );
 
+	Size getSize(){ return Size( 50.0f, 50.0f ); };
+
 	protected:
 
 		PointLightSource();
@@ -43,9 +44,6 @@ class PointLightSource : public Node
 		virtual ~PointLightSource();
 
 		CREATE_FUNC(PointLightSource);
-
-
-		virtual void setSize( const Size& size ) override;
 
 		void setLightProperties( const LightProperties& properties );
 		const LightProperties& getLightProperties();

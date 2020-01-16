@@ -130,8 +130,10 @@
     <ClCompile Include="..\classes\AutoReleasePool.cpp" />
     <ClCompile Include="..\classes\Camera.cpp" />
     <ClCompile Include="..\classes\CameraMovementController.cpp" />
+    <ClCompile Include="..\classes\ColorCube.cpp" />
     <ClCompile Include="..\classes\DirectLightSource.cpp" />
     <ClCompile Include="..\classes\Director.cpp" />
+    <ClCompile Include="..\classes\NodeExtentions.cpp" />
     <ClCompile Include="..\classes\PointLightSource.cpp" />
     <ClCompile Include="..\classes\InputController.cpp" />
     <ClCompile Include="..\classes\TimeScheduler.cpp" />
@@ -155,10 +157,12 @@
     <ClInclude Include="..\classes\AutoReleasePool.h" />
     <ClInclude Include="..\classes\Camera.h" />
     <ClInclude Include="..\classes\CameraMovementController.h" />
+    <ClInclude Include="..\classes\ColorCube.h" />
     <ClInclude Include="..\classes\DirectLightSource.h" />
     <ClInclude Include="..\classes\Director.h" />
-    <ClInclude Include="..\classes\PointLIghtSource.h" />
     <ClInclude Include="..\classes\InputController.h" />
+    <ClInclude Include="..\classes\NodeExtentions.h" />
+    <ClInclude Include="..\classes\PointLightSource.h" />
     <ClInclude Include="..\classes\TimeScheduler.h" />
     <ClInclude Include="..\classes\GLRender.h" />
     <ClInclude Include="..\classes\GLView.h" />

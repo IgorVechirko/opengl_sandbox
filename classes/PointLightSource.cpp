@@ -7,8 +7,7 @@ _VESTART
 
 
 PointLightSource::PointLightSource()
-	: _verticesDirty( false )
-	, _vbo( 0 )
+	: _vbo( 0 )
 	, _vao( 0 )
 	, _ebo( 0 )
 	, _shader( nullptr )
@@ -63,7 +62,7 @@ void PointLightSource::updateVertices()
 				0.0f,  getSize().x, 0.0f,  0.0f, 1.0f 
 	};
 
-	if ( _verticesDirty )
+	//if ( _verticesDirty )
 	{
 		glBindVertexArray( _vao );
 
@@ -88,7 +87,6 @@ void PointLightSource::setShaderProgram( ShaderProgram* program )
 }
 bool PointLightSource::init()
 {
-	setSize( Size( 50.0f, 50.0f ) );
 	updateVertices();
 
 	_indices = { 0, 1, 2,
@@ -123,10 +121,9 @@ bool PointLightSource::init()
 }
 void PointLightSource::draw( GLRender* render, const Mat4& transform )
 {
-	if ( _verticesDirty )
+	//if ( _verticesDirty )
 	{
 		updateVertices();
-		_verticesDirty = false;
 	}
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
@@ -153,12 +150,6 @@ void PointLightSource::draw( GLRender* render, const Mat4& transform )
 	
 	
 	glBindVertexArray(0);
-}
-void PointLightSource::setSize( const Size& size )
-{
-	Parent::setSize( size );
-
-	_verticesDirty = true;
 }
 void PointLightSource::setLightProperties( const LightProperties& properties )
 {
