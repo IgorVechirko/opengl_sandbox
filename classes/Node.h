@@ -36,7 +36,7 @@ protected:
 	Vec3 _rotate;
 	Vec3 _scale;
 
-	Vec3 _contentShift;
+	Vec3 _originShift;
 
 	std::string _name;
 
@@ -83,7 +83,8 @@ public:
 	void setZorder( int zOrder );
 	int getZorder();
 
-	void setContentShift( const Vec3& shift );
+	void setOrigintShift( const Vec3& shift );
+	const Vec3& getOriginShift();
 
 	void addChild( Node* child );
 	void removeChild( Node* child );

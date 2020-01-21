@@ -47,7 +47,7 @@ const glm::mat4& Node::getTransform()
 		_transform *= actionMat;
 
 		actionMat = glm::mat4(1.0f);
-		actionMat = glm::translate(actionMat, _contentShift );
+		actionMat = glm::translate(actionMat, _originShift );
 		_transform *= actionMat;
 	}
 
@@ -145,13 +145,17 @@ int Node::getZorder()
 {
 	return _zOrder;
 }
-void Node::setContentShift( const Vec3& shift )
+void Node::setOrigintShift( const Vec3& shift )
 {
-	if ( _contentShift != shift )
+	if ( _originShift != shift )
 	{
-		_contentShift = shift;
+		_originShift = shift;
 		_transformDirty = true;
 	}
+}
+const Vec3& Node::getOriginShift()
+{
+	return _originShift;
 }
 void Node::addChild( Node* child )
 {
