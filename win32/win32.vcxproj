@@ -133,6 +133,7 @@
     <ClCompile Include="..\classes\ColorCube.cpp" />
     <ClCompile Include="..\classes\DirectLightSource.cpp" />
     <ClCompile Include="..\classes\Director.cpp" />
+    <ClCompile Include="..\classes\Line.cpp" />
     <ClCompile Include="..\classes\NodeExtentions.cpp" />
     <ClCompile Include="..\classes\PointLightSource.cpp" />
     <ClCompile Include="..\classes\InputController.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="..\classes\DirectLightSource.h" />
     <ClInclude Include="..\classes\Director.h" />
     <ClInclude Include="..\classes\InputController.h" />
+    <ClInclude Include="..\classes\Line.h" />
     <ClInclude Include="..\classes\NodeExtentions.h" />
     <ClInclude Include="..\classes\PointLightSource.h" />
     <ClInclude Include="..\classes\TimeScheduler.h" />

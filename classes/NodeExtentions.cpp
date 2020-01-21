@@ -48,3 +48,20 @@ const ShaderProgram* ShaderProtocol::getShaderProgram()
 {
 	return _shader;
 }
+
+
+
+ColorProtocol::ColorProtocol()
+{
+}
+ColorProtocol::~ColorProtocol()
+{
+}
+void ColorProtocol::setColor( const RGBA& color )
+{
+	_color = color;
+}
+const RGBA& ColorProtocol::getColor()
+{
+	return _color;
+}

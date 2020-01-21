@@ -6,7 +6,7 @@
 
 _VESTART
 
-class ShaderProgram;
+
 class Size3Protocol
 {
 
@@ -27,14 +27,17 @@ public:
 	const Size3& getSize3();
 };
 
+class ShaderProgram;
 class ShaderProtocol
 {
 
 protected:
 
-	ShaderProtocol();
-
 	ShaderProgram* _shader;
+
+protected:
+
+	ShaderProtocol();
 
 public:
 
@@ -42,6 +45,27 @@ public:
 
 	virtual void setShaderProgram( ShaderProgram* program );
 	const ShaderProgram* getShaderProgram();
+
+};
+
+class ColorProtocol
+{
+
+protected:
+
+	RGBA _color;
+
+protected:
+		
+	ColorProtocol();
+
+public:
+
+	virtual ~ColorProtocol();
+
+	virtual void setColor( const RGBA& color );
+	const RGBA& getColor();
+
 
 };
 

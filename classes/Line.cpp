@@ -1,77 +1,52 @@
-#include "ColorCube.h"
-
+#include "Line.h"
 
 #include "ShaderProgram.h"
 #include "Director.h"
 #include "Camera.h"
 
-
 _USEVE
 
-
-ColorCube::ColorCube()
-	: _cubeSize( 1.0f )
-	, _verticesDirty( false )
+Line::Line()
+	: _verticesDirty( false )
 	, _vao( 0 )
 	, _vbo( 0 )
-	, _ebo( 0 )
-	, _indicesCount( 0 )
 {
 	setColor( RGBA::WHITE );
 }
-ColorCube::~ColorCube()
+Line::~Line()
 {
 }
-void ColorCube::updateVertices()
+void Line::updateVertices()
 {
-	std::vector<PosVertex> vertices( 8 );
-
-	vertices[0] = { 0.0f, 0.0f, 0.0f };
-	vertices[1] = { 0.0f, _cubeSize, 0.0f };
-	vertices[2] = { _cubeSize, 0.0f, 0.0f };
-	vertices[3] = { _cubeSize, _cubeSize, 0.0f };
-	vertices[4] = { 0.0f, 0.0f, _cubeSize };
-	vertices[5] = { 0.0f, _cubeSize, _cubeSize };
-	vertices[6] = { _cubeSize, 0.0f, _cubeSize };
-	vertices[7] = { _cubeSize, _cubeSize, _cubeSize };
+	std::vector<PosVertex> vertices( 3 );
+	vertices[0] = { _startPos.x, _startPos.y, _startPos.z };
+	vertices[1] = { _finishPos.x, _finishPos.y, _finishPos.z };
 
 	glBindVertexArray( _vao );
 	
 	glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-	glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(PosVertex) * 8, (void*)&vertices[0] );
-
+	glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(PosVertex)*2, (void*)(&vertices[0]) );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
 	glBindVertexArray( 0 );
 }
-bool ColorCube::init()
+bool Line::init()
 {
 	auto shader = ShaderProgram::create( RES_PATH( "VERTEX_POS_UCOLOR_VSH" ), RES_PATH( "VERTEX_POS_UCOLOR_FSH" ) );
 
 	if ( shader )
 		setShaderProgram( shader );
 
-	GLuint indices[] = { 0, 1, 2, 1, 2, 3,
-					  4, 5, 6, 5, 6, 7,
-					  2, 3, 6, 3, 6, 7,
-					  0, 1, 4, 1, 4, 5,
-					  0, 4, 2, 4, 2, 6,
-					  1, 5, 3, 5, 3, 7 };
-	_indicesCount = sizeof( indices ) / sizeof( int );
-
 	glGenVertexArrays( 1, &_vao );
 	glGenBuffers( 1, &_vbo );
-	glGenBuffers( 1, &_ebo );
 
 	glBindVertexArray( _vao );
-	
+
 	glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-	glBufferData( GL_ARRAY_BUFFER, sizeof(PosVertex) * 8, nullptr, GL_STATIC_DRAW );
+	glBufferData( GL_ARRAY_BUFFER, sizeof(PosVertex)*2, nullptr, GL_STATIC_DRAW );
 
 	glVertexAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
 	glEnableVertexAttribArray(0);
-
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, _indicesCount * sizeof(GLuint), (void*)&indices[0], GL_STATIC_DRAW );
 
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 	glBindVertexArray( 0 );
@@ -80,11 +55,12 @@ bool ColorCube::init()
 
 	return true;
 }
-void ColorCube::draw( GLRender* render, const Mat4& parentTransform )
+void Line::draw( GLRender* render, const Mat4& parentTransform )
 {
 	if ( _verticesDirty )
 	{
 		updateVertices();
+
 		_verticesDirty = false;
 	}
 
@@ -104,14 +80,31 @@ void ColorCube::draw( GLRender* render, const Mat4& parentTransform )
 	}
 
 	glBindVertexArray( _vao );
-	glDrawElements( GL_TRIANGLES, _indicesCount, GL_UNSIGNED_INT, 0 );
+	glDrawArrays( GL_LINE_STRIP, 0, 2 );
 	glBindVertexArray( 0 );
+
 }
-void ColorCube::setCubeSize( float size )
+void Line::setStartPos( const Vec3& pos )
 {
-	if ( size > 0.0f && abs(_cubeSize - size) > FLT_EPSILON  )
+	if ( _startPos != pos )
 	{
-		_cubeSize = size;
+		_startPos = pos;
 		_verticesDirty = true;
 	}
+}
+const Vec3& Line::getStartPos()
+{
+	return _startPos;
+}
+void Line::setFinishPos( const Vec3& pos )
+{
+	if ( _finishPos != pos )
+	{
+		_finishPos = pos;
+		_verticesDirty = true;
+	}
+}
+const Vec3& Line::getFinishPos()
+{
+	return _finishPos;
 }

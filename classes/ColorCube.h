@@ -9,6 +9,7 @@ _VESTART
 
 class ColorCube : public Node
 				, public ShaderProtocol
+				, public ColorProtocol
 {
 
 	typedef Node Parent;
@@ -22,8 +23,6 @@ class ColorCube : public Node
 	bool _verticesDirty;
 
 	float _cubeSize;
-
-	RGBA _color;
 
 
 	void updateVertices();
@@ -43,8 +42,6 @@ public:
 	virtual ~ColorCube();
 
 	CREATE_FUNC( ColorCube );
-
-	void setColor( const RGBA& color );
 
 	virtual void setCubeSize( float size );
 };
