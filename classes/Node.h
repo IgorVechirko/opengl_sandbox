@@ -28,13 +28,15 @@ class Node : public Ref
 {
 
 	glm::mat4 _transform;
-	bool _transDirty;
+	bool _transformDirty;
 
 protected:
 
 	Vec3 _pos;
 	Vec3 _rotate;
 	Vec3 _scale;
+
+	Vec3 _contentShift;
 
 	std::string _name;
 
@@ -80,6 +82,8 @@ public:
 
 	void setZorder( int zOrder );
 	int getZorder();
+
+	void setContentShift( const Vec3& shift );
 
 	void addChild( Node* child );
 	void removeChild( Node* child );

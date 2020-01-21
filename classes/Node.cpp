@@ -6,7 +6,7 @@ _USEVE
 
 Node::Node()
 	: _transform(1.0f)
-	, _transDirty( true )
+	, _transformDirty( true )
 	, _rotate( 0.0f, 0.0f, 0.0f )
 	, _pos( 0.0f, 0.0f, 0.0f )
 	, _scale( 1.0f, 1.0, 1.0f )
@@ -20,13 +20,17 @@ Node::~Node()
 }
 const glm::mat4& Node::getTransform()
 {
-	if ( _transDirty )
+	if ( _transformDirty )
 	{
-		_transDirty = false;
+		_transformDirty = false;
 
 		_transform = glm::mat4(1.0f);
 
 		glm::mat4 actionMat(1.0f);
+		actionMat = glm::translate(actionMat, _pos );
+		_transform *= actionMat;
+
+		actionMat = glm::mat4(1.0f);
 		actionMat = glm::scale( actionMat, glm::vec3(_scale.x,_scale.y,_scale.z) );
 		_transform *= actionMat;
 
@@ -43,7 +47,7 @@ const glm::mat4& Node::getTransform()
 		_transform *= actionMat;
 
 		actionMat = glm::mat4(1.0f);
-		actionMat = glm::translate(actionMat, glm::vec3(_pos.x, _pos.y, _pos.z) );
+		actionMat = glm::translate(actionMat, _contentShift );
 		_transform *= actionMat;
 	}
 
@@ -94,7 +98,7 @@ void Node::setPosition( const Vec3& pos )
 	if ( pos != _pos )
 	{
 		_pos = pos;
-		_transDirty = true;;
+		_transformDirty = true;;
 	}
 }
 const Vec3& Node::getPosition() const
@@ -106,7 +110,7 @@ void Node::setRotate( const Vec3& rotate )
 	if ( rotate != _rotate )
 	{
 		_rotate = rotate;
-		_transDirty = true;;
+		_transformDirty = true;;
 	}
 }
 const Vec3& Node::getRotate() const
@@ -118,7 +122,7 @@ void Node::setScale( const Vec3& scale )
 	if ( scale != _scale )
 	{
 		_scale = scale;
-		_transDirty = true;;
+		_transformDirty = true;;
 	}
 }
 const Vec3& Node::getScale() const
@@ -140,6 +144,14 @@ void Node::setZorder( int zOrder )
 int Node::getZorder()
 {
 	return _zOrder;
+}
+void Node::setContentShift( const Vec3& shift )
+{
+	if ( _contentShift != shift )
+	{
+		_contentShift = shift;
+		_transformDirty = true;
+	}
 }
 void Node::addChild( Node* child )
 {
