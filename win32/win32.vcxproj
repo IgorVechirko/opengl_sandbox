@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="..\classes\Application.cpp" />
     <ClCompile Include="..\classes\AutoReleasePool.cpp" />
+    <ClCompile Include="..\classes\AxisesOrigin.cpp" />
     <ClCompile Include="..\classes\Camera.cpp" />
     <ClCompile Include="..\classes\CameraMovementController.cpp" />
     <ClCompile Include="..\classes\ColorCube.cpp" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="..\classes\Application.h" />
     <ClInclude Include="..\classes\AutoReleasePool.h" />
+    <ClInclude Include="..\classes\AxisesOrigin.h" />
     <ClInclude Include="..\classes\Camera.h" />
     <ClInclude Include="..\classes\CameraMovementController.h" />
     <ClInclude Include="..\classes\ColorCube.h" />
