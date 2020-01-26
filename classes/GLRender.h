@@ -18,8 +18,6 @@ public:
 	void init();
 
 	void drawScene( Scene* scene );
-
-	DirectLightSource* getDirectionLight();
 };
 
 _VEEND

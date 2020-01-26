@@ -1,23 +1,38 @@
 #ifndef DirectLightSource_H
 #define DirectLightSource_H
 
-#include "Ref.h"
+#include "Node.h"
 
 
 _VESTART
 
-
-class DirectLightSource : public Ref
+class Line;
+class DirectLightSource : public Node
 {
+
+	typedef Node Parent;
 
 	Vec3 _direction;
 
 	LightProperties _lightProperties;
 
+	const int _linesCount;
+	const float _distBetweenLines;
+	std::vector<Line*> _directionLines;
 
+
+	void updateDirectionLines();
+
+
+protected:
 
 	DirectLightSource();
-	bool init(){return true;};
+
+
+	virtual bool init() override;
+
+	virtual void setRotate( const Vec3& rotate ) override;
+	virtual void setScale( const Vec3& scale ) override;
 
 
 	public:

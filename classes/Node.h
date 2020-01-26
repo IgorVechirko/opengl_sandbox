@@ -71,10 +71,10 @@ public:
 	virtual void setPosition( const Vec3& pos );
 	const Vec3& getPosition() const;
 
-	void setRotate( const Vec3& rotate );
+	virtual void setRotate( const Vec3& rotate );
 	const Vec3& getRotate() const;
 
-	void setScale( const Vec3& scale );
+	virtual void setScale( const Vec3& scale );
 	const Vec3& getScale() const;
 
 	void setName( const std::string& name );

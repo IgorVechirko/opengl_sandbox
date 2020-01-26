@@ -195,9 +195,10 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 
 		LightProperties lightProperties;
 		glm::vec3 lightDirection( 0.0f, 0.0f, 0.0f );
-		auto lightSource = RENDER->getDirectionLight();
-		if ( lightSource )
+		
+		if ( CUR_SCENE && CUR_SCENE->getDirectionLight() )
 		{
+			auto lightSource = CUR_SCENE->getDirectionLight();
 			lightProperties = lightSource->getLightProperties();
 			lightDirection = lightSource->getDirection();
 		}

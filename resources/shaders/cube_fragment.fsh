@@ -85,18 +85,18 @@ vec3 calcPointLight( PointLightProperties lightProperties, vec3 normal, vec3 vie
 
 void main()
 {
-	vec3 normal = normalize( fragmentNormal );
 	vec3 viewDir = normalize( cameraPos - fragPos );
+	vec3 normal = normalize( fragmentNormal	);
 
 	vec3 resultColor = calcDirectionLight( normal, viewDir );
 
-	for( int i = 0; i < min( 0, MAX_POINT_LIGHTS ); i++ )
-	{
-		resultColor += calcPointLight( pointLights[i], normal, viewDir );
-	}
+	//for( int i = 0; i < min( 0, MAX_POINT_LIGHTS ); i++ )
+	//{
+		//resultColor += calcPointLight( pointLights[i], normal, viewDir );
+	//}
 	
 
-	vec4 textureColor = texture( Texture1, f_texCoord );
+	//vec4 textureColor = texture( Texture1, f_texCoord );
 
 	color = vec4( resultColor, 1.0f );
 }

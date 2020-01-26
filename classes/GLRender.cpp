@@ -28,15 +28,3 @@ void GLRender::drawScene( Scene* scene )
 	glfwSwapBuffers( VIEW->getWindow() );
 
 }
-DirectLightSource* GLRender::getDirectionLight()
-{
-	DirectLightSource* result = nullptr;
-
-	auto scene = Director::getInstance()->getScene();
-	if ( scene )
-	{
-		result = scene->getDirectionLight();
-	}
-
-	return result;
-}

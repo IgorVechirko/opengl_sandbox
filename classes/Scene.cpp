@@ -13,11 +13,6 @@ Scene::Scene()
 }
 Scene::~Scene()
 {
-	if ( _directionLight )
-	{
-		_directionLight->release();
-		_directionLight = nullptr;
-	}
 }
 bool Scene::init()
 {
@@ -31,20 +26,16 @@ void Scene::visit( GLRender* render )
 }
 void Scene::setDirectionLight( DirectLightSource* directionLight )
 {
-	if ( _directionLight != directionLight )
+	if ( directionLight && _directionLight != directionLight )
 	{
+		addChild( directionLight );
+		
 		if ( _directionLight )
 		{
-			_directionLight->release();
-			_directionLight = nullptr;
+			removeChild( _directionLight );
 		}
 
 		_directionLight = directionLight;
-
-		if ( _directionLight )
-		{
-			_directionLight->retain();
-		}
 	}
 }
 DirectLightSource* Scene::getDirectionLight()
