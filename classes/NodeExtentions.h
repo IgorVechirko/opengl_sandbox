@@ -70,6 +70,49 @@ public:
 };
 
 
+class LigthPropertiesProtocol
+{
+
+protected:
+
+	LightProperties _lightProperties;
+
+protected:
+
+	LigthPropertiesProtocol();
+
+public:
+
+	virtual ~LigthPropertiesProtocol();
+
+	virtual void setLightProperties( const LightProperties& properties );
+	const LightProperties& getLightProperties();
+
+
+};
+
+
+class LightAttenuationProtocol
+{
+
+protected:
+
+	LightAttenuationCoefs _LightAttenuation;
+
+protected:
+
+	LightAttenuationProtocol();
+
+public:
+
+	virtual ~LightAttenuationProtocol();
+
+	void setAttenuation( const LightAttenuationCoefs& attenuation );
+	const LightAttenuationCoefs& getAttenuation();
+
+
+};
+
 _VEEND
 
 

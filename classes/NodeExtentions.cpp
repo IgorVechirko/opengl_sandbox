@@ -65,3 +65,35 @@ const RGBA& ColorProtocol::getColor()
 {
 	return _color;
 }
+
+
+LigthPropertiesProtocol::LigthPropertiesProtocol()
+{
+}
+LigthPropertiesProtocol::~LigthPropertiesProtocol()
+{
+}
+void LigthPropertiesProtocol::setLightProperties( const LightProperties& properties )
+{
+	_lightProperties = properties;
+}
+const LightProperties& LigthPropertiesProtocol::getLightProperties()
+{
+	return _lightProperties;
+}
+
+
+LightAttenuationProtocol::LightAttenuationProtocol()
+{
+}
+LightAttenuationProtocol::~LightAttenuationProtocol()
+{
+}
+void LightAttenuationProtocol::setAttenuation( const LightAttenuationCoefs& attenuation )
+{
+	_LightAttenuation = attenuation;
+}
+const LightAttenuationCoefs& LightAttenuationProtocol::getAttenuation()
+{
+	return _LightAttenuation;
+}

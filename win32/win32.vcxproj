@@ -134,6 +134,7 @@
     <ClCompile Include="..\classes\ColorCube.cpp" />
     <ClCompile Include="..\classes\DirectLightSource.cpp" />
     <ClCompile Include="..\classes\Director.cpp" />
+    <ClCompile Include="..\classes\Flashlight.cpp" />
     <ClCompile Include="..\classes\Line.cpp" />
     <ClCompile Include="..\classes\NodeExtentions.cpp" />
     <ClCompile Include="..\classes\PointLightSource.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="..\classes\ColorCube.h" />
     <ClInclude Include="..\classes\DirectLightSource.h" />
     <ClInclude Include="..\classes\Director.h" />
+    <ClInclude Include="..\classes\Flashlight.h" />
     <ClInclude Include="..\classes\InputController.h" />
     <ClInclude Include="..\classes\Line.h" />
     <ClInclude Include="..\classes\NodeExtentions.h" />

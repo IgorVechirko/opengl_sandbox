@@ -3,12 +3,16 @@
 
 #include "Camera.h"
 #include "DirectLightSource.h"
+#include "PointLightSource.h"
+#include "Flashlight.h"
 
 _USEVE
 
 Scene::Scene()
 	: _directionLight( nullptr )
 	, _camera( nullptr )
+	, _maxPointLights( 10 )
+	, _maxFlashlights( 10 )
 {
 }
 Scene::~Scene()
@@ -41,6 +45,30 @@ void Scene::setDirectionLight( DirectLightSource* directionLight )
 DirectLightSource* Scene::getDirectionLight()
 {
 	return _directionLight;
+}
+void Scene::addPointLight( PointLightSource* light )
+{
+	if ( _pointLights.size() < _maxPointLights )
+	{
+		addChild( light );
+		_pointLights.push_back( light );
+	}
+}
+const std::vector<PointLightSource*> Scene::getPointLights()
+{
+	return _pointLights;
+}
+void Scene::addFlashlight( Flashlight* light )
+{
+	if ( _flashlights.size() < _maxFlashlights )
+	{
+		addChild( light );
+		_flashlights.push_back( light );
+	}
+}
+const std::vector<Flashlight*>& Scene::getFlashLights()
+{
+	return _flashlights;
 }
 void Scene::setCamera( Camera* camera )
 {

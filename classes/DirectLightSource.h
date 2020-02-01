@@ -2,19 +2,19 @@
 #define DirectLightSource_H
 
 #include "Node.h"
+#include "NodeExtentions.h"
 
 
 _VESTART
 
 class Line;
 class DirectLightSource : public Node
+						, public LigthPropertiesProtocol
 {
 
 	typedef Node Parent;
 
 	Vec3 _direction;
-
-	LightProperties _lightProperties;
 
 	const int _linesCount;
 	const float _distBetweenLines;
@@ -44,8 +44,7 @@ protected:
 		void setDirection( const Vec3& aDirection );
 		const Vec3& getDirection();
 
-		void setLightProperties( const LightProperties& properties );
-		const LightProperties& getLightProperties();
+		virtual void setLightProperties( const LightProperties& properties ) override;
 
 
 };

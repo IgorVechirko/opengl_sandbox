@@ -83,7 +83,7 @@ public:
 	void setZorder( int zOrder );
 	int getZorder();
 
-	void setOrigintShift( const Vec3& shift );
+	void setOriginShift( const Vec3& shift );
 	const Vec3& getOriginShift();
 
 	void addChild( Node* child );

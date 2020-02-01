@@ -78,7 +78,3 @@ void DirectLightSource::setLightProperties( const LightProperties& properties )
 		}
 	}
 }
-const LightProperties& DirectLightSource::getLightProperties()
-{
-	return _lightProperties;
-}

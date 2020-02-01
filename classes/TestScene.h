@@ -17,7 +17,7 @@ class TestScene : public Scene
 	typedef Scene Parent;
 
 	Sprite* _mySprite;
-	Cube* _cube; 
+	Node* _cube; 
 
 protected:
 

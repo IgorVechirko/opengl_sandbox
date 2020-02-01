@@ -2,34 +2,20 @@
 #define PointLightSource_H
 
 #include "Node.h"
+#include "NodeExtentions.h"
 
 
 _VESTART
 
-class ShaderProgram;
+class ColorCube;
 class PointLightSource : public Node
+					   , public LigthPropertiesProtocol
+					   , public LightAttenuationProtocol
 {
 
 	typedef Node Parent;
 
-	std::vector<GLfloat> _vertices;
-	std::vector<GLuint> _indices;
-
-	GLuint _vbo;
-	GLuint _vao;
-	GLuint _ebo;
-
-	ShaderProgram* _shader;
-
-	LightProperties _properties;
-	LightAttenuationCoefs _attenuationCoefs;
-
-
-	void updateVertices();
-
-	void setShaderProgram( ShaderProgram* program );
-
-	Size getSize(){ return Size( 50.0f, 50.0f ); };
+	ColorCube* _cube;
 
 	protected:
 
@@ -37,7 +23,6 @@ class PointLightSource : public Node
 
 		virtual bool init() override;
 
-		virtual void draw( GLRender* render, const Mat4& transform ) override;
 
 	public:
 
@@ -45,8 +30,8 @@ class PointLightSource : public Node
 
 		CREATE_FUNC(PointLightSource);
 
-		void setLightProperties( const LightProperties& properties );
-		const LightProperties& getLightProperties();
+		virtual void setLightProperties( const LightProperties& properties ) override;
+		
 };
 
 

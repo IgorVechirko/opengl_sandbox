@@ -8,6 +8,7 @@
 
 #include "PointLightSource.h"
 #include "DirectLightSource.h"
+#include "Flashlight.h"
 
 _USEVE
 
@@ -98,25 +99,25 @@ void Cube::setTexture( Texture2D* texture )
 						0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
 
 						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+						 textSize.x,  textSize.x, 0.0f,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
 						 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
 						 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
 						 textSize.x, 0.0f,  textSize.x,  0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
 						 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
 
-						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f,
+						0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
 						 textSize.x, 0.0f, 0.0f,  1.0f, 1.0f,  0.0f, -1.0f,  0.0f,
 						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
 						 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
 						0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f, -1.0f,  0.0f,
 						0.0f, 0.0f, 0.0f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f,
 
-						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f,  1.0f,  0.0f,
-						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  0.0f,  1.0f,  0.0f,
-						 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f,  1.0f,  0.0f,
-						 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f,  1.0f,  0.0f,
-						0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f,  0.0f,  1.0f,  0.0f,
-						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f,  1.0f,  0.0f, };
+						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
+						 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,  0.0f,
+						 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
+						 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
+						0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f, 0.0f, 1.0f,  0.0f,
+						0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f };
 
 		_indices = { 0, 1, 2,
 					 1, 2, 3 };
@@ -187,26 +188,90 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		glProgramUniform3f( _shader->getProgramID(), materialSpecularLoc, _material.specular.r, _material.specular.g, _material.specular.b );
 		glProgramUniform1f( _shader->getProgramID(), materialShininessLoc, _material.shininess );
 
-
-		GLuint lightPropAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.ambient" );
-		GLuint lightPropDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.diffuse" );
-		GLuint lightPropSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.specular" );
-		GLuint lightPropDirectLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.direction" );
-
-		LightProperties lightProperties;
-		glm::vec3 lightDirection( 0.0f, 0.0f, 0.0f );
 		
 		if ( CUR_SCENE && CUR_SCENE->getDirectionLight() )
 		{
 			auto lightSource = CUR_SCENE->getDirectionLight();
-			lightProperties = lightSource->getLightProperties();
-			lightDirection = lightSource->getDirection();
+			LightProperties lightProperties = lightSource->getLightProperties();
+			glm::vec3 lightDirection = lightSource->getDirection();
+
+			GLuint lightPropAmbientLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.ambient" );
+			GLuint lightPropDiffuseLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.diffuse" );
+			GLuint lightPropSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.specular" );
+			GLuint lightPropDirectLoc = glGetUniformLocation( _shader->getProgramID(), "directLight.direction" );
+
+			glProgramUniform3f( _shader->getProgramID(), lightPropAmbientLoc, lightProperties.ambient.r, lightProperties.ambient.g, lightProperties.ambient.b );
+			glProgramUniform3f( _shader->getProgramID(), lightPropDiffuseLoc, lightProperties.diffuse.r, lightProperties.diffuse.g, lightProperties.diffuse.b );
+			glProgramUniform3f( _shader->getProgramID(), lightPropSpecularLoc, lightProperties.specular.r, lightProperties.specular.g, lightProperties.specular.b );
+			glProgramUniform3f( _shader->getProgramID(), lightPropDirectLoc, lightDirection.x, lightDirection.y, lightDirection.z );
 		}
 		
-		glProgramUniform3f( _shader->getProgramID(), lightPropAmbientLoc, lightProperties.ambient.r, lightProperties.ambient.g, lightProperties.ambient.b );
-		glProgramUniform3f( _shader->getProgramID(), lightPropDiffuseLoc, lightProperties.diffuse.r, lightProperties.diffuse.g, lightProperties.diffuse.b );
-		glProgramUniform3f( _shader->getProgramID(), lightPropSpecularLoc, lightProperties.specular.r, lightProperties.specular.g, lightProperties.specular.b );
-		glProgramUniform3f( _shader->getProgramID(), lightPropDirectLoc, lightDirection.x, lightDirection.y, lightDirection.z );
+
+		if ( CUR_SCENE )
+		{
+			const auto& pointLights = CUR_SCENE->getPointLights();
+
+			GLuint ponitLighstCount = glGetUniformLocation( _shader->getProgramID(), "pointLightsCount" );
+			glProgramUniform1i( _shader->getProgramID(), ponitLighstCount, pointLights.size() );
+
+			for( int lightIndx = 0; lightIndx < pointLights.size(); lightIndx++ )
+			{
+				auto light = pointLights[ lightIndx ];
+
+				GLuint posLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "pointLights[" + std::to_string(lightIndx) + "].pos" ).c_str() );
+				GLuint constantLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "pointLights[" + std::to_string(lightIndx) + "].constant" ).c_str() );
+				GLuint linearLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "pointLights[" + std::to_string(lightIndx) + "].linear" ).c_str() );
+				GLuint quadraticLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "pointLights[" + std::to_string(lightIndx) + "].quadratic" ).c_str() );
+				GLuint ambientLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "pointLights[" + std::to_string(lightIndx) + "].ambient" ).c_str() );
+				GLuint diffuseLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "pointLights[" + std::to_string(lightIndx) + "].diffuse" ).c_str() );
+				GLuint specularLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "pointLights[" + std::to_string(lightIndx) + "].specular" ).c_str() );
+
+				glProgramUniform3f( _shader->getProgramID(), posLoc, light->getPosition().x, light->getPosition().y, light->getPosition().z );
+
+				glProgramUniform1f( _shader->getProgramID(), constantLoc, light->getAttenuation().constant );
+				glProgramUniform1f( _shader->getProgramID(), linearLoc, light->getAttenuation().linear );
+				glProgramUniform1f( _shader->getProgramID(), quadraticLoc, light->getAttenuation().quadratic );
+
+				glProgramUniform3f( _shader->getProgramID(), ambientLoc, light->getLightProperties().ambient.r, light->getLightProperties().ambient.g, light->getLightProperties().ambient.b );
+				glProgramUniform3f( _shader->getProgramID(), diffuseLoc, light->getLightProperties().diffuse.r, light->getLightProperties().diffuse.g, light->getLightProperties().diffuse.b );
+				glProgramUniform3f( _shader->getProgramID(), specularLoc, light->getLightProperties().specular.r, light->getLightProperties().specular.g, light->getLightProperties().specular.b );
+			}
+
+			const auto& flashlights = CUR_SCENE->getFlashLights();
+
+			GLuint flashlightsCount = glGetUniformLocation( _shader->getProgramID(), "flashlightsCount" );
+			glProgramUniform1i( _shader->getProgramID(), flashlightsCount, flashlights.size() );
+
+			for( int lightIndx = 0; lightIndx < flashlights.size(); lightIndx++ )
+			{
+				auto light = flashlights[ lightIndx ];
+
+				GLuint posLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].pos" ).c_str() );
+				GLuint directLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].direction" ).c_str() );
+				GLuint cutOffAngleCosLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].cutOffAngleCos" ).c_str() );
+				GLuint outerCutOffAngleCosLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].outerCutOffAngleCos" ).c_str() );
+				GLuint constantLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].constant" ).c_str() );
+				GLuint linearLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].linear" ).c_str() );
+				GLuint quadraticLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].quadratic" ).c_str() );
+				GLuint ambientLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].ambient" ).c_str() );
+				GLuint diffuseLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].diffuse" ).c_str() );
+				GLuint specularLoc = glGetUniformLocation( _shader->getProgramID(), std::string( "flashlights[" + std::to_string(lightIndx) + "].specular" ).c_str() );
+
+				glProgramUniform3f( _shader->getProgramID(), posLoc, light->getPosition().x, light->getPosition().y, light->getPosition().z );
+				glProgramUniform3f( _shader->getProgramID(), directLoc, light->getDirection().x, light->getDirection().y, light->getDirection().z );
+				glProgramUniform1f( _shader->getProgramID(), cutOffAngleCosLoc, glm::cos(glm::radians(light->getCutOffAngle())) );
+				glProgramUniform1f( _shader->getProgramID(), outerCutOffAngleCosLoc, glm::cos(glm::radians(light->getOuterCutOffAngle())) );
+
+				glProgramUniform1f( _shader->getProgramID(), constantLoc, light->getAttenuation().constant );
+				glProgramUniform1f( _shader->getProgramID(), linearLoc, light->getAttenuation().linear );
+				glProgramUniform1f( _shader->getProgramID(), quadraticLoc, light->getAttenuation().quadratic );
+
+				glProgramUniform3f( _shader->getProgramID(), ambientLoc, light->getLightProperties().ambient.r, light->getLightProperties().ambient.g, light->getLightProperties().ambient.b );
+				glProgramUniform3f( _shader->getProgramID(), diffuseLoc, light->getLightProperties().diffuse.r, light->getLightProperties().diffuse.g, light->getLightProperties().diffuse.b );
+				glProgramUniform3f( _shader->getProgramID(), specularLoc, light->getLightProperties().specular.r, light->getLightProperties().specular.g, light->getLightProperties().specular.b );
+			}
+
+		}
 		
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );

@@ -145,7 +145,7 @@ int Node::getZorder()
 {
 	return _zOrder;
 }
-void Node::setOrigintShift( const Vec3& shift )
+void Node::setOriginShift( const Vec3& shift )
 {
 	if ( _originShift != shift )
 	{
