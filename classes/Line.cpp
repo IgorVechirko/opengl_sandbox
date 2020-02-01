@@ -19,8 +19,8 @@ Line::~Line()
 void Line::updateVertices()
 {
 	std::vector<PosVertex> vertices( 3 );
-	vertices[0] = { _startPos.x, _startPos.y, _startPos.z };
-	vertices[1] = { _finishPos.x, _finishPos.y, _finishPos.z };
+	vertices[0].pos = Vec3( _startPos.x, _startPos.y, _startPos.z );
+	vertices[1].pos = Vec3( _finishPos.x, _finishPos.y, _finishPos.z );
 
 	glBindVertexArray( _vao );
 	
@@ -76,7 +76,7 @@ void Line::draw( GLRender* render, const Mat4& parentTransform )
 		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(parentTransform) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
-		glProgramUniform4f( _shader->getProgramID(), colorLoc, _color._r, _color._g, _color._b, _color._a );
+		glProgramUniform4f( _shader->getProgramID(), colorLoc, _color.r, _color.g, _color.b, _color.a );
 	}
 
 	glBindVertexArray( _vao );

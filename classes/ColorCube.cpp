@@ -26,14 +26,14 @@ void ColorCube::updateVertices()
 {
 	std::vector<PosVertex> vertices( 8 );
 
-	vertices[0] = { 0.0f, 0.0f, 0.0f };
-	vertices[1] = { 0.0f, _cubeSize, 0.0f };
-	vertices[2] = { _cubeSize, 0.0f, 0.0f };
-	vertices[3] = { _cubeSize, _cubeSize, 0.0f };
-	vertices[4] = { 0.0f, 0.0f, _cubeSize };
-	vertices[5] = { 0.0f, _cubeSize, _cubeSize };
-	vertices[6] = { _cubeSize, 0.0f, _cubeSize };
-	vertices[7] = { _cubeSize, _cubeSize, _cubeSize };
+	vertices[0].pos = Vec3( 0.0f, 0.0f, 0.0f );
+	vertices[1].pos = Vec3( 0.0f, _cubeSize, 0.0f );
+	vertices[2].pos = Vec3( _cubeSize, 0.0f, 0.0f );
+	vertices[3].pos = Vec3( _cubeSize, _cubeSize, 0.0f );
+	vertices[4].pos = Vec3( 0.0f, 0.0f, _cubeSize );
+	vertices[5].pos = Vec3( 0.0f, _cubeSize, _cubeSize );
+	vertices[6].pos = Vec3( _cubeSize, 0.0f, _cubeSize );
+	vertices[7].pos = Vec3( _cubeSize, _cubeSize, _cubeSize );
 
 	glBindVertexArray( _vao );
 	
@@ -100,7 +100,7 @@ void ColorCube::draw( GLRender* render, const Mat4& parentTransform )
 		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(parentTransform) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
 		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
-		glProgramUniform4f( _shader->getProgramID(), colorLoc, _color._r, _color._g, _color._b, _color._a );
+		glProgramUniform4f( _shader->getProgramID(), colorLoc, _color.r, _color.g, _color.b, _color.a );
 	}
 
 	glBindVertexArray( _vao );

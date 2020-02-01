@@ -272,7 +272,6 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 			}
 
 		}
-		
 
 		glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 	}

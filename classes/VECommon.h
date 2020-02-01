@@ -46,26 +46,14 @@ typedef glm::vec2 Vec;
 typedef glm::vec3 Vec3;
 typedef glm::mat4 Mat4;
 
-struct RGBA
+struct RGBA : glm::vec4
 {
-	float _r;
-	float _g;
-	float _b;
-	float _a;
-
 	RGBA()
-		: _r(0.0f)
-		, _g(0.0f)
-		, _b(0.0f)
-		, _a(0.0f)
 	{};
 
-	RGBA(float r, float g, float b, float a = 1.0f )
+	RGBA(float r, float g, float b, float a )
+		: glm::vec4( r, g, b, a )
 	{
-		_r = r;
-		_g = g;
-		_b = b;
-		_a = a;
 	};
 
 	static const RGBA WHITE;
@@ -74,24 +62,9 @@ struct RGBA
 	static const RGBA GREEN;
 };
 
-struct Vertex
-{
-	Vec _pos;
-	RGBA _color;
-
-	Vertex()
-	{};
-
-	Vertex( const Vec& pos, const RGBA& color )
-	{
-		_pos = pos;
-		_color = color; 
-	}
-};
-
 struct PosVertex
 {
-	float pos[3];
+	Vec3 pos;
 };
 
 struct Material 
