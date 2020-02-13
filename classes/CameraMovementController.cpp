@@ -7,7 +7,7 @@ _USEVE
 
 
 CameraMovementController::CameraMovementController()
-	: _cameraMoveSpeed( 2000.0f )
+	: _cameraMoveSpeed( 2.0f )
 	, _cameraRotateSensitivity( 0.1f )
 	, _mousePos( 0.0f, 0.0f )
 	, _mousePosInited( false )
@@ -203,7 +203,7 @@ void CameraMovementController::init()
 	{
 		getCamera()->setProjection( projection );
 
-		getCamera()->setPosition( Vec3( 0.0f, 0.0f, 927.0f ) );
+		getCamera()->setPosition( Vec3( 0.0f, 0.0f, 27.0f ) );
 	}
 
 	SCHEDULER->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );

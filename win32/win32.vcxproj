@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\externals\soil\src;..\externals\glm\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\externals\assimp\include;..\externals\soil\src;..\externals\glm\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -183,6 +183,11 @@
     <ClInclude Include="..\classes\TestScene.h" />
     <ClInclude Include="..\classes\Texture2D.h" />
     <ClInclude Include="..\classes\VECommon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\externals\assimp\code\assimp.vcxproj">
+      <Project>{85fb00f9-945d-3868-8dd0-7cd83fea1e29}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -44,7 +44,7 @@ public:
 	virtual ~ShaderProtocol();
 
 	virtual void setShaderProgram( ShaderProgram* program );
-	const ShaderProgram* getShaderProgram();
+	ShaderProgram* getShaderProgram();
 
 };
 

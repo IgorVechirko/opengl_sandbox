@@ -67,6 +67,32 @@ struct PosVertex
 	Vec3 pos;
 };
 
+struct PosNormaTextCordVertex
+{
+	Vec3 pos;
+	Vec3 normal;
+	glm::vec2 textCord;
+};
+
+enum class eTextureType
+{
+	NONE,
+	DIFFUSE_LIHGT_MAP,
+	SPECULAR_LIHGT_MAP
+};
+
+struct Texture
+{
+	GLint id;
+	eTextureType type;
+
+	Texture()
+		: id( 0 )
+		, type( eTextureType::NONE )
+	{
+	}
+};
+
 struct Material 
 {
 	Vec3 ambient;
@@ -110,7 +136,8 @@ struct LightAttenuationCoefs
 };
 
 #define DEF_WIN_SIZE Size( 1024, 768 )
-#define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );
+#define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );\
+							   printf( "\n" );
 #define AUTORELEASE_CREATE_FUNC(__TYPE__)\
 static __TYPE__* create()\
 {\

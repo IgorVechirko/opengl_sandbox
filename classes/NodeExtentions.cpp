@@ -44,7 +44,7 @@ void ShaderProtocol::setShaderProgram( ShaderProgram* program )
 			_shader->retain();
 	}
 }
-const ShaderProgram* ShaderProtocol::getShaderProgram()
+ShaderProgram* ShaderProtocol::getShaderProgram()
 {
 	return _shader;
 }
