@@ -74,6 +74,7 @@
     <IncludePath>..\externals\glew\include\GL;..\externals\glfw\include\GLFW;..\externals\rapidjson;$(IncludePath)</IncludePath>
     <LibraryPath>..\externals\glew\bin\Release\Win32;..\externals\glew\lib\Release\Win32;..\externals\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
     <SourcePath>..\classes;$(SourcePath)</SourcePath>
+    <ReferencePath>..\resources;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,13 +82,19 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\externals\assimp\include;..\externals\soil\src;..\externals\glm\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\externals\assimp\include;..\externals\soil\src;..\externals\glm\glm;..\externals\glew\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\externals\glew\bin\Release\Win32;..\externals\glew\lib\Release\Win32;..\externals\glfw\lib-vc2015;..\externals\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <RootFolder>
+      </RootFolder>
+      <Command>
+      </Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -105,10 +112,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\externals\rapidjson;..\externals\glm\glm;..\externals\soil\src;..\externals\glew\include\GL;..\externals\glfw\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\externals\glew\bin\Release\Win32;..\externals\glew\lib\Release\Win32;..\externals\glfw\lib-vc2015;..\externals\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

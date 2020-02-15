@@ -1,0 +1,95 @@
+﻿  Application.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  AutoReleasePool.cpp
+  AxisesOrigin.cpp
+  Camera.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  CameraMovementController.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+d:\my_projects\opengl_sandbox\classes\cameramovementcontroller.cpp(172): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\my_projects\opengl_sandbox\classes\cameramovementcontroller.cpp(173): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  ColorCube.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  DirectLightSource.cpp
+d:\my_projects\opengl_sandbox\classes\directlightsource.cpp(24): warning C4018: '>': signed/unsigned mismatch
+d:\my_projects\opengl_sandbox\classes\directlightsource.cpp(73): warning C4018: '>': signed/unsigned mismatch
+  Director.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  Flashlight.cpp
+  Line.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  NodeExtentions.cpp
+  PointLightSource.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  InputController.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+d:\my_projects\opengl_sandbox\classes\inputcontroller.cpp(73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  TimeScheduler.cpp
+  GLRender.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  GLView.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  Node.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+d:\my_projects\opengl_sandbox\classes\node.cpp(66): warning C4018: '<': signed/unsigned mismatch
+d:\my_projects\opengl_sandbox\classes\node.cpp(80): warning C4018: '<': signed/unsigned mismatch
+  FileUtils.cpp
+  main.cpp
+  ResourcesManager.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  Compiling...
+  ShaderProgram.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  Ref.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  Scene.cpp
+d:\my_projects\opengl_sandbox\classes\scene.cpp(51): warning C4018: '<': signed/unsigned mismatch
+d:\my_projects\opengl_sandbox\classes\scene.cpp(63): warning C4018: '<': signed/unsigned mismatch
+  Cube.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+d:\my_projects\opengl_sandbox\classes\cube.cpp(217): warning C4018: '<': signed/unsigned mismatch
+d:\my_projects\opengl_sandbox\classes\cube.cpp(245): warning C4018: '<': signed/unsigned mismatch
+  Sprite.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  TestScene.cpp
+d:\my_projects\opengl_sandbox\classes\director.h(80): warning C4005: 'RES_PATH': macro redefinition
+  d:\my_projects\opengl_sandbox\classes\resourcesmanager.h(29): note: see previous definition of 'RES_PATH'
+  Texture2D.cpp
+  VECommon.cpp
+SOIL.lib(SOIL.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+d:\my_projects\opengl_sandbox\classes\resourcesmanager.cpp(45): warning C4172: returning address of local variable or temporary
+  All 1711 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\my_projects\opengl_sandbox\win32\Release\vc120.pdb'; linking object as if no debug info
+SOIL.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(image_DXT.obj)' or at 'D:\my_projects\opengl_sandbox\win32\Release\SOIL.pdb'; linking object as if no debug info
+SOIL.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(image_helper.obj)' or at 'D:\my_projects\opengl_sandbox\win32\Release\SOIL.pdb'; linking object as if no debug info
+SOIL.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(SOIL.obj)' or at 'D:\my_projects\opengl_sandbox\win32\Release\SOIL.pdb'; linking object as if no debug info
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(stb_image_aug.obj)' or at 'D:\my_projects\opengl_sandbox\win32\Release\SOIL.pdb'; linking object as if no debug info
+  win32.vcxproj -> D:\my_projects\opengl_sandbox\win32\Release\opengl_sandbox.exe
