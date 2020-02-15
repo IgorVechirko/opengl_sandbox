@@ -16,9 +16,9 @@ DirectLightSource::~DirectLightSource()
 }
 void DirectLightSource::updateDirectionLines()
 {
-	for( int columnIndx = 0; columnIndx < 10; columnIndx++ )
+	for( int columnIndx = 0; columnIndx < _linesCount; columnIndx++ )
 	{
-		for( int rowIndx = 0; rowIndx < 10; rowIndx++ )
+		for( int rowIndx = 0; rowIndx < _linesCount; rowIndx++ )
 		{
 			auto indx = columnIndx * _linesCount + rowIndx;
 			if ( _directionLines.size() > indx )
@@ -65,9 +65,9 @@ void DirectLightSource::setLightProperties( const LightProperties& properties )
 {
 	_lightProperties = properties;
 
-	for( int columnIndx = 0; columnIndx < 10; columnIndx++ )
+	for( int columnIndx = 0; columnIndx < _linesCount; columnIndx++ )
 	{
-		for( int rowIndx = 0; rowIndx < 10; rowIndx++ )
+		for( int rowIndx = 0; rowIndx < _linesCount; rowIndx++ )
 		{
 			auto indx = columnIndx * _linesCount + rowIndx;
 			if ( _directionLines.size() > indx )

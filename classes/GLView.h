@@ -5,7 +5,6 @@
 
 _VESTART
 
-class GLRender;
 class GLView
 {
 	GLFWwindow* _window;
