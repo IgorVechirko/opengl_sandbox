@@ -16,3 +16,11 @@ For easier way to create different render entity and make possibility to do some
 * TimeScheduler - class allow organize work with time dependent callbecks
 * InputController - class allow receive callbacks from input devices ( now mouse and keyboards )
 * Scene - class is the main Node of scene graph. Director containing pointer to current render Scene. Scene contains camera and light sources ( direction, point light, flashlight ) objects
+
+# Previews
+Direction light
+![DirectionLight](images/direction_light.png "Direction light sample")
+Point lights
+![PointLights](images/point_lights.png "Point lights sample")
+Flashlight
+![Flashlihgt](images/flashlight.png "Flashlight sample")
