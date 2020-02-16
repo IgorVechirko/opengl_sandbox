@@ -55,6 +55,9 @@
     <Filter Include="Source Files\render\light">
       <UniqueIdentifier>{4a39d22d-7cb3-4a5c-bc46-460b0b3de082}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\nodes\3d\model">
+      <UniqueIdentifier>{11130004-f510-45d1-9bc8-a685a78f24b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\classes\main.cpp">
@@ -141,6 +144,12 @@
     <ClCompile Include="..\classes\Flashlight.cpp">
       <Filter>Source Files\render\light</Filter>
     </ClCompile>
+    <ClCompile Include="..\classes\Mesh.cpp">
+      <Filter>Source Files\nodes\3d\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\classes\Model.cpp">
+      <Filter>Source Files\nodes\3d\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\classes\VECommon.h">
@@ -223,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="..\classes\Flashlight.h">
       <Filter>Source Files\render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Mesh.h">
+      <Filter>Source Files\nodes\3d\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\classes\Model.h">
+      <Filter>Source Files\nodes\3d\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

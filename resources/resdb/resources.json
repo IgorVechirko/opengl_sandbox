@@ -7,6 +7,8 @@
 	"CUBE_VERTEX" : "shaders/cube_vertex.vsh",
 	"ILLUMINAT_FRAGMENT" : "shaders/illuminat_fragment.fsh",
 	"ILLUMINAT_VERTEX" : "shaders/illuminat_vertex.vsh",
+	"MODEL_FRAGMENT" : "shaders/model_fragment.fsh",
+	"MODEL_VERTEX" : "shaders/model_vertex.vsh",
 
 	"CONTAINER" : "textures/container.jpg",
 	"SMILE" : "textures/smile.png",
@@ -14,5 +16,8 @@
 	"SMALL_IMAGE" : "textures/small_image.png",
 
 	"VERTEX_POS_UCOLOR_VSH" : "shaders/vertex_pos_ucolor.vsh",
-	"VERTEX_POS_UCOLOR_FSH" : "shaders/vertex_pos_ucolor.fsh"
+	"VERTEX_POS_UCOLOR_FSH" : "shaders/vertex_pos_ucolor.fsh",
+
+	"NANO_SUIT" : "models/nano_suit/KSR-29 sniper rifle new_obj.obj",
+	"GUN" : "models/gun/Handgun_obj.obj"
 }

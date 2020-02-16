@@ -10,6 +10,8 @@
 #include "AxisesOrigin.h"
 #include "PointLightSource.h"
 #include "Flashlight.h"
+#include "Model.h"
+#include "ShaderProgram.h"
 
 _USEVE
 
@@ -24,8 +26,19 @@ bool TestScene::init()
 {
 	Parent::init();
 
-	auto origin = AxisesOrigin::create();
-	addChild( origin );
+	if( true )
+	{
+		auto origin = AxisesOrigin::create();
+		addChild( origin );
+	}
+
+	if ( true )
+	{
+		auto model = Model::create();
+		model->loadModel( RES_PATH( "GUN" ) );
+		model->setShaderProgram( ShaderProgram::create( RES_PATH( "MODEL_VERTEX" ), RES_PATH( "MODEL_FRAGMENT" ) ) );
+		addChild( model );
+	}
 
 	Material emerald;
 	emerald.ambient = Vec3( 0.0215f, 0.1745f, 0.0215f );
@@ -53,6 +66,7 @@ bool TestScene::init()
 		}
 	}
 
+	if( false )
 	{
 		auto cube = Cube::create(	RES_PATH( "MOUNTAIN" ) );
 		cube->setMaterial( emerald );
@@ -90,7 +104,7 @@ bool TestScene::init()
 	attenuation.quadratic = 0.0000007f;
 
 	
-	if ( true )
+	if ( false )
 	{
 		DirectLightSource* directionLight = DirectLightSource::create();
 		directionLight->setPosition( Vec3( 0.0f, 0.0f, 1000.0f ) );
@@ -102,18 +116,18 @@ bool TestScene::init()
 		setDirectionLight( directionLight );
 	}
 
-	if ( true )
+	if ( false )
 	{
 		float dist = 400.0f;
 		std::vector<Vec3> lightsPositions;
 		lightsPositions.push_back( Vec3( 2.0f*dist, 2.0f*dist, -2.0f*dist ) );
-		/*lightsPositions.push_back( Vec3( -dist, 0.0f, dist ) );
+		lightsPositions.push_back( Vec3( -dist, 0.0f, dist ) );
 		lightsPositions.push_back( Vec3( -dist, 0.0f, 0.0f ) );
 		lightsPositions.push_back( Vec3( -dist, 0.0f, -dist ) );
 		lightsPositions.push_back( Vec3( 0.0f, 0.0f, -dist ) );
 		lightsPositions.push_back( Vec3( dist, 0.0f, -dist ) );
 		lightsPositions.push_back( Vec3( dist, 0.0f, 0.0f ) );
-		lightsPositions.push_back( Vec3( dist, 0.0f, dist ) );*/
+		lightsPositions.push_back( Vec3( dist, 0.0f, dist ) );
 
 		for( const auto& pos : lightsPositions )
 		{
@@ -126,7 +140,7 @@ bool TestScene::init()
 		}
 	}
 
-	if ( true )
+	if ( false )
 	{
 		auto light = Flashlight::create();
 
@@ -139,8 +153,6 @@ bool TestScene::init()
 		
 		addFlashlight( light );
 	}
-
-
 
 	CameraMovementController::init();
 

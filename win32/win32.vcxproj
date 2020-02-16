@@ -112,7 +112,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\externals\rapidjson;..\externals\glm\glm;..\externals\soil\src;..\externals\glew\include\GL;..\externals\glfw\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\externals\rapidjson;..\externals\glm\glm;..\externals\soil\src;..\externals\glew\include\GL;..\externals\glfw\include\GLFW;..\externals\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -146,6 +146,8 @@
     <ClCompile Include="..\classes\Director.cpp" />
     <ClCompile Include="..\classes\Flashlight.cpp" />
     <ClCompile Include="..\classes\Line.cpp" />
+    <ClCompile Include="..\classes\Mesh.cpp" />
+    <ClCompile Include="..\classes\Model.cpp" />
     <ClCompile Include="..\classes\NodeExtentions.cpp" />
     <ClCompile Include="..\classes\PointLightSource.cpp" />
     <ClCompile Include="..\classes\InputController.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="..\classes\Flashlight.h" />
     <ClInclude Include="..\classes\InputController.h" />
     <ClInclude Include="..\classes\Line.h" />
+    <ClInclude Include="..\classes\Mesh.h" />
+    <ClInclude Include="..\classes\Model.h" />
     <ClInclude Include="..\classes\NodeExtentions.h" />
     <ClInclude Include="..\classes\PointLightSource.h" />
     <ClInclude Include="..\classes\TimeScheduler.h" />
