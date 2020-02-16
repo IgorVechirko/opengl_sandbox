@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\b0b99e5fc083256f5a16c32455e2d4e5\gtest-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\b0b99e5fc083256f5a16c32455e2d4e5\gtest-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\b0b99e5fc083256f5a16c32455e2d4e5\gtest-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\b0b99e5fc083256f5a16c32455e2d4e5\gtest-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\b0b99e5fc083256f5a16c32455e2d4e5\gtest-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\b0b99e5fc083256f5a16c32455e2d4e5\gtest-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\b0b99e5fc083256f5a16c32455e2d4e5\gtest-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\5b515302513052e0de5830650e759b49\gtest-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\CMakeFiles\c8578c0b424ca84831fe888e17246909\gtest.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\my_projects\opengl_sandbox\externals\assimp\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\my_projects\opengl_sandbox\externals\assimp\test\CMakeFiles\gtest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{14A3E76F-9B4B-307E-8904-F3A53559DEAB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
