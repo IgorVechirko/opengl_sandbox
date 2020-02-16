@@ -2,7 +2,7 @@
 Simple project for try use OpenGL API functionality to take understanding about main work principles.
 
 Using libraries:
-1. For create window and interaction with gl context using glfw library
+1. For create window and interaction with gl context using glfw and glew libraries
 2. For vector and matrix calculation using GLM library
 3. For load textures using SOIL library
 4. For load 3D models using assimp library
