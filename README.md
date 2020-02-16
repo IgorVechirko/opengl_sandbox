@@ -24,3 +24,5 @@ Point lights
 ![PointLights](images/point_lights.png "Point lights sample")
 Flashlight
 ![Flashlihgt](images/flashlight.png "Flashlight sample")
+3D model loading ( no lighting logic, dispayed only diffus textures )
+![3DModel](images/3d_model_no_lihgt.png "3D model sample")
