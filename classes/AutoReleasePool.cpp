@@ -12,7 +12,7 @@ AutoReleasePool::~AutoReleasePool()
 }
 void AutoReleasePool::releaseRef( Ref* ref )
 {
-	if ( ref->getRefCount() == 1 )
+	if ( ref && ref->getRefCount() == 1 )
 	{
 		auto findIt = std::find( _refs.begin(), _refs.end(), ref );
 		if ( findIt != _refs.end() )
