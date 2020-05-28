@@ -17,6 +17,7 @@ _USEVE
 
 TestScene::TestScene()
 	: _mySprite( nullptr )
+	, _cube( nullptr )
 {
 }
 TestScene::~TestScene()

@@ -1,6 +1,5 @@
 #include "Texture2D.h"
 
-#include "SOIL.h"
 
 _USEVE
 
