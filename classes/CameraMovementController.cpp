@@ -12,6 +12,9 @@ CameraMovementController::CameraMovementController()
 	, _mousePos( 0.0f, 0.0f )
 	, _mousePosInited( false )
 	, _fovAngle( 45.0f )
+	, _xDirection( eAxisDirection::NONE )
+	, _yDirection( eAxisDirection::NONE )
+	, _zDirection( eAxisDirection::NONE )
 {
 }
 CameraMovementController::~CameraMovementController()
