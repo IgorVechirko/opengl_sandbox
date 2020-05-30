@@ -97,4 +97,6 @@ if ( MSVC )
 		opengl_sandbox PROPERTIES
 		VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/resources"
 		)
+
+    target_compile_options( opengl_sandbox PRIVATE /MP )
 endif()
