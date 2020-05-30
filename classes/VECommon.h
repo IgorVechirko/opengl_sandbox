@@ -1,8 +1,6 @@
 #ifndef VECommon_H
 #define VECommon_H
 
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -17,19 +15,17 @@
 #include <unordered_set>
 #include <functional>
 
-#include <rapidjson.h>
-#include <document.h>
+#include "rapidjson/rapidjson.h"
+#include "rapidjson/document.h"
 
-#include "glm.hpp"
-#include "gtc/matrix_transform.hpp"
-#include "gtc/type_ptr.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
-// GLEW
-#define GLEW_STATIC
-#include <glew.h>
+#include "SOIL/SOIL.h"
 
-// GLFW
-#include <glfw3.h>
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
 
 #define _VESTART namespace VEngine {
 

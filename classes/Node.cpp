@@ -10,6 +10,7 @@ Node::Node()
 	, _rotate( 0.0f, 0.0f, 0.0f )
 	, _pos( 0.0f, 0.0f, 0.0f )
 	, _scale( 1.0f, 1.0, 1.0f )
+	, _originShift( 0.0f, 0.0f, 0.0f )
 {
 }
 Node::~Node()

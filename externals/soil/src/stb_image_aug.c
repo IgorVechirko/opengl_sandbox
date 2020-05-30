@@ -1,10 +1,6 @@
-/* stbi-1.16 - public domain JPEG/PNG reader - http://nothings.org/stb_image.c
-                      when you control the images you're loading
+/* stbi-1.16 - public domain JPEG/PNG reader
 
    QUICK NOTES:
-      Primarily of interest to game developers and other people who can
-          avoid problematic images and only need the trivial interface
-
       JPEG baseline (no JPEG progressive, no oddball channel decimations)
       PNG non-interlaced
       BMP non-1bpp, non-RLE
@@ -14,56 +10,9 @@
       writes BMP,TGA (define STBI_NO_WRITE to remove code)
       decoded from memory or through stdio FILE (define STBI_NO_STDIO to remove code)
       supports installable dequantizing-IDCT, YCbCr-to-RGB conversion (define STBI_SIMD)
-
-   TODO:
-      stbi_info_*
-
-   history:
-      1.16   major bugfix - convert_format converted one too many pixels
-      1.15   initialize some fields for thread safety
-      1.14   fix threadsafe conversion bug; header-file-only version (#define STBI_HEADER_FILE_ONLY before including)
-      1.13   threadsafe
-      1.12   const qualifiers in the API
-      1.11   Support installable IDCT, colorspace conversion routines
-      1.10   Fixes for 64-bit (don't use "unsigned long")
-             optimized upsampling by Fabian "ryg" Giesen
-      1.09   Fix format-conversion for PSD code (bad global variables!)
-      1.08   Thatcher Ulrich's PSD code integrated by Nicolas Schulz
-      1.07   attempt to fix C++ warning/errors again
-      1.06   attempt to fix C++ warning/errors again
-      1.05   fix TGA loading to return correct *comp and use good luminance calc
-      1.04   default float alpha is 1, not 255; use 'void *' for stbi_image_free
-      1.03   bugfixes to STBI_NO_STDIO, STBI_NO_HDR
-      1.02   support for (subset of) HDR files, float interface for preferred access to them
-      1.01   fix bug: possible bug in handling right-side up bmps... not sure
-             fix bug: the stbi_bmp_load() and stbi_tga_load() functions didn't work at all
-      1.00   interface to zlib that skips zlib header
-      0.99   correct handling of alpha in palette
-      0.98   TGA loader by lonesock; dynamically add loaders (untested)
-      0.97   jpeg errors on too large a file; also catch another malloc failure
-      0.96   fix detection of invalid v value - particleman@mollyrocket forum
-      0.95   during header scan, seek to markers in case of padding
-      0.94   STBI_NO_STDIO to disable stdio usage; rename all #defines the same
-      0.93   handle jpegtran output; verbose errors
-      0.92   read 4,8,16,24,32-bit BMP files of several formats
-      0.91   output 24-bit Windows 3.0 BMP files
-      0.90   fix a few more warnings; bump version number to approach 1.0
-      0.61   bugfixes due to Marc LeBlanc, Christopher Lloyd
-      0.60   fix compiling as c++
-      0.59   fix warnings: merge Dave Moore's -Wall fixes
-      0.58   fix bug: zlib uncompressed mode len/nlen was wrong endian
-      0.57   fix bug: jpg last huffman symbol before marker was >9 bits but less
-                      than 16 available
-      0.56   fix bug: zlib uncompressed mode len vs. nlen
-      0.55   fix bug: restart_interval not initialized to 0
-      0.54   allow NULL for 'int *comp'
-      0.53   fix bug in png 3->4; speedup png decoding
-      0.52   png handles req_comp=3,4 directly; minor cleanup; jpeg comments
-      0.51   obey req_comp requests, 1-component jpegs return as 1-component,
-             on 'test' only check type, not whether we support this variant
 */
 
-#include "stb_image_aug.h"
+#include "SOIL/stb_image_aug.h"
 
 #ifndef STBI_NO_HDR
 #include <math.h>  // ldexp
@@ -103,7 +52,7 @@ typedef unsigned char validate_uint32[sizeof(uint32)==4];
 #endif
 
 #ifndef STBI_NO_DDS
-#include "stbi_DDS_aug.h"
+#include "SOIL/stbi_dds_aug.h"
 #endif
 
 //	I (JLD) want full messages for SOIL
@@ -3678,5 +3627,5 @@ int stbi_write_tga(char const *filename, int x, int y, int comp, void *data)
 
 //	add in my DDS loading support
 #ifndef STBI_NO_DDS
-#include "stbi_DDS_aug_c.h"
+#include "SOIL/stbi_DDS_aug_c.h"
 #endif
