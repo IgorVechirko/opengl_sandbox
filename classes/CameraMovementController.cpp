@@ -172,8 +172,8 @@ void CameraMovementController::onMouseMoved( double posX, double posY )
 	{
 		_mousePosInited = true;
 
-		_mousePos.x = posX;
-		_mousePos.y = posY;
+		_mousePos.x = static_cast<float>(posX);
+		_mousePos.y = static_cast<float>(posY);
 	}
 	
 	Vec newMousePos( posX, posY );

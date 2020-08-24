@@ -37,8 +37,6 @@ int Application::run()
 		Director::getInstance()->setScene( Scene::create() );
 	}
 
-	
-
 	Director::getInstance()->runMainLoop();
 
 	return 0;

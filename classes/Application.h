@@ -5,8 +5,6 @@
 
 _VESTART
 
-class Scene;
-class GLView;
 class Application
 {
 

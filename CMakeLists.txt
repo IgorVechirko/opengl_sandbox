@@ -19,6 +19,8 @@ add_subdirectory( ${SANDBOX_DIR}/externals/assimp EXCLUDE_FROM_ALL )
 
 add_subdirectory( ${SANDBOX_DIR}/externals/glm )
 
+add_subdirectory( ${SANDBOX_DIR}/externals/boost EXCLUDE_FROM_ALL )
+
 set( RAPIDJSON_INCLUDE_DIR ${SANDBOX_DIR}/externals/rapidjson/include )
 
 
@@ -70,7 +72,7 @@ set( Model ${SANDBOX_DIR}/classes/Model.h ${SANDBOX_DIR}/classes/Model.cpp )
 set( Sprite ${SANDBOX_DIR}/classes/Sprite.h ${SANDBOX_DIR}/classes/Sprite.cpp )
 
 set( TestScene ${SANDBOX_DIR}/classes/TestScene.h ${SANDBOX_DIR}/classes/TestScene.cpp )
-set( main ${SANDBOX_DIR}/classes/main.cpp )
+set( Main ${SANDBOX_DIR}/classes/main.cpp )
 
 
 source_group( common FILES ${VECommon} )
@@ -101,9 +103,11 @@ source_group( nodes FILES ${AxisesOrigin}
 						  ${Line} 
 						  ${Mesh} 
 						  ${Model} 
-						  ${Sprite} )
+						  ${Sprite} 
+)
 
-source_group( content FILES ${TestScene} ${main} )
+source_group( content FILES ${TestScene} )
+source_group( main FILES ${Main} )
 
 
 
@@ -137,7 +141,7 @@ set( SANDBOX_SRC ${VECommon}
 				 ${Model}
 				 ${Sprite}
 				 ${TestScene} 
-				 ${main}
+				 ${Main}
 )
 
 #setup project
@@ -145,15 +149,42 @@ add_executable( opengl_sandbox ${SANDBOX_SRC} )
 
 target_link_libraries( opengl_sandbox glew_s glfw SOIL glm assimp )
 
+target_compile_definitions( opengl_sandbox PRIVATE BUILD )
+
 include_directories( ${RAPIDJSON_INCLUDE_DIR}
 					 ${GLEW_INCLUDE_DIR}
-					 )
+)
 
 if ( MSVC )
 	set_target_properties(
 		opengl_sandbox PROPERTIES
 		VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/resources"
-		)
+	)
 
     target_compile_options( opengl_sandbox PRIVATE /MP )
+endif()
+
+
+#tests sources
+
+set( unit_tests_main ${SANDBOX_DIR}/unit_tests_src/unit_tests_main.cpp )
+
+source_group( unit_main FILES ${unit_tests_main} )
+
+set( UNIT_TESTS_SRC ${unit_tests_main} )
+
+#setup unit tests project
+add_executable( unit_tests ${SANDBOX_SRC} ${UNIT_TESTS_SRC} )
+
+target_link_libraries( unit_tests glew_s glfw SOIL glm assimp boost.test )
+
+target_compile_definitions( unit_tests PRIVATE UNIT_TESTS )
+
+if ( MSVC )
+	set_target_properties(
+		unit_tests PROPERTIES
+		VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/resources"
+	)
+
+	target_compile_options( unit_tests PRIVATE /MP )
 endif()

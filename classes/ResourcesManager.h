@@ -25,9 +25,6 @@ public:
 
 };
 
-#define RESOURCES ResourcesManager::getInstance()
-#define RES_PATH( x ) ResourcesManager::getInstance()->getResPath( x )
-
 _VEEND
 
 

@@ -77,6 +77,8 @@ void Director::runMainLoop()
 
 		loopWait();
 	}
+
+	glfwTerminate();
 }
 GLView* Director::getView()
 {
