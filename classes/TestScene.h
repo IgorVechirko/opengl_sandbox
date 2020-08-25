@@ -22,8 +22,6 @@ class TestScene : public Scene
 
 protected:
 
-	TestScene();
-
 	virtual bool onInit() override;
 
 	virtual void update( float deltaTime ) override;
@@ -31,9 +29,8 @@ protected:
 
 public:
 
+	TestScene();
 	virtual ~TestScene();
-
-	CREATE_FUNC(TestScene);
 
 };
 

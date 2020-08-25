@@ -123,7 +123,7 @@ void WorkingScope::startWork()
 	_view->setupWindowSize( winSize.x, winSize.y );
 	_inputController->init();
 
-	setScene( TestScene::create(this) );
+	setScene( createNode<TestScene>() );
 
 	while( !glfwWindowShouldClose(_view->getWindow() ) )
 	{

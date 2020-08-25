@@ -17,7 +17,7 @@ PointLightSource::~PointLightSource()
 }
 bool PointLightSource::onInit()
 {
-	_cube = ColorCube::create();
+	_cube = createNode<ColorCube>();
 	_cube->setCubeSize( 50.0f );
 	_cube->setColor( RGBA( _lightProperties.diffuse.r, _lightProperties.diffuse.g, _lightProperties.diffuse.b, 1.0f ) );
 	_cube->setOriginShift( Vec3( -25.0f ) );

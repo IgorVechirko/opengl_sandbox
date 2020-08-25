@@ -30,8 +30,6 @@ class ColorCube : public Node
 
 protected:
 
-	ColorCube();
-
 	virtual bool onInit() override;
 
 	virtual void draw( GLRender* render, const Mat4& parentTransform ) override;
@@ -39,9 +37,8 @@ protected:
 
 public:
 
+	ColorCube();
 	virtual ~ColorCube();
-
-	CREATE_FUNC( ColorCube );
 
 	virtual void setCubeSize( float size );
 };

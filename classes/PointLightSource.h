@@ -19,16 +19,13 @@ class PointLightSource : public Node
 
 	protected:
 
-		PointLightSource();
-
 		virtual bool onInit() override;
 
 
 	public:
 
+		PointLightSource();
 		virtual ~PointLightSource();
-
-		CREATE_FUNC(PointLightSource);
 
 		virtual void setLightProperties( const LightProperties& properties ) override;
 		

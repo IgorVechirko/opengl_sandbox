@@ -30,17 +30,14 @@ class Cube : public Node
 
 protected:
 
-	Cube();
-
-	bool init( const std::string& filePath );
-
 	virtual void draw( GLRender* render, const Mat4& transform ) override;
 
 public:
 
+	Cube();
 	virtual ~Cube();
 
-	static Cube* create( WorkingScope* scope, const std::string& filePath );
+	bool initWithFilePath( const std::string& filePath );
 
 	void setShaderProgram( ShaderProgram* program );
 	void setTexture( Texture2D* texture );

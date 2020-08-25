@@ -31,15 +31,15 @@ bool TestScene::onInit()
 
 	if( true )
 	{
-		auto origin = AxisesOrigin::create(getScope());
+		auto origin = createNode<AxisesOrigin>();
 		addChild( origin );
 	}
 
 	if ( true )
 	{
-		auto model = Model::create(getScope());
+		auto model = createNode<Model>();
 		model->loadModel( getResMng()->getResPath( "GUN" ) );
-		model->setShaderProgram( ShaderProgram::create( getReleasePool(), getResMng()->getResStr( "MODEL_VERTEX" ), getResMng()->getResStr( "MODEL_FRAGMENT" ) ) );
+		model->setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr( "MODEL_VERTEX" ), getResMng()->getResStr( "MODEL_FRAGMENT" ) ) );
 		addChild( model );
 	}
 
@@ -57,7 +57,7 @@ bool TestScene::onInit()
 			{
 				for( int z = 0; z < 3; z++ )
 				{
-					auto cube = Cube::create( getScope(), getResMng()->getResPath( "MOUNTAIN" ) );
+					auto cube = createScopedRefWithInitializer<Cube>( &Cube::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
 					cube->setMaterial( emerald );
 					cube->setPosition( Vec3( 1400.0f*i, 1400.0f*j, -1400.0f*z ) );
 					cube->setRotate( Vec3( 10.0f*i, 10.0f*j, 10.0f*z ) );
@@ -71,7 +71,7 @@ bool TestScene::onInit()
 
 	if( false )
 	{
-		auto cube = Cube::create( getScope(), getResMng()->getResPath( "MOUNTAIN" ) );
+		auto cube = createScopedRefWithInitializer<Cube>( &Cube::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
 		cube->setMaterial( emerald );
 		cube->setPosition( Vec3( 0.0f, 0.0f, -500.0f ) );
 		cube->setOriginShift( Vec3( -200.0f ) );
@@ -83,7 +83,7 @@ bool TestScene::onInit()
 
 	if ( false )
 	{
-		auto colorCube = ColorCube::create();
+		auto colorCube = createNode<ColorCube>();
 
 		//colorCube->setColor( RGBA::RED );
 		colorCube->setCubeSize( 100.0f );
@@ -109,7 +109,7 @@ bool TestScene::onInit()
 	
 	if ( false )
 	{
-		DirectLightSource* directionLight = DirectLightSource::create();
+		DirectLightSource* directionLight = createNode<DirectLightSource>();
 		directionLight->setPosition( Vec3( 0.0f, 0.0f, 1000.0f ) );
 		directionLight->setDirection( Vec3( 1.0f, 0.0f, 0.0f ) );
 
@@ -134,7 +134,7 @@ bool TestScene::onInit()
 
 		for( const auto& pos : lightsPositions )
 		{
-			auto pointLight = PointLightSource::create();
+			auto pointLight = createNode<PointLightSource>();
 			pointLight->setLightProperties( lightProperties );
 			pointLight->setAttenuation( attenuation );
 			pointLight->setPosition( pos );
@@ -145,7 +145,7 @@ bool TestScene::onInit()
 
 	if ( false )
 	{
-		auto light = Flashlight::create();
+		auto light = createNode<Flashlight>();
 
 		light->setAttenuation( attenuation );
 		light->setLightProperties( lightProperties );

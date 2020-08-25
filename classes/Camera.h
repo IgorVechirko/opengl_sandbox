@@ -21,13 +21,12 @@ class Camera : public Node
 	
 protected:
 
-	Camera();
-
 	virtual bool onInit() override;
 
 
 public:
 
+	Camera();
 	virtual ~Camera();
 
 	void setProjection( const Mat4& projection );
@@ -48,9 +47,6 @@ public:
 	void spinPitch( float shift );
 	void spinYaw( float shift );
 
-
-
-	CREATE_FUNC(Camera);
 };
 
 _VEEND

@@ -14,16 +14,12 @@ class AxisesOrigin : public Node
 
 protected:
 
-	AxisesOrigin();
-
 	virtual bool onInit() override;
-
 
 public:
 
+	AxisesOrigin();
 	virtual ~AxisesOrigin();
-
-	CREATE_FUNC(AxisesOrigin);
 
 };
 

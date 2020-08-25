@@ -35,7 +35,7 @@ bool DirectLightSource::onInit()
 	{
 		for( int rowIndx = 0; rowIndx < _linesCount; rowIndx++ )
 		{
-			auto line = Line::create();
+			auto line = createNode<Line>();
 			line->setStartPos( Vec3( rowIndx * _distBetweenLines, columnIndx * _distBetweenLines, 0.0f ) );
 			line->setFinishPos( Vec3( rowIndx * _distBetweenLines, columnIndx * _distBetweenLines, 0.0f ) );
 			addChild( line );

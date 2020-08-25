@@ -61,3 +61,8 @@ InputController* WorkingScopeProvider::getInputController()
 	_ASSERT( _providedScope != nullptr );
 	return _providedScope->getInputController();
 }
+Scene* WorkingScopeProvider::getScene()
+{
+	_ASSERT( _providedScope );
+	return _providedScope->getScene();
+}

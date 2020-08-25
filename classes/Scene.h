@@ -27,15 +27,12 @@ class Scene : public Node
 
 protected:
 
-	Scene();
-
 	virtual bool onInit() override;
 
 public:
 
+	Scene();
 	virtual ~Scene();
-
-	CREATE_FUNC(Scene);
 
 	void visit( GLRender* render );
 

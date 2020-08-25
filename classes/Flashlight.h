@@ -25,12 +25,11 @@ class Flashlight : public Node
 
 protected:
 
-	Flashlight();
-
 	virtual bool onInit() override;
 
 public:
 
+	Flashlight();
 	virtual ~Flashlight();
 	
 	virtual void setLightProperties( const LightProperties& properties ) override;
@@ -43,8 +42,6 @@ public:
 
 	void setOuterCutOffAngle( float angle );
 	float getOuterCutOffAngle();
-
-	CREATE_FUNC(Flashlight);
 
 };
 

@@ -25,8 +25,6 @@ class Line : public Node
 
 protected:
 
-	Line();
-
 	virtual bool onInit() override;
 
 	virtual void draw( GLRender* render, const Mat4& transform ) override;
@@ -34,9 +32,8 @@ protected:
 
 public:
 
+	Line();
 	virtual ~Line();
-
-	CREATE_FUNC( Line );
 
 	void setStartPos( const Vec3& pos );
 	const Vec3& getStartPos();

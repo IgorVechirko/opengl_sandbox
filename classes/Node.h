@@ -3,39 +3,6 @@
 
 #include "Ref.h"
 #include "WorkingScopeProvider.h"
-#include "WorkingScope.h"
-
-#define CREATE_FUNC(__TYPE__)\
-static __TYPE__* create()\
-{\
-__TYPE__* ret = new __TYPE__();\
-\
-if ( ret && ret->Node::init(nullptr) )\
-{\
-}\
-else\
-{\
-delete ret;\
-ret = nullptr;\
-}\
-return ret;\
-}\
-static __TYPE__* create(WorkingScope* scope)\
-{\
-__TYPE__* ret = new __TYPE__();\
-\
-if ( ret && ret->Node::init(scope) )\
-{\
-ret->autorelease(scope->getReleasePool());\
-}\
-else\
-{\
-delete ret;\
-ret = nullptr;\
-}\
-return ret;\
-}\
-
 
 _VESTART
 
@@ -82,9 +49,7 @@ public:
 	Node();
 	virtual ~Node();
 
-	CREATE_FUNC(Node);
-
-	bool init(WorkingScope* scope);
+	bool init();
 
 	virtual void setPosition( const Vec3& pos );
 	const Vec3& getPosition() const;

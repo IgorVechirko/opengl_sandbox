@@ -55,10 +55,8 @@ const glm::mat4& Node::getTransform()
 
 	return _transform;
 }
-bool Node::init(WorkingScope* scope)
+bool Node::init()
 {
-	setScope( scope );
-	autorelease(getReleasePool());
 	return onInit();
 }
 void Node::visit( GLRender* render, const Mat4& parentTransform )

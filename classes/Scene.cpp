@@ -20,7 +20,7 @@ Scene::~Scene()
 }
 bool Scene::onInit()
 {
-	setCamera( Camera::create(getScope()) );
+	setCamera( createNode<Camera>() );
 
 	return true;
 }

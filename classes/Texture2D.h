@@ -13,16 +13,12 @@ class Texture2D : public Ref
 
 	GLuint _textureID;
 
-
-	Texture2D();
-
-	bool init( const std::string& aTextPath );
-
 	public:
 
+		Texture2D();
 		virtual ~Texture2D();
 
-		static Texture2D* create( AutoReleasePool* pool, const std::string& aTextPath );
+		bool initWithFilePath( const std::string& filePath );
 
 		GLuint getTextureID();
 

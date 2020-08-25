@@ -12,22 +12,7 @@ ShaderProgram::~ShaderProgram()
 {
 	glDeleteProgram(_programID);
 }
-ShaderProgram* ShaderProgram::create(AutoReleasePool* pool, const std::string& verSrc, const std::string& fragSrc)
-{
-	ShaderProgram* ret = new ShaderProgram();
-
-	if ( ret && ret->init( verSrc, fragSrc ) )
-	{
-		ret->autorelease(pool);
-		return ret;
-	}
-	else
-	{
-		delete ret;
-		return nullptr;
-	}
-}
-bool ShaderProgram::init( const std::string& verSrc, const std::string& fragSrc )
+bool ShaderProgram::initWithSrc( const std::string& verSrc, const std::string& fragSrc )
 {
 	if ( verSrc.empty() || fragSrc.empty() )
 		return false;

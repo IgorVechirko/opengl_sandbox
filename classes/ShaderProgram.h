@@ -14,15 +14,15 @@ class ShaderProgram : public Ref
 	GLuint _programID;
 
 
-	ShaderProgram();
+	
 
-	bool init( const std::string& verSrc, const std::string& fragSrc );
 
 	public:
 
+		ShaderProgram();
 		virtual ~ShaderProgram();
 
-		static ShaderProgram* create( AutoReleasePool* pool, const std::string& verSrc, const std::string& fragSrc );
+		bool initWithSrc( const std::string& verSrc, const std::string& fragSrc );
 
 		GLuint getProgramID();
 

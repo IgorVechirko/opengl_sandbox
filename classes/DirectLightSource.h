@@ -26,9 +26,6 @@ class DirectLightSource : public Node
 
 protected:
 
-	DirectLightSource();
-
-
 	virtual bool onInit() override;
 
 	virtual void setRotate( const Vec3& rotate ) override;
@@ -37,9 +34,8 @@ protected:
 
 	public:
 
+		DirectLightSource();
 		virtual ~DirectLightSource();
-
-		CREATE_FUNC( DirectLightSource );
 
 		void setDirection( const Vec3& aDirection );
 		const Vec3& getDirection();

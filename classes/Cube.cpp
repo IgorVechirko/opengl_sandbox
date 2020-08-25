@@ -25,27 +25,15 @@ Cube::Cube()
 Cube::~Cube()
 {
 }
-Cube* Cube::create( WorkingScope* scope, const std::string& filePath )
-{
-	Cube* ret = new Cube();
 
-	if ( ret && ret->Node::init( scope ) && ret->init( filePath ) )
-	{
-		ret->autorelease(scope->getReleasePool());
-		return ret;
-	}
-	else
-	{
-		delete ret;
-		return nullptr;
-	}
-}
 void Cube::updateVertices( const Size& size )
 {
 }
-bool Cube::init( const std::string& filePath )
+bool Cube::initWithFilePath( const std::string& filePath )
 {	
-	auto texture = Texture2D::create( getReleasePool(), filePath );
+	Node::init();
+	
+	auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, filePath );
 
 	if ( texture )
 	{
@@ -124,7 +112,7 @@ void Cube::setTexture( Texture2D* texture )
 		_indices = { 0, 1, 2,
 					 1, 2, 3 };
 
-		setShaderProgram( ShaderProgram::create( getReleasePool(), getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
+		setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
 
 		glGenVertexArrays(1, &_vao);
 		glGenBuffers(1, &_vbo);

@@ -31,18 +31,13 @@ class Model : public Node
 
 private: 
 
-	Model();
-
 	virtual void draw( GLRender* render, const Mat4& transform ) override;
 
 
 public:
 
+	Model();
 	virtual ~Model();
-
-	void draw( ShaderProgram* shader );
-
-	CREATE_FUNC( Model );
 
 	void loadModel( const std::string& path );
 
