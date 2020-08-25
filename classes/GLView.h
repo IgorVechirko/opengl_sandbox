@@ -1,11 +1,11 @@
 #ifndef GLView_H
 #define GLView_H
 
-#include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
-class GLView
+class GLView : public WorkingScopeProvider
 {
 	GLFWwindow* _window;
 	GLuint _windowWidth;
@@ -13,7 +13,7 @@ class GLView
 
 public:
 
-	GLView();
+	GLView( WorkingScope* scope );
 	virtual ~GLView();
 
 	void setupWindowSize( GLuint width, GLuint height );

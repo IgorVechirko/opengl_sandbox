@@ -7,6 +7,7 @@
 
 _VESTART
 
+class AutoReleasePool;
 class ShaderProgram : public Ref
 {
 
@@ -15,13 +16,13 @@ class ShaderProgram : public Ref
 
 	ShaderProgram();
 
-	bool init( const std::string& verPath, const std::string& fragPath );
+	bool init( const std::string& verSrc, const std::string& fragSrc );
 
 	public:
 
 		virtual ~ShaderProgram();
 
-		static ShaderProgram* create( const std::string& verPath, const std::string& fragPath );
+		static ShaderProgram* create( AutoReleasePool* pool, const std::string& verSrc, const std::string& fragSrc );
 
 		GLuint getProgramID();
 

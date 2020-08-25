@@ -1,6 +1,7 @@
 #include "Camera.h"
 
-#include "Director.h"
+#include "GLView.h"
+
 
 _USEVE
 
@@ -14,12 +15,18 @@ Camera::Camera()
 	, _cameraRoll( 0.0f )
 	, _viewDirty( false )
 {
-	setProjection( glm::ortho( 0.0f, VIEW->getWindowSize().x, 0.0f, VIEW->getWindowSize().y, -1.0f, 100.0f ) );
-
-	setPosition( Vec3( 0.0f, 0.0f, 1.0f ) );
 }
 Camera::~Camera()
 {
+	
+}
+bool Camera::onInit()
+{
+	setProjection( glm::ortho( 0.0f, getGLView()->getWindowSize().x, 0.0f, getGLView()->getWindowSize().y, -1.0f, 100.0f ) );
+
+	setPosition( Vec3( 0.0f, 0.0f, 1.0f ) );
+
+	return true;
 }
 void Camera::setProjection( const Mat4& projection )
 {

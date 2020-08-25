@@ -82,7 +82,7 @@ Mesh Model::processMesh( aiMesh* mesh, const aiScene* scene )
 		textures.insert( textures.begin(), specularMaps.begin(), specularMaps.end() );
 	}
 
-	return Mesh( vertices, indices, textures );
+	return Mesh( getScope(), vertices, indices, textures );
 }
 std::vector<Texture> Model::loadMatertialTextures( aiMaterial* mat, aiTextureType type, eTextureType textureType )
 {

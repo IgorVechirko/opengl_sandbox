@@ -1,10 +1,14 @@
 #include "GLRender.h"
 
-#include "Director.h"
+#include "Scene.h"
+#include "GLView.h"
+
+
 
 _USEVE
 
-GLRender::GLRender()
+GLRender::GLRender( WorkingScope* scope )
+	: WorkingScopeProvider( scope )
 {
 }
 GLRender::~GLRender()
@@ -25,6 +29,6 @@ void GLRender::drawScene( Scene* scene )
 
 	scene->visit( this );
 
-	glfwSwapBuffers( VIEW->getWindow() );
+	glfwSwapBuffers( getGLView()->getWindow() );
 
 }

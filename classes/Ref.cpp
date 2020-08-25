@@ -1,12 +1,14 @@
 #include "Ref.h"
 
-#include "Director.h"
+#include "AutoReleasePool.h"
+
 
 _USEVE
 
 Ref::Ref()
 	: _refCount( 0 )
 	, _autorelesed( false )
+	, _pool( nullptr )
 {
 }
 
@@ -17,9 +19,9 @@ void Ref::release()
 {
 	_refCount--;
 
-	if ( _autorelesed && _refCount == 1 )
+	if ( _pool && _autorelesed && _refCount == 1 )
 	{
-		RELEASE_POOL->releaseRef( this );
+		_pool->releaseRef( this );
 	}
 }
 void Ref::retain()
@@ -30,11 +32,12 @@ unsigned int Ref::getRefCount()
 {
 	return _refCount;
 }
-void Ref::autorelease()
+void Ref::autorelease( AutoReleasePool* pool )
 {
-	if ( !_autorelesed )
+	if ( !_autorelesed && pool)
 	{
+		_pool = pool;
 		_autorelesed = true;
-		RELEASE_POOL->addRef( this );
+		_pool->addRef( this );
 	}
 }

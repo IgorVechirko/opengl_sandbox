@@ -29,7 +29,7 @@ void DirectLightSource::updateDirectionLines()
 		}
 	}
 }
-bool DirectLightSource::init()
+bool DirectLightSource::onInit()
 {
 	for( int columnIndx = 0; columnIndx < _linesCount; columnIndx++ )
 	{

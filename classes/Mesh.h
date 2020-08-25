@@ -2,11 +2,13 @@
 #define Mesh_H
 
 #include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
 class ShaderProgram;
-class Mesh
+class Mesh 
+	: public WorkingScopeProvider
 {
 
 	std::vector<PosNormaTextCordVertex> _vertices;
@@ -26,7 +28,7 @@ class Mesh
 
 public:
 	
-		Mesh( const std::vector<PosNormaTextCordVertex>& vetrices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures );
+		Mesh( WorkingScope* scope, const std::vector<PosNormaTextCordVertex>& vetrices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures );
 		virtual ~Mesh();
 
 

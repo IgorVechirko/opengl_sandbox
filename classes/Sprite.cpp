@@ -2,7 +2,8 @@
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
-#include "Director.h"
+#include "ResourcesManager.h"
+#include "Scene.h"
 #include "Camera.h"
 
 _USEVE
@@ -18,13 +19,13 @@ Sprite::Sprite()
 Sprite::~Sprite()
 {
 }
-Sprite* Sprite::create( const std::string& filePath )
+Sprite* Sprite::create( WorkingScope* scope, const std::string& filePath )
 {
 	Sprite* ret = new Sprite();
 
-	if ( ret && ret->init( filePath ) )
+	if ( ret && ret->Node::init(scope) && ret->init( filePath ) )
 	{
-		ret->autorelease();
+		ret->autorelease( scope->getReleasePool() );
 		return ret;
 	}
 	else
@@ -38,7 +39,7 @@ void Sprite::updateVertices( const Size& size )
 }
 bool Sprite::init( const std::string& filePath )
 {	
-	auto texture = Texture2D::create( filePath );
+	auto texture = Texture2D::create( getReleasePool(), filePath );
 
 	if ( texture )
 	{
@@ -62,8 +63,8 @@ void Sprite::draw( GLRender* render, const Mat4& transform )
 		GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(transform) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getView() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getProjection() ) );
 	}
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
@@ -104,7 +105,7 @@ void Sprite::setTexture( Texture2D* texture )
 		_indices = { 0, 1, 2,
 					 1, 2, 3 };
 
-		setShaderProgram( ShaderProgram::create( RES_PATH("SPRITE_VERTEX"), RES_PATH("SPRITE_FRAGMENT") ) );
+		setShaderProgram( ShaderProgram::create( getReleasePool(), getResMng()->getResStr("SPRITE_VERTEX"), getResMng()->getResStr("SPRITE_FRAGMENT") ) );
 
 		glGenVertexArrays(1, &_vao);
 		glGenBuffers(1, &_vbo);

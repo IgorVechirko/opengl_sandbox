@@ -1,6 +1,8 @@
 #include "CameraMovementController.h"
 
 #include "Camera.h"
+#include "GLView.h"
+#include "TimeScheduler.h"
 
 
 _USEVE
@@ -15,16 +17,17 @@ CameraMovementController::CameraMovementController()
 	, _xDirection( eAxisDirection::NONE )
 	, _yDirection( eAxisDirection::NONE )
 	, _zDirection( eAxisDirection::NONE )
+	, _camera( nullptr )
 {
 }
 CameraMovementController::~CameraMovementController()
 {
-	if( INPUT->getInputCondtrollerListener() == this )
+	if( getInputController()->getInputCondtrollerListener() == this )
 	{
-		INPUT->setInputCondtrollerListener( nullptr );
+		getInputController()->setInputCondtrollerListener( nullptr );
 	}
 
-	SCHEDULER->delUpdateFunc( this );
+	getTimeScheduler()->delUpdateFunc( this );
 }
 void CameraMovementController::updaeTime( float deltaTme )
 {
@@ -34,13 +37,13 @@ void CameraMovementController::updaeTime( float deltaTme )
 	{
 		if ( _xDirection == eAxisDirection::POSITIV )
 		{
-			if ( getCamera() )
-				getCamera()->moveRight( shift );
+			if ( _camera )
+				_camera->moveRight( shift );
 		}
 		else
 		{
-			if ( getCamera() )
-				getCamera()->moveLeft( shift );
+			if ( _camera )
+				_camera->moveLeft( shift );
 		}
 	}
 
@@ -48,13 +51,13 @@ void CameraMovementController::updaeTime( float deltaTme )
 	{
 		if ( _zDirection == eAxisDirection::POSITIV )
 		{
-			if ( getCamera() )
-				getCamera()->moveAhead( shift );
+			if ( _camera )
+				_camera->moveAhead( shift );
 		}
 		else
 		{
-			if ( getCamera() )
-				getCamera()->moveBack( shift );
+			if ( _camera )
+				_camera->moveBack( shift );
 		}
 	}
 
@@ -62,13 +65,13 @@ void CameraMovementController::updaeTime( float deltaTme )
 	{
 		if ( _yDirection == eAxisDirection::POSITIV )
 		{
-			if ( getCamera() )
-				getCamera()->moveUp( shift );
+			if ( _camera )
+				_camera->moveUp( shift );
 		}
 		else
 		{
-			if ( getCamera() )
-				getCamera()->moveDown( shift );
+			if ( _camera )
+				_camera->moveDown( shift );
 		}
 	}
 }
@@ -115,6 +118,10 @@ void CameraMovementController::onKeyPressed( int aKeyCode )
 		{
 			_yDirection	= eAxisDirection::NEGATIVE;
 		}
+	}
+	else if ( aKeyCode == GLFW_KEY_ESCAPE )
+	{
+		glfwSetWindowShouldClose( getGLView()->getWindow(), 1 );
 	}
 }
 void CameraMovementController::onKeyPressRepeate( int aKeyCode )
@@ -180,10 +187,10 @@ void CameraMovementController::onMouseMoved( double posX, double posY )
 	Vec moveDelta = _mousePos - newMousePos;
 	moveDelta *= _cameraRotateSensitivity;
 
-	if ( getCamera() )
+	if ( _camera )
 	{
-		getCamera()->spinPitch( moveDelta.y );
-		getCamera()->spinYaw( moveDelta.x );
+		_camera->spinPitch( moveDelta.y );
+		_camera->spinYaw( moveDelta.x );
 	}
 
 	_mousePos = newMousePos;
@@ -192,24 +199,26 @@ void CameraMovementController::onWheelScrolled( float xoffset, float yoffset )
 {
 	_fovAngle += yoffset;
 
-	auto wndSize = VIEW->getWindowSize();
+	auto wndSize = getGLView()->getWindowSize();
 
-	if ( getCamera() )
-		getCamera()->setProjection( glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f ) );
+	if ( _camera )
+		_camera->setProjection( glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f ) );
 }
-void CameraMovementController::init()
+void CameraMovementController::initWithCamera( Camera* camera )
 {
-	auto wndSize = VIEW->getWindowSize();
+	_camera = camera;
+
+	auto wndSize = getGLView()->getWindowSize();
 	Mat4 projection = glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f );
 
-	if ( getCamera() )
+	if ( _camera )
 	{
-		getCamera()->setProjection( projection );
+		_camera->setProjection( projection );
 
-		getCamera()->setPosition( Vec3( 0.0f, 0.0f, 27.0f ) );
+		_camera->setPosition( Vec3( 0.0f, 0.0f, 27.0f ) );
 	}
 
-	SCHEDULER->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );
+	getTimeScheduler()->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );
 
-	INPUT->setInputCondtrollerListener( this );
+	getInputController()->setInputCondtrollerListener( this );
 }

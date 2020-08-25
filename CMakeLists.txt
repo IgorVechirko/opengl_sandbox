@@ -28,10 +28,6 @@ set( RAPIDJSON_INCLUDE_DIR ${SANDBOX_DIR}/externals/rapidjson/include )
 #sources
 set( VECommon ${SANDBOX_DIR}/classes/VECommon.h ${SANDBOX_DIR}/classes/VECommon.cpp )
 
-set( Application ${SANDBOX_DIR}/classes/Application.h ${SANDBOX_DIR}/classes/Application.cpp )
-
-set( Director ${SANDBOX_DIR}/classes/Director.h ${SANDBOX_DIR}/classes/Director.cpp )
-
 set( FileUtils ${SANDBOX_DIR}/classes/FileUtils.h ${SANDBOX_DIR}/classes/FileUtils.cpp )
 set( ResourcesManager ${SANDBOX_DIR}/classes/ResourcesManager.h ${SANDBOX_DIR}/classes/ResourcesManager.cpp )
 
@@ -74,10 +70,14 @@ set( Sprite ${SANDBOX_DIR}/classes/Sprite.h ${SANDBOX_DIR}/classes/Sprite.cpp )
 set( TestScene ${SANDBOX_DIR}/classes/TestScene.h ${SANDBOX_DIR}/classes/TestScene.cpp )
 set( Main ${SANDBOX_DIR}/classes/main.cpp )
 
+set( WorkingScope 
+				  ${SANDBOX_DIR}/classes/WorkingScope.h
+				  ${SANDBOX_DIR}/classes/WorkingScope.cpp
+				  ${SANDBOX_DIR}/classes/WorkingScopeProvider.cpp
+				  ${SANDBOX_DIR}/classes/WorkingScopeProvider.h )
+
 
 source_group( common FILES ${VECommon} )
-source_group( application FILES ${Application} )
-source_group( director FILES ${Director} )
 source_group( file_utils FILES ${FileUtils} 
 						 	   ${ResourcesManager} )
 source_group( scheduler FILES ${TimeScheduler} )
@@ -108,12 +108,11 @@ source_group( nodes FILES ${AxisesOrigin}
 
 source_group( content FILES ${TestScene} )
 source_group( main FILES ${Main} )
+source_group( working_scope FILES ${WorkingScope} )
 
 
 
 set( SANDBOX_SRC ${VECommon}
-				 ${Application}
-				 ${Director}
 				 ${FileUtils}
 				 ${ResourcesManager}
 				 ${TimeScheduler}
@@ -142,6 +141,7 @@ set( SANDBOX_SRC ${VECommon}
 				 ${Sprite}
 				 ${TestScene} 
 				 ${Main}
+				 ${WorkingScope}
 )
 
 #setup project

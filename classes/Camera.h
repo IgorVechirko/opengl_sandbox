@@ -23,6 +23,8 @@ protected:
 
 	Camera();
 
+	virtual bool onInit() override;
+
 
 public:
 
@@ -48,7 +50,7 @@ public:
 
 
 
-	AUTORELEASE_CREATE_FUNC(Camera);
+	CREATE_FUNC(Camera);
 };
 
 _VEEND

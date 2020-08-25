@@ -1,12 +1,15 @@
 #ifndef CameraMovementController_H
 #define CameraMovementController_H
 
-#include "Director.h"
+#include "InputController.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
 class Camera;
-class CameraMovementController : public InputControllerListener
+class CameraMovementController
+	: public InputControllerListener
+	, public WorkingScopeProvider
 {
 	enum class eAxisDirection
 	{
@@ -28,6 +31,8 @@ class CameraMovementController : public InputControllerListener
 	bool _mousePosInited;
 	Vec _mousePos;
 
+	Camera* _camera;
+
 
 	void updaeTime( float deltaTme );
 
@@ -42,15 +47,14 @@ protected:
 
 	virtual void onWheelScrolled( float xoffset, float yoffset ) override;
 
-	virtual Camera* getCamera(){ return nullptr; };
-
 
 public:
 
 	CameraMovementController();
 	virtual ~CameraMovementController();
 
-	void init();
+	void initWithCamera( Camera* camera );
+
 };
 
 

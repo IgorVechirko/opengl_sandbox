@@ -29,7 +29,7 @@ protected:
 	DirectLightSource();
 
 
-	virtual bool init() override;
+	virtual bool onInit() override;
 
 	virtual void setRotate( const Vec3& rotate ) override;
 	virtual void setScale( const Vec3& scale ) override;
@@ -39,7 +39,7 @@ protected:
 
 		virtual ~DirectLightSource();
 
-		AUTORELEASE_CREATE_FUNC( DirectLightSource );
+		CREATE_FUNC( DirectLightSource );
 
 		void setDirection( const Vec3& aDirection );
 		const Vec3& getDirection();

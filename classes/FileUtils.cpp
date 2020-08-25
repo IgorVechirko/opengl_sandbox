@@ -3,7 +3,8 @@
 
 _USEVE
 
-FileUtils::FileUtils()
+FileUtils::FileUtils( WorkingScope* scope )
+	: WorkingScopeProvider( scope )
 {
 }
 FileUtils::~FileUtils()

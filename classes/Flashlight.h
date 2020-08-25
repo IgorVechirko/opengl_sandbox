@@ -27,7 +27,7 @@ protected:
 
 	Flashlight();
 
-	virtual bool init() override;
+	virtual bool onInit() override;
 
 public:
 

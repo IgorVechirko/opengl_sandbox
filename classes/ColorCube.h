@@ -32,7 +32,7 @@ protected:
 
 	ColorCube();
 
-	virtual bool init() override;
+	virtual bool onInit() override;
 
 	virtual void draw( GLRender* render, const Mat4& parentTransform ) override;
 

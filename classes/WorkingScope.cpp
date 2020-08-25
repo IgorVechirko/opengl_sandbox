@@ -1,5 +1,6 @@
 #include "WorkingScope.h"
 
+#include "WorkingScope.h"
 #include "GLView.h"
 #include "GLRender.h"
 #include "FileUtils.h"
@@ -7,6 +8,7 @@
 #include "AutoReleasePool.h"
 #include "TimeScheduler.h"
 #include "InputController.h"
+#include "Scene.h"
 #include "TestScene.h"
 
 #include <thread>
@@ -69,7 +71,7 @@ void WorkingScope::loopWait()
 {
 	std::this_thread::sleep_for( std::chrono::milliseconds( (long)( (1.0f/60.0f) * 1000.0f ) ) );
 }
-GLView* WorkingScope::getView()
+GLView* WorkingScope::getGLView()
 {
 	return _view;
 }

@@ -1,11 +1,14 @@
 #include "ResourcesManager.h"
 
-#include "Director.h"
+#include "FileUtils.h"
+
+
 
 _USEVE
 
 
-ResourcesManager::ResourcesManager()
+ResourcesManager::ResourcesManager( WorkingScope* scope )
+	: WorkingScopeProvider( scope )
 {
 }
 ResourcesManager::~ResourcesManager()
@@ -17,7 +20,7 @@ void ResourcesManager::init()
 }
 void ResourcesManager::parseResConfig( const std::string& aConfigPath )
 {
-	std::string fileStr = FILE_UTILS->getStringFromFile( aConfigPath );
+	std::string fileStr = getFileUtils()->getStringFromFile( aConfigPath );
 
 	rapidjson::Document jsonDoc;
 	jsonDoc.Parse<0>( fileStr.c_str() );
@@ -44,4 +47,10 @@ const std::string& ResourcesManager::getResPath( const std::string& aResID ) con
 	{
 		return "";
 	}
+}
+std::string ResourcesManager::getResStr( const std::string& resID )
+{
+	const auto& resPath = getResPath( resID );
+	return getFileUtils()->getStringFromFile( resPath );
+
 }

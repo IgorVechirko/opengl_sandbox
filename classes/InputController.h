@@ -1,7 +1,7 @@
 #ifndef InputController_H
 #define InputController_H
 
-#include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 
 _VESTART
@@ -22,14 +22,22 @@ class InputControllerListener
 };
 
 
-class InputController
+class InputController : public WorkingScopeProvider
 {
+	static bool _callbacksSetuped;
+
+	static std::vector<InputController*> _controllers;
+
 
 	InputControllerListener* _inputControllerListener;
 
 public:
 
-	InputController();
+	static void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers );
+	static void mouseMoved( GLFWwindow* window, double posX, double posY );
+	static void wheelScrolled( GLFWwindow* window, double xoffset, double yoffset );
+
+	InputController( WorkingScope* scope );
 	virtual ~InputController();
 
 	void init();

@@ -134,21 +134,6 @@ struct LightAttenuationCoefs
 #define DEF_WIN_SIZE Size( 1024, 768 )
 #define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );\
 							   printf( "\n" );
-#define AUTORELEASE_CREATE_FUNC(__TYPE__)\
-static __TYPE__* create()\
-{\
-__TYPE__* ret = new __TYPE__();\
-if ( ret && ret->init() )\
-{\
-	ret->autorelease();\
-}\
-else\
-{\
-delete ret;\
-ret = nullptr;\
-}\
-return ret;\
-}\
 
 _VEEND
 

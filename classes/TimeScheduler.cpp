@@ -2,7 +2,8 @@
 
 _USEVE
 
-TimeScheduler::TimeScheduler()
+TimeScheduler::TimeScheduler( WorkingScope* scope )
+	: WorkingScopeProvider( scope )
 {
 }
 TimeScheduler::~TimeScheduler()

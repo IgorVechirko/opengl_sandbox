@@ -5,7 +5,7 @@
 
 _VESTART
 
-
+class AutoReleasePool;
 class Texture2D : public Ref
 {
 	int _width;
@@ -22,7 +22,7 @@ class Texture2D : public Ref
 
 		virtual ~Texture2D();
 
-		static Texture2D* create( const std::string& aTextPath );
+		static Texture2D* create( AutoReleasePool* pool, const std::string& aTextPath );
 
 		GLuint getTextureID();
 

@@ -4,7 +4,8 @@
 
 _USEVE
 
-AutoReleasePool::AutoReleasePool()
+AutoReleasePool::AutoReleasePool( WorkingScope* scope )
+	: WorkingScopeProvider( scope )
 {
 }
 AutoReleasePool::~AutoReleasePool()

@@ -14,13 +14,13 @@ Texture2D::~Texture2D()
 	glDeleteTextures( 1, &_textureID );
 	_textureID = 0;
 }
-Texture2D* Texture2D::create(const std::string& aTextPath)
+Texture2D* Texture2D::create(AutoReleasePool* pool, const std::string& aTextPath)
 {
 	Texture2D* ret = new Texture2D();
 
 	if ( ret && ret->init( aTextPath ) )
 	{
-		ret->autorelease();
+		ret->autorelease(pool);
 		return ret;
 	}
 	else

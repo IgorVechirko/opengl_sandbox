@@ -1,6 +1,7 @@
 #include "Node.h"
 
-#include "Director.h"
+#include "TimeScheduler.h"
+
 
 _USEVE
 
@@ -53,6 +54,12 @@ const glm::mat4& Node::getTransform()
 	}
 
 	return _transform;
+}
+bool Node::init(WorkingScope* scope)
+{
+	setScope( scope );
+	autorelease(getReleasePool());
+	return onInit();
 }
 void Node::visit( GLRender* render, const Mat4& parentTransform )
 {
@@ -176,11 +183,11 @@ void Node::removeChild( Node* child )
 }
 void Node::scheduleUpdate()
 {
-	SCHEDULER->addUpdateFunc( std::bind(&Node::update, this, std::placeholders::_1  ), this );
+	getTimeScheduler()->addUpdateFunc( std::bind(&Node::update, this, std::placeholders::_1  ), this );
 }
 void Node::unscheduleUpdate()
 {
-	SCHEDULER->delUpdateFunc( this );
+	getTimeScheduler()->delUpdateFunc( this );
 }
 const std::vector<Node*>& Node::getChildren()
 {
@@ -199,8 +206,4 @@ Node* Node::getChild( const std::string& childName )
 	}
 
 	return nullptr;
-}
-template<typename T> T Node::getChild( const std::string& childName )
-{
-	return dynamic_cast<T>( getChild( childName ) );
 }

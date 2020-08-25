@@ -16,7 +16,7 @@ protected:
 
 	AxisesOrigin();
 
-	virtual bool init() override;
+	virtual bool onInit() override;
 
 
 public:

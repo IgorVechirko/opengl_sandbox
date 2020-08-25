@@ -2,12 +2,12 @@
 #define AutoReleasePool_H
 
 
-#include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
 class Ref;
-class AutoReleasePool
+class AutoReleasePool : public WorkingScopeProvider
 {
 
 	std::vector<Ref*> _refs;
@@ -15,7 +15,7 @@ class AutoReleasePool
 
 public:
 
-	AutoReleasePool();
+	AutoReleasePool( WorkingScope* scope );
 	virtual ~AutoReleasePool();
 
 	void releaseRef( Ref* ref );

@@ -18,9 +18,9 @@ Scene::Scene()
 Scene::~Scene()
 {
 }
-bool Scene::init()
+bool Scene::onInit()
 {
-	setCamera( Camera::create() );
+	setCamera( Camera::create(getScope()) );
 
 	return true;
 }

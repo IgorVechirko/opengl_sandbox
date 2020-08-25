@@ -29,7 +29,7 @@ protected:
 
 	Scene();
 
-	virtual bool init() override;
+	virtual bool onInit() override;
 
 public:
 

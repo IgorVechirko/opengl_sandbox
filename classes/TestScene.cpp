@@ -2,7 +2,7 @@
 
 #include "Sprite.h"
 #include "Cube.h"
-#include "Director.h"
+
 #include "PointLightSource.h"
 #include "DirectLightSource.h"
 #include "ColorCube.h"
@@ -12,6 +12,8 @@
 #include "Flashlight.h"
 #include "Model.h"
 #include "ShaderProgram.h"
+#include "ResourcesManager.h"
+#include "FileUtils.h"
 
 _USEVE
 
@@ -23,21 +25,21 @@ TestScene::TestScene()
 TestScene::~TestScene()
 {
 }
-bool TestScene::init()
+bool TestScene::onInit()
 {
-	Parent::init();
+	Parent::onInit();
 
 	if( true )
 	{
-		auto origin = AxisesOrigin::create();
+		auto origin = AxisesOrigin::create(getScope());
 		addChild( origin );
 	}
 
 	if ( true )
 	{
-		auto model = Model::create();
-		model->loadModel( RES_PATH( "GUN" ) );
-		model->setShaderProgram( ShaderProgram::create( RES_PATH( "MODEL_VERTEX" ), RES_PATH( "MODEL_FRAGMENT" ) ) );
+		auto model = Model::create(getScope());
+		model->loadModel( getResMng()->getResPath( "GUN" ) );
+		model->setShaderProgram( ShaderProgram::create( getReleasePool(), getResMng()->getResStr( "MODEL_VERTEX" ), getResMng()->getResStr( "MODEL_FRAGMENT" ) ) );
 		addChild( model );
 	}
 
@@ -55,7 +57,7 @@ bool TestScene::init()
 			{
 				for( int z = 0; z < 3; z++ )
 				{
-					auto cube = Cube::create(	RES_PATH( "MOUNTAIN" ) );
+					auto cube = Cube::create( getScope(), getResMng()->getResPath( "MOUNTAIN" ) );
 					cube->setMaterial( emerald );
 					cube->setPosition( Vec3( 1400.0f*i, 1400.0f*j, -1400.0f*z ) );
 					cube->setRotate( Vec3( 10.0f*i, 10.0f*j, 10.0f*z ) );
@@ -69,7 +71,7 @@ bool TestScene::init()
 
 	if( false )
 	{
-		auto cube = Cube::create(	RES_PATH( "MOUNTAIN" ) );
+		auto cube = Cube::create( getScope(), getResMng()->getResPath( "MOUNTAIN" ) );
 		cube->setMaterial( emerald );
 		cube->setPosition( Vec3( 0.0f, 0.0f, -500.0f ) );
 		cube->setOriginShift( Vec3( -200.0f ) );
@@ -154,8 +156,9 @@ bool TestScene::init()
 		
 		addFlashlight( light );
 	}
-
-	CameraMovementController::init();
+	
+	_cameraMovementController.setScope( getScope() );
+	_cameraMovementController.initWithCamera( getCamera() );
 
 	scheduleUpdate();
 
@@ -174,8 +177,4 @@ void TestScene::update( float deltaTime )
 
 		*/_cube->setRotate( _cube->getRotate() + Vec3( 20.0f, 0.0f, 20.0f ) * deltaTime );
 	}
-}
-Camera* TestScene::getCamera()
-{
-	return Parent::getCamera();
 }

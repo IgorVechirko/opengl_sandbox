@@ -1,19 +1,19 @@
 #ifndef ResourcesManager_H
 #define ResourcesManager_H
 
-#include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
 
-class ResourcesManager
+class ResourcesManager : public WorkingScopeProvider
 {
 
 	std::map<std::string,std::string> _resIDs;
 
 public:
 
-	ResourcesManager();
+	ResourcesManager( WorkingScope* scope );
 	virtual ~ResourcesManager();
 
 
@@ -22,6 +22,8 @@ public:
 	void parseResConfig( const std::string& aConfigPath );
 
 	const std::string& getResPath( const std::string& aResID ) const;
+
+	std::string getResStr( const std::string& resID );
 
 };
 

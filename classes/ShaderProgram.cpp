@@ -1,6 +1,6 @@
 #include "ShaderProgram.h"
 
-#include "Director.h"
+
 
 _USEVE
 
@@ -12,13 +12,13 @@ ShaderProgram::~ShaderProgram()
 {
 	glDeleteProgram(_programID);
 }
-ShaderProgram* ShaderProgram::create(const std::string& verPath, const std::string& fragPath)
+ShaderProgram* ShaderProgram::create(AutoReleasePool* pool, const std::string& verSrc, const std::string& fragSrc)
 {
 	ShaderProgram* ret = new ShaderProgram();
 
-	if ( ret && ret->init( verPath, fragPath ) )
+	if ( ret && ret->init( verSrc, fragSrc ) )
 	{
-		ret->autorelease();
+		ret->autorelease(pool);
 		return ret;
 	}
 	else
@@ -27,12 +27,13 @@ ShaderProgram* ShaderProgram::create(const std::string& verPath, const std::stri
 		return nullptr;
 	}
 }
-bool ShaderProgram::init( const std::string& verPath, const std::string& fragPath )
+bool ShaderProgram::init( const std::string& verSrc, const std::string& fragSrc )
 {
-	std::string vertexSource = FILE_UTILS->getStringFromFile(verPath);
-	std::string fragmentSource = FILE_UTILS->getStringFromFile(fragPath);
-	const char* vertexChar = vertexSource.c_str();
-	const char* fragmentChar = fragmentSource.c_str();
+	if ( verSrc.empty() || fragSrc.empty() )
+		return false;
+
+	const char* vertexChar = verSrc.c_str();
+	const char* fragmentChar = fragSrc.c_str();
 
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexChar, NULL);

@@ -2,9 +2,11 @@
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
-#include "Director.h"
+#include "Scene.h"
+#include "WorkingScope.h"
 #include "Camera.h"
 
+#include "ResourcesManager.h"
 
 #include "PointLightSource.h"
 #include "DirectLightSource.h"
@@ -23,13 +25,13 @@ Cube::Cube()
 Cube::~Cube()
 {
 }
-Cube* Cube::create( const std::string& filePath )
+Cube* Cube::create( WorkingScope* scope, const std::string& filePath )
 {
 	Cube* ret = new Cube();
 
-	if ( ret && ret->init( filePath ) )
+	if ( ret && ret->Node::init( scope ) && ret->init( filePath ) )
 	{
-		ret->autorelease();
+		ret->autorelease(scope->getReleasePool());
 		return ret;
 	}
 	else
@@ -43,7 +45,7 @@ void Cube::updateVertices( const Size& size )
 }
 bool Cube::init( const std::string& filePath )
 {	
-	auto texture = Texture2D::create( filePath );
+	auto texture = Texture2D::create( getReleasePool(), filePath );
 
 	if ( texture )
 	{
@@ -122,7 +124,7 @@ void Cube::setTexture( Texture2D* texture )
 		_indices = { 0, 1, 2,
 					 1, 2, 3 };
 
-		setShaderProgram( ShaderProgram::create( RES_PATH("CUBE_VERTEX"), RES_PATH("CUBE_FRAGMENT") ) );
+		setShaderProgram( ShaderProgram::create( getReleasePool(), getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
 
 		glGenVertexArrays(1, &_vao);
 		glGenBuffers(1, &_vbo);
@@ -170,11 +172,11 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
 		GLuint cameraPosLoc = glGetUniformLocation( _shader->getProgramID(), "cameraPos" );
 
-		auto& cameraPos = CAMERA->getPosition();
+		auto& cameraPos = getScope()->getScene()->getCamera()->getPosition();
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getView() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getProjection() ) );
 		glProgramUniform3f( _shader->getProgramID(), cameraPosLoc, cameraPos.x, cameraPos.y, cameraPos.z );
 
 
@@ -189,9 +191,9 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		glProgramUniform1f( _shader->getProgramID(), materialShininessLoc, _material.shininess );
 
 		
-		if ( CUR_SCENE && CUR_SCENE->getDirectionLight() )
+		if ( getScope()->getScene() && getScope()->getScene()->getDirectionLight() )
 		{
-			auto lightSource = CUR_SCENE->getDirectionLight();
+			auto lightSource = getScope()->getScene()->getDirectionLight();
 			LightProperties lightProperties = lightSource->getLightProperties();
 			glm::vec3 lightDirection = lightSource->getDirection();
 
@@ -207,9 +209,9 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		}
 		
 
-		if ( CUR_SCENE )
+		if ( getScope()->getScene() )
 		{
-			const auto& pointLights = CUR_SCENE->getPointLights();
+			const auto& pointLights = getScope()->getScene()->getPointLights();
 
 			GLuint ponitLighstCount = glGetUniformLocation( _shader->getProgramID(), "pointLightsCount" );
 			glProgramUniform1i( _shader->getProgramID(), ponitLighstCount, pointLights.size() );
@@ -237,7 +239,7 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 				glProgramUniform3f( _shader->getProgramID(), specularLoc, light->getLightProperties().specular.r, light->getLightProperties().specular.g, light->getLightProperties().specular.b );
 			}
 
-			const auto& flashlights = CUR_SCENE->getFlashLights();
+			const auto& flashlights = getScope()->getScene()->getFlashLights();
 
 			GLuint flashlightsCount = glGetUniformLocation( _shader->getProgramID(), "flashlightsCount" );
 			glProgramUniform1i( _shader->getProgramID(), flashlightsCount, flashlights.size() );

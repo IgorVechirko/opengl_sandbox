@@ -1,13 +1,13 @@
 #ifndef TimeScheduler_H
 #define TimeScheduler_H
 
-#include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
 typedef std::function<void(float)> updateFunc;
 
-class TimeScheduler
+class TimeScheduler : public WorkingScopeProvider
 {
 
 	std::map<void*,updateFunc> _updateFunctions;
@@ -15,7 +15,7 @@ class TimeScheduler
 
 public:
 
-	TimeScheduler();
+	TimeScheduler( WorkingScope* scope );
 	virtual ~TimeScheduler();
 
 	void addUpdateFunc( updateFunc func, void* target );

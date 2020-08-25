@@ -1,47 +1,66 @@
 #include "InputController.h"
 
-#include "Director.h"
+#include "GLView.h"
 
 _USEVE
 
-void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers )
+bool InputController::_callbacksSetuped = false;
+std::vector<InputController*> InputController::_controllers;
+
+void InputController::keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers )
 {
-	INPUT->onKeyPressed( window, keyCode, scancode, action, modifiers );
+	for( auto controller : _controllers )
+		controller->onKeyPressed( window, keyCode, scancode, action, modifiers );
 }
 
-void mouseMoved( GLFWwindow* window, double posX, double posY )
-{
-	INPUT->onMouseMoved( window, posX, posY );
+void InputController::mouseMoved( GLFWwindow* window, double posX, double posY )
+{	
+	for( auto controller : _controllers )
+		controller->onMouseMoved( window, posX, posY );
 }
 
-void wheelScrolled( GLFWwindow* window, double xoffset, double yoffset )
+void InputController::wheelScrolled( GLFWwindow* window, double xoffset, double yoffset )
 {
-	INPUT->onWheelScrolled( window, xoffset, yoffset );
+	for( auto controller : _controllers )
+		controller->onWheelScrolled( window, xoffset, yoffset );
 }
 
-InputController::InputController()
-	: _inputControllerListener( nullptr )
+InputController::InputController( WorkingScope* scope )
+	: WorkingScopeProvider( scope )
+	, _inputControllerListener( nullptr )
 {
 }
 InputController::~InputController()
 {
+	auto findIt = std::find( _controllers.begin(), _controllers.end(), this );
+	if ( findIt != _controllers.end() )
+	{
+		_controllers.erase( findIt );
+	}
 }
 
 void InputController::init()
 {
-	glfwSetKeyCallback( VIEW->getWindow(), &keyPressed );
+	if ( !_callbacksSetuped )
+	{
+		glfwSetKeyCallback( getGLView()->getWindow(), &InputController::keyPressed );
 
-	glfwSetCursorPosCallback( VIEW->getWindow(), &mouseMoved );
+		glfwSetCursorPosCallback( getGLView()->getWindow(), &InputController::mouseMoved );
 
-	glfwSetScrollCallback( VIEW->getWindow(), &wheelScrolled );
+		glfwSetScrollCallback( getGLView()->getWindow(), &InputController::wheelScrolled );
 
-	glfwSetInputMode( VIEW->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED );
+		_callbacksSetuped = true;
+	}
+
+	_controllers.push_back( this );
+
+	glfwSetInputMode( getGLView()->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED );
 
 	bool stop = true;
 }
 void InputController::onKeyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers )
 {
-	if ( _inputControllerListener )
+	if ( _inputControllerListener && getGLView()->getWindow() == window )
 	{
 		switch (action)
 		{
@@ -61,14 +80,14 @@ void InputController::onKeyPressed( GLFWwindow* window, int keyCode, int scancod
 }
 void InputController::onMouseMoved( GLFWwindow* window, double posX, double posY )
 {
-	if ( _inputControllerListener )
+	if ( _inputControllerListener && getGLView()->getWindow() == window )
 	{
 		_inputControllerListener->onMouseMoved( posX, posY );
 	}
 }
 void InputController::onWheelScrolled( GLFWwindow* window, double xoffset, double yoffset )
 {
-	if( _inputControllerListener )
+	if( _inputControllerListener && getGLView()->getWindow() == window )
 	{
 		_inputControllerListener->onWheelScrolled( xoffset, yoffset );
 	}

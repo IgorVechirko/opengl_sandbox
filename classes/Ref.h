@@ -5,12 +5,14 @@
 
 _VESTART
 
-
+class AutoReleasePool;
 class Ref
 {
 
 	unsigned int _refCount;
 	bool _autorelesed;
+
+	AutoReleasePool* _pool;
 
 public:
 
@@ -21,7 +23,7 @@ public:
 	void retain();
 	unsigned int getRefCount();
 
-	void autorelease();
+	void autorelease( AutoReleasePool* pool );
 };
 
 _VEEND

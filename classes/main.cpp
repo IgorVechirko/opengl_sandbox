@@ -1,10 +1,11 @@
 #ifdef BUILD
 
-#include "Application.h"
+#include "WorkingScope.h"
 
 int main()
 {
-	VEngine::Application::getInstance()->run();
+	VEngine::WorkingScope scope;
+	scope.startWork();
 
     return 0;
 }

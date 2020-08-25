@@ -1,7 +1,7 @@
 #include "PointLightSource.h"
 
 #include "ShaderProgram.h"
-#include "Director.h"
+
 
 #include "ColorCube.h"
 
@@ -15,7 +15,7 @@ PointLightSource::PointLightSource()
 PointLightSource::~PointLightSource()
 {
 }
-bool PointLightSource::init()
+bool PointLightSource::onInit()
 {
 	_cube = ColorCube::create();
 	_cube->setCubeSize( 50.0f );

@@ -40,7 +40,7 @@ public:
 
 	virtual ~Cube();
 
-	static Cube* create( const std::string& filePath );
+	static Cube* create( WorkingScope* scope, const std::string& filePath );
 
 	void setShaderProgram( ShaderProgram* program );
 	void setTexture( Texture2D* texture );

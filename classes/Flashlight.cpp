@@ -13,7 +13,7 @@ Flashlight::Flashlight()
 Flashlight::~Flashlight()
 {
 }
-bool Flashlight::init()
+bool Flashlight::onInit()
 {
 	_cube = ColorCube::create();
 	_cube->setCubeSize( 50.0f );

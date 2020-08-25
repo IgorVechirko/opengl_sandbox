@@ -1,12 +1,13 @@
 #include "GLView.h"
 
-#include "Director.h"
+
 
 _USEVE
 
 
-GLView::GLView()
-	: _window( nullptr )
+GLView::GLView( WorkingScope* scope )
+	: WorkingScopeProvider( scope )
+	, _window( nullptr )
 	, _windowWidth( 0 )
 	, _windowHeight( 0 )
 {

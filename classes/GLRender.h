@@ -1,18 +1,17 @@
 #ifndef GLRender_H
 #define GLRender_H
 
-#include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
 class Scene;
-class DirectLightSource;
-class GLRender
+class GLRender : public WorkingScopeProvider
 {
 
 public:
 
-	GLRender();
+	GLRender( WorkingScope* scope );
 	virtual ~GLRender();
 
 	void init();

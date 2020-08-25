@@ -21,7 +21,7 @@ class PointLightSource : public Node
 
 		PointLightSource();
 
-		virtual bool init() override;
+		virtual bool onInit() override;
 
 
 	public:

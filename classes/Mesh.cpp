@@ -1,8 +1,11 @@
 #include "Mesh.h"
 #include "ShaderProgram.h"
-#include "Director.h"
+
 #include "Camera.h"
 #include "DirectLightSource.h"
+#include "WorkingScope.h"
+#include "Scene.h"
+
 
 _USEVE
 
@@ -12,10 +15,11 @@ Mesh::Mesh()
 	, _ebo( 0 )
 {
 }
-Mesh::Mesh( const std::vector<PosNormaTextCordVertex>& vetrices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures )
+Mesh::Mesh( WorkingScope* scope, const std::vector<PosNormaTextCordVertex>& vetrices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures )
 	: _vao( 0 )
 	, _vbo( 0 )
 	, _ebo( 0 )
+	, WorkingScopeProvider( scope )
 {
 	_vertices = vetrices;
 	_indices = indices;
@@ -58,22 +62,22 @@ void Mesh::draw( ShaderProgram* shader, const Mat4& transform )
 	{
 		shader->useProgram();
 
-		if ( CAMERA )
+		if ( getScope()->getScene()->getCamera() )
 		{
 			GLuint transModelLoc = glGetUniformLocation( shader->getProgramID(), "model" );
 			GLuint transViewLoc = glGetUniformLocation ( shader->getProgramID(), "view" );
 			GLuint transProjLoc = glGetUniformLocation( shader->getProgramID(), "projection" );
 
-			auto& cameraPos = CAMERA->getPosition();
+			auto& cameraPos = getScope()->getScene()->getCamera()->getPosition();
 
 			glProgramUniformMatrix4fv( shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
-			glProgramUniformMatrix4fv( shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getView() ) );
-			glProgramUniformMatrix4fv( shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( CAMERA->getProjection() ) );
+			glProgramUniformMatrix4fv( shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getView() ) );
+			glProgramUniformMatrix4fv( shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getProjection() ) );
 		}
 
-		if ( CUR_SCENE && CUR_SCENE->getDirectionLight() )
+		if ( getScope()->getScene() && getScope()->getScene()->getDirectionLight() )
 		{
-			auto lightSource = CUR_SCENE->getDirectionLight();
+			auto lightSource = getScope()->getScene()->getDirectionLight();
 			LightProperties lightProperties = lightSource->getLightProperties();
 			glm::vec3 lightDirection = lightSource->getDirection();
 

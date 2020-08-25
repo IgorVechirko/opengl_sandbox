@@ -1,7 +1,7 @@
 #include "WorkingScopeProvider.h"
 
 #include "WorkingScope.h"
-
+#include <assert.h>
 _USEVE
 
 WorkingScopeProvider::WorkingScopeProvider()
@@ -23,54 +23,41 @@ void WorkingScopeProvider::setScope( WorkingScope* scope )
 }
 WorkingScope* WorkingScopeProvider::getScope()
 {
+	_ASSERT( _providedScope != nullptr );
 	return _providedScope;
 }
-GLView* WorkingScopeProvider::getView()
+GLView* WorkingScopeProvider::getGLView()
 {
-	if ( _providedScope )
-		return _providedScope->getView();
-	else 
-		return nullptr;
+	_ASSERT( _providedScope != nullptr );
+	return _providedScope->getGLView();
 }
 GLRender* WorkingScopeProvider::getRender()
 {
-	if ( _providedScope )
-		return _providedScope->getRender();
-	else 
-		return nullptr;
+	_ASSERT( _providedScope != nullptr );
+	return _providedScope->getRender();
 }
 FileUtils* WorkingScopeProvider::getFileUtils()
 {
-	if ( _providedScope )
-		return _providedScope->getFileUtils();
-	else 
-		return nullptr;
+	_ASSERT( _providedScope != nullptr );
+	return _providedScope->getFileUtils();
 }
 ResourcesManager* WorkingScopeProvider::getResMng()
 {
-	if ( _providedScope )
-		return _providedScope->getResMng();
-	else 
-		return nullptr;
+	_ASSERT( _providedScope != nullptr );
+	return _providedScope->getResMng();
 }
 AutoReleasePool* WorkingScopeProvider::getReleasePool()
 {
-	if ( _providedScope )
-		return _providedScope->getReleasePool();
-	else 
-		return nullptr;
+	_ASSERT( _providedScope != nullptr );
+	return _providedScope->getReleasePool();
 }
 TimeScheduler* WorkingScopeProvider::getTimeScheduler()
 {
-	if ( _providedScope )
-		return _providedScope->getTimeScheduler();
-	else 
-		return nullptr;
+	_ASSERT( _providedScope != nullptr );
+	return _providedScope->getTimeScheduler();
 }
 InputController* WorkingScopeProvider::getInputController()
 {
-	if ( _providedScope )
-		return _providedScope->getInputController();
-	else 
-		return nullptr;
+	_ASSERT( _providedScope != nullptr );
+	return _providedScope->getInputController();
 }

@@ -1,6 +1,7 @@
 #ifndef WorkingScope_H
 #define WorkingScope_H
 
+
 #include "VECommon.h"
 
 #include <chrono>
@@ -16,6 +17,8 @@ class AutoReleasePool;
 class TimeScheduler;
 class InputController;
 class Scene;
+
+
 class WorkingScope
 {
 
@@ -48,7 +51,7 @@ public:
 	WorkingScope();
 	virtual ~WorkingScope();
 
-	GLView* getView();
+	GLView* getGLView();
 	GLRender* getRender();
 
 	FileUtils* getFileUtils();
@@ -65,6 +68,29 @@ public:
 
 	void startWork();
 
+	template< typename T, typename InitializerType, typename... InitArgsTypes > 
+	T* createScopedWithInitializer( InitializerType initializer, const InitArgsTypes&... initArgs )
+	{
+		T* result = new(std::nothrow) T();
+
+		if ( result )
+		{
+			result->setScope( this );
+
+			if ( !(result->*initializer)( initArgs... ) )
+			{
+				delete result;
+				result = nullptr;
+			}
+		}
+		else
+		{
+			delete result;
+			result = nullptr;
+		}
+
+		return result;
+	}
 };
 
 

@@ -2,14 +2,31 @@
 #define Node_H
 
 #include "Ref.h"
+#include "WorkingScopeProvider.h"
+#include "WorkingScope.h"
 
-#define CREATE_FUNC(__TYPE__) static __TYPE__* create()\
+#define CREATE_FUNC(__TYPE__)\
+static __TYPE__* create()\
 {\
 __TYPE__* ret = new __TYPE__();\
 \
-if ( ret && ret->init() )\
+if ( ret && ret->Node::init(nullptr) )\
 {\
-ret->autorelease();\
+}\
+else\
+{\
+delete ret;\
+ret = nullptr;\
+}\
+return ret;\
+}\
+static __TYPE__* create(WorkingScope* scope)\
+{\
+__TYPE__* ret = new __TYPE__();\
+\
+if ( ret && ret->Node::init(scope) )\
+{\
+ret->autorelease(scope->getReleasePool());\
 }\
 else\
 {\
@@ -22,9 +39,10 @@ return ret;\
 
 _VESTART
 
-
 class GLRender;
-class Node : public Ref
+class Node
+	: public Ref
+	, public WorkingScopeProvider
 {
 
 	glm::mat4 _transform;
@@ -47,13 +65,10 @@ protected:
 
 protected:
 
-
-	Node();
-
 	const glm::mat4& getTransform();
 
 
-	virtual bool init(){return true;};
+	virtual bool onInit(){ return true;};
 
 	virtual void update( float delatTime ){};
 
@@ -64,9 +79,12 @@ protected:
 
 public:
 
+	Node();
 	virtual ~Node();
 
 	CREATE_FUNC(Node);
+
+	bool init(WorkingScope* scope);
 
 	virtual void setPosition( const Vec3& pos );
 	const Vec3& getPosition() const;
@@ -94,7 +112,12 @@ public:
 
 	const std::vector<Node*>& getChildren();
 	Node* getChild( const std::string& childName );
-	template<typename T> T getChild( const std::string& childName );
+	
+	template<typename T> 
+	T getChild( const std::string& childName )
+	{
+		return dynamic_cast<T>( getChild( childName ) );
+	}
 };
 
 _VEEND

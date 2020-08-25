@@ -1,17 +1,17 @@
 #ifndef FileUtils_H
 #define FileUtils_H
 
-#include "VECommon.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 
-class FileUtils
+class FileUtils : public WorkingScopeProvider
 {
 
 
 public:
 
-	FileUtils();
+	FileUtils( WorkingScope* scope );
 	virtual ~FileUtils();
 
 	void init();
