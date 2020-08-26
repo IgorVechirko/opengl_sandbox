@@ -169,9 +169,23 @@ endif()
 
 set( unit_tests_main ${SANDBOX_DIR}/unit_tests_src/unit_tests_main.cpp )
 
+set( RefTest ${SANDBOX_DIR}/unit_tests_src/RefTest.h ${SANDBOX_DIR}/unit_tests_src/RefTest.cpp )
+
+set( TimeSchedulerTest ${SANDBOX_DIR}/unit_tests_src/TimeSchedulerTest.h ${SANDBOX_DIR}/unit_tests_src/TimeSchedulerTest.cpp )
+
 source_group( unit_main FILES ${unit_tests_main} )
 
-set( UNIT_TESTS_SRC ${unit_tests_main} )
+source_group( unit_tests\\ref FILES ${RefTest} )
+
+source_group( unit_tests\\scheduler FILES ${TimeSchedulerTest} )
+
+
+
+
+set( UNIT_TESTS_SRC 
+					${unit_tests_main}
+					${RefTest}
+					${TimeSchedulerTest} )
 
 #setup unit tests project
 add_executable( unit_tests ${SANDBOX_SRC} ${UNIT_TESTS_SRC} )
@@ -179,6 +193,11 @@ add_executable( unit_tests ${SANDBOX_SRC} ${UNIT_TESTS_SRC} )
 target_link_libraries( unit_tests glew_s glfw SOIL glm assimp boost.test )
 
 target_compile_definitions( unit_tests PRIVATE UNIT_TESTS )
+
+include_directories( ${RAPIDJSON_INCLUDE_DIR}
+					 ${GLEW_INCLUDE_DIR}
+					 ${SANDBOX_DIR}/classes
+)
 
 if ( MSVC )
 	set_target_properties(

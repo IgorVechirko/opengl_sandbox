@@ -10,6 +10,8 @@ typedef std::function<void(float)> updateFunc;
 class TimeScheduler : public WorkingScopeProvider
 {
 
+	TEST_FRIEND
+
 	std::map<void*,updateFunc> _updateFunctions;
 
 

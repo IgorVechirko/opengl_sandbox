@@ -16,6 +16,8 @@ class InputController;
 class Scene;
 class WorkingScopeProvider
 {
+	TEST_FRIEND
+
 	WorkingScope* _providedScope;
 
 public:

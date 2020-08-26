@@ -36,6 +36,11 @@
 
 _VESTART
 
+#ifndef TEST_FRIEND
+	#define TEST_FRIEND
+#endif
+
+
 typedef glm::vec2 Size;
 typedef glm::vec3 Size3;
 typedef glm::vec2 Vec;

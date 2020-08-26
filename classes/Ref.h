@@ -8,6 +8,7 @@ _VESTART
 class AutoReleasePool;
 class Ref
 {
+	TEST_FRIEND
 
 	unsigned int _refCount;
 	bool _autorelesed;
