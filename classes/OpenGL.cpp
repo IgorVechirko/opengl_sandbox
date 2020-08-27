@@ -16,6 +16,7 @@ OpenGL::OpenGL()
 }
 OpenGL::~OpenGL()
 {
+	glfwTerminate();
 }
 OpenGL* OpenGL::getInstance()
 {
@@ -93,4 +94,8 @@ void OpenGL::processGlewError( const std::string& desc, GLenum errorCode )
 	{
 		LOG( "%s. Code %d.", desc.c_str(), errorCode );
 	}
+}
+void OpenGL::poolEvents()
+{
+	glfwPollEvents();
 }

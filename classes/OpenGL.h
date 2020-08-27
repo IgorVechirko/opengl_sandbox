@@ -27,6 +27,8 @@ public:
 	void processLasGlfwtError( const std::string& desc );
 	void processGlewError( const std::string& desc, GLenum errorCode );
 
+	void poolEvents();
+
 
 };
 

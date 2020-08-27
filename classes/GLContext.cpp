@@ -146,6 +146,10 @@ void GLContext::setWindowShouldClose()
 {
 	glfwSetWindowShouldClose( _window, 1 );
 }
+void GLContext::poolEvents()
+{
+	OpenGL::getInstance()->poolEvents();
+}
 GLRender* GLContext::getRender()
 {
 	return &_render;

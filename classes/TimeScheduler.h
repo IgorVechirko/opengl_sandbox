@@ -3,14 +3,17 @@
 
 #include "WorkingScopeProvider.h"
 
+#include <chrono>
+
 _VESTART
 
 typedef std::function<void(float)> updateFunc;
 
 class TimeScheduler : public WorkingScopeProvider
 {
-
 	TEST_FRIEND
+
+	std::chrono::time_point<std::chrono::steady_clock > _lastTickTime;
 
 	std::map<void*,updateFunc> _updateFunctions;
 
@@ -23,7 +26,8 @@ public:
 	void addUpdateFunc( updateFunc func, void* target );
 	void delUpdateFunc( void* target );
 
-	void onMainTick( float deltaTime );
+	void doMainTick();
+	void doWaitFrameEnd();
 
 };
 

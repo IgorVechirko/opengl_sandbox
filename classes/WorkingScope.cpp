@@ -9,8 +9,7 @@
 #include "Scene.h"
 #include "TestScene.h"
 #include "GLContext.h"
-
-#include <thread>
+#include "OpenGL.h"
 
 _USEVE
 
@@ -40,20 +39,6 @@ WorkingScope::~WorkingScope()
 	delete _releasePool;
 
 	delete _timeScheduler;
-}
-float WorkingScope::calcDeltaTime()
-{
-	auto time = std::chrono::steady_clock::now();
-
-	float result = std::chrono::duration_cast<std::chrono::milliseconds>( time - _lastUpdateTime ).count() / 1000.0f;
-
-	_lastUpdateTime = time;
-
-	return result;
-}
-void WorkingScope::loopWait()
-{
-	std::this_thread::sleep_for( std::chrono::milliseconds( (long)( (1.0f/60.0f) * 1000.0f ) ) );
 }
 GLContext* WorkingScope::getGLContext()
 {
@@ -87,14 +72,14 @@ void WorkingScope::startWork()
 
 	while( !_glContext->windowShouldClose() )
 	{
-		_timeScheduler->onMainTick( calcDeltaTime() );
+		_timeScheduler->doMainTick();
 
 		_releasePool->checkPool();
 
 		_glContext->drawScene();
 
-		loopWait();
+		_timeScheduler->doWaitFrameEnd();
 
-		glfwPollEvents();
+		_glContext->poolEvents();
 	}
 }

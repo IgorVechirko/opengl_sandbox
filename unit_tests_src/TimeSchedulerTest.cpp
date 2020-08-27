@@ -185,7 +185,7 @@ namespace UnitTests
 		}
 	}
 
-	void TimeSchedulerTest::onMainTickMethodWork()
+	void TimeSchedulerTest::doMainTickMethodWork()
 	{
 		{
 			VEngine::TimeScheduler scheduler(nullptr);
@@ -206,38 +206,10 @@ namespace UnitTests
 
 			for( int i = 0; i < ticksAmount; i++ )
 			{
-				scheduler.onMainTick( 0.1f );
+				scheduler.doMainTick();
 			}
 
 			BOOST_TEST( testObj._counter == ticksAmount, "wrong ticks propagation" );
-		}
-
-		{
-			VEngine::TimeScheduler scheduler(nullptr);
-
-			struct SchedulerTest
-			{
-				float _tickTimeSum{0.0f};
-
-				void update( float deltaTime )
-				{
-					_tickTimeSum += deltaTime;
-				};
-			} testObj;
-
-			scheduler.addUpdateFunc( std::bind(&SchedulerTest::update, &testObj, std::placeholders::_1), &testObj );
-
-			int ticksAmount = 100;
-			float singleTickTime = 0.1f;
-			float ticksTimeSum = 0.0f;
-
-			for( int i = 0; i < ticksAmount; i++ )
-			{
-				scheduler.onMainTick( singleTickTime );
-				ticksTimeSum += singleTickTime;
-			}
-
-			BOOST_TEST( abs(testObj._tickTimeSum - ticksTimeSum ) <= std::numeric_limits<float>::epsilon(), "wrong ticks deltaTime propagation" );
 		}
 	}
 }
@@ -259,9 +231,9 @@ BOOST_AUTO_TEST_CASE( delUpdateFuncMethodWork )
 	UnitTests::TimeSchedulerTest::delUpdateFuncMethodWork();
 }
 
-BOOST_AUTO_TEST_CASE( onMainTickMethodWork )
+BOOST_AUTO_TEST_CASE( doMainTickMethodWork )
 {
-	UnitTests::TimeSchedulerTest::onMainTickMethodWork();
+	UnitTests::TimeSchedulerTest::doMainTickMethodWork();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -16,7 +16,7 @@ namespace UnitTests
 
 			static void delUpdateFuncMethodWork();
 
-			static void onMainTickMethodWork();
+			static void doMainTickMethodWork();
 			
 
 	};

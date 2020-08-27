@@ -47,6 +47,8 @@ public:
 	void setWindowShouldClose();
 	bool windowShouldClose();
 
+	void poolEvents();
+
 	GLRender* getRender();
 
 	void setScene( Scene* scene );
