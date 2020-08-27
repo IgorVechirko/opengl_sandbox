@@ -11,6 +11,7 @@ class FileUtils;
 class ResourcesManager;
 class AutoReleasePool;
 class TimeScheduler;
+class ScopeDelegate;
 class WorkingScope
 {
 	GLContext* _glContext;
@@ -22,9 +23,16 @@ class WorkingScope
 
 	TimeScheduler* _timeScheduler;
 
+	ScopeDelegate* _delegate;
+
 public:
 
 	WorkingScope();
+	WorkingScope( const WorkingScope& scope ) = delete;
+	WorkingScope( WorkingScope&& scope ) = delete;
+	const WorkingScope& operator= ( const WorkingScope& scope ) = delete;
+	const WorkingScope& operator= ( WorkingScope&& scope ) = delete;
+	
 	virtual ~WorkingScope();
 
 	GLContext* getGLContext();
@@ -36,7 +44,7 @@ public:
 
 	TimeScheduler* getTimeScheduler();
 
-	void startWork();
+	void startWithDelegate( ScopeDelegate* delegate );
 
 
 

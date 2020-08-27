@@ -1,15 +1,12 @@
 #include "WorkingScope.h"
 
 #include "WorkingScope.h"
-#include "GLRender.h"
 #include "FileUtils.h"
 #include "ResourcesManager.h"
 #include "AutoReleasePool.h"
 #include "TimeScheduler.h"
-#include "Scene.h"
-#include "TestScene.h"
 #include "GLContext.h"
-#include "OpenGL.h"
+#include "ScopeDelegate.h"
 
 _USEVE
 
@@ -19,6 +16,7 @@ WorkingScope::WorkingScope()
 	, _resMng( nullptr )
 	, _releasePool( nullptr )
 	, _timeScheduler( nullptr )
+	, _delegate( nullptr )
 {
 	_fileUtils = new FileUtils(this);
 	_resMng = new ResourcesManager(this);
@@ -65,10 +63,14 @@ TimeScheduler* WorkingScope::getTimeScheduler()
 	_ASSERT( _timeScheduler );
 	return _timeScheduler;
 }
-void WorkingScope::startWork()
+void WorkingScope::startWithDelegate( ScopeDelegate* delegate )
 {
+	_delegate = delegate ? delegate : createScoped<ScopeDelegate>();
+	_delegate->setScope( this );
+
 	_resMng->init();
-	_glContext->setScene( createNode<TestScene>() );
+
+	_glContext->setScene( _delegate->getStartScene() );
 
 	while( !_glContext->windowShouldClose() )
 	{

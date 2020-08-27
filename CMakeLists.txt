@@ -72,11 +72,15 @@ set( Sprite ${SANDBOX_DIR}/classes/Sprite.h ${SANDBOX_DIR}/classes/Sprite.cpp )
 set( TestScene ${SANDBOX_DIR}/classes/TestScene.h ${SANDBOX_DIR}/classes/TestScene.cpp )
 set( Main ${SANDBOX_DIR}/classes/main.cpp )
 
+set( TestScopeDelegat ${SANDBOX_DIR}/classes/TestScopeDelegat.h ${SANDBOX_DIR}/classes/TestScopeDelegat.cpp )
+
 set( WorkingScope 
 				  ${SANDBOX_DIR}/classes/WorkingScope.h
 				  ${SANDBOX_DIR}/classes/WorkingScope.cpp
 				  ${SANDBOX_DIR}/classes/WorkingScopeProvider.cpp
-				  ${SANDBOX_DIR}/classes/WorkingScopeProvider.h )
+				  ${SANDBOX_DIR}/classes/WorkingScopeProvider.h
+				  ${SANDBOX_DIR}/classes/ScopeDelegate.h
+)
 
 
 source_group( common FILES ${VECommon} )
@@ -123,7 +127,10 @@ source_group( nodes\\light FILES
 )
 source_group( nodes\\scene FILES ${Scene} )
 
-source_group( content FILES ${TestScene} )
+source_group( content FILES 
+							${TestScene}
+							${TestScopeDelegat}
+)
 
 source_group( main FILES ${Main} )
 
@@ -160,6 +167,7 @@ set( SANDBOX_SRC ${VECommon}
 				 ${Model}
 				 ${Sprite}
 				 ${TestScene} 
+				 ${TestScopeDelegat}
 				 ${Main}
 				 ${WorkingScope}
 )
