@@ -80,27 +80,29 @@ set( WorkingScope
 
 
 source_group( common FILES ${VECommon} )
+
 source_group( file_utils FILES ${FileUtils} 
 						 	   ${ResourcesManager} )
+
 source_group( scheduler FILES ${TimeScheduler} )
+
 source_group( auto_release FILES ${AutoReleasePool} 
 						   	     ${Ref} )
+
 source_group( input FILES ${InputListener} )
-source_group( light FILES ${DirectLightSource} 
-						  ${Flashlight} 
-						  ${PointLightSource} )
-source_group( render FILES ${GLRender} )
-source_group( gl FILES 
-						${GLContext}
-						${OpenGL} 
-						)
+
+source_group( gl FILES ${OpenGL} )
+source_group( gl\\context FILES ${GLContext} )
+source_group( gl\\render FILES ${GLRender} )
+
 source_group( textures FILES ${Texture2D} )
+
 source_group( shader FILES ${ShaderProgram} )
+
 source_group( camera FILES ${Camera} 
-					 	   ${CameraMovementController} )
-source_group( scene FILES ${Scene} )
-source_group( nodes\\base FILES ${Node} 
-						 	   ${NodeExtentions} )
+					 	   ${CameraMovementController} 
+)
+
 source_group( nodes FILES ${AxisesOrigin} 
 						  ${ColorCube} 
 						  ${Cube} 
@@ -110,9 +112,21 @@ source_group( nodes FILES ${AxisesOrigin}
 						  ${Model} 
 						  ${Sprite} 
 )
+source_group( nodes\\base FILES 
+								${Node} 
+								${NodeExtentions} 
+)
+source_group( nodes\\light FILES 
+						${DirectLightSource} 
+						${Flashlight} 
+						${PointLightSource} 
+)
+source_group( nodes\\scene FILES ${Scene} )
 
 source_group( content FILES ${TestScene} )
+
 source_group( main FILES ${Main} )
+
 source_group( working_scope FILES ${WorkingScope} )
 
 
