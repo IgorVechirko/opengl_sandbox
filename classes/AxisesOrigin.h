@@ -3,28 +3,27 @@
 
 #include "Node.h"
 
-
-_VESTART
-
-
-class AxisesOrigin : public Node
+namespace GLSandbox
 {
-	typedef Node Parent;
+
+	class AxisesOrigin : public Node
+	{
+		typedef Node Parent;
 
 
-protected:
+	protected:
 
-	virtual bool onInit() override;
+		virtual bool onInit() override;
 
-public:
+	public:
 
-	AxisesOrigin();
-	virtual ~AxisesOrigin();
+		AxisesOrigin();
+		virtual ~AxisesOrigin();
 
-};
+	};
 
+}
 
-_VEEND
 
 #endif
 

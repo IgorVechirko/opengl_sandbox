@@ -2,47 +2,50 @@
 
 #include "Ref.h"
 
-_USEVE
+namespace GLSandbox
+{
 
-AutoReleasePool::AutoReleasePool( WorkingScope* scope )
-	: WorkingScopeProvider( scope )
-{
-}
-AutoReleasePool::~AutoReleasePool()
-{
-}
-void AutoReleasePool::releaseRef( Ref* ref )
-{
-	if ( ref && ref->getRefCount() == 1 )
+	AutoReleasePool::AutoReleasePool( WorkingScope* scope )
+		: WorkingScopeProvider( scope )
 	{
-		auto findIt = std::find( _refs.begin(), _refs.end(), ref );
-		if ( findIt != _refs.end() )
+	}
+	AutoReleasePool::~AutoReleasePool()
+	{
+	}
+	void AutoReleasePool::releaseRef( Ref* ref )
+	{
+		if ( ref && ref->getRefCount() == 1 )
 		{
-			_refs.erase( findIt );
-			delete ref;
+			auto findIt = std::find( _refs.begin(), _refs.end(), ref );
+			if ( findIt != _refs.end() )
+			{
+				_refs.erase( findIt );
+				delete ref;
+			}
 		}
 	}
-}
-void AutoReleasePool::addRef( Ref* newRef )
-{
-	auto findIt = std::find( _refs.begin(), _refs.end(), newRef );
-	if ( findIt == _refs.end() )
+	void AutoReleasePool::addRef( Ref* newRef )
 	{
-		newRef->retain();
-		_refs.push_back( newRef );
-	}
-}
-void AutoReleasePool::checkPool()
-{
-	for ( auto refIt = _refs.begin(); refIt != _refs.end(); )
-	{
-		if ( (*refIt)->getRefCount() == 1 )
+		auto findIt = std::find( _refs.begin(), _refs.end(), newRef );
+		if ( findIt == _refs.end() )
 		{
-			refIt = _refs.erase( refIt );
-		}
-		else
-		{
-			refIt++;
+			newRef->retain();
+			_refs.push_back( newRef );
 		}
 	}
+	void AutoReleasePool::checkPool()
+	{
+		for ( auto refIt = _refs.begin(); refIt != _refs.end(); )
+		{
+			if ( (*refIt)->getRefCount() == 1 )
+			{
+				refIt = _refs.erase( refIt );
+			}
+			else
+			{
+				refIt++;
+			}
+		}
+	}
+
 }

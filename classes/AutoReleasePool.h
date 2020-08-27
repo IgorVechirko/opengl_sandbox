@@ -4,26 +4,26 @@
 
 #include "WorkingScopeProvider.h"
 
-_VESTART
-
-class Ref;
-class AutoReleasePool : public WorkingScopeProvider
+namespace GLSandbox
 {
+	class Ref;
+	class AutoReleasePool : public WorkingScopeProvider
+	{
 
-	std::vector<Ref*> _refs;
+		std::vector<Ref*> _refs;
 
 
-public:
+	public:
 
-	AutoReleasePool( WorkingScope* scope );
-	virtual ~AutoReleasePool();
+		AutoReleasePool( WorkingScope* scope );
+		virtual ~AutoReleasePool();
 
-	void releaseRef( Ref* ref );
-	void addRef( Ref* newRef );
+		void releaseRef( Ref* ref );
+		void addRef( Ref* newRef );
 
-	void checkPool();
-};
+		void checkPool();
+	};
 
-_VEEND
+}
 
 #endif

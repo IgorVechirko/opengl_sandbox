@@ -5,37 +5,38 @@
 
 #include "CameraMovementController.h"
 
-_VESTART
-
-
-class Cube;
-class Sprite;
-class TestScene : public Scene
+namespace GLSandbox
 {
 
-	typedef Scene Parent;
 
-	CameraMovementController _cameraMovementController;
+	class Cube;
+	class Sprite;
+	class TestScene : public Scene
+	{
 
-	Sprite* _mySprite;
-	Node* _cube; 
+		typedef Scene Parent;
 
-protected:
+		CameraMovementController _cameraMovementController;
 
-	virtual bool onInit() override;
+		Sprite* _mySprite;
+		Node* _cube; 
 
-	virtual void update( float deltaTime ) override;
+	protected:
 
+		virtual bool onInit() override;
 
-public:
-
-	TestScene();
-	virtual ~TestScene();
-
-};
+		virtual void update( float deltaTime ) override;
 
 
-_VEEND
+	public:
+
+		TestScene();
+		virtual ~TestScene();
+
+	};
+
+
+}
 
 
 #endif

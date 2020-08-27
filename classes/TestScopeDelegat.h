@@ -3,10 +3,10 @@
 
 #include "ScopeDelegate.h"
 
-class TestScopeDelegat : public VEngine::ScopeDelegate
+class TestScopeDelegat : public GLSandbox::ScopeDelegate
 {
 
-	virtual VEngine::Scene* getStartScene() override;
+	virtual GLSandbox::Scene* getStartScene() override;
 
 };
 

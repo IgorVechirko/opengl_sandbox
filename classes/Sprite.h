@@ -4,45 +4,45 @@
 
 #include "Node.h"
 
-_VESTART
-
-
-class Texture2D;
-class ShaderProgram;
-class Sprite : public Node
+namespace GLSandbox
 {
-	typedef Node Parent;
+
+	class Texture2D;
+	class ShaderProgram;
+	class Sprite : public Node
+	{
+		typedef Node Parent;
 	
 
-	Texture2D* _texture;
-	ShaderProgram* _shader;
+		Texture2D* _texture;
+		ShaderProgram* _shader;
 
-	std::vector<GLfloat> _vertices;
-	std::vector<GLuint> _indices;
+		std::vector<GLfloat> _vertices;
+		std::vector<GLuint> _indices;
 
-	GLuint _vbo;
-	GLuint _vao;
-	GLuint _ebo;
+		GLuint _vbo;
+		GLuint _vao;
+		GLuint _ebo;
 
-	void updateVertices( const Size& size );
+		void updateVertices( const Size& size );
 
-protected:
+	protected:
 
-	virtual void draw( GLRender* render, const Mat4& transform ) override;
+		virtual void draw( GLRender* render, const Mat4& transform ) override;
 
-public:
+	public:
 
-	Sprite();
-	virtual ~Sprite();
+		Sprite();
+		virtual ~Sprite();
 
-	bool initWithFilePath( const std::string& filePath );
+		bool initWithFilePath( const std::string& filePath );
 
-	void setShaderProgram( ShaderProgram* program );
-	void setTexture( Texture2D* texture );
-};
+		void setShaderProgram( ShaderProgram* program );
+		void setTexture( Texture2D* texture );
+	};
 
 
-_VEEND
+}
 
 
 #endif

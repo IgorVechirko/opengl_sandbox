@@ -3,7 +3,7 @@
 #include "GLContext.h"
 #include "TestScene.h"
 
-VEngine::Scene* TestScopeDelegat::getStartScene()
+GLSandbox::Scene* TestScopeDelegat::getStartScene()
 {
-	return createNode<VEngine::TestScene>();
+	return createNode<GLSandbox::TestScene>();
 }

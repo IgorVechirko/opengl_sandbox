@@ -6,48 +6,47 @@
 #include "NodeExtentions.h"
 
 
-_VESTART
-
-class ColorCube;
-class Flashlight : public Node
-				 , public LigthPropertiesProtocol
-				 , public LightAttenuationProtocol
+namespace GLSandbox
 {
 
-	typedef Node Parent;
+	class ColorCube;
+	class Flashlight : public Node
+					 , public LigthPropertiesProtocol
+					 , public LightAttenuationProtocol
+	{
 
-	ColorCube* _cube;
+		typedef Node Parent;
 
-	Vec3 _direction;
-	float _cutOffAngle;
-	float _outerCutOffAngle;
+		ColorCube* _cube;
+
+		Vec3 _direction;
+		float _cutOffAngle;
+		float _outerCutOffAngle;
 
 
-protected:
+	protected:
 
-	virtual bool onInit() override;
+		virtual bool onInit() override;
 
-public:
+	public:
 
-	Flashlight();
-	virtual ~Flashlight();
+		Flashlight();
+		virtual ~Flashlight();
 	
-	virtual void setLightProperties( const LightProperties& properties ) override;
+		virtual void setLightProperties( const LightProperties& properties ) override;
 
-	void setDirection( const Vec3& direction );
-	const Vec3& getDirection();
+		void setDirection( const Vec3& direction );
+		const Vec3& getDirection();
 
-	void setCutOffAngle( float angle );
-	float getCutOffAngle();
+		void setCutOffAngle( float angle );
+		float getCutOffAngle();
 
-	void setOuterCutOffAngle( float angle );
-	float getOuterCutOffAngle();
+		void setOuterCutOffAngle( float angle );
+		float getOuterCutOffAngle();
 
-};
+	};
 
-
-_VEEND
-
+}
 
 
 #endif

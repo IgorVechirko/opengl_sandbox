@@ -5,34 +5,35 @@
 
 #include <chrono>
 
-_VESTART
-
-typedef std::function<void(float)> updateFunc;
-
-class TimeScheduler : public WorkingScopeProvider
+namespace GLSandbox
 {
-	TEST_FRIEND
 
-	std::chrono::time_point<std::chrono::steady_clock > _lastTickTime;
+	typedef std::function<void(float)> updateFunc;
 
-	std::map<void*,updateFunc> _updateFunctions;
+	class TimeScheduler : public WorkingScopeProvider
+	{
+		TEST_FRIEND
 
+		std::chrono::time_point<std::chrono::steady_clock > _lastTickTime;
 
-public:
-
-	TimeScheduler( WorkingScope* scope );
-	virtual ~TimeScheduler();
-
-	void addUpdateFunc( updateFunc func, void* target );
-	void delUpdateFunc( void* target );
-
-	void doMainTick();
-	void doWaitFrameEnd();
-
-};
+		std::map<void*,updateFunc> _updateFunctions;
 
 
-_VEEND
+	public:
+
+		TimeScheduler( WorkingScope* scope );
+		virtual ~TimeScheduler();
+
+		void addUpdateFunc( updateFunc func, void* target );
+		void delUpdateFunc( void* target );
+
+		void doMainTick();
+		void doWaitFrameEnd();
+
+	};
+
+
+}
 
 
 #endif

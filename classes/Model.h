@@ -10,42 +10,43 @@
 #include "assimp/postprocess.h"
 
 
-_VESTART
-
-
-class ShaderProgram;
-class Model : public Node
-			, public ShaderProtocol
+namespace GLSandbox
 {
-	typedef Node Parent;
-
-	std::vector<Mesh> _meshes;
-	std::string _directory;
 
 
-	void processNode( aiNode* node, const aiScene* scene );
-	Mesh processMesh( aiMesh* mesh, const aiScene* scene );
-	std::vector<Texture> loadMatertialTextures( aiMaterial* mao, aiTextureType type, eTextureType textureType );
+	class ShaderProgram;
+	class Model : public Node
+				, public ShaderProtocol
+	{
+		typedef Node Parent;
 
-	GLuint textureFromFile( const char* path, const std::string& directory );
-
-private: 
-
-	virtual void draw( GLRender* render, const Mat4& transform ) override;
-
-
-public:
-
-	Model();
-	virtual ~Model();
-
-	void loadModel( const std::string& path );
-
-};
+		std::vector<Mesh> _meshes;
+		std::string _directory;
 
 
+		void processNode( aiNode* node, const aiScene* scene );
+		Mesh processMesh( aiMesh* mesh, const aiScene* scene );
+		std::vector<Texture> loadMatertialTextures( aiMaterial* mao, aiTextureType type, eTextureType textureType );
 
-_VEEND
+		GLuint textureFromFile( const char* path, const std::string& directory );
+
+	private: 
+
+		virtual void draw( GLRender* render, const Mat4& transform ) override;
+
+
+	public:
+
+		Model();
+		virtual ~Model();
+
+		void loadModel( const std::string& path );
+
+	};
+
+
+
+}
 
 
 

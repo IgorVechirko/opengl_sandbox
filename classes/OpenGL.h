@@ -3,37 +3,37 @@
 
 #include "VECommon.h"
 
-_VESTART
-
-
-class GLContext;
-class OpenGL
+namespace GLSandbox
 {
 
-	OpenGL();
-	OpenGL( const OpenGL& ) = delete;
-	OpenGL( OpenGL&& ) = delete;
-	const OpenGL& operator= ( const OpenGL& ) = delete;
+	class GLContext;
+	class OpenGL
+	{
 
-public:
+		OpenGL();
+		OpenGL( const OpenGL& ) = delete;
+		OpenGL( OpenGL&& ) = delete;
+		const OpenGL& operator= ( const OpenGL& ) = delete;
 
-	virtual ~OpenGL();
+	public:
 
-	static OpenGL* getInstance();
+		virtual ~OpenGL();
 
-	GLFWwindow* createWindow( GLuint wndWidth, GLuint wndHeight );
-	void destroyWindow( GLFWwindow* window );
+		static OpenGL* getInstance();
 
-	void processLasGlfwtError( const std::string& desc );
-	void processGlewError( const std::string& desc, GLenum errorCode );
+		GLFWwindow* createWindow( GLuint wndWidth, GLuint wndHeight );
+		void destroyWindow( GLFWwindow* window );
 
-	void poolEvents();
+		void processLasGlfwtError( const std::string& desc );
+		void processGlewError( const std::string& desc, GLenum errorCode );
+
+		void poolEvents();
 
 
-};
+	};
 
 
-_VEEND
+}
 
 
 #endif

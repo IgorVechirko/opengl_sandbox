@@ -4,66 +4,67 @@
 #include "VECommon.h"
 #include "GLRender.h"
 
-_VESTART
-
-class InputListener;
-class Scene;
-class GLContext : public WorkingScopeProvider
+namespace GLSandbox
 {
 
-	GLFWwindow* _window;
-	GLuint _windowWidth;
-	GLuint _windowHeight;
+	class InputListener;
+	class Scene;
+	class GLContext : public WorkingScopeProvider
+	{
 
-	InputListener* _inputListener;
+		GLFWwindow* _window;
+		GLuint _windowWidth;
+		GLuint _windowHeight;
 
-	Scene* _scene;
-	GLRender _render;
+		InputListener* _inputListener;
 
-
-	void onKeyPressed( int keyCode, int scancode, int action, int modifiers );
-	void onMouseMoved( double posX, double posY );
-	void onWheelScrolled( double xoffset, double yoffset );
-
-
-public:
-
-	GLContext();
-	GLContext( const GLContext& ) = delete;
-	GLContext( GLContext&& ) = delete;
-	GLContext& operator= (const GLContext& ) = delete;
-	virtual ~GLContext();
-
-	bool initWithWndSize( GLuint wndWidth, GLuint wndHeight );
-
-	GLFWwindow* getWindow();
-	Size getWindowSize();
-
-	void makeCurrent();
-
-	void setInputListener( InputListener* lst );
-	InputListener* getInputListener();
-
-	void setWindowShouldClose();
-	bool windowShouldClose();
-
-	void poolEvents();
-
-	GLRender* getRender();
-
-	void setScene( Scene* scene );
-	Scene* getScene();
-	void drawScene();
+		Scene* _scene;
+		GLRender _render;
 
 
-	friend void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers );
-	friend void mouseMoved( GLFWwindow* window, double posX, double posY );
-	friend void wheelScrolled( GLFWwindow* window, double xoffset, double yoffset );
-
-};
+		void onKeyPressed( int keyCode, int scancode, int action, int modifiers );
+		void onMouseMoved( double posX, double posY );
+		void onWheelScrolled( double xoffset, double yoffset );
 
 
-_VEEND
+	public:
+
+		GLContext();
+		GLContext( const GLContext& ) = delete;
+		GLContext( GLContext&& ) = delete;
+		GLContext& operator= (const GLContext& ) = delete;
+		virtual ~GLContext();
+
+		bool initWithWndSize( GLuint wndWidth, GLuint wndHeight );
+
+		GLFWwindow* getWindow();
+		Size getWindowSize();
+
+		void makeCurrent();
+
+		void setInputListener( InputListener* lst );
+		InputListener* getInputListener();
+
+		void setWindowShouldClose();
+		bool windowShouldClose();
+
+		void poolEvents();
+
+		GLRender* getRender();
+
+		void setScene( Scene* scene );
+		Scene* getScene();
+		void drawScene();
+
+
+		friend void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers );
+		friend void mouseMoved( GLFWwindow* window, double posX, double posY );
+		friend void wheelScrolled( GLFWwindow* window, double xoffset, double yoffset );
+
+	};
+
+
+}
 
 
 #endif

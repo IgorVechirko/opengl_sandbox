@@ -3,30 +3,31 @@
 
 #include "Ref.h"
 
-_VESTART
-
-class AutoReleasePool;
-class Texture2D : public Ref
+namespace GLSandbox
 {
-	int _width;
-	int _height;
 
-	GLuint _textureID;
+	class AutoReleasePool;
+	class Texture2D : public Ref
+	{
+		int _width;
+		int _height;
 
-	public:
+		GLuint _textureID;
 
-		Texture2D();
-		virtual ~Texture2D();
+		public:
 
-		bool initWithFilePath( const std::string& filePath );
+			Texture2D();
+			virtual ~Texture2D();
 
-		GLuint getTextureID();
+			bool initWithFilePath( const std::string& filePath );
 
-		int getWidth();
-		int getHeight();
-};
+			GLuint getTextureID();
 
-_VEEND
+			int getWidth();
+			int getHeight();
+	};
+
+}
 
 
 #endif

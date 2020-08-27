@@ -5,33 +5,34 @@
 #include "NodeExtentions.h"
 
 
-_VESTART
-
-class ColorCube;
-class PointLightSource : public Node
-					   , public LigthPropertiesProtocol
-					   , public LightAttenuationProtocol
+namespace GLSandbox
 {
 
-	typedef Node Parent;
+	class ColorCube;
+	class PointLightSource : public Node
+						   , public LigthPropertiesProtocol
+						   , public LightAttenuationProtocol
+	{
 
-	ColorCube* _cube;
+		typedef Node Parent;
 
-	protected:
+		ColorCube* _cube;
 
-		virtual bool onInit() override;
+		protected:
+
+			virtual bool onInit() override;
 
 
-	public:
+		public:
 
-		PointLightSource();
-		virtual ~PointLightSource();
+			PointLightSource();
+			virtual ~PointLightSource();
 
-		virtual void setLightProperties( const LightProperties& properties ) override;
+			virtual void setLightProperties( const LightProperties& properties ) override;
 		
-};
+	};
 
+}
 
-_VEEND	
 
 #endif

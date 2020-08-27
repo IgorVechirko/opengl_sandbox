@@ -5,49 +5,48 @@
 #include "NodeExtentions.h"
 
 
-_VESTART
-
-class Line;
-class DirectLightSource : public Node
-						, public LigthPropertiesProtocol
+namespace GLSandbox
 {
 
-	typedef Node Parent;
+	class Line;
+	class DirectLightSource : public Node
+							, public LigthPropertiesProtocol
+	{
 
-	Vec3 _direction;
+		typedef Node Parent;
 
-	const int _linesCount;
-	const float _distBetweenLines;
-	std::vector<Line*> _directionLines;
+		Vec3 _direction;
 
-
-	void updateDirectionLines();
-
-
-protected:
-
-	virtual bool onInit() override;
-
-	virtual void setRotate( const Vec3& rotate ) override;
-	virtual void setScale( const Vec3& scale ) override;
+		const int _linesCount;
+		const float _distBetweenLines;
+		std::vector<Line*> _directionLines;
 
 
-	public:
-
-		DirectLightSource();
-		virtual ~DirectLightSource();
-
-		void setDirection( const Vec3& aDirection );
-		const Vec3& getDirection();
-
-		virtual void setLightProperties( const LightProperties& properties ) override;
+		void updateDirectionLines();
 
 
-};
+	protected:
+
+		virtual bool onInit() override;
+
+		virtual void setRotate( const Vec3& rotate ) override;
+		virtual void setScale( const Vec3& scale ) override;
 
 
+		public:
 
-_VEEND
+			DirectLightSource();
+			virtual ~DirectLightSource();
+
+			void setDirection( const Vec3& aDirection );
+			const Vec3& getDirection();
+
+			virtual void setLightProperties( const LightProperties& properties ) override;
+
+
+	};
+
+}
 
 
 

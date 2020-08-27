@@ -1,36 +1,39 @@
 #include "FileUtils.h"
 
 
-_USEVE
+namespace GLSandbox
+{
 
-FileUtils::FileUtils( WorkingScope* scope )
-	: WorkingScopeProvider( scope )
-{
-}
-FileUtils::~FileUtils()
-{
-}
-void FileUtils::init()
-{
-}
-std::string FileUtils::getStringFromFile( const std::string& aPath )
-{
-	std::string result;
-
-	FILE* openFile = fopen( aPath.c_str(), "r" );
-
-	if ( openFile )
+	FileUtils::FileUtils( WorkingScope* scope )
+		: WorkingScopeProvider( scope )
 	{
-		char nextSym;
+	}
+	FileUtils::~FileUtils()
+	{
+	}
+	void FileUtils::init()
+	{
+	}
+	std::string FileUtils::getStringFromFile( const std::string& aPath )
+	{
+		std::string result;
 
-		while ( ( nextSym = fgetc(openFile) ) != EOF )
+		FILE* openFile = fopen( aPath.c_str(), "r" );
+
+		if ( openFile )
 		{
-			result += nextSym;
+			char nextSym;
+
+			while ( ( nextSym = fgetc(openFile) ) != EOF )
+			{
+				result += nextSym;
+			}
+
+			fclose( openFile );
+			openFile = nullptr;
 		}
 
-		fclose( openFile );
-		openFile = nullptr;
+		return result;
 	}
 
-	return result;
 }

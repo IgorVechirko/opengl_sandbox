@@ -5,7 +5,7 @@
 
 int main()
 {
-	VEngine::WorkingScope scope;
+	GLSandbox::WorkingScope scope;
 	auto scopeDelegate = std::shared_ptr<TestScopeDelegat>(scope.createScoped<TestScopeDelegat>());
 	scope.startWithDelegate( scopeDelegate.get() );
 

@@ -4,50 +4,51 @@
 
 #include "Node.h"
 
-_VESTART
-
-
-class Texture2D;
-class ShaderProgram;
-class Cube : public Node
+namespace GLSandbox
 {
-	typedef Node Parent;
+
+
+	class Texture2D;
+	class ShaderProgram;
+	class Cube : public Node
+	{
+		typedef Node Parent;
 	
 
-	Texture2D* _texture;
-	ShaderProgram* _shader;
+		Texture2D* _texture;
+		ShaderProgram* _shader;
 
-	std::vector<GLfloat> _vertices;
-	std::vector<GLuint> _indices;
+		std::vector<GLfloat> _vertices;
+		std::vector<GLuint> _indices;
 
-	GLuint _vbo;
-	GLuint _vao;
-	GLuint _ebo;
+		GLuint _vbo;
+		GLuint _vao;
+		GLuint _ebo;
 
-	Material _material;
+		Material _material;
 
-	void updateVertices( const Size& size );
+		void updateVertices( const Size& size );
 
-protected:
+	protected:
 
-	virtual void draw( GLRender* render, const Mat4& transform ) override;
+		virtual void draw( GLRender* render, const Mat4& transform ) override;
 
-public:
+	public:
 
-	Cube();
-	virtual ~Cube();
+		Cube();
+		virtual ~Cube();
 
-	bool initWithFilePath( const std::string& filePath );
+		bool initWithFilePath( const std::string& filePath );
 
-	void setShaderProgram( ShaderProgram* program );
-	void setTexture( Texture2D* texture );
+		void setShaderProgram( ShaderProgram* program );
+		void setTexture( Texture2D* texture );
 
-	void setMaterial( const Material& material );
-	const Material& getMaterial();
-};
+		void setMaterial( const Material& material );
+		const Material& getMaterial();
+	};
 
 
-_VEEND
+}
 
 
 #endif

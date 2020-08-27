@@ -1,53 +1,54 @@
 #include "Node.h"
 
-_VESTART
-
-class Camera : public Node
+namespace GLSandbox
 {
-	typedef Node Parent;
 
-	Mat4 _projection;
-	Mat4 _view;
+	class Camera : public Node
+	{
+		typedef Node Parent;
 
-	bool _viewDirty;
+		Mat4 _projection;
+		Mat4 _view;
 
-	Vec3 _cameraFront;
-	const Vec3 _cameraUp;
+		bool _viewDirty;
 
-	float _cameraPitch;
-	float _cameraYaw;
-	float _cameraRoll;
+		Vec3 _cameraFront;
+		const Vec3 _cameraUp;
+
+		float _cameraPitch;
+		float _cameraYaw;
+		float _cameraRoll;
 
 	
-protected:
+	protected:
 
-	virtual bool onInit() override;
+		virtual bool onInit() override;
 
 
-public:
+	public:
 
-	Camera();
-	virtual ~Camera();
+		Camera();
+		virtual ~Camera();
 
-	void setProjection( const Mat4& projection );
-	const Mat4& getProjection() const;
+		void setProjection( const Mat4& projection );
+		const Mat4& getProjection() const;
 
-	void setView( const Mat4& view );
-	const Mat4& getView();
+		void setView( const Mat4& view );
+		const Mat4& getView();
 
-	virtual void setPosition( const Vec3& pos ) override;
+		virtual void setPosition( const Vec3& pos ) override;
 
-	void moveAhead( float shift );
-	void moveBack( float shift );
-	void moveRight( float shift );
-	void moveLeft( float shift );
-	void moveUp( float shift );
-	void moveDown( float shift );
+		void moveAhead( float shift );
+		void moveBack( float shift );
+		void moveRight( float shift );
+		void moveLeft( float shift );
+		void moveUp( float shift );
+		void moveDown( float shift );
 
-	void spinPitch( float shift );
-	void spinYaw( float shift );
+		void spinPitch( float shift );
+		void spinYaw( float shift );
 
-};
+	};
 
-_VEEND
+}
 

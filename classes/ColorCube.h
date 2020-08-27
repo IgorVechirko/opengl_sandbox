@@ -5,45 +5,46 @@
 #include "Node.h"
 #include "NodeExtentions.h"
 
-_VESTART
-
-class ColorCube : public Node
-				, public ShaderProtocol
-				, public ColorProtocol
+namespace GLSandbox
 {
 
-	typedef Node Parent;
+	class ColorCube : public Node
+					, public ShaderProtocol
+					, public ColorProtocol
+	{
 
-	GLuint _vao;
-	GLuint _vbo;
-	GLuint _ebo;
+		typedef Node Parent;
 
-	unsigned _indicesCount;
+		GLuint _vao;
+		GLuint _vbo;
+		GLuint _ebo;
 
-	bool _verticesDirty;
+		unsigned _indicesCount;
 
-	float _cubeSize;
+		bool _verticesDirty;
 
-
-	void updateVertices();
-
-
-protected:
-
-	virtual bool onInit() override;
-
-	virtual void draw( GLRender* render, const Mat4& parentTransform ) override;
+		float _cubeSize;
 
 
-public:
+		void updateVertices();
 
-	ColorCube();
-	virtual ~ColorCube();
 
-	virtual void setCubeSize( float size );
-};
+	protected:
 
-_VEEND
+		virtual bool onInit() override;
+
+		virtual void draw( GLRender* render, const Mat4& parentTransform ) override;
+
+
+	public:
+
+		ColorCube();
+		virtual ~ColorCube();
+
+		virtual void setCubeSize( float size );
+	};
+
+}
 
 
 #endif

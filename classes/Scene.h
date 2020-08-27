@@ -3,53 +3,54 @@
 
 #include "Node.h"
 
-_VESTART
-
-class Camera;
-class DirectLightSource;
-class PointLightSource;
-class Flashlight;
-class Scene : public Node
+namespace GLSandbox
 {
-	typedef Node Parent;
 
-	Camera* _camera;
+	class Camera;
+	class DirectLightSource;
+	class PointLightSource;
+	class Flashlight;
+	class Scene : public Node
+	{
+		typedef Node Parent;
 
-	DirectLightSource* _directionLight;
+		Camera* _camera;
+
+		DirectLightSource* _directionLight;
 	
-	const int _maxPointLights;
-	std::vector<PointLightSource*> _pointLights;
+		const int _maxPointLights;
+		std::vector<PointLightSource*> _pointLights;
 
-	const int _maxFlashlights;
-	std::vector<Flashlight*> _flashlights;
+		const int _maxFlashlights;
+		std::vector<Flashlight*> _flashlights;
 
 
 
-protected:
+	protected:
 
-	virtual bool onInit() override;
+		virtual bool onInit() override;
 
-public:
+	public:
 
-	Scene();
-	virtual ~Scene();
+		Scene();
+		virtual ~Scene();
 
-	void visit( GLRender* render );
+		void visit( GLRender* render );
 
-	void setDirectionLight( DirectLightSource* directionLight );
-	DirectLightSource* getDirectionLight();
+		void setDirectionLight( DirectLightSource* directionLight );
+		DirectLightSource* getDirectionLight();
 
-	void addPointLight( PointLightSource* light );
-	const std::vector<PointLightSource*> getPointLights();
+		void addPointLight( PointLightSource* light );
+		const std::vector<PointLightSource*> getPointLights();
 
-	void addFlashlight( Flashlight* light );
-	const std::vector<Flashlight*>& getFlashLights();
+		void addFlashlight( Flashlight* light );
+		const std::vector<Flashlight*>& getFlashLights();
 
-	void setCamera( Camera* camera );
-	Camera* getCamera();
+		void setCamera( Camera* camera );
+		Camera* getCamera();
 
-};
+	};
 
-_VEEND
+}
 
 #endif

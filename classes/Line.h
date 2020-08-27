@@ -4,52 +4,49 @@
 #include "Node.h"
 #include "NodeExtentions.h"
 
-_VESTART
-
-class Line : public Node
-		   , public ShaderProtocol
-		   , public ColorProtocol
+namespace GLSandbox
 {
-	typedef Node Parent;
 
-	GLuint _vao;
-	GLuint _vbo;
+	class Line : public Node
+			   , public ShaderProtocol
+			   , public ColorProtocol
+	{
+		typedef Node Parent;
 
-	Vec3 _startPos;
-	Vec3 _finishPos;
+		GLuint _vao;
+		GLuint _vbo;
 
-	bool _verticesDirty;
+		Vec3 _startPos;
+		Vec3 _finishPos;
 
-
-	void updateVertices();
-
-protected:
-
-	virtual bool onInit() override;
-
-	virtual void draw( GLRender* render, const Mat4& transform ) override;
+		bool _verticesDirty;
 
 
-public:
+		void updateVertices();
 
-	Line();
-	virtual ~Line();
+	protected:
 
-	void setStartPos( const Vec3& pos );
-	const Vec3& getStartPos();
+		virtual bool onInit() override;
 
-	void setFinishPos( const Vec3& pos );
-	const Vec3& getFinishPos();
-
-	
+		virtual void draw( GLRender* render, const Mat4& transform ) override;
 
 
-};
+	public:
+
+		Line();
+		virtual ~Line();
+
+		void setStartPos( const Vec3& pos );
+		const Vec3& getStartPos();
+
+		void setFinishPos( const Vec3& pos );
+		const Vec3& getFinishPos();
 
 
+	};
 
+}
 
-_VEEND
 
 
 #endif

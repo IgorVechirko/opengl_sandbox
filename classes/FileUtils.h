@@ -3,27 +3,25 @@
 
 #include "WorkingScopeProvider.h"
 
-_VESTART
-
-class FileUtils : public WorkingScopeProvider
+namespace GLSandbox
 {
 
-
-public:
-
-	FileUtils( WorkingScope* scope );
-	virtual ~FileUtils();
-
-	void init();
-
-	std::string getStringFromFile( const std::string& aPath );
-
-};
+	class FileUtils : public WorkingScopeProvider
+	{
 
 
-#define FILES FileUtils::getInstance()
+	public:
 
-_VEEND
+		FileUtils( WorkingScope* scope );
+		virtual ~FileUtils();
+
+		void init();
+
+		std::string getStringFromFile( const std::string& aPath );
+
+	};
+
+}
 
 
 

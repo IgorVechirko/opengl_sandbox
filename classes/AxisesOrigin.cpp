@@ -4,34 +4,36 @@
 #include "WorkingScope.h"
 
 
-_USEVE
-
-
-AxisesOrigin::AxisesOrigin()
+namespace GLSandbox
 {
-}
-AxisesOrigin::~AxisesOrigin()
-{
-}
-bool AxisesOrigin::onInit()
-{
-	auto XAxis = createNode<Line>();
-	XAxis->setStartPos( Vec3( 0.0f ) );
-	XAxis->setFinishPos( Vec3( 100000.0f, 0.0f, 0.0f ) );
-	XAxis->setColor( RGBA::RED );
-	addChild( XAxis );
 
-	auto YAxis = createNode<Line>();
-	YAxis->setStartPos( Vec3( 0.0f ) );
-	YAxis->setFinishPos( Vec3( 0.0f, 100000.0f, 0.0f ) );
-	YAxis->setColor( RGBA::GREEN );
-	addChild( YAxis );
+	AxisesOrigin::AxisesOrigin()
+	{
+	}
+	AxisesOrigin::~AxisesOrigin()
+	{
+	}
+	bool AxisesOrigin::onInit()
+	{
+		auto XAxis = createNode<Line>();
+		XAxis->setStartPos( Vec3( 0.0f ) );
+		XAxis->setFinishPos( Vec3( 100000.0f, 0.0f, 0.0f ) );
+		XAxis->setColor( RGBA::RED );
+		addChild( XAxis );
 
-	auto ZAxis = createNode<Line>();
-	ZAxis->setStartPos( Vec3( 0.0f ) );
-	ZAxis->setFinishPos( Vec3( 0.0f, 0.0f, 100000.0f ) );
-	ZAxis->setColor( RGBA( 0.0f, 0.0f, 1.0f, 1.0f ) );
-	addChild( ZAxis );
+		auto YAxis = createNode<Line>();
+		YAxis->setStartPos( Vec3( 0.0f ) );
+		YAxis->setFinishPos( Vec3( 0.0f, 100000.0f, 0.0f ) );
+		YAxis->setColor( RGBA::GREEN );
+		addChild( YAxis );
 
-	return true;
+		auto ZAxis = createNode<Line>();
+		ZAxis->setStartPos( Vec3( 0.0f ) );
+		ZAxis->setFinishPos( Vec3( 0.0f, 0.0f, 100000.0f ) );
+		ZAxis->setColor( RGBA( 0.0f, 0.0f, 1.0f, 1.0f ) );
+		addChild( ZAxis );
+
+		return true;
+	}
+
 }

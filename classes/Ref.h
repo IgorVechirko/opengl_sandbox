@@ -3,30 +3,30 @@
 
 #include "VECommon.h"
 
-_VESTART
-
-class AutoReleasePool;
-class Ref
+namespace GLSandbox
 {
-	TEST_FRIEND
+	class AutoReleasePool;
+	class Ref
+	{
+		TEST_FRIEND
 
-	unsigned int _refCount;
-	bool _autorelesed;
+		unsigned int _refCount;
+		bool _autorelesed;
 
-	AutoReleasePool* _pool;
+		AutoReleasePool* _pool;
 
-public:
+	public:
 
-	Ref();
-	virtual ~Ref();
+		Ref();
+		virtual ~Ref();
 
-	void release();
-	void retain();
-	unsigned int getRefCount();
+		void release();
+		void retain();
+		unsigned int getRefCount();
 
-	void autorelease( AutoReleasePool* pool );
-};
+		void autorelease( AutoReleasePool* pool );
+	};
 
-_VEEND
+}
 
 #endif

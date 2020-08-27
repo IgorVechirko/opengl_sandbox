@@ -4,21 +4,23 @@
 
 #include "Scene.h"
 
-_VESTART
 
-class ScopeDelegate : public WorkingScopeProvider
+namespace GLSandbox
 {
 
-protected:
+	class ScopeDelegate : public WorkingScopeProvider
+	{
+
+	protected:
 
 
-public:
+	public:
 
-	virtual Scene* getStartScene(){return createNode<Scene>();};
+		virtual Scene* getStartScene(){return createNode<Scene>();};
 
-};
+	};
 
-_VEEND
+}
 
 
 

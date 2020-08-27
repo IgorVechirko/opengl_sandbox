@@ -4,42 +4,43 @@
 #include "Cube.h"
 #include "NodeExtentions.h"
 
-_VESTART
-
-class CubeVertices : public Node
-				   , public Size3Protocol
-				   , public ShaderProtocol
+namespace GLSandbox
 {
 
-private:
+	class CubeVertices : public Node
+					   , public Size3Protocol
+					   , public ShaderProtocol
+	{
 
-	typedef Node Parent;
+	private:
 
-	GLuint _vao;
-	GLuint _vbo;
+		typedef Node Parent;
 
-	bool _verticesDirty;
+		GLuint _vao;
+		GLuint _vbo;
 
-protected:
+		bool _verticesDirty;
 
-	std::vector<GLfloat> _vertices;
+	protected:
 
-private:
+		std::vector<GLfloat> _vertices;
 
-	void updateVertices();
+	private:
 
-protected:
+		void updateVertices();
 
-	CubeVertices();
+	protected:
 
-public:
+		CubeVertices();
 
-	virtual ~CubeVertices();
+	public:
 
-	virtual void setSize3( const Size3& size ) override;
+		virtual ~CubeVertices();
 
-};
+		virtual void setSize3( const Size3& size ) override;
 
-_VEEND
+	};
+
+}
 
 #endif

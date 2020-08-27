@@ -3,22 +3,23 @@
 
 #include "WorkingScopeProvider.h"
 
-_VESTART
-
-class Scene;
-class GLRender : public WorkingScopeProvider
+namespace GLSandbox
 {
 
-public:
+	class Scene;
+	class GLRender : public WorkingScopeProvider
+	{
 
-	GLRender( WorkingScope* scope );
-	virtual ~GLRender();
+	public:
 
-	void init();
+		GLRender( WorkingScope* scope );
+		virtual ~GLRender();
 
-	void drawScene( Scene* scene );
-};
+		void init();
 
-_VEEND
+		void drawScene( Scene* scene );
+	};
+
+}
 
 #endif

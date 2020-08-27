@@ -3,31 +3,32 @@
 
 #include "WorkingScopeProvider.h"
 
-_VESTART
-
-
-class ResourcesManager : public WorkingScopeProvider
+namespace GLSandbox
 {
 
-	std::map<std::string,std::string> _resIDs;
 
-public:
+	class ResourcesManager : public WorkingScopeProvider
+	{
 
-	ResourcesManager( WorkingScope* scope );
-	virtual ~ResourcesManager();
+		std::map<std::string,std::string> _resIDs;
+
+	public:
+
+		ResourcesManager( WorkingScope* scope );
+		virtual ~ResourcesManager();
 
 
-	void init();
+		void init();
 
-	void parseResConfig( const std::string& aConfigPath );
+		void parseResConfig( const std::string& aConfigPath );
 
-	const std::string& getResPath( const std::string& aResID ) const;
+		const std::string& getResPath( const std::string& aResID ) const;
 
-	std::string getResStr( const std::string& resID );
+		std::string getResStr( const std::string& resID );
 
-};
+	};
 
-_VEEND
+}
 
 
 #endif

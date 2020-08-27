@@ -5,31 +5,33 @@
 
 #include "Ref.h"
 
-_VESTART
 
-class AutoReleasePool;
-class ShaderProgram : public Ref
+namespace GLSandbox
 {
 
-	GLuint _programID;
+	class AutoReleasePool;
+	class ShaderProgram : public Ref
+	{
+
+		GLuint _programID;
 
 
 	
 
 
-	public:
+		public:
 
-		ShaderProgram();
-		virtual ~ShaderProgram();
+			ShaderProgram();
+			virtual ~ShaderProgram();
 
-		bool initWithSrc( const std::string& verSrc, const std::string& fragSrc );
+			bool initWithSrc( const std::string& verSrc, const std::string& fragSrc );
 
-		GLuint getProgramID();
+			GLuint getProgramID();
 
-		void useProgram();
-};
+			void useProgram();
+	};
 
-_VEEND
+}
 
 
 #endif

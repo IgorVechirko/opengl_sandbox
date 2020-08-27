@@ -3,117 +3,117 @@
 
 #include "VECommon.h"
 
-
-_VESTART
-
-
-class Size3Protocol
+namespace GLSandbox
 {
 
-protected:
 
-	Size3 _size;
+	class Size3Protocol
+	{
+
+	protected:
+
+		Size3 _size;
 	
 
-protected:
+	protected:
 
-	Size3Protocol();
+		Size3Protocol();
 
-public:
+	public:
 
-	virtual ~Size3Protocol();
+		virtual ~Size3Protocol();
 
-	virtual void setSize3( const Size3& size );
-	const Size3& getSize3();
-};
+		virtual void setSize3( const Size3& size );
+		const Size3& getSize3();
+	};
 
-class ShaderProgram;
-class ShaderProtocol
-{
+	class ShaderProgram;
+	class ShaderProtocol
+	{
 
-protected:
+	protected:
 
-	ShaderProgram* _shader;
+		ShaderProgram* _shader;
 
-protected:
+	protected:
 
-	ShaderProtocol();
+		ShaderProtocol();
 
-public:
+	public:
 
-	virtual ~ShaderProtocol();
+		virtual ~ShaderProtocol();
 
-	virtual void setShaderProgram( ShaderProgram* program );
-	ShaderProgram* getShaderProgram();
+		virtual void setShaderProgram( ShaderProgram* program );
+		ShaderProgram* getShaderProgram();
 
-};
+	};
 
-class ColorProtocol
-{
+	class ColorProtocol
+	{
 
-protected:
+	protected:
 
-	RGBA _color;
+		RGBA _color;
 
-protected:
+	protected:
 		
-	ColorProtocol();
+		ColorProtocol();
 
-public:
+	public:
 
-	virtual ~ColorProtocol();
+		virtual ~ColorProtocol();
 
-	virtual void setColor( const RGBA& color );
-	const RGBA& getColor();
-
-
-};
+		virtual void setColor( const RGBA& color );
+		const RGBA& getColor();
 
 
-class LigthPropertiesProtocol
-{
-
-protected:
-
-	LightProperties _lightProperties;
-
-protected:
-
-	LigthPropertiesProtocol();
-
-public:
-
-	virtual ~LigthPropertiesProtocol();
-
-	virtual void setLightProperties( const LightProperties& properties );
-	const LightProperties& getLightProperties();
+	};
 
 
-};
+	class LigthPropertiesProtocol
+	{
+
+	protected:
+
+		LightProperties _lightProperties;
+
+	protected:
+
+		LigthPropertiesProtocol();
+
+	public:
+
+		virtual ~LigthPropertiesProtocol();
+
+		virtual void setLightProperties( const LightProperties& properties );
+		const LightProperties& getLightProperties();
 
 
-class LightAttenuationProtocol
-{
-
-protected:
-
-	LightAttenuationCoefs _LightAttenuation;
-
-protected:
-
-	LightAttenuationProtocol();
-
-public:
-
-	virtual ~LightAttenuationProtocol();
-
-	void setAttenuation( const LightAttenuationCoefs& attenuation );
-	const LightAttenuationCoefs& getAttenuation();
+	};
 
 
-};
+	class LightAttenuationProtocol
+	{
 
-_VEEND
+	protected:
+
+		LightAttenuationCoefs _LightAttenuation;
+
+	protected:
+
+		LightAttenuationProtocol();
+
+	public:
+
+		virtual ~LightAttenuationProtocol();
+
+		void setAttenuation( const LightAttenuationCoefs& attenuation );
+		const LightAttenuationCoefs& getAttenuation();
+
+
+	};
+
+}
 
 
 #endif
