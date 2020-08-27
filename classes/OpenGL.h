@@ -11,6 +11,9 @@ class OpenGL
 {
 
 	OpenGL();
+	OpenGL( const OpenGL& ) = delete;
+	OpenGL( OpenGL&& ) = delete;
+	const OpenGL& operator= ( const OpenGL& ) = delete;
 
 public:
 
@@ -19,6 +22,10 @@ public:
 	static OpenGL* getInstance();
 
 	GLFWwindow* createWindow( GLuint wndWidth, GLuint wndHeight );
+	void destroyWindow( GLFWwindow* window );
+
+	void processLasGlfwtError( const std::string& desc );
+	void processGlewError( const std::string& desc, GLenum errorCode );
 
 
 };

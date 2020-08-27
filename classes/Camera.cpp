@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-#include "GLView.h"
+#include "GLContext.h"
 
 
 _USEVE
@@ -22,7 +22,7 @@ Camera::~Camera()
 }
 bool Camera::onInit()
 {
-	setProjection( glm::ortho( 0.0f, getGLView()->getWindowSize().x, 0.0f, getGLView()->getWindowSize().y, -1.0f, 100.0f ) );
+	setProjection( glm::ortho( 0.0f, getGLContext()->getWindowSize().x, 0.0f, getGLContext()->getWindowSize().y, -1.0f, 100.0f ) );
 
 	setPosition( Vec3( 0.0f, 0.0f, 1.0f ) );
 

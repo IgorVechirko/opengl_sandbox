@@ -1,7 +1,7 @@
 #include "GLRender.h"
 
 #include "Scene.h"
-#include "GLView.h"
+#include "GLContext.h"
 
 
 
@@ -29,6 +29,6 @@ void GLRender::drawScene( Scene* scene )
 
 	scene->visit( this );
 
-	glfwSwapBuffers( getGLView()->getWindow() );
+	glfwSwapBuffers( getGLContext()->getWindow() );
 
 }

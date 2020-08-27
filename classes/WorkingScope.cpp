@@ -1,55 +1,49 @@
 #include "WorkingScope.h"
 
 #include "WorkingScope.h"
-#include "GLView.h"
 #include "GLRender.h"
 #include "FileUtils.h"
 #include "ResourcesManager.h"
 #include "AutoReleasePool.h"
 #include "TimeScheduler.h"
-#include "InputController.h"
 #include "Scene.h"
 #include "TestScene.h"
+#include "GLContext.h"
 
 #include <thread>
 
 _USEVE
 
 WorkingScope::WorkingScope()
-	: _view( nullptr )
-	, _render( nullptr )
+	: _render( nullptr )
+	, _glContext( nullptr )
 	, _fileUtils( nullptr )
 	, _resMng( nullptr )
 	, _releasePool( nullptr )
 	, _timeScheduler( nullptr )
-	, _inputController( nullptr )
 	, _scene( nullptr )
 {
 	_fileUtils = new FileUtils(this);
 	_resMng = new ResourcesManager(this);
 
-	_view = new GLView(this);
+	_glContext = createObjWithInitializer<GLContext>(&GLContext::initWithWndSize, 1024, 768 );
 	_render = new GLRender(this);
 
 	_releasePool = new AutoReleasePool(this);
 
 	_timeScheduler = new TimeScheduler(this);
-
-	_inputController = new InputController(this);
 }
 WorkingScope::~WorkingScope()
 {
 	delete _fileUtils;
 	delete _resMng;
 
-	delete _view;
+	delete _glContext;
 	delete _render;
 
 	delete _releasePool;
 
 	delete _timeScheduler;
-
-	delete _inputController;
 }
 void WorkingScope::drawScene()
 {
@@ -71,9 +65,9 @@ void WorkingScope::loopWait()
 {
 	std::this_thread::sleep_for( std::chrono::milliseconds( (long)( (1.0f/60.0f) * 1000.0f ) ) );
 }
-GLView* WorkingScope::getGLView()
+GLContext* WorkingScope::getGLContext()
 {
-	return _view;
+	return _glContext;
 }
 GLRender* WorkingScope::getRender()
 {
@@ -95,10 +89,6 @@ TimeScheduler* WorkingScope::getTimeScheduler()
 {
 	return _timeScheduler;
 }
-InputController* WorkingScope::getInputController()
-{
-	return _inputController;
-}
 void WorkingScope::setScene( Scene* scene )
 {
 	if ( _scene != scene )
@@ -119,18 +109,12 @@ void WorkingScope::startWork()
 {
 	_resMng->init();
 
-	Size winSize(1024, 768 );
-	_view->setupWindowSize( winSize.x, winSize.y );
-	_inputController->init();
-
 	setScene( createNode<TestScene>() );
 
-	while( !glfwWindowShouldClose(_view->getWindow() ) )
+	while( !glfwWindowShouldClose( _glContext->getWindow() ) )
 	{
 		_timeScheduler->onMainTick( calcDeltaTime() );
 		drawScene();
 		loopWait();
 	}
-
-	glfwTerminate();
 }

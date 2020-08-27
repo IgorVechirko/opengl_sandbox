@@ -26,10 +26,10 @@ WorkingScope* WorkingScopeProvider::getScope()
 	_ASSERT( _providedScope != nullptr );
 	return _providedScope;
 }
-GLView* WorkingScopeProvider::getGLView()
+GLContext* WorkingScopeProvider::getGLContext()
 {
 	_ASSERT( _providedScope != nullptr );
-	return _providedScope->getGLView();
+	return _providedScope->getGLContext();
 }
 GLRender* WorkingScopeProvider::getRender()
 {
@@ -55,11 +55,6 @@ TimeScheduler* WorkingScopeProvider::getTimeScheduler()
 {
 	_ASSERT( _providedScope != nullptr );
 	return _providedScope->getTimeScheduler();
-}
-InputController* WorkingScopeProvider::getInputController()
-{
-	_ASSERT( _providedScope != nullptr );
-	return _providedScope->getInputController();
 }
 Scene* WorkingScopeProvider::getScene()
 {

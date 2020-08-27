@@ -5,12 +5,20 @@
 
 _VESTART
 
+class InputListener;
 class GLContext
 {
 
 	GLFWwindow* _window;
 	GLuint _windowWidth;
 	GLuint _windowHeight;
+
+	InputListener* _inputListener;
+
+
+	void onKeyPressed( int keyCode, int scancode, int action, int modifiers );
+	void onMouseMoved( double posX, double posY );
+	void onWheelScrolled( double xoffset, double yoffset );
 
 
 public:
@@ -24,9 +32,19 @@ public:
 	bool initWithWndSize( GLuint wndWidth, GLuint wndHeight );
 
 	GLFWwindow* getWindow();
-	Size getWndSize();
+	Size getWindowSize();
+
+	void setInputListener( InputListener* lst );
+	InputListener* getInputListener();
+
+	void setWindowSouldClose();
 
 	void makeCurrent();
+
+
+	friend void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers );
+	friend void mouseMoved( GLFWwindow* window, double posX, double posY );
+	friend void wheelScrolled( GLFWwindow* window, double xoffset, double yoffset );
 
 };
 

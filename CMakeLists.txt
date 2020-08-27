@@ -36,7 +36,7 @@ set( TimeScheduler ${SANDBOX_DIR}/classes/TimeScheduler.h ${SANDBOX_DIR}/classes
 set( AutoReleasePool ${SANDBOX_DIR}/classes/AutoReleasePool.h ${SANDBOX_DIR}/classes/AutoReleasePool.cpp )
 set( Ref ${SANDBOX_DIR}/classes/Ref.h ${SANDBOX_DIR}/classes/Ref.cpp )
 
-set( InputController ${SANDBOX_DIR}/classes/InputController.h ${SANDBOX_DIR}/classes/InputController.cpp )
+set( InputListener ${SANDBOX_DIR}/classes/InputListener.h )
 
 set( DirectLightSource ${SANDBOX_DIR}/classes/DirectLightSource.h ${SANDBOX_DIR}/classes/DirectLightSource.cpp )
 set( Flashlight ${SANDBOX_DIR}/classes/Flashlight.h ${SANDBOX_DIR}/classes/Flashlight.cpp )
@@ -44,7 +44,9 @@ set( PointLightSource ${SANDBOX_DIR}/classes/PointLightSource.h ${SANDBOX_DIR}/c
 
 set( GLRender ${SANDBOX_DIR}/classes/GLRender.h ${SANDBOX_DIR}/classes/GLRender.cpp )
 
-set( GLView ${SANDBOX_DIR}/classes/GLView.h ${SANDBOX_DIR}/classes/GLView.cpp )
+set( GLContext ${SANDBOX_DIR}/classes/GLContext.h ${SANDBOX_DIR}/classes/GLContext.cpp )
+set( OpenGL ${SANDBOX_DIR}/classes/OpenGL.h ${SANDBOX_DIR}/classes/OpenGL.cpp )
+
 
 set( Texture2D ${SANDBOX_DIR}/classes/Texture2D.h ${SANDBOX_DIR}/classes/Texture2D.cpp )
 
@@ -83,12 +85,15 @@ source_group( file_utils FILES ${FileUtils}
 source_group( scheduler FILES ${TimeScheduler} )
 source_group( auto_release FILES ${AutoReleasePool} 
 						   	     ${Ref} )
-source_group( input FILES ${InputController} )
+source_group( input FILES ${InputListener} )
 source_group( light FILES ${DirectLightSource} 
 						  ${Flashlight} 
 						  ${PointLightSource} )
 source_group( render FILES ${GLRender} )
-source_group( view FILES ${GLView} )
+source_group( gl FILES 
+						${GLContext}
+						${OpenGL} 
+						)
 source_group( textures FILES ${Texture2D} )
 source_group( shader FILES ${ShaderProgram} )
 source_group( camera FILES ${Camera} 
@@ -118,12 +123,13 @@ set( SANDBOX_SRC ${VECommon}
 				 ${TimeScheduler}
 				 ${AutoReleasePool}
 				 ${Ref}
-				 ${InputController}
+				 ${InputListener}
 				 ${DirectLightSource}
 				 ${Flashlight}
 				 ${PointLightSource}
 				 ${GLRender}
-				 ${GLView}
+				 ${GLContext}
+				 ${OpenGL}
 				 ${Texture2D}
 				 ${ShaderProgram}
 				 ${Camera}

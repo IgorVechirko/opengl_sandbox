@@ -1,7 +1,7 @@
 #include "CameraMovementController.h"
 
 #include "Camera.h"
-#include "GLView.h"
+#include "GLContext.h"
 #include "TimeScheduler.h"
 
 
@@ -22,9 +22,9 @@ CameraMovementController::CameraMovementController()
 }
 CameraMovementController::~CameraMovementController()
 {
-	if( getInputController()->getInputCondtrollerListener() == this )
+	if( getGLContext()->getInputListener() == this )
 	{
-		getInputController()->setInputCondtrollerListener( nullptr );
+		getGLContext()->setInputListener( nullptr );
 	}
 
 	getTimeScheduler()->delUpdateFunc( this );
@@ -121,7 +121,7 @@ void CameraMovementController::onKeyPressed( int aKeyCode )
 	}
 	else if ( aKeyCode == GLFW_KEY_ESCAPE )
 	{
-		glfwSetWindowShouldClose( getGLView()->getWindow(), 1 );
+		getGLContext()->setWindowSouldClose();
 	}
 }
 void CameraMovementController::onKeyPressRepeate( int aKeyCode )
@@ -199,7 +199,7 @@ void CameraMovementController::onWheelScrolled( float xoffset, float yoffset )
 {
 	_fovAngle += yoffset;
 
-	auto wndSize = getGLView()->getWindowSize();
+	auto wndSize = getGLContext()->getWindowSize();
 
 	if ( _camera )
 		_camera->setProjection( glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f ) );
@@ -208,7 +208,7 @@ void CameraMovementController::initWithCamera( Camera* camera )
 {
 	_camera = camera;
 
-	auto wndSize = getGLView()->getWindowSize();
+	auto wndSize = getGLContext()->getWindowSize();
 	Mat4 projection = glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f );
 
 	if ( _camera )
@@ -220,5 +220,5 @@ void CameraMovementController::initWithCamera( Camera* camera )
 
 	getTimeScheduler()->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );
 
-	getInputController()->setInputCondtrollerListener( this );
+	getGLContext()->setInputListener( this );
 }

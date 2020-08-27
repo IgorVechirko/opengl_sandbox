@@ -1,14 +1,13 @@
 #ifndef CameraMovementController_H
 #define CameraMovementController_H
 
-#include "InputController.h"
-#include "WorkingScopeProvider.h"
+#include "InputListener.h"
 
 _VESTART
 
 class Camera;
 class CameraMovementController
-	: public InputControllerListener
+	: public InputListener
 	, public WorkingScopeProvider
 {
 	enum class eAxisDirection

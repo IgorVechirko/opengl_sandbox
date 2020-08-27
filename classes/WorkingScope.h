@@ -8,21 +8,18 @@
 
 _VESTART
 
-
-class GLView;
+class GLContext;
 class GLRender;
 class FileUtils;
 class ResourcesManager;
 class AutoReleasePool;
 class TimeScheduler;
-class InputController;
 class Scene;
 
 
 class WorkingScope
 {
-
-	GLView* _view;
+	GLContext* _glContext;
 	GLRender* _render;
 
 	FileUtils* _fileUtils;
@@ -31,8 +28,6 @@ class WorkingScope
 	AutoReleasePool* _releasePool;
 
 	TimeScheduler* _timeScheduler;
-
-	InputController* _inputController;
 
 	Scene* _scene;
 
@@ -51,7 +46,7 @@ public:
 	WorkingScope();
 	virtual ~WorkingScope();
 
-	GLView* getGLView();
+	GLContext* getGLContext();
 	GLRender* getRender();
 
 	FileUtils* getFileUtils();
@@ -60,8 +55,6 @@ public:
 	AutoReleasePool* getReleasePool();
 
 	TimeScheduler* getTimeScheduler();
-
-	InputController* getInputController();
 
 	void setScene( Scene* scene );
 	Scene* getScene();

@@ -6,14 +6,13 @@
 
 _VESTART
 
-class GLView;
 class GLRender;
 class FileUtils;
 class ResourcesManager;
 class AutoReleasePool;
 class TimeScheduler;
-class InputController;
 class Scene;
+class GLContext;
 class WorkingScopeProvider
 {
 	TEST_FRIEND
@@ -29,7 +28,7 @@ public:
 	void setScope( WorkingScope* scope );
 	WorkingScope* getScope();
 
-	GLView* getGLView();
+	GLContext* getGLContext();
 	GLRender* getRender();
 
 	FileUtils* getFileUtils();
@@ -38,8 +37,6 @@ public:
 	AutoReleasePool* getReleasePool();
 
 	TimeScheduler* getTimeScheduler();
-
-	InputController* getInputController();
 
 	Scene* getScene();
 

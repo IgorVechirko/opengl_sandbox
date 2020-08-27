@@ -136,7 +136,6 @@ struct LightAttenuationCoefs
 	{};
 };
 
-#define DEF_WIN_SIZE Size( 1024, 768 )
 #define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );\
 							   printf( "\n" );
 
