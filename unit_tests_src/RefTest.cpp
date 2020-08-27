@@ -10,7 +10,7 @@ namespace UnitTests
 
 	void RefTest::membersInit()
 	{
-		VEngine::Ref ref;
+		GLSandbox::Ref ref;
 
 		BOOST_TEST( ref._refCount == 0, "_refCout wrong init" );
 		BOOST_TEST( ref._autorelesed == false, "_autorelesed wrong init" );
@@ -19,13 +19,13 @@ namespace UnitTests
 
 	void RefTest::retainMethodWork()
 	{
-		VEngine::Ref ref;
+		GLSandbox::Ref ref;
 		ref.retain();
 
 		BOOST_TEST( ref._refCount == 1, "wron single retain" );
 
 
-		VEngine::Ref ref2;
+		GLSandbox::Ref ref2;
 		for( int i = 0; i < 10; i++ )
 			ref2.retain();
 
@@ -34,14 +34,14 @@ namespace UnitTests
 
 	void RefTest::releaseMethodWork()
 	{
-		VEngine::Ref ref;
+		GLSandbox::Ref ref;
 		ref._refCount = 12;
 		ref.release();
 
 		BOOST_TEST( ref._refCount == 11, "wrong single release" );
 
 
-		VEngine::Ref ref2;
+		GLSandbox::Ref ref2;
 		ref2._refCount = 12;
 		for( int i = 0 ; i < 10; i++ )
 			ref2.release();

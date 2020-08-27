@@ -1,11 +1,10 @@
 #include "CameraMovementController.h"
 
-#include "Camera.h"
 #include "GLContext.h"
 #include "TimeScheduler.h"
 
 
-namespace GLSandbox
+namespace WorkingTests
 {
 	CameraMovementController::CameraMovementController()
 		: _cameraMoveSpeed( 2.0f )
@@ -182,8 +181,8 @@ namespace GLSandbox
 			_mousePos.y = static_cast<float>(posY);
 		}
 	
-		Vec newMousePos( posX, posY );
-		Vec moveDelta = _mousePos - newMousePos;
+		GLSandbox::Vec newMousePos( posX, posY );
+		GLSandbox::Vec moveDelta = _mousePos - newMousePos;
 		moveDelta *= _cameraRotateSensitivity;
 
 		if ( _camera )
@@ -203,18 +202,18 @@ namespace GLSandbox
 		if ( _camera )
 			_camera->setProjection( glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f ) );
 	}
-	void CameraMovementController::initWithCamera( Camera* camera )
+	void CameraMovementController::initWithCamera( GLSandbox::Camera* camera )
 	{
 		_camera = camera;
 
 		auto wndSize = getGLContext()->getWindowSize();
-		Mat4 projection = glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f );
+		GLSandbox::Mat4 projection = glm::perspective( glm::radians(_fovAngle), wndSize.x/wndSize.y, 0.1f, 10000.0f );
 
 		if ( _camera )
 		{
 			_camera->setProjection( projection );
 
-			_camera->setPosition( Vec3( 0.0f, 0.0f, 27.0f ) );
+			_camera->setPosition(GLSandbox:: Vec3( 0.0f, 0.0f, 27.0f ) );
 		}
 
 		getTimeScheduler()->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );

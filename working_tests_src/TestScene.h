@@ -2,24 +2,20 @@
 #define TestScene_H
 
 #include "Scene.h"
-
 #include "CameraMovementController.h"
+#include "Sprite.h"
 
-namespace GLSandbox
+namespace WorkingTests
 {
-
-
-	class Cube;
-	class Sprite;
-	class TestScene : public Scene
+	class TestScene : public GLSandbox::Scene
 	{
 
 		typedef Scene Parent;
 
 		CameraMovementController _cameraMovementController;
 
-		Sprite* _mySprite;
-		Node* _cube; 
+		GLSandbox::Sprite* _mySprite;
+		GLSandbox::Node* _cube; 
 
 	protected:
 
@@ -35,8 +31,8 @@ namespace GLSandbox
 
 	};
 
-
 }
+
 
 
 #endif

@@ -11,7 +11,7 @@ namespace UnitTests
 	void TimeSchedulerTest::membersInit()
 	{
 
-		VEngine::TimeScheduler scheduler(nullptr);
+		GLSandbox::TimeScheduler scheduler(nullptr);
 
 		BOOST_TEST( scheduler._providedScope == nullptr, "working scope wrong init" );
 
@@ -22,7 +22,7 @@ namespace UnitTests
 	void TimeSchedulerTest::addUpdateFuncMethodWork()
 	{
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 
 			struct SchedulerTest
 			{
@@ -38,7 +38,7 @@ namespace UnitTests
 		}
 		
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 
 			struct SchedulerTest
 			{
@@ -54,7 +54,7 @@ namespace UnitTests
 		}
 
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 			scheduler.addUpdateFunc( nullptr, nullptr );
 
 			auto findIt = scheduler._updateFunctions.find( nullptr );
@@ -73,7 +73,7 @@ namespace UnitTests
 		}
 
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 
 			struct SchedulerTest
 			{
@@ -89,7 +89,7 @@ namespace UnitTests
 		}
 
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 
 			struct SchedulerTest
 			{
@@ -128,7 +128,7 @@ namespace UnitTests
 	void TimeSchedulerTest::delUpdateFuncMethodWork()
 	{
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 
 			struct SchedulerTest
 			{
@@ -145,7 +145,7 @@ namespace UnitTests
 		}
 
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 
 			struct SchedulerTest
 			{
@@ -188,7 +188,7 @@ namespace UnitTests
 	void TimeSchedulerTest::doMainTickMethodWork()
 	{
 		{
-			VEngine::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler(nullptr);
 
 			struct SchedulerTest
 			{

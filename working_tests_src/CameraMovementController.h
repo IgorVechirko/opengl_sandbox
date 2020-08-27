@@ -3,14 +3,13 @@
 
 #include "InputListener.h"
 #include "WorkingScopeProvider.h"
+#include "Camera.h"
 
-namespace GLSandbox
+namespace WorkingTests
 {
-
-	class Camera;
 	class CameraMovementController
-		: public InputListener
-		, public WorkingScopeProvider
+		: public GLSandbox::InputListener
+		, public GLSandbox::WorkingScopeProvider
 	{
 		enum class eAxisDirection
 		{
@@ -30,9 +29,9 @@ namespace GLSandbox
 		float _cameraRotateSensitivity;
 
 		bool _mousePosInited;
-		Vec _mousePos;
+		GLSandbox::Vec _mousePos;
 
-		Camera* _camera;
+		GLSandbox::Camera* _camera;
 
 
 		void updaeTime( float deltaTme );
@@ -54,7 +53,7 @@ namespace GLSandbox
 		CameraMovementController();
 		virtual ~CameraMovementController();
 
-		void initWithCamera( Camera* camera );
+		void initWithCamera( GLSandbox::Camera* camera );
 
 	};
 
