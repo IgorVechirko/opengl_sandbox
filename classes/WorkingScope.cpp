@@ -15,19 +15,16 @@
 _USEVE
 
 WorkingScope::WorkingScope()
-	: _render( nullptr )
-	, _glContext( nullptr )
+	: _glContext( nullptr )
 	, _fileUtils( nullptr )
 	, _resMng( nullptr )
 	, _releasePool( nullptr )
 	, _timeScheduler( nullptr )
-	, _scene( nullptr )
 {
 	_fileUtils = new FileUtils(this);
 	_resMng = new ResourcesManager(this);
 
-	_glContext = createObjWithInitializer<GLContext>(&GLContext::initWithWndSize, 1024, 768 );
-	_render = new GLRender(this);
+	_glContext = createScopedWithInitializer<GLContext>(&GLContext::initWithWndSize, 1024, 768 );
 
 	_releasePool = new AutoReleasePool(this);
 
@@ -39,17 +36,10 @@ WorkingScope::~WorkingScope()
 	delete _resMng;
 
 	delete _glContext;
-	delete _render;
 
 	delete _releasePool;
 
 	delete _timeScheduler;
-}
-void WorkingScope::drawScene()
-{
-	_releasePool->checkPool();
-
-	_render->drawScene( _scene );
 }
 float WorkingScope::calcDeltaTime()
 {
@@ -67,54 +57,44 @@ void WorkingScope::loopWait()
 }
 GLContext* WorkingScope::getGLContext()
 {
+	_ASSERT( _glContext );
 	return _glContext;
-}
-GLRender* WorkingScope::getRender()
-{
-	return _render;
 }
 FileUtils* WorkingScope::getFileUtils()
 {
+	_ASSERT( _fileUtils );
 	return _fileUtils;
 }
 ResourcesManager* WorkingScope::getResMng()
 {
+	_ASSERT( _resMng );
 	return _resMng;
 }
 AutoReleasePool* WorkingScope::getReleasePool()
 {
+	_ASSERT( _releasePool );
 	return _releasePool;
 }
 TimeScheduler* WorkingScope::getTimeScheduler()
 {
+	_ASSERT( _timeScheduler );
 	return _timeScheduler;
-}
-void WorkingScope::setScene( Scene* scene )
-{
-	if ( _scene != scene )
-	{
-		if ( _scene )
-		{
-			_scene->release();
-		}
-
-		_scene = scene;
-	}
-}
-Scene* WorkingScope::getScene()
-{
-	return _scene;
 }
 void WorkingScope::startWork()
 {
 	_resMng->init();
+	_glContext->setScene( createNode<TestScene>() );
 
-	setScene( createNode<TestScene>() );
-
-	while( !glfwWindowShouldClose( _glContext->getWindow() ) )
+	while( !_glContext->windowShouldClose() )
 	{
 		_timeScheduler->onMainTick( calcDeltaTime() );
-		drawScene();
+
+		_releasePool->checkPool();
+
+		_glContext->drawScene();
+
 		loopWait();
+
+		glfwPollEvents();
 	}
 }

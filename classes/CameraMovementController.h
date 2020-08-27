@@ -2,6 +2,7 @@
 #define CameraMovementController_H
 
 #include "InputListener.h"
+#include "WorkingScopeProvider.h"
 
 _VESTART
 

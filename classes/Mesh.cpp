@@ -5,6 +5,7 @@
 #include "DirectLightSource.h"
 #include "WorkingScope.h"
 #include "Scene.h"
+#include "GLContext.h"
 
 
 _USEVE
@@ -62,22 +63,22 @@ void Mesh::draw( ShaderProgram* shader, const Mat4& transform )
 	{
 		shader->useProgram();
 
-		if ( getScope()->getScene()->getCamera() )
+		if ( getGLContext()->getScene()->getCamera() )
 		{
 			GLuint transModelLoc = glGetUniformLocation( shader->getProgramID(), "model" );
 			GLuint transViewLoc = glGetUniformLocation ( shader->getProgramID(), "view" );
 			GLuint transProjLoc = glGetUniformLocation( shader->getProgramID(), "projection" );
 
-			auto& cameraPos = getScope()->getScene()->getCamera()->getPosition();
+			auto& cameraPos = getGLContext()->getScene()->getCamera()->getPosition();
 
 			glProgramUniformMatrix4fv( shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
-			glProgramUniformMatrix4fv( shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getView() ) );
-			glProgramUniformMatrix4fv( shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getProjection() ) );
+			glProgramUniformMatrix4fv( shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
+			glProgramUniformMatrix4fv( shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
 		}
 
-		if ( getScope()->getScene() && getScope()->getScene()->getDirectionLight() )
+		if ( getGLContext()->getScene()->getDirectionLight() )
 		{
-			auto lightSource = getScope()->getScene()->getDirectionLight();
+			auto lightSource = getGLContext()->getScene()->getDirectionLight();
 			LightProperties lightProperties = lightSource->getLightProperties();
 			glm::vec3 lightDirection = lightSource->getDirection();
 

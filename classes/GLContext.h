@@ -2,11 +2,13 @@
 #define GLContext_H
 
 #include "VECommon.h"
+#include "GLRender.h"
 
 _VESTART
 
 class InputListener;
-class GLContext
+class Scene;
+class GLContext : public WorkingScopeProvider
 {
 
 	GLFWwindow* _window;
@@ -14,6 +16,9 @@ class GLContext
 	GLuint _windowHeight;
 
 	InputListener* _inputListener;
+
+	Scene* _scene;
+	GLRender _render;
 
 
 	void onKeyPressed( int keyCode, int scancode, int action, int modifiers );
@@ -34,12 +39,19 @@ public:
 	GLFWwindow* getWindow();
 	Size getWindowSize();
 
+	void makeCurrent();
+
 	void setInputListener( InputListener* lst );
 	InputListener* getInputListener();
 
-	void setWindowSouldClose();
+	void setWindowShouldClose();
+	bool windowShouldClose();
 
-	void makeCurrent();
+	GLRender* getRender();
+
+	void setScene( Scene* scene );
+	Scene* getScene();
+	void drawScene();
 
 
 	friend void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers );

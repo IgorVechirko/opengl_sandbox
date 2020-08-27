@@ -6,12 +6,10 @@
 
 _VESTART
 
-class GLRender;
 class FileUtils;
 class ResourcesManager;
 class AutoReleasePool;
 class TimeScheduler;
-class Scene;
 class GLContext;
 class WorkingScopeProvider
 {
@@ -29,8 +27,7 @@ public:
 	WorkingScope* getScope();
 
 	GLContext* getGLContext();
-	GLRender* getRender();
-
+	
 	FileUtils* getFileUtils();
 	ResourcesManager* getResMng();
 
@@ -38,7 +35,6 @@ public:
 
 	TimeScheduler* getTimeScheduler();
 
-	Scene* getScene();
 
 
 	template< typename ObjType, typename InitializerType, typename... InitArgsTypes > 

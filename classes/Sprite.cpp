@@ -5,6 +5,7 @@
 #include "ResourcesManager.h"
 #include "Scene.h"
 #include "Camera.h"
+#include "GLContext.h"
 
 _USEVE
 
@@ -50,8 +51,8 @@ void Sprite::draw( GLRender* render, const Mat4& transform )
 		GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(transform) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getScene()->getCamera()->getView() ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getScene()->getCamera()->getProjection() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
 	}
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );

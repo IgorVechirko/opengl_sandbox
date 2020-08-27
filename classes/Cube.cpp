@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "WorkingScope.h"
 #include "Camera.h"
+#include "GLContext.h"
 
 #include "ResourcesManager.h"
 
@@ -160,11 +161,11 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		GLuint transProjLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
 		GLuint cameraPosLoc = glGetUniformLocation( _shader->getProgramID(), "cameraPos" );
 
-		auto& cameraPos = getScope()->getScene()->getCamera()->getPosition();
+		auto& cameraPos = getGLContext()->getScene()->getCamera()->getPosition();
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), transModelLoc, 1, GL_FALSE, glm::value_ptr( transform ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getView() ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( getScope()->getScene()->getCamera()->getProjection() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transViewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), transProjLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
 		glProgramUniform3f( _shader->getProgramID(), cameraPosLoc, cameraPos.x, cameraPos.y, cameraPos.z );
 
 
@@ -179,9 +180,9 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		glProgramUniform1f( _shader->getProgramID(), materialShininessLoc, _material.shininess );
 
 		
-		if ( getScope()->getScene() && getScope()->getScene()->getDirectionLight() )
+		if ( getGLContext()->getScene()->getDirectionLight() )
 		{
-			auto lightSource = getScope()->getScene()->getDirectionLight();
+			auto lightSource = getGLContext()->getScene()->getDirectionLight();
 			LightProperties lightProperties = lightSource->getLightProperties();
 			glm::vec3 lightDirection = lightSource->getDirection();
 
@@ -197,9 +198,9 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 		}
 		
 
-		if ( getScope()->getScene() )
+		if ( getGLContext()->getScene() )
 		{
-			const auto& pointLights = getScope()->getScene()->getPointLights();
+			const auto& pointLights = getGLContext()->getScene()->getPointLights();
 
 			GLuint ponitLighstCount = glGetUniformLocation( _shader->getProgramID(), "pointLightsCount" );
 			glProgramUniform1i( _shader->getProgramID(), ponitLighstCount, pointLights.size() );
@@ -227,7 +228,7 @@ void Cube::draw( GLRender* render, const Mat4& transform )
 				glProgramUniform3f( _shader->getProgramID(), specularLoc, light->getLightProperties().specular.r, light->getLightProperties().specular.g, light->getLightProperties().specular.b );
 			}
 
-			const auto& flashlights = getScope()->getScene()->getFlashLights();
+			const auto& flashlights = getGLContext()->getScene()->getFlashLights();
 
 			GLuint flashlightsCount = glGetUniformLocation( _shader->getProgramID(), "flashlightsCount" );
 			glProgramUniform1i( _shader->getProgramID(), flashlightsCount, flashlights.size() );

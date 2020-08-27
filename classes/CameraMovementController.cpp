@@ -121,7 +121,7 @@ void CameraMovementController::onKeyPressed( int aKeyCode )
 	}
 	else if ( aKeyCode == GLFW_KEY_ESCAPE )
 	{
-		getGLContext()->setWindowSouldClose();
+		getGLContext()->setWindowShouldClose();
 	}
 }
 void CameraMovementController::onKeyPressRepeate( int aKeyCode )

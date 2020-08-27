@@ -9,18 +9,13 @@
 _VESTART
 
 class GLContext;
-class GLRender;
 class FileUtils;
 class ResourcesManager;
 class AutoReleasePool;
 class TimeScheduler;
-class Scene;
-
-
 class WorkingScope
 {
 	GLContext* _glContext;
-	GLRender* _render;
 
 	FileUtils* _fileUtils;
 	ResourcesManager* _resMng;
@@ -29,13 +24,8 @@ class WorkingScope
 
 	TimeScheduler* _timeScheduler;
 
-	Scene* _scene;
-
 	std::chrono::time_point<std::chrono::steady_clock> _lastUpdateTime;
 
-
-
-	void drawScene();
 
 	float calcDeltaTime();
 
@@ -47,7 +37,6 @@ public:
 	virtual ~WorkingScope();
 
 	GLContext* getGLContext();
-	GLRender* getRender();
 
 	FileUtils* getFileUtils();
 	ResourcesManager* getResMng();
@@ -55,9 +44,6 @@ public:
 	AutoReleasePool* getReleasePool();
 
 	TimeScheduler* getTimeScheduler();
-
-	void setScene( Scene* scene );
-	Scene* getScene();
 
 	void startWork();
 

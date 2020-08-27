@@ -2,6 +2,7 @@
 
 #include "OpenGL.h"
 #include "InputListener.h"
+#include "Scene.h"
 
 _USEVE
 
@@ -47,6 +48,8 @@ GLContext::GLContext()
 	: _window( nullptr )
 	, _windowWidth( 0 )
 	, _windowHeight( 0 )
+	, _render( nullptr )
+	, _scene( nullptr )
 {
 }
 GLContext::~GLContext()
@@ -105,6 +108,8 @@ bool GLContext::initWithWndSize( GLuint wndWidth, GLuint wndHeight )
 		glfwSetScrollCallback( _window, wheelScrolled );
 
 		glfwSetInputMode( _window, GLFW_CURSOR, GLFW_CURSOR_DISABLED );
+
+		_render.setScope( getScope() );
 	}
 	else
 	{
@@ -121,6 +126,14 @@ Size GLContext::getWindowSize()
 {
 	return Size( _windowWidth, _windowHeight );
 }
+void GLContext::makeCurrent()
+{
+	glfwMakeContextCurrent(_window);
+}
+bool GLContext::windowShouldClose()
+{
+	return glfwWindowShouldClose(_window );
+}
 void GLContext::setInputListener( InputListener* lst )
 {
 	_inputListener = lst;
@@ -129,11 +142,35 @@ InputListener* GLContext::getInputListener()
 {
 	return _inputListener;
 }
-void GLContext::setWindowSouldClose()
+void GLContext::setWindowShouldClose()
 {
 	glfwSetWindowShouldClose( _window, 1 );
 }
-void GLContext::makeCurrent()
+GLRender* GLContext::getRender()
 {
-	glfwMakeContextCurrent(_window);
+	return &_render;
+}
+void GLContext::setScene( Scene* scene )
+{
+	if( scene )
+	{
+		if ( _scene != scene )
+		{
+			if ( _scene )
+				_scene->release();
+
+			scene->retain();
+			_scene = scene;
+		}
+	}
+}
+Scene* GLContext::getScene()
+{
+	_ASSERT( _scene != nullptr );
+	return _scene;
+}
+void GLContext::drawScene()
+{
+	_ASSERT(_scene);
+	_render.drawScene( _scene );
 }

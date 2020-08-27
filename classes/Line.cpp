@@ -4,6 +4,7 @@
 #include "ResourcesManager.h"
 #include "Camera.h"
 #include "Scene.h"
+#include "GLContext.h"
 
 _USEVE
 
@@ -75,8 +76,8 @@ void Line::draw( GLRender* render, const Mat4& parentTransform )
 		auto colorLoc = glGetUniformLocation( _shader->getProgramID(), "color" );
 
 		glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(parentTransform) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getScene()->getCamera()->getView() ) );
-		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getScene()->getCamera()->getProjection() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
+		glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
 		glProgramUniform4f( _shader->getProgramID(), colorLoc, _color.r, _color.g, _color.b, _color.a );
 	}
 
