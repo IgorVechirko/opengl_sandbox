@@ -3,14 +3,16 @@
 
 
 #include "Node.h"
+#include "NodeExtestions.h"
 
 namespace GLSandbox
 {
 
-
 	class Texture2D;
 	class ShaderProgram;
-	class Cube : public Node
+	class Cube 
+		: public Node
+		, public MaterialProtocol
 	{
 		typedef Node Parent;
 	
@@ -25,10 +27,6 @@ namespace GLSandbox
 		GLuint _vao;
 		GLuint _ebo;
 
-		Material _material;
-
-		void updateVertices( const Size& size );
-
 	protected:
 
 		virtual void draw( GLRender* render, const Mat4& transform ) override;
@@ -42,9 +40,6 @@ namespace GLSandbox
 
 		void setShaderProgram( ShaderProgram* program );
 		void setTexture( Texture2D* texture );
-
-		void setMaterial( const Material& material );
-		const Material& getMaterial();
 	};
 
 

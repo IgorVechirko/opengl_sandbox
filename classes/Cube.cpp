@@ -28,9 +28,7 @@ namespace GLSandbox
 	{
 	}
 
-	void Cube::updateVertices( const Size& size )
-	{
-	}
+
 	bool Cube::initWithFilePath( const std::string& filePath )
 	{	
 		Node::init();
@@ -175,10 +173,12 @@ namespace GLSandbox
 			GLuint materialSpecularLoc = glGetUniformLocation( _shader->getProgramID(), "material.specular" );
 			GLuint materialShininessLoc = glGetUniformLocation( _shader->getProgramID(), "material.shininess" );
 
-			glProgramUniform3f( _shader->getProgramID(), materialAmbientLoc, _material.ambient.r, _material.ambient.g, _material.ambient.b );
-			glProgramUniform3f( _shader->getProgramID(), materialDiffuseLoc, _material.diffuse.r, _material.diffuse.g, _material.diffuse.b );
-			glProgramUniform3f( _shader->getProgramID(), materialSpecularLoc, _material.specular.r, _material.specular.g, _material.specular.b );
-			glProgramUniform1f( _shader->getProgramID(), materialShininessLoc, _material.shininess );
+			const auto& material = getMaterial();
+
+			glProgramUniform3f( _shader->getProgramID(), materialAmbientLoc, material.ambient.r, material.ambient.g, material.ambient.b );
+			glProgramUniform3f( _shader->getProgramID(), materialDiffuseLoc, material.diffuse.r, material.diffuse.g, material.diffuse.b );
+			glProgramUniform3f( _shader->getProgramID(), materialSpecularLoc, material.specular.r, material.specular.g, material.specular.b );
+			glProgramUniform1f( _shader->getProgramID(), materialShininessLoc, material.shininess );
 
 		
 			if ( getGLContext()->getScene()->getDirectionLight() )
@@ -273,14 +273,6 @@ namespace GLSandbox
 			//glBindTexture(GL_TEXTURE_2D, NULL );
 	
 		glBindVertexArray(0);
-	}
-	void Cube::setMaterial( const Material& material )
-	{
-		_material = material;
-	}
-	const Material& Cube::getMaterial()
-	{
-		return _material;
 	}
 
 }

@@ -1,7 +1,7 @@
 #ifndef OpenGL_H
 #define OpenGL_H
 
-#include "VECommon.h"
+#include "Common.h"
 
 namespace GLSandbox
 {

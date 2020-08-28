@@ -21,9 +21,6 @@ namespace GLSandbox
 	Sprite::~Sprite()
 	{
 	}
-	void Sprite::updateVertices( const Size& size )
-	{
-	}
 	bool Sprite::initWithFilePath( const std::string& filePath )
 	{	
 		Node::init();

@@ -1,7 +1,7 @@
 #ifndef WorkingScopeProvider_H
 #define WorkingScopeProvider_H
 
-#include "VECommon.h"
+#include "Common.h"
 #include "WorkingScope.h"
 
 namespace GLSandbox

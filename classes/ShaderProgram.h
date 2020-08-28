@@ -1,7 +1,7 @@
 #ifndef ShaderProgram_H
 #define ShaderProgram_H
 
-#include "VECommon.h"
+#include "Common.h"
 
 #include "Ref.h"
 

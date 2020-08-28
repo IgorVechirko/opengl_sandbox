@@ -1,11 +1,37 @@
 #ifndef Mesh_H
 #define Mesh_H
 
-#include "VECommon.h"
+#include "Common.h"
 #include "WorkingScopeProvider.h"
 
 namespace GLSandbox
 {
+
+	struct PosNormaTextCordVertex
+	{
+		Vec3 pos;
+		Vec3 normal;
+		glm::vec2 textCord;
+	};
+
+	enum class eTextureType
+	{
+		NONE,
+		DIFFUSE_LIHGT_MAP,
+		SPECULAR_LIHGT_MAP
+	};
+
+	struct Texture
+	{
+		GLint id;
+		eTextureType type;
+
+		Texture()
+			: id( 0 )
+			, type( eTextureType::NONE )
+		{
+		}
+	};
 
 	class ShaderProgram;
 	class Mesh 

@@ -3,7 +3,7 @@
 
 #include "Mesh.h"
 #include "Node.h"
-#include "NodeExtentions.h"
+#include "NodeExtestions.h"
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"

@@ -1,4 +1,4 @@
-#include "NodeExtentions.h"
+#include "NodeExtestions.h"
 
 #include "ShaderProgram.h"
 
@@ -68,6 +68,25 @@ namespace GLSandbox
 	}
 
 
+	
+
+	MaterialProtocol::MaterialProtocol()
+	{
+	}
+	MaterialProtocol::~MaterialProtocol()
+	{
+	}
+	void MaterialProtocol::setMaterial( const Material& materila )
+	{
+		_material = materila;
+	}
+	const Material& MaterialProtocol::getMaterial()
+	{
+		return _material;
+	}
+
+
+
 	LigthPropertiesProtocol::LigthPropertiesProtocol()
 	{
 	}
@@ -82,6 +101,8 @@ namespace GLSandbox
 	{
 		return _lightProperties;
 	}
+
+
 
 
 	LightAttenuationProtocol::LightAttenuationProtocol()

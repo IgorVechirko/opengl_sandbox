@@ -1,7 +1,8 @@
-#ifndef NodeExtentions_H
-#define NodeExtentions_H
+#ifndef NodeExtestions_H
+#define NodeExtestions_H
 
-#include "VECommon.h"
+#include "Common.h"
+#include "MaterialsAndLightsTypes.h"
 
 namespace GLSandbox
 {
@@ -24,7 +25,7 @@ namespace GLSandbox
 		virtual ~Size3Protocol();
 
 		virtual void setSize3( const Size3& size );
-		const Size3& getSize3();
+		virtual const Size3& getSize3();
 	};
 
 	class ShaderProgram;
@@ -44,7 +45,7 @@ namespace GLSandbox
 		virtual ~ShaderProtocol();
 
 		virtual void setShaderProgram( ShaderProgram* program );
-		ShaderProgram* getShaderProgram();
+		virtual ShaderProgram* getShaderProgram();
 
 	};
 
@@ -64,11 +65,27 @@ namespace GLSandbox
 		virtual ~ColorProtocol();
 
 		virtual void setColor( const RGBA& color );
-		const RGBA& getColor();
+		virtual const RGBA& getColor();
 
 
 	};
 
+	class MaterialProtocol
+	{
+
+		Material _material;
+
+	protected:
+
+		MaterialProtocol();
+
+	public:
+
+		virtual ~MaterialProtocol();
+
+		virtual void setMaterial( const Material& material );
+		virtual const Material& getMaterial();
+	};
 
 	class LigthPropertiesProtocol
 	{
@@ -86,7 +103,7 @@ namespace GLSandbox
 		virtual ~LigthPropertiesProtocol();
 
 		virtual void setLightProperties( const LightProperties& properties );
-		const LightProperties& getLightProperties();
+		virtual const LightProperties& getLightProperties();
 
 
 	};
@@ -107,8 +124,8 @@ namespace GLSandbox
 
 		virtual ~LightAttenuationProtocol();
 
-		void setAttenuation( const LightAttenuationCoefs& attenuation );
-		const LightAttenuationCoefs& getAttenuation();
+		virtual void setAttenuation( const LightAttenuationCoefs& attenuation );
+		virtual const LightAttenuationCoefs& getAttenuation();
 
 
 	};

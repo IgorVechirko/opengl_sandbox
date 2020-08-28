@@ -26,7 +26,7 @@ set( RAPIDJSON_INCLUDE_DIR ${GL_SANDBOX_DIR}/externals/rapidjson/include )
 #sources
 set( GL_SANDBOX_SRC_DIR ${GL_SANDBOX_DIR}/classes )
 
-set( VECommon ${GL_SANDBOX_SRC_DIR}/VECommon.h ${GL_SANDBOX_SRC_DIR}/VECommon.cpp )
+set( Common ${GL_SANDBOX_SRC_DIR}/Common.h ${GL_SANDBOX_SRC_DIR}/Common.cpp )
 
 set( FileUtils ${GL_SANDBOX_SRC_DIR}/FileUtils.h ${GL_SANDBOX_SRC_DIR}/FileUtils.cpp )
 set( ResourcesManager ${GL_SANDBOX_SRC_DIR}/ResourcesManager.h ${GL_SANDBOX_SRC_DIR}/ResourcesManager.cpp )
@@ -57,12 +57,11 @@ set( Camera ${GL_SANDBOX_SRC_DIR}/Camera.h ${GL_SANDBOX_SRC_DIR}/Camera.cpp )
 set( Scene ${GL_SANDBOX_SRC_DIR}/Scene.h ${GL_SANDBOX_SRC_DIR}/Scene.cpp )
 
 set( Node ${GL_SANDBOX_SRC_DIR}/Node.h ${GL_SANDBOX_SRC_DIR}/Node.cpp )
-set( NodeExtentions ${GL_SANDBOX_SRC_DIR}/NodeExtentions.h ${GL_SANDBOX_SRC_DIR}/NodeExtentions.cpp )
+set( NodeExtestions ${GL_SANDBOX_SRC_DIR}/NodeExtestions.h ${GL_SANDBOX_SRC_DIR}/NodeExtestions.cpp )
 
 set( AxisesOrigin ${GL_SANDBOX_SRC_DIR}/AxisesOrigin.h ${GL_SANDBOX_SRC_DIR}/AxisesOrigin.cpp )
 set( ColorCube ${GL_SANDBOX_SRC_DIR}/ColorCube.h ${GL_SANDBOX_SRC_DIR}/ColorCube.cpp )
 set( Cube ${GL_SANDBOX_SRC_DIR}/Cube.h ${GL_SANDBOX_SRC_DIR}/Cube.cpp )
-set( CubeVertices ${GL_SANDBOX_SRC_DIR}/CubeVertices.h ${GL_SANDBOX_SRC_DIR}/CubeVertices.cpp )
 set( Line ${GL_SANDBOX_SRC_DIR}/Line.h ${GL_SANDBOX_SRC_DIR}/Line.cpp )
 set( Mesh ${GL_SANDBOX_SRC_DIR}/Mesh.h ${GL_SANDBOX_SRC_DIR}/Mesh.cpp )
 set( Model ${GL_SANDBOX_SRC_DIR}/Model.h ${GL_SANDBOX_SRC_DIR}/Model.cpp )
@@ -71,7 +70,8 @@ set( Sprite ${GL_SANDBOX_SRC_DIR}/Sprite.h ${GL_SANDBOX_SRC_DIR}/Sprite.cpp )
 set( TestScene ${GL_SANDBOX_SRC_DIR}/TestScene.h ${GL_SANDBOX_SRC_DIR}/TestScene.cpp )
 set( Main ${GL_SANDBOX_SRC_DIR}/main.cpp )
 
-set( TestScopeDelegat ${GL_SANDBOX_SRC_DIR}/TestScopeDelegat.h ${GL_SANDBOX_SRC_DIR}/TestScopeDelegat.cpp )
+set( DrawTypes ${GL_SANDBOX_SRC_DIR}/DrawTypes.h ${GL_SANDBOX_SRC_DIR}/DrawTypes.cpp )
+set( MaterialsAndLightsTypes ${GL_SANDBOX_SRC_DIR}/MaterialsAndLightsTypes.h ${GL_SANDBOX_SRC_DIR}/MaterialsAndLightsTypes.cpp )
 
 set( WorkingScope 
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.h
@@ -86,7 +86,7 @@ set( WorkingScope
 
 
 
-source_group( common FILES ${VECommon} )
+source_group( common FILES ${Common} )
 
 source_group( file_utils FILES ${FileUtils} 
 						 	   ${ResourcesManager} )
@@ -111,7 +111,6 @@ source_group( camera FILES ${Camera} )
 source_group( nodes FILES ${AxisesOrigin} 
 						  ${ColorCube} 
 						  ${Cube} 
-						  ${CubeVertices} 
 						  ${Line} 
 						  ${Mesh} 
 						  ${Model} 
@@ -119,7 +118,7 @@ source_group( nodes FILES ${AxisesOrigin}
 )
 source_group( nodes\\base FILES 
 								${Node} 
-								${NodeExtentions} 
+								${NodeExtestions} 
 )
 source_group( nodes\\light FILES 
 						${DirectLightSource} 
@@ -130,10 +129,13 @@ source_group( nodes\\scene FILES ${Scene} )
 
 source_group( working_scope FILES ${WorkingScope} )
 
+source_group( data_structures FILES 
+									${MaterialsAndLightsTypes}
+									${DrawTypes}
+)
 
 
-
-set( SANDBOX_SRC ${VECommon}
+set( SANDBOX_SRC ${Common}
 				 ${FileUtils}
 				 ${ResourcesManager}
 				 ${TimeScheduler}
@@ -151,16 +153,17 @@ set( SANDBOX_SRC ${VECommon}
 				 ${Camera}
 				 ${Scene}
 				 ${Node}
-				 ${NodeExtentions}
+				 ${NodeExtestions}
 				 ${AxisesOrigin}
 				 ${ColorCube}
 				 ${Cube}
-				 ${CubeVertices}
 				 ${Line}
 				 ${Mesh}
 				 ${Model}
 				 ${Sprite}
 				 ${WorkingScope}
+				 ${MaterialsAndLightsTypes}
+				 ${DrawTypes}
 )
 
 #setup project

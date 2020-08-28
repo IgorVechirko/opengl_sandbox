@@ -1,4 +1,4 @@
-#include "VECommon.h"
+#include "Common.h"
 
 namespace GLSandbox
 {

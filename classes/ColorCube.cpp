@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "ResourcesManager.h"
 #include "GLContext.h"
+#include "DrawTypes.h"
 
 namespace GLSandbox
 {

@@ -3,7 +3,7 @@
 
 
 #include "Node.h"
-#include "NodeExtentions.h"
+#include "NodeExtestions.h"
 
 namespace GLSandbox
 {

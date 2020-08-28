@@ -1,7 +1,7 @@
 #ifndef GLContext_H
 #define GLContext_H
 
-#include "VECommon.h"
+#include "Common.h"
 #include "GLRender.h"
 
 namespace GLSandbox

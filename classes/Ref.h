@@ -1,7 +1,7 @@
 #ifndef Ref_H
 #define Ref_H
 
-#include "VECommon.h"
+#include "Common.h"
 
 namespace GLSandbox
 {

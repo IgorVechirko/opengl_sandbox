@@ -24,7 +24,6 @@ namespace GLSandbox
 		GLuint _vao;
 		GLuint _ebo;
 
-		void updateVertices( const Size& size );
 
 	protected:
 

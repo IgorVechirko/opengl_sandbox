@@ -2,12 +2,11 @@
 #define DirectLightSource_H
 
 #include "Node.h"
-#include "NodeExtentions.h"
+#include "NodeExtestions.h"
 
 
 namespace GLSandbox
 {
-
 	class Line;
 	class DirectLightSource : public Node
 							, public LigthPropertiesProtocol
