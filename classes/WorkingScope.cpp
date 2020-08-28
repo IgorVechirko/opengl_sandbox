@@ -66,7 +66,16 @@ namespace GLSandbox
 	}
 	void WorkingScope::startWithDelegate( ScopeDelegate* delegate )
 	{
-		_delegate = delegate ? delegate : createScoped<ScopeDelegate>();
+		if ( delegate )
+		{
+			_delegate = delegate;
+		}
+		else
+		{
+			_defaultDelegate = std::shared_ptr<ScopeDelegate>(createScoped<ScopeDelegate>());
+			_delegate = _defaultDelegate.get();
+		}
+
 		_delegate->setScope( this );
 
 		_resMng->init();

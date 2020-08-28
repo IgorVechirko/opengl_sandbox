@@ -25,6 +25,7 @@ namespace GLSandbox
 		TimeScheduler* _timeScheduler;
 
 		ScopeDelegate* _delegate;
+		std::shared_ptr<ScopeDelegate> _defaultDelegate;
 
 	public:
 
