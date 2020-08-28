@@ -1,9 +1,6 @@
 #ifndef InputListener_H
 #define InputListener_H
 
-
-#include "Common.h"
-
 namespace GLSandbox
 {
 

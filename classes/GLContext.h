@@ -1,7 +1,6 @@
 #ifndef GLContext_H
 #define GLContext_H
 
-#include "Common.h"
 #include "GLRender.h"
 
 namespace GLSandbox
@@ -47,6 +46,8 @@ namespace GLSandbox
 
 		void setWindowShouldClose();
 		bool windowShouldClose();
+
+		void swapBuffers();
 
 		void poolEvents();
 

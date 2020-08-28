@@ -1,7 +1,6 @@
 #include "AxisesOrigin.h"
 
 #include "Line.h"
-#include "WorkingScope.h"
 
 
 namespace GLSandbox

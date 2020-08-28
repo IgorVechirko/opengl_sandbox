@@ -1,7 +1,5 @@
 #include "PointLightSource.h"
 
-#include "ShaderProgram.h"
-
 
 #include "ColorCube.h"
 

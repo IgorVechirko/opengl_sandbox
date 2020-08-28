@@ -5,7 +5,6 @@
 
 #include "Ref.h"
 
-
 namespace GLSandbox
 {
 

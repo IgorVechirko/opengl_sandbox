@@ -135,6 +135,10 @@ namespace GLSandbox
 	{
 		return glfwWindowShouldClose(_window );
 	}
+	void GLContext::swapBuffers()
+	{
+		glfwSwapBuffers( _window );
+	}
 	void GLContext::setInputListener( InputListener* lst )
 	{
 		_inputListener = lst;

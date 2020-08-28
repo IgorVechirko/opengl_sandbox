@@ -27,7 +27,7 @@ namespace GLSandbox
 
 		scene->visit( this );
 
-		glfwSwapBuffers( getGLContext()->getWindow() );
+		getGLContext()->swapBuffers();
 
 	}
 

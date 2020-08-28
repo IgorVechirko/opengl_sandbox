@@ -6,7 +6,6 @@
 namespace GLSandbox
 {
 
-	class AutoReleasePool;
 	class Texture2D : public Ref
 	{
 		int _width;
