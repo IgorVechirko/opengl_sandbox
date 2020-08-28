@@ -38,8 +38,22 @@ __TYPE__( __TYPE__&& ) = delete;\
 const __TYPE__& operator= ( const __TYPE__& ) = delete;\
 const __TYPE__& operator= ( __TYPE__&& ) = delete;\
 
-#define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );\
-								   printf( "\n" );
+class Console
+{
+
+public:
+	
+	static void log()
+	{
+		std::cout << std::endl;
+	}
+	template<typename FirstType, typename... Types>
+	static void log( const FirstType& firstArg, const Types&... otherArgs )
+	{
+		std::cout << firstArg;
+		log( otherArgs... );
+	}
+};
 
 namespace GLSandbox
 {

@@ -75,11 +75,11 @@ namespace GLSandbox
 
 		if( errorDesc )
 		{
-			LOG( "%s. Code %d: %s", desc.c_str(), errorCode, errorDesc );
+			Console::log( desc, ". Code ", errorCode, ": ", errorDesc );
 		}
 		else
 		{
-			LOG( "%s. Code %d.", desc.c_str(), errorCode );
+			Console::log( desc, ". Code ", errorCode );
 		}
 	}
 	void OpenGL::processGlewError( const std::string& desc, GLenum errorCode )
@@ -88,11 +88,11 @@ namespace GLSandbox
 
 		if( errorDesc )
 		{
-			LOG( "%s. Code %d: %s", desc.c_str(), errorCode, errorDesc );
+			Console::log( desc, ". Code ", errorCode, ": ", errorDesc );
 		}
 		else
 		{
-			LOG( "%s. Code %d.", desc.c_str(), errorCode );
+			Console::log( desc, ". Code ", errorCode );
 		}
 	}
 	void OpenGL::poolEvents()

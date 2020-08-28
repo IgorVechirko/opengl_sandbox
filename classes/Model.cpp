@@ -136,7 +136,7 @@ namespace GLSandbox
 		}
 		else
 		{
-			LOG( "Texture failed to load at path: %s", filename.c_str() );
+			//LOG( "Texture failed to load at path: %s", filename.c_str() );
 			SOIL_free_image_data(image);
 		}
 

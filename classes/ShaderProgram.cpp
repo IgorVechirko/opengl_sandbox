@@ -31,7 +31,7 @@ namespace GLSandbox
 		{
 			GLchar* infoLog = new GLchar[logSize];
 			glGetShaderInfoLog(vertexShader, logSize, NULL, infoLog);
-			std::cout << "vertex shader compile error: " + std::string(infoLog);
+			Console::log( "vertex shader compile error: ", infoLog );
 			delete[] infoLog;
 			logSize = 0;
 
@@ -48,7 +48,7 @@ namespace GLSandbox
 		{
 			GLchar* infoLog = new GLchar[logSize];
 			glGetShaderInfoLog(fragmentShader, logSize, NULL, infoLog);
-			std::cout << "fragment shader compile error: " + std::string(infoLog);
+			Console::log( "fragment shader compile error: ", infoLog );
 			delete[] infoLog;
 			logSize = 0;
 
@@ -66,7 +66,7 @@ namespace GLSandbox
 		{
 			GLchar* infoLog = new GLchar[logSize];
 			glGetProgramInfoLog( _programID, logSize, NULL, infoLog );
-			std::cout << "program compile error: " + std::string(infoLog);
+			Console::log( "program compile error: ", infoLog );
 			delete [] infoLog;
 
 			return false;
