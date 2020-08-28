@@ -181,6 +181,9 @@ target_include_directories( gl_sandbox PUBLIC
 
 if ( MSVC )
     target_compile_options( gl_sandbox PRIVATE /MP )
+
+	target_compile_options( gl_sandbox PRIVATE /wd4018)
+
 endif()
 
 

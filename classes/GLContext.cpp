@@ -88,7 +88,7 @@ namespace GLSandbox
 	{
 		if ( _inputListener )
 		{
-			_inputListener->onWheelScrolled( xoffset, yoffset );
+			_inputListener->onWheelScrolled( static_cast<float>(xoffset), static_cast<float>(yoffset) );
 		}
 	}
 	bool GLContext::initWithWndSize( GLuint wndWidth, GLuint wndHeight )
