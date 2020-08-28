@@ -38,25 +38,27 @@ __TYPE__( __TYPE__&& ) = delete;\
 const __TYPE__& operator= ( const __TYPE__& ) = delete;\
 const __TYPE__& operator= ( __TYPE__&& ) = delete;\
 
-class Console
-{
-
-public:
-	
-	static void log()
-	{
-		std::cout << std::endl;
-	}
-	template<typename FirstType, typename... Types>
-	static void log( const FirstType& firstArg, const Types&... otherArgs )
-	{
-		std::cout << firstArg;
-		log( otherArgs... );
-	}
-};
 
 namespace GLSandbox
 {
+	class Console
+	{
+
+	public:
+	
+		static void log()
+		{
+			std::cout << std::endl;
+		}
+		template<typename FirstType, typename... Types>
+		static void log( const FirstType& firstArg, const Types&... otherArgs )
+		{
+			std::cout << firstArg;
+			log( otherArgs... );
+		}
+	};
+
+
 	typedef glm::vec2 Size;
 	typedef glm::vec2 Size2;
 	typedef glm::vec3 Size3;
