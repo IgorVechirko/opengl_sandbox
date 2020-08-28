@@ -36,8 +36,7 @@ namespace GLSandbox
 
 		bool initWithWndSize( GLuint wndWidth, GLuint wndHeight );
 
-		GLFWwindow* getWindow();
-		Size getWindowSize();
+		Size getWindowSize() const;
 
 		void makeCurrent();
 

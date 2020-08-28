@@ -16,6 +16,7 @@ namespace GLSandbox
 
 		typedef Node Parent;
 
+
 		ColorCube* _cube;
 
 		protected:

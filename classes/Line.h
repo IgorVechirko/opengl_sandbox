@@ -37,10 +37,10 @@ namespace GLSandbox
 		virtual ~Line();
 
 		void setStartPos( const Vec3& pos );
-		const Vec3& getStartPos();
+		const Vec3& getStartPos() const;
 
 		void setFinishPos( const Vec3& pos );
-		const Vec3& getFinishPos();
+		const Vec3& getFinishPos() const;
 
 
 	};

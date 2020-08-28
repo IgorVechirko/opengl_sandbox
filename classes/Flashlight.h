@@ -36,13 +36,13 @@ namespace GLSandbox
 		virtual void setLightProperties( const LightProperties& properties ) override;
 
 		void setDirection( const Vec3& direction );
-		const Vec3& getDirection();
+		const Vec3& getDirection() const;
 
 		void setCutOffAngle( float angle );
-		float getCutOffAngle();
+		float getCutOffAngle() const;
 
 		void setOuterCutOffAngle( float angle );
-		float getOuterCutOffAngle();
+		float getOuterCutOffAngle() const;
 
 	};
 

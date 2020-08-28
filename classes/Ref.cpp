@@ -29,7 +29,7 @@ namespace GLSandbox
 	{
 		_refCount++;
 	}
-	unsigned int Ref::getRefCount()
+	unsigned int Ref::getRefCount() const
 	{
 		return _refCount;
 	}

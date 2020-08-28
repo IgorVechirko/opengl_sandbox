@@ -38,7 +38,7 @@ namespace GLSandbox
 			virtual ~DirectLightSource();
 
 			void setDirection( const Vec3& aDirection );
-			const Vec3& getDirection();
+			const Vec3& getDirection() const;
 
 			virtual void setLightProperties( const LightProperties& properties ) override;
 

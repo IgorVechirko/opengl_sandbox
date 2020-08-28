@@ -25,7 +25,7 @@ namespace GLSandbox
 		virtual ~Size3Protocol();
 
 		virtual void setSize3( const Size3& size );
-		virtual const Size3& getSize3();
+		virtual const Size3& getSize3() const;
 	};
 
 	class ShaderProgram;
@@ -45,7 +45,7 @@ namespace GLSandbox
 		virtual ~ShaderProtocol();
 
 		virtual void setShaderProgram( ShaderProgram* program );
-		virtual ShaderProgram* getShaderProgram();
+		virtual ShaderProgram* getShaderProgram() const;
 
 	};
 
@@ -65,7 +65,7 @@ namespace GLSandbox
 		virtual ~ColorProtocol();
 
 		virtual void setColor( const RGBA& color );
-		virtual const RGBA& getColor();
+		virtual const RGBA& getColor() const;
 
 
 	};
@@ -84,7 +84,7 @@ namespace GLSandbox
 		virtual ~MaterialProtocol();
 
 		virtual void setMaterial( const Material& material );
-		virtual const Material& getMaterial();
+		virtual const Material& getMaterial() const;
 	};
 
 	class LigthPropertiesProtocol
@@ -103,7 +103,7 @@ namespace GLSandbox
 		virtual ~LigthPropertiesProtocol();
 
 		virtual void setLightProperties( const LightProperties& properties );
-		virtual const LightProperties& getLightProperties();
+		virtual const LightProperties& getLightProperties() const;
 
 
 	};
@@ -125,7 +125,7 @@ namespace GLSandbox
 		virtual ~LightAttenuationProtocol();
 
 		virtual void setAttenuation( const LightAttenuationCoefs& attenuation );
-		virtual const LightAttenuationCoefs& getAttenuation();
+		virtual const LightAttenuationCoefs& getAttenuation() const;
 
 
 	};

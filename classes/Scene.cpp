@@ -55,7 +55,7 @@ namespace GLSandbox
 			_pointLights.push_back( light );
 		}
 	}
-	const std::vector<PointLightSource*> Scene::getPointLights()
+	const std::vector<PointLightSource*>& Scene::getPointLights() const
 	{
 		return _pointLights;
 	}
@@ -67,7 +67,7 @@ namespace GLSandbox
 			_flashlights.push_back( light );
 		}
 	}
-	const std::vector<Flashlight*>& Scene::getFlashLights()
+	const std::vector<Flashlight*>& Scene::getFlashLights() const
 	{
 		return _flashlights;
 	}

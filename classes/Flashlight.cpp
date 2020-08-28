@@ -37,7 +37,7 @@ namespace GLSandbox
 	{
 		_direction = glm::normalize(direction);
 	}
-	const Vec3& Flashlight::getDirection()
+	const Vec3& Flashlight::getDirection() const
 	{
 		return _direction;
 	}
@@ -53,7 +53,7 @@ namespace GLSandbox
 			}
 		}
 	}
-	float Flashlight::getCutOffAngle()
+	float Flashlight::getCutOffAngle() const
 	{
 		return _cutOffAngle;
 	}
@@ -69,7 +69,7 @@ namespace GLSandbox
 			}
 		}
 	}
-	float Flashlight::getOuterCutOffAngle()
+	float Flashlight::getOuterCutOffAngle() const
 	{
 		return _outerCutOffAngle;
 	}

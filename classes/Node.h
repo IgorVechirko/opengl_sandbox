@@ -26,9 +26,6 @@ namespace GLSandbox
 
 		std::string _name;
 
-		int _zOrder;
-
-		bool _isChildrenSorted;
 		std::vector<Node*> _children;
 
 	protected:
@@ -42,8 +39,6 @@ namespace GLSandbox
 
 		virtual void visit( GLRender* render, const Mat4& parentTransform );
 		virtual void draw( GLRender* render, const Mat4& transform ){};
-
-		void sortChildren();
 
 	public:
 
@@ -64,11 +59,8 @@ namespace GLSandbox
 		void setName( const std::string& name );
 		const std::string& getName() const;
 
-		void setZorder( int zOrder );
-		int getZorder();
-
 		void setOriginShift( const Vec3& shift );
-		const Vec3& getOriginShift();
+		const Vec3& getOriginShift() const;
 
 		void addChild( Node* child );
 		void removeChild( Node* child );
@@ -76,11 +68,11 @@ namespace GLSandbox
 		void scheduleUpdate();
 		void unscheduleUpdate();
 
-		const std::vector<Node*>& getChildren();
-		Node* getChild( const std::string& childName );
+		const std::vector<Node*>& getChildren() const;
+		Node* getChild( const std::string& childName ) const;
 	
 		template<typename T> 
-		T getChild( const std::string& childName )
+		T getChild( const std::string& childName ) const
 		{
 			return dynamic_cast<T>( getChild( childName ) );
 		}

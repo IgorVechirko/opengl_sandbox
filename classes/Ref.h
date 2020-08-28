@@ -22,7 +22,7 @@ namespace GLSandbox
 
 		void release();
 		void retain();
-		unsigned int getRefCount();
+		unsigned int getRefCount() const;
 
 		void autorelease( AutoReleasePool* pool );
 	};

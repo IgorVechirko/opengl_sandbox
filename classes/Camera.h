@@ -8,11 +8,11 @@ namespace GLSandbox
 		typedef Node Parent;
 
 		Mat4 _projection;
-		Mat4 _view;
+		mutable Mat4 _view;
 
-		bool _viewDirty;
+		mutable bool _viewDirty;
 
-		Vec3 _cameraFront;
+		mutable Vec3 _cameraFront;
 		const Vec3 _cameraUp;
 
 		float _cameraPitch;
@@ -34,7 +34,7 @@ namespace GLSandbox
 		const Mat4& getProjection() const;
 
 		void setView( const Mat4& view );
-		const Mat4& getView();
+		const Mat4& getView() const;
 
 		virtual void setPosition( const Vec3& pos ) override;
 

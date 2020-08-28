@@ -29,15 +29,15 @@ namespace GLSandbox
 
 		return true;
 	}
-	GLuint Texture2D::getTextureID()
+	GLuint Texture2D::getTextureID() const
 	{
 		return _textureID;
 	}
-	int Texture2D::getWidth()
+	int Texture2D::getWidth() const
 	{
 		return _width;
 	}
-	int Texture2D::getHeight()
+	int Texture2D::getHeight() const
 	{
 		return _height;
 	}

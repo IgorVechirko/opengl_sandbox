@@ -20,10 +20,10 @@ namespace GLSandbox
 
 			bool initWithFilePath( const std::string& filePath );
 
-			GLuint getTextureID();
+			GLuint getTextureID() const;
 
-			int getWidth();
-			int getHeight();
+			int getWidth() const;
+			int getHeight() const;
 	};
 
 }

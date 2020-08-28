@@ -42,7 +42,7 @@ namespace GLSandbox
 		_view = view;
 		_viewDirty = true;
 	}
-	const Mat4& Camera::getView()
+	const Mat4& Camera::getView() const
 	{
 		if ( _viewDirty )
 		{

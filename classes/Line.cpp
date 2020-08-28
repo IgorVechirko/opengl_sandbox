@@ -87,7 +87,7 @@ namespace GLSandbox
 		glDrawArrays( GL_LINE_STRIP, 0, 2 );
 		glBindVertexArray( 0 );
 
-	}
+	} 
 	void Line::setStartPos( const Vec3& pos )
 	{
 		if ( _startPos != pos )
@@ -96,7 +96,7 @@ namespace GLSandbox
 			_verticesDirty = true;
 		}
 	}
-	const Vec3& Line::getStartPos()
+	const Vec3& Line::getStartPos() const
 	{
 		return _startPos;
 	}
@@ -108,7 +108,7 @@ namespace GLSandbox
 			_verticesDirty = true;
 		}
 	}
-	const Vec3& Line::getFinishPos()
+	const Vec3& Line::getFinishPos() const
 	{
 		return _finishPos;
 	}

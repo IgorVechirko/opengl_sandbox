@@ -57,7 +57,7 @@ namespace GLSandbox
 
 		updateDirectionLines();
 	}
-	const Vec3& DirectLightSource::getDirection()
+	const Vec3& DirectLightSource::getDirection() const
 	{
 		return _direction;
 	}

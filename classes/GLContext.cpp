@@ -119,11 +119,7 @@ namespace GLSandbox
 
 		return true;
 	}
-	GLFWwindow* GLContext::getWindow()
-	{
-		return _window;
-	}
-	Size GLContext::getWindowSize()
+	Size GLContext::getWindowSize() const
 	{
 		return Size( _windowWidth, _windowHeight );
 	}

@@ -63,41 +63,12 @@ namespace GLSandbox
 	{
 		auto transform = parentTransform * getTransform();
 
-		if( !_isChildrenSorted )
+		for( auto child :_children )
 		{
-			sortChildren();
-		}
-
-		int i = 0;
-		for( ; i < _children.size(); i++ )
-		{
-			if ( _children[i]->_zOrder < 0 )
-			{
-				_children[i]->visit( render, transform );
-			}
-			else
-			{
-				break;
-			}
+			child->visit( render, transform );
 		}
 
 		draw( render, transform );
-
-		for( ; i < _children.size(); i ++)
-		{
-			_children[i]->visit( render, transform );
-		}
-	}
-	void Node::sortChildren()
-	{
-		if ( !_isChildrenSorted )
-		{
-			std::sort( _children.begin(), _children.end(), [](Node* a, Node* b)-> bool {
-				return a->_zOrder > b->_zOrder;
-			});
-
-			_isChildrenSorted = true;
-		}
 	}
 	void Node::setPosition( const Vec3& pos )
 	{
@@ -143,14 +114,6 @@ namespace GLSandbox
 	{
 		return _name;
 	}
-	void Node::setZorder( int zOrder )
-	{
-		_zOrder = zOrder;
-	}
-	int Node::getZorder()
-	{
-		return _zOrder;
-	}
 	void Node::setOriginShift( const Vec3& shift )
 	{
 		if ( _originShift != shift )
@@ -159,7 +122,7 @@ namespace GLSandbox
 			_transformDirty = true;
 		}
 	}
-	const Vec3& Node::getOriginShift()
+	const Vec3& Node::getOriginShift() const
 	{
 		return _originShift;
 	}
@@ -167,7 +130,6 @@ namespace GLSandbox
 	{
 		if ( _children.end() == std::find( _children.begin(), _children.end(), child ) )
 		{
-			_isChildrenSorted = false;
 			_children.push_back( child );
 		}
 	}
@@ -187,15 +149,15 @@ namespace GLSandbox
 	{
 		getTimeScheduler()->delUpdateFunc( this );
 	}
-	const std::vector<Node*>& Node::getChildren()
+	const std::vector<Node*>& Node::getChildren() const
 	{
 		return _children;
 	}
-	Node* Node::getChild( const std::string& childName )
+	Node* Node::getChild( const std::string& childName ) const
 	{
 		auto findIt = _children.end();
 	
-		for( auto& child : _children )
+		for( auto child : _children )
 		{
 			if ( child->_name == childName )
 			{

@@ -25,7 +25,7 @@ namespace GLSandbox
 
 			bool initWithSrc( const std::string& verSrc, const std::string& fragSrc );
 
-			GLuint getProgramID();
+			GLuint getProgramID() const;
 
 			void useProgram();
 	};

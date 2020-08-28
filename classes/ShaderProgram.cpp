@@ -77,7 +77,7 @@ namespace GLSandbox
 
 		return true;
 	}
-	GLuint ShaderProgram::getProgramID()
+	GLuint ShaderProgram::getProgramID() const
 	{
 		return _programID;
 	}

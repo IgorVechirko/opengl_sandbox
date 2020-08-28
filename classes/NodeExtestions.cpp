@@ -17,7 +17,7 @@ namespace GLSandbox
 	{
 		_size = size;
 	}
-	const Size3& Size3Protocol::getSize3()
+	const Size3& Size3Protocol::getSize3() const
 	{
 		return _size;
 	}
@@ -45,7 +45,7 @@ namespace GLSandbox
 				_shader->retain();
 		}
 	}
-	ShaderProgram* ShaderProtocol::getShaderProgram()
+	ShaderProgram* ShaderProtocol::getShaderProgram() const
 	{
 		return _shader;
 	}
@@ -62,7 +62,7 @@ namespace GLSandbox
 	{
 		_color = color;
 	}
-	const RGBA& ColorProtocol::getColor()
+	const RGBA& ColorProtocol::getColor() const
 	{
 		return _color;
 	}
@@ -80,7 +80,7 @@ namespace GLSandbox
 	{
 		_material = materila;
 	}
-	const Material& MaterialProtocol::getMaterial()
+	const Material& MaterialProtocol::getMaterial() const
 	{
 		return _material;
 	}
@@ -97,7 +97,7 @@ namespace GLSandbox
 	{
 		_lightProperties = properties;
 	}
-	const LightProperties& LigthPropertiesProtocol::getLightProperties()
+	const LightProperties& LigthPropertiesProtocol::getLightProperties() const
 	{
 		return _lightProperties;
 	}
@@ -115,7 +115,7 @@ namespace GLSandbox
 	{
 		_LightAttenuation = attenuation;
 	}
-	const LightAttenuationCoefs& LightAttenuationProtocol::getAttenuation()
+	const LightAttenuationCoefs& LightAttenuationProtocol::getAttenuation() const
 	{
 		return _LightAttenuation;
 	}

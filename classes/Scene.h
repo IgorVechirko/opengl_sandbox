@@ -41,10 +41,10 @@ namespace GLSandbox
 		DirectLightSource* getDirectionLight();
 
 		void addPointLight( PointLightSource* light );
-		const std::vector<PointLightSource*> getPointLights();
+		const std::vector<PointLightSource*>& getPointLights() const;
 
 		void addFlashlight( Flashlight* light );
-		const std::vector<Flashlight*>& getFlashLights();
+		const std::vector<Flashlight*>& getFlashLights() const;
 
 		void setCamera( Camera* camera );
 		Camera* getCamera();
