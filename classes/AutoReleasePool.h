@@ -17,6 +17,7 @@ namespace GLSandbox
 
 		AutoReleasePool( WorkingScope* scope );
 		virtual ~AutoReleasePool();
+		MAKE_UNCOPYABLE(AutoReleasePool);
 
 		void releaseRef( Ref* ref );
 		void addRef( Ref* newRef );

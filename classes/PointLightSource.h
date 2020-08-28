@@ -28,6 +28,7 @@ namespace GLSandbox
 
 			PointLightSource();
 			virtual ~PointLightSource();
+			MAKE_UNCOPYABLE(PointLightSource);
 
 			virtual void setLightProperties( const LightProperties& properties ) override;
 		

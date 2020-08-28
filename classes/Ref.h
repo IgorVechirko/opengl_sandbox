@@ -19,6 +19,7 @@ namespace GLSandbox
 
 		Ref();
 		virtual ~Ref();
+		MAKE_UNCOPYABLE(Ref);
 
 		void release();
 		void retain();

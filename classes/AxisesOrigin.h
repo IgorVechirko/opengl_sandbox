@@ -19,6 +19,7 @@ namespace GLSandbox
 
 		AxisesOrigin();
 		virtual ~AxisesOrigin();
+		MAKE_UNCOPYABLE(AxisesOrigin);
 
 	};
 

@@ -35,6 +35,7 @@ namespace GLSandbox
 
 		Cube();
 		virtual ~Cube();
+		MAKE_UNCOPYABLE(Cube);
 
 		bool initWithFilePath( const std::string& filePath );
 

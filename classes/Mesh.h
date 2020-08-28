@@ -51,8 +51,6 @@ namespace GLSandbox
 
 		void setupMesh();
 
-		std::string getTextureTypeStrFromEnum( eTextureType type );
-
 	public:
 	
 			Mesh( WorkingScope* scope, const std::vector<PosNormaTextCordVertex>& vetrices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures );

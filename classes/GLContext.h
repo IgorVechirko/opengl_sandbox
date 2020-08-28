@@ -29,10 +29,8 @@ namespace GLSandbox
 	public:
 
 		GLContext();
-		GLContext( const GLContext& ) = delete;
-		GLContext( GLContext&& ) = delete;
-		GLContext& operator= (const GLContext& ) = delete;
 		virtual ~GLContext();
+		MAKE_UNCOPYABLE(GLContext);
 
 		bool initWithWndSize( GLuint wndWidth, GLuint wndHeight );
 

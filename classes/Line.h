@@ -35,6 +35,7 @@ namespace GLSandbox
 
 		Line();
 		virtual ~Line();
+		MAKE_UNCOPYABLE(Line);
 
 		void setStartPos( const Vec3& pos );
 		const Vec3& getStartPos() const;

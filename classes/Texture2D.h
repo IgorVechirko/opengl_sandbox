@@ -17,6 +17,7 @@ namespace GLSandbox
 
 			Texture2D();
 			virtual ~Texture2D();
+			MAKE_UNCOPYABLE(Texture2D);
 
 			bool initWithFilePath( const std::string& filePath );
 

@@ -22,6 +22,7 @@ namespace GLSandbox
 
 			ShaderProgram();
 			virtual ~ShaderProgram();
+			MAKE_UNCOPYABLE(ShaderProgram);
 
 			bool initWithSrc( const std::string& verSrc, const std::string& fragSrc );
 

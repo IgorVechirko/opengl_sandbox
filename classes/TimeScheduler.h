@@ -23,6 +23,7 @@ namespace GLSandbox
 
 		TimeScheduler( WorkingScope* scope );
 		virtual ~TimeScheduler();
+		MAKE_UNCOPYABLE(TimeScheduler);
 
 		void addUpdateFunc( updateFunc func, void* target );
 		void delUpdateFunc( void* target );

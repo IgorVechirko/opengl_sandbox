@@ -40,6 +40,7 @@ namespace GLSandbox
 
 		ColorCube();
 		virtual ~ColorCube();
+		MAKE_UNCOPYABLE(ColorCube);
 
 		virtual void setCubeSize( float size );
 	};

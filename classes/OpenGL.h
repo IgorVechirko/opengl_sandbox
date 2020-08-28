@@ -11,13 +11,10 @@ namespace GLSandbox
 	{
 
 		OpenGL();
-		OpenGL( const OpenGL& ) = delete;
-		OpenGL( OpenGL&& ) = delete;
-		const OpenGL& operator= ( const OpenGL& ) = delete;
+		virtual ~OpenGL();
+		MAKE_UNCOPYABLE(OpenGL);
 
 	public:
-
-		virtual ~OpenGL();
 
 		static OpenGL* getInstance();
 

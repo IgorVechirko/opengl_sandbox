@@ -29,6 +29,7 @@ namespace GLSandbox
 
 		Camera();
 		virtual ~Camera();
+		MAKE_UNCOPYABLE(Camera);
 
 		void setProjection( const Mat4& projection );
 		const Mat4& getProjection() const;

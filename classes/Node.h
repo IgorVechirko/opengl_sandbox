@@ -44,6 +44,7 @@ namespace GLSandbox
 
 		Node();
 		virtual ~Node();
+		MAKE_UNCOPYABLE(Node);
 
 		bool init();
 

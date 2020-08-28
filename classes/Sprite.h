@@ -33,6 +33,7 @@ namespace GLSandbox
 
 		Sprite();
 		virtual ~Sprite();
+		MAKE_UNCOPYABLE(Sprite);
 
 		bool initWithFilePath( const std::string& filePath );
 

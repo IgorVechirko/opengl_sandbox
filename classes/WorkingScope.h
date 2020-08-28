@@ -30,10 +30,7 @@ namespace GLSandbox
 	public:
 
 		WorkingScope();
-		WorkingScope( const WorkingScope& scope ) = delete;
-		WorkingScope( WorkingScope&& scope ) = delete;
-		const WorkingScope& operator= ( const WorkingScope& scope ) = delete;
-		const WorkingScope& operator= ( WorkingScope&& scope ) = delete;
+		MAKE_UNCOPYABLE( WorkingScope );
 	
 		virtual ~WorkingScope();
 

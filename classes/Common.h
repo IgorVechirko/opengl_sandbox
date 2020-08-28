@@ -32,6 +32,12 @@
 	#define TEST_FRIEND
 #endif
 
+#define MAKE_UNCOPYABLE(__TYPE__)\
+__TYPE__( const __TYPE__& ) = delete;\
+__TYPE__( __TYPE__&& ) = delete;\
+const __TYPE__& operator= ( const __TYPE__& ) = delete;\
+const __TYPE__& operator= ( __TYPE__&& ) = delete;\
+
 #define LOG( __FORMAT__, ... ) printf( __FORMAT__, __VA_ARGS__ );\
 								   printf( "\n" );
 

@@ -36,6 +36,7 @@ namespace GLSandbox
 
 			DirectLightSource();
 			virtual ~DirectLightSource();
+			MAKE_UNCOPYABLE(DirectLightSource);
 
 			void setDirection( const Vec3& aDirection );
 			const Vec3& getDirection() const;

@@ -15,6 +15,8 @@ namespace GLSandbox
 		FileUtils( WorkingScope* scope );
 		virtual ~FileUtils();
 
+		MAKE_UNCOPYABLE(FileUtils);
+
 		void init();
 
 		std::string getStringFromFile( const std::string& aPath );

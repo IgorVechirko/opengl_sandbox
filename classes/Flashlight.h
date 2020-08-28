@@ -32,6 +32,7 @@ namespace GLSandbox
 
 		Flashlight();
 		virtual ~Flashlight();
+		MAKE_UNCOPYABLE(Flashlight);
 	
 		virtual void setLightProperties( const LightProperties& properties ) override;
 

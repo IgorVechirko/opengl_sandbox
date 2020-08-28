@@ -39,6 +39,7 @@ namespace GLSandbox
 
 		Model();
 		virtual ~Model();
+		MAKE_UNCOPYABLE( Model );
 
 		void loadModel( const std::string& path );
 
