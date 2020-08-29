@@ -96,7 +96,8 @@ source_group( file_utils FILES ${FileUtils}
 
 source_group( scheduler FILES ${TimeScheduler} )
 
-source_group( memmory_managment FILES ${Creator} )
+source_group( creator FILES ${Creator} )
+
 source_group( memmory_managment\\auto_release FILES 
 													${AutoReleasePool} 
 						   							${Ref}
