@@ -1,5 +1,5 @@
-#ifndef NodeExtestions_H
-#define NodeExtestions_H
+#ifndef NodeExtensions_H
+#define NodeExtensions_H
 
 #include "Common.h"
 #include "MaterialsAndLightsTypes.h"

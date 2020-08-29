@@ -57,7 +57,7 @@ set( Camera ${GL_SANDBOX_SRC_DIR}/Camera.h ${GL_SANDBOX_SRC_DIR}/Camera.cpp )
 set( Scene ${GL_SANDBOX_SRC_DIR}/Scene.h ${GL_SANDBOX_SRC_DIR}/Scene.cpp )
 
 set( Node ${GL_SANDBOX_SRC_DIR}/Node.h ${GL_SANDBOX_SRC_DIR}/Node.cpp )
-set( NodeExtestions ${GL_SANDBOX_SRC_DIR}/NodeExtestions.h ${GL_SANDBOX_SRC_DIR}/NodeExtestions.cpp )
+set( NodeExtensions ${GL_SANDBOX_SRC_DIR}/NodeExtensions.h ${GL_SANDBOX_SRC_DIR}/NodeExtensions.cpp )
 
 set( AxisesOrigin ${GL_SANDBOX_SRC_DIR}/AxisesOrigin.h ${GL_SANDBOX_SRC_DIR}/AxisesOrigin.cpp )
 set( ColorCube ${GL_SANDBOX_SRC_DIR}/ColorCube.h ${GL_SANDBOX_SRC_DIR}/ColorCube.cpp )
@@ -126,7 +126,7 @@ source_group( nodes FILES ${AxisesOrigin}
 )
 source_group( nodes\\base FILES 
 								${Node} 
-								${NodeExtestions} 
+								${NodeExtensions} 
 )
 source_group( nodes\\light FILES 
 						${DirectLightSource} 
@@ -161,7 +161,7 @@ set( SANDBOX_SRC ${Common}
 				 ${Camera}
 				 ${Scene}
 				 ${Node}
-				 ${NodeExtestions}
+				 ${NodeExtensions}
 				 ${AxisesOrigin}
 				 ${ColorCube}
 				 ${Cube}

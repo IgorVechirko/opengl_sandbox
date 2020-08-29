@@ -11,9 +11,7 @@ namespace GLSandbox
 {
 
 	Sprite::Sprite()
-		: _texture( nullptr )
-		, _shader( nullptr )
-		, _vbo( 0 )
+		: _vbo( 0 )
 		, _vao( 0 )
 		, _ebo( 0 )
 	{
@@ -29,7 +27,7 @@ namespace GLSandbox
 
 		if ( texture )
 		{
-			setTexture( texture );
+			setTexture2D( texture );
 			return true;
 		}
 		else
@@ -37,8 +35,8 @@ namespace GLSandbox
 	}
 	void Sprite::draw( GLRender* render, const Mat4& transform )
 	{
-		if ( _texture )
-			glBindTexture(GL_TEXTURE_2D, _texture->getTextureID() );
+		if ( getTexture2D() )
+			glBindTexture( GL_TEXTURE_2D, getTexture2D()->getTextureID() );
 
 		if( _shader )
 		{
@@ -60,28 +58,14 @@ namespace GLSandbox
 		glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
-	void Sprite::setShaderProgram( ShaderProgram* program )
+	void Sprite::setTexture2D( Texture2D* texture )
 	{
-		if ( program && _shader != program )
+		Texture2DProtocol::setTexture2D( texture );
+
+		if ( texture )
 		{
-			if ( _shader )
-				_shader->release();
 
-			_shader = program;
-			_shader->retain();
-		}
-	}
-	void Sprite::setTexture( Texture2D* texture )
-	{
-		if ( texture && texture != _texture )
-		{
-			if ( _texture )
-				_texture->release();
-
-			_texture = texture;
-			_texture->retain();
-
-			Size textSize( (float)_texture->getWidth(), (float)_texture->getHeight() );
+			Size textSize( static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()) );
 
 			_vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 					  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,

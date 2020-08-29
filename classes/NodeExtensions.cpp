@@ -1,4 +1,4 @@
-#include "NodeExtestions.h"
+#include "NodeExtensions.h"
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"

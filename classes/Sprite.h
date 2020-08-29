@@ -3,19 +3,17 @@
 
 
 #include "Node.h"
+#include "NodeExtensions.h"
 
 namespace GLSandbox
 {
-
-	class Texture2D;
-	class ShaderProgram;
-	class Sprite : public Node
+	class Sprite 
+		: public Node
+		, public ShaderProtocol
+		, public Texture2DProtocol
+			
 	{
 		typedef Node Parent;
-	
-
-		Texture2D* _texture;
-		ShaderProgram* _shader;
 
 		std::vector<GLfloat> _vertices;
 		std::vector<GLuint> _indices;
@@ -37,8 +35,8 @@ namespace GLSandbox
 
 		bool initWithFilePath( const std::string& filePath );
 
-		void setShaderProgram( ShaderProgram* program );
-		void setTexture( Texture2D* texture );
+		virtual void setTexture2D( Texture2D* texture ) override;
+
 	};
 
 
