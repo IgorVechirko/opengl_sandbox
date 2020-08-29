@@ -21,7 +21,7 @@ namespace GLSandbox
 
 		unscheduleUpdate();
 	}
-	const glm::mat4& Node::getTransform()
+	const glm::mat4& Node::getTransform() const
 	{
 		if ( _transformDirty )
 		{

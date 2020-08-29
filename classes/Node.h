@@ -13,8 +13,8 @@ namespace GLSandbox
 		, public WorkingScopeProvider
 	{
 
-		glm::mat4 _transform;
-		bool _transformDirty;
+		mutable glm::mat4 _transform;
+		mutable bool _transformDirty;
 
 	protected:
 
@@ -30,7 +30,7 @@ namespace GLSandbox
 
 	protected:
 
-		const glm::mat4& getTransform();
+		const glm::mat4& getTransform() const;
 
 
 		virtual bool onInit(){ return true;};
