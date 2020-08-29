@@ -17,9 +17,7 @@ namespace GLSandbox
 {
 
 	Cube::Cube()
-		: _texture( nullptr )
-		, _shader( nullptr )
-		, _vbo( 0 )
+		: _vbo( 0 )
 		, _vao( 0 )
 		, _ebo( 0 )
 	{
@@ -37,114 +35,16 @@ namespace GLSandbox
 
 		if ( texture )
 		{
-			setTexture( texture );
+			setTexture2D( texture );
 			return true;
 		}
 		else
 			return false;
 	}
-	void Cube::setShaderProgram( ShaderProgram* program )
-	{
-		if ( program )
-		{
-			if ( _shader )
-				_shader->release();
-
-			_shader = program;
-			_shader->retain();
-		}
-	}
-	void Cube::setTexture( Texture2D* texture )
-	{
-		if ( texture )
-		{
-			if ( _texture )
-				_texture->release();
-
-			_texture = texture;
-			_texture->retain();
-
-			Size textSize( _texture->getWidth(), _texture->getHeight() );
-
-
-			_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
-							 textSize.x, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f, 0.0f, -1.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
-							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f, 0.0f, 0.0f, -1.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
-
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
-							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f,  0.0f,  1.0f,
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
-							0.0f,  textSize.x,  textSize.x,  0.0f, 1.0f,  0.0f,  0.0f,  1.0f,
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
-
-							0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
-							0.0f,  textSize.x, 0.0f,  1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
-							0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
-
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x, 0.0f,  textSize.x,  0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
-							 textSize.x, 0.0f, 0.0f,  1.0f, 1.0f,  0.0f, -1.0f,  0.0f,
-							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
-							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f, -1.0f,  0.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f,
-
-							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,  0.0f,
-							 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
-							 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
-							0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f, 0.0f, 1.0f,  0.0f,
-							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f };
-
-			_indices = { 0, 1, 2,
-						 1, 2, 3 };
-
-			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
-
-			glGenVertexArrays(1, &_vao);
-			glGenBuffers(1, &_vbo);
-			glGenBuffers(1, &_ebo);
-
-			glBindVertexArray( _vao );
-
-			const GLfloat* vertices = &_vertices[0];
-			glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*_vertices.size(), vertices, GL_STATIC_DRAW );
-
-			const GLuint* indices = &_indices[0];
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*_indices.size(), indices, GL_STATIC_DRAW );
-
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0);
-			glEnableVertexAttribArray(0);
-
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GLfloat)));
-			glEnableVertexAttribArray(1);
-
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(5*sizeof(GLfloat)));
-			glEnableVertexAttribArray(2);
-
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glBindVertexArray(0);
-		}
-	}
 	void Cube::draw( GLRender* render, const Mat4& transform )
 	{
-		if ( _texture )
-			glBindTexture(GL_TEXTURE_2D, _texture->getTextureID() );
+		if ( getTexture2D() )
+			glBindTexture(GL_TEXTURE_2D, getTexture2D()->getTextureID() );
 
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
@@ -273,6 +173,91 @@ namespace GLSandbox
 			//glBindTexture(GL_TEXTURE_2D, NULL );
 	
 		glBindVertexArray(0);
+	}
+
+	void Cube::setTexture2D( Texture2D* texture )
+	{
+		Texture2DProtocol::setTexture2D( texture );
+
+		if ( texture )
+		{
+
+			Size textSize( texture->getWidth(), texture->getHeight() );
+
+
+			_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
+							 textSize.x, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f, 0.0f, -1.0f,
+							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
+							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
+							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f, 0.0f, 0.0f, -1.0f,
+							0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
+
+							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
+							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f,  0.0f,  1.0f,
+							 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
+							 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
+							0.0f,  textSize.x,  textSize.x,  0.0f, 1.0f,  0.0f,  0.0f,  1.0f,
+							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
+
+							0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+							0.0f,  textSize.x, 0.0f,  1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+							0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+
+							 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+							 textSize.x,  textSize.x, 0.0f,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+							 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+							 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+							 textSize.x, 0.0f,  textSize.x,  0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+							 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+
+							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+							 textSize.x, 0.0f, 0.0f,  1.0f, 1.0f,  0.0f, -1.0f,  0.0f,
+							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
+							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
+							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f, -1.0f,  0.0f,
+							0.0f, 0.0f, 0.0f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f,
+
+							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
+							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,  0.0f,
+							 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
+							 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
+							0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f, 0.0f, 1.0f,  0.0f,
+							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f };
+
+			_indices = { 0, 1, 2,
+						 1, 2, 3 };
+
+			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
+
+			glGenVertexArrays(1, &_vao);
+			glGenBuffers(1, &_vbo);
+			glGenBuffers(1, &_ebo);
+
+			glBindVertexArray( _vao );
+
+			const GLfloat* vertices = &_vertices[0];
+			glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*_vertices.size(), vertices, GL_STATIC_DRAW );
+
+			const GLuint* indices = &_indices[0];
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*_indices.size(), indices, GL_STATIC_DRAW );
+
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0);
+			glEnableVertexAttribArray(0);
+
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GLfloat)));
+			glEnableVertexAttribArray(1);
+
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(5*sizeof(GLfloat)));
+			glEnableVertexAttribArray(2);
+
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindVertexArray(0);
+		}
 	}
 
 }

@@ -49,6 +49,27 @@ namespace GLSandbox
 
 	};
 
+	class Texture2D;
+	class Texture2DProtocol
+	{
+
+	protected:
+
+		Texture2D* _texture2D;
+
+	protected:
+
+		Texture2DProtocol();
+
+	public:
+
+		virtual ~Texture2DProtocol();
+
+		virtual void setTexture2D( Texture2D* texture );
+		virtual Texture2D* getTexture2D() const;
+
+	};
+
 	class ColorProtocol
 	{
 

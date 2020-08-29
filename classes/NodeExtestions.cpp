@@ -1,6 +1,7 @@
 #include "NodeExtestions.h"
 
 #include "ShaderProgram.h"
+#include "Texture2D.h"
 
 namespace GLSandbox
 {
@@ -48,6 +49,33 @@ namespace GLSandbox
 	ShaderProgram* ShaderProtocol::getShaderProgram() const
 	{
 		return _shader;
+	}
+
+
+	Texture2DProtocol::Texture2DProtocol()
+		: _texture2D( nullptr )
+	{
+	}
+	Texture2DProtocol::~Texture2DProtocol()
+	{
+		setTexture2D( nullptr );
+	}
+	void Texture2DProtocol::setTexture2D( Texture2D* texture )
+	{
+		if ( texture != _texture2D )
+		{
+			if ( _texture2D )
+				_texture2D->release();
+
+			_texture2D = texture;
+
+			if ( _texture2D )
+				_texture2D->retain();
+		}
+	}
+	Texture2D* Texture2DProtocol::getTexture2D() const
+	{
+		return _texture2D;
 	}
 
 
