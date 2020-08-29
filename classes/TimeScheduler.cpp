@@ -5,8 +5,7 @@
 namespace GLSandbox
 {
 
-	TimeScheduler::TimeScheduler( WorkingScope* scope )
-		: WorkingScopeProvider( scope )
+	TimeScheduler::TimeScheduler()
 	{
 		_lastTickTime = std::chrono::steady_clock::now();
 	}

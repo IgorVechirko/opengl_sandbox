@@ -73,6 +73,9 @@ set( Main ${GL_SANDBOX_SRC_DIR}/main.cpp )
 set( DrawTypes ${GL_SANDBOX_SRC_DIR}/DrawTypes.h ${GL_SANDBOX_SRC_DIR}/DrawTypes.cpp )
 set( MaterialsAndLightsTypes ${GL_SANDBOX_SRC_DIR}/MaterialsAndLightsTypes.h ${GL_SANDBOX_SRC_DIR}/MaterialsAndLightsTypes.cpp )
 
+set( Creator ${GL_SANDBOX_SRC_DIR}/Creator.h ${GL_SANDBOX_SRC_DIR}/Creator.cpp )
+set( Allocator ${GL_SANDBOX_SRC_DIR}/Allocator.h ${GL_SANDBOX_SRC_DIR}/Allocator.cpp )
+
 set( WorkingScope 
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.h
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.cpp
@@ -93,8 +96,12 @@ source_group( file_utils FILES ${FileUtils}
 
 source_group( scheduler FILES ${TimeScheduler} )
 
-source_group( auto_release FILES ${AutoReleasePool} 
-						   	     ${Ref} )
+source_group( memmory_managment FILES ${Creator} )
+source_group( memmory_managment\\auto_release FILES 
+													${AutoReleasePool} 
+						   							${Ref}
+)
+source_group( memmory_managment\\allocation FILES ${Allocator} )
 
 source_group( input FILES ${InputListener} )
 
@@ -164,6 +171,8 @@ set( SANDBOX_SRC ${Common}
 				 ${WorkingScope}
 				 ${MaterialsAndLightsTypes}
 				 ${DrawTypes}
+				 ${Creator}
+				 ${Allocator}
 )
 
 #setup project

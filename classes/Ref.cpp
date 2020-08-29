@@ -8,7 +8,6 @@ namespace GLSandbox
 
 	Ref::Ref()
 		: _refCount( 0 )
-		, _autorelesed( false )
 		, _pool( nullptr )
 	{
 	}
@@ -18,9 +17,10 @@ namespace GLSandbox
 	}
 	void Ref::release()
 	{
+		_ASSERT(_refCount > 0 ); 
 		_refCount--;
 
-		if ( _pool && _autorelesed && _refCount == 1 )
+		if ( _pool && _refCount == 0 )
 		{
 			_pool->releaseRef( this );
 		}
@@ -33,12 +33,11 @@ namespace GLSandbox
 	{
 		return _refCount;
 	}
-	void Ref::autorelease( AutoReleasePool* pool )
+	void Ref::setupReleasePool( AutoReleasePool* pool )
 	{
-		if ( !_autorelesed && pool)
+		if ( !_pool && pool)
 		{
 			_pool = pool;
-			_autorelesed = true;
 			_pool->addRef( this );
 		}
 	}

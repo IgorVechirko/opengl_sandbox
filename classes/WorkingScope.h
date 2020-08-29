@@ -3,6 +3,7 @@
 
 
 #include "Common.h"
+#include "Creator.h"
 
 namespace GLSandbox
 {
@@ -13,16 +14,19 @@ namespace GLSandbox
 	class AutoReleasePool;
 	class TimeScheduler;
 	class ScopeDelegate;
+	class Creator;
 	class WorkingScope
 	{
+		Creator _creator;
+
+		std::shared_ptr<AutoReleasePool> _releasePool;
+
 		GLContext* _glContext;
 
-		FileUtils* _fileUtils;
-		ResourcesManager* _resMng;
+		std::shared_ptr<FileUtils> _fileUtils;
+		std::shared_ptr<ResourcesManager> _resMng;
 
-		AutoReleasePool* _releasePool;
-
-		TimeScheduler* _timeScheduler;
+		std::shared_ptr<TimeScheduler> _timeScheduler;
 
 		ScopeDelegate* _delegate;
 		std::shared_ptr<ScopeDelegate> _defaultDelegate;
@@ -43,195 +47,69 @@ namespace GLSandbox
 
 		TimeScheduler* getTimeScheduler();
 
+		Creator* getCreator();
+
 		void startWithDelegate( ScopeDelegate* delegate );
 
 
+		template< typename ObjType, typename... Types >
+		ObjType* createObj( const Types&... constructArgs )
+		{
+			return _creator.createObj<ObjType>( constructArgs... );
+		}
 
 		template< typename ObjType, typename InitializerType, typename... InitArgsTypes > 
 		ObjType* createObjWithInitializer( InitializerType initializer, const InitArgsTypes&... initArgs )
 		{
-			ObjType* ret = new(std::nothrow) ObjType();
-
-			if ( ret )
-			{
-				if( initializer )
-				{
-					if ( !(ret->*initializer)( initArgs...) )
-					{
-						delete ret;
-						ret = nullptr;
-					}
-				}
-			}
-			else
-			{
-				delete ret;
-				ret = nullptr;
-			}
-
-			return ret;
+			return _creator.createObjWithInitializer<ObjType>(initializer, initArgs... );
 		}
 
 		template<typename ObjType>
 		ObjType* createScoped()
 		{
-			ObjType* ret = new(std::nothrow) ObjType();
-
-			if ( ret )
-			{
-				ret->setScope( this );
-			}
-			else
-			{
-				delete ret;
-				ret = nullptr;
-			}
-
-			return ret;
+			return _creator.createScoped<ObjType>();
 		}
 
 		template< typename ObjType, typename InitializerType, typename... InitArgsTypes > 
 		ObjType* createScopedWithInitializer( InitializerType initializer, const InitArgsTypes&... initArgs )
 		{
-			ObjType* ret = new(std::nothrow) ObjType();
-
-			if ( ret )
-			{
-				ret->setScope( this );
-
-				if( initializer )
-				{
-					if ( !(ret->*initializer)( initArgs...) )
-					{
-						delete ret;
-						ret = nullptr;
-					}
-				}
-			}
-			else
-			{
-				delete ret;
-				ret = nullptr;
-			}
-
-			return ret;
+			return _creator.createScopedWithInitializer<ObjType>( initializer, initArgs...);
 		}
 
 		template<typename ObjType>
 		ObjType* createRef()
 		{
-			ObjType* ret = new(std::nothrow) ObjType();
-
-			if ( ret )
-			{
-				ret->autorelease( getReleasePool() );
-			}
-			else
-			{
-				delete ret;
-				ret = nullptr;
-			}
-
-			return ret;
+			return _creator.createRef<ObjType>();
 		}
 
 		template< typename ObjType, typename InitializerType, typename... InitArgsTypes > 
 		ObjType* createRefWithInitializer( InitializerType initializer, const InitArgsTypes&... initArgs )
 		{
-			ObjType* ret = new(std::nothrow) ObjType();
-
-			if ( ret )
-			{
-				ret->autorelease( getReleasePool() );
-
-				if( initializer )
-				{
-					if ( !(ret->*initializer)( initArgs...) )
-					{
-						delete ret;
-						ret = nullptr;
-					}
-				}
-			}
-			else
-			{
-				delete ret;
-				ret = nullptr;
-			}
-
-			return ret;
+			return _creator.createRefWithInitializer<ObjType>(initializer, initArgs...);
 		}
 
 		template< typename ObjType >
 		ObjType* createScopedRef()
 		{
-			ObjType* ret = new(std::nothrow) ObjType();
-
-			if ( ret )
-			{
-				ret->autorelease(getReleasePool());
-				ret->setScope( this );
-			}
-			else
-			{
-				delete ret;
-				ret = nullptr;
-			}
-
-			return ret;
+			return _creator.createScopedRef<ObjType>();
 		}
 
 		template< typename ObjType, typename InitializerType, typename... InitArgsTypes > 
 		ObjType* createScopedRefWithInitializer( InitializerType initializer, const InitArgsTypes&... initArgs )
 		{
-			ObjType* result = new(std::nothrow) ObjType();
-
-			if ( result )
-			{
-				result->autorelease(getReleasePool());
-				result->setScope( this );
-
-				if ( initializer )
-				{
-					if ( !(result->*initializer)( initArgs... ) )
-					{
-						delete result;
-						result = nullptr;
-					}
-				}
-			}
-			else
-			{
-				delete result;
-				result = nullptr;
-			}
-
-			return result;
+			return _creator.createScopedRefWithInitializer<ObjType>(initializer, initArgs...);
 		}
 
 		template< typename ObjType >
 		ObjType* createNode()
 		{
-			ObjType* ret = new(std::nothrow) ObjType();
+			return _creator.createNode<ObjType>();
+		}
 
-			if ( ret )
-			{
-				ret->autorelease(getReleasePool());
-				ret->setScope( this );
-
-				if ( !ret->init() )
-				{
-					delete ret;
-					ret = nullptr;
-				}
-			}
-			else
-			{
-				delete ret;
-				ret = nullptr;
-			}
-
-			return ret;
+		template<typename ObjType>
+		void destroyObj( ObjType* ptr )
+		{
+			_creator.destroyObj( ptr );
 		}
 	};
 

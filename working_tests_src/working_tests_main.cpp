@@ -7,8 +7,9 @@ using namespace WorkingTests;
 int main()
 {
 	WorkingScope scope;
-	auto scopeDelegate = std::shared_ptr<TestScopeDelegat>(scope.createScoped<TestScopeDelegat>());
-	scope.startWithDelegate( scopeDelegate.get() );
+	auto scopeDelegate = scope.createScoped<TestScopeDelegat>();
+	scope.startWithDelegate( scopeDelegate );
+	scope.destroyObj(scopeDelegate);
 
     return 0;
 }

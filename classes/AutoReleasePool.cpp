@@ -5,8 +5,7 @@
 namespace GLSandbox
 {
 
-	AutoReleasePool::AutoReleasePool( WorkingScope* scope )
-		: WorkingScopeProvider( scope )
+	AutoReleasePool::AutoReleasePool()
 	{
 	}
 	AutoReleasePool::~AutoReleasePool()
@@ -14,13 +13,13 @@ namespace GLSandbox
 	}
 	void AutoReleasePool::releaseRef( Ref* ref )
 	{
-		if ( ref && ref->getRefCount() == 1 )
+		if ( ref && ref->getRefCount() == 0 )
 		{
 			auto findIt = std::find( _refs.begin(), _refs.end(), ref );
 			if ( findIt != _refs.end() )
 			{
+				destoryObj( *findIt );
 				_refs.erase( findIt );
-				delete ref;
 			}
 		}
 	}
@@ -29,7 +28,6 @@ namespace GLSandbox
 		auto findIt = std::find( _refs.begin(), _refs.end(), newRef );
 		if ( findIt == _refs.end() )
 		{
-			newRef->retain();
 			_refs.push_back( newRef );
 		}
 	}
@@ -37,8 +35,9 @@ namespace GLSandbox
 	{
 		for ( auto refIt = _refs.begin(); refIt != _refs.end(); )
 		{
-			if ( (*refIt)->getRefCount() == 1 )
+			if ( (*refIt)->getRefCount() == 0 )
 			{
+				destoryObj(*refIt);
 				refIt = _refs.erase( refIt );
 			}
 			else

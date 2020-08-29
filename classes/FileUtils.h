@@ -12,7 +12,7 @@ namespace GLSandbox
 
 	public:
 
-		FileUtils( WorkingScope* scope );
+		FileUtils();
 		virtual ~FileUtils();
 
 		MAKE_UNCOPYABLE(FileUtils);

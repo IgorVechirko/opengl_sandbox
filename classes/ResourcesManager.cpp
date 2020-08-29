@@ -8,8 +8,7 @@ namespace GLSandbox
 {
 
 
-	ResourcesManager::ResourcesManager( WorkingScope* scope )
-		: WorkingScopeProvider( scope )
+	ResourcesManager::ResourcesManager()
 	{
 	}
 	ResourcesManager::~ResourcesManager()

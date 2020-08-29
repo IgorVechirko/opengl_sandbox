@@ -30,13 +30,13 @@ namespace WorkingTests
 	{
 		Parent::onInit();
 
-		if( true )
+		if( false )
 		{
 			auto origin = createNode<GLSandbox::AxisesOrigin>();
 			addChild( origin );
 		}
 
-		if ( true )
+		if ( false )
 		{
 			auto model = createNode<GLSandbox::Model>();
 			model->loadModel( getResMng()->getResPath( "GUN" ) );
@@ -50,7 +50,7 @@ namespace WorkingTests
 		emerald.specular = GLSandbox::Vec3( 0.633f, 0.727811f, 0.633f );
 		emerald.shininess = 32.0f;
 
-		if( false )
+		if( true )
 		{
 			for( int i = 0; i < 3; i++ )
 			{
@@ -108,7 +108,7 @@ namespace WorkingTests
 		attenuation.quadratic = 0.0000007f;
 
 	
-		if ( false )
+		if ( true )
 		{
 			GLSandbox::DirectLightSource* directionLight = createNode<GLSandbox::DirectLightSource>();
 			directionLight->setPosition( GLSandbox::Vec3( 0.0f, 0.0f, 1000.0f ) );
@@ -120,7 +120,7 @@ namespace WorkingTests
 			setDirectionLight( directionLight );
 		}
 
-		if ( false )
+		if ( true )
 		{
 			float dist = 400.0f;
 			std::vector<GLSandbox::Vec3> lightsPositions;
@@ -144,7 +144,7 @@ namespace WorkingTests
 			}
 		}
 
-		if ( false )
+		if ( true )
 		{
 			auto light = createNode<GLSandbox::Flashlight>();
 

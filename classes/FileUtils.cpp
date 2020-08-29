@@ -4,8 +4,7 @@
 namespace GLSandbox
 {
 
-	FileUtils::FileUtils( WorkingScope* scope )
-		: WorkingScopeProvider( scope )
+	FileUtils::FileUtils()
 	{
 	}
 	FileUtils::~FileUtils()

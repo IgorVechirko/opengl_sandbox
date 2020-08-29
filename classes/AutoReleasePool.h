@@ -15,7 +15,7 @@ namespace GLSandbox
 
 	public:
 
-		AutoReleasePool( WorkingScope* scope );
+		AutoReleasePool();
 		virtual ~AutoReleasePool();
 		MAKE_UNCOPYABLE(AutoReleasePool);
 

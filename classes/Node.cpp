@@ -16,9 +16,10 @@ namespace GLSandbox
 	}
 	Node::~Node()
 	{
-		unscheduleUpdate();
+		for( auto child : _children )
+			child->release();
 
-		bool stop = true;
+		unscheduleUpdate();
 	}
 	const glm::mat4& Node::getTransform()
 	{
@@ -131,6 +132,7 @@ namespace GLSandbox
 		if ( _children.end() == std::find( _children.begin(), _children.end(), child ) )
 		{
 			_children.push_back( child );
+			child->retain();
 		}
 	}
 	void Node::removeChild( Node* child )
@@ -138,6 +140,7 @@ namespace GLSandbox
 		auto findIt = std::find( _children.begin(), _children.end(), child );
 		if ( findIt != _children.end() )
 		{
+			(*findIt)->release();
 			_children.erase( findIt );
 		}
 	}

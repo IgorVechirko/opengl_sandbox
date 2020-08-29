@@ -55,6 +55,10 @@ namespace GLSandbox
 	}
 	GLContext::~GLContext()
 	{
+		_ASSERT(_scene);
+		_scene->release();
+		_scene = nullptr;
+
 		OpenGL::getInstance()->destroyWindow( _window );
 	}
 	void GLContext::onKeyPressed( int keyCode, int scancode, int action, int modifiers )
@@ -127,6 +131,16 @@ namespace GLSandbox
 	{
 		glfwMakeContextCurrent(_window);
 	}
+	void GLContext::setWindowShouldClose()
+	{
+		glfwSetWindowUserPointer( _window, nullptr );
+
+		glfwSetKeyCallback( _window, nullptr );
+		glfwSetCursorPosCallback( _window, nullptr );
+		glfwSetScrollCallback( _window, nullptr );
+
+		glfwSetWindowShouldClose( _window, 1 );
+	}
 	bool GLContext::windowShouldClose()
 	{
 		return glfwWindowShouldClose(_window );
@@ -142,10 +156,6 @@ namespace GLSandbox
 	InputListener* GLContext::getInputListener()
 	{
 		return _inputListener;
-	}
-	void GLContext::setWindowShouldClose()
-	{
-		glfwSetWindowShouldClose( _window, 1 );
 	}
 	void GLContext::poolEvents()
 	{

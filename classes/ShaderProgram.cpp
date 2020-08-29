@@ -29,10 +29,9 @@ namespace GLSandbox
 		glGetShaderiv( vertexShader, GL_INFO_LOG_LENGTH, &logSize);
 		if (logSize)
 		{
-			GLchar* infoLog = new GLchar[logSize];
-			glGetShaderInfoLog(vertexShader, logSize, NULL, infoLog);
+			std::shared_ptr<GLchar> infoLog = std::shared_ptr<GLchar>(new GLchar[logSize]);
+			glGetShaderInfoLog(vertexShader, logSize, NULL, infoLog.get());
 			Console::log( "vertex shader compile error: ", infoLog );
-			delete[] infoLog;
 			logSize = 0;
 
 			return false;
@@ -46,10 +45,9 @@ namespace GLSandbox
 		glGetShaderiv( fragmentShader, GL_INFO_LOG_LENGTH, &logSize);
 		if (logSize)
 		{
-			GLchar* infoLog = new GLchar[logSize];
-			glGetShaderInfoLog(fragmentShader, logSize, NULL, infoLog);
+			std::shared_ptr<GLchar> infoLog = std::shared_ptr<GLchar>(new GLchar[logSize]);
+			glGetShaderInfoLog(fragmentShader, logSize, NULL, infoLog.get());
 			Console::log( "fragment shader compile error: ", infoLog );
-			delete[] infoLog;
 			logSize = 0;
 
 			return false;
@@ -64,10 +62,9 @@ namespace GLSandbox
 		glGetProgramiv( _programID, GL_INFO_LOG_LENGTH, &logSize );
 		if ( logSize )
 		{
-			GLchar* infoLog = new GLchar[logSize];
-			glGetProgramInfoLog( _programID, logSize, NULL, infoLog );
+			std::shared_ptr<GLchar> infoLog = std::shared_ptr<GLchar>(new GLchar[logSize]);
+			glGetProgramInfoLog( _programID, logSize, NULL, infoLog.get() );
 			Console::log( "program compile error: ", infoLog );
-			delete [] infoLog;
 
 			return false;
 		}

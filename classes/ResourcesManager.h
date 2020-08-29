@@ -14,7 +14,7 @@ namespace GLSandbox
 
 	public:
 
-		ResourcesManager( WorkingScope* scope );
+		ResourcesManager();
 		virtual ~ResourcesManager();
 
 

@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "GLContext.h"
+#include "WorkingScope.h"
 
 
 namespace GLSandbox

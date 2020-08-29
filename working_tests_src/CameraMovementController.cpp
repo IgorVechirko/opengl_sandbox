@@ -7,7 +7,7 @@
 namespace WorkingTests
 {
 	CameraMovementController::CameraMovementController()
-		: _cameraMoveSpeed( 2.0f )
+		: _cameraMoveSpeed( 1000.0f )
 		, _cameraRotateSensitivity( 0.1f )
 		, _mousePos( 0.0f, 0.0f )
 		, _mousePosInited( false )

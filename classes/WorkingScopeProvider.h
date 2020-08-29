@@ -6,12 +6,13 @@
 namespace GLSandbox
 {
 
-
 	class FileUtils;
 	class ResourcesManager;
 	class AutoReleasePool;
 	class TimeScheduler;
 	class GLContext;
+	class WorkingScope;
+	class Creator;
 	class WorkingScopeProvider
 	{
 		TEST_FRIEND
@@ -36,7 +37,16 @@ namespace GLSandbox
 
 		TimeScheduler* getTimeScheduler();
 
+		Creator* getCreator();
 
+
+		template< typename ObjType, typename... Types >
+		ObjType* createObj( const Types&... constructArgs )
+		{
+			_ASSERT(_providedScope);
+
+			return _providedScope->createObj<ObjType>(constructArgs...);
+		}
 
 		template< typename ObjType, typename InitializerType, typename... InitArgsTypes > 
 		ObjType* createObjWithInitializer( InitializerType initializer, const InitArgsTypes&... initArgs )
@@ -92,6 +102,12 @@ namespace GLSandbox
 			_ASSERT(_providedScope);
 
 			return _providedScope->createNode<ObjType>();
+		}
+
+		template<typename ObjType>
+		void destoryObj( ObjType* ptr )
+		{
+			_providedScope->destroyObj( ptr );
 		}
 
 	};

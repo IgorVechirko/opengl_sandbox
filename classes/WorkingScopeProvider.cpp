@@ -1,7 +1,5 @@
 #include "WorkingScopeProvider.h"
 
-#include "WorkingScope.h"
-
 
 namespace GLSandbox
 {
@@ -53,5 +51,9 @@ namespace GLSandbox
 		_ASSERT( _providedScope != nullptr );
 		return _providedScope->getTimeScheduler();
 	}
-
+	Creator* WorkingScopeProvider::getCreator()
+	{
+		_ASSERT( _providedScope != nullptr );
+		return _providedScope->getCreator();
+	}
 }

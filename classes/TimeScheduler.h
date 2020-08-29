@@ -21,7 +21,7 @@ namespace GLSandbox
 
 	public:
 
-		TimeScheduler( WorkingScope* scope );
+		TimeScheduler();
 		virtual ~TimeScheduler();
 		MAKE_UNCOPYABLE(TimeScheduler);
 
