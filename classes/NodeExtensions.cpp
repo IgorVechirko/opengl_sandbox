@@ -2,6 +2,8 @@
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
+#include "GLRender.h"
+#include "Node.h"
 
 namespace GLSandbox
 {
@@ -148,4 +150,71 @@ namespace GLSandbox
 		return _LightAttenuation;
 	}
 
+
+
+	ProtectedChildsProtocol::ProtectedChildsProtocol()
+	{
+	}
+	ProtectedChildsProtocol::~ProtectedChildsProtocol()
+	{
+		for( auto child : _protectedChilds )
+			child->release();
+	}
+	void ProtectedChildsProtocol::visitProtectedChilds( GLRender* render, const Mat4& parentTransform )
+	{
+		for( auto child : _protectedChilds )
+		{
+			child->visit( render, parentTransform );
+		}
+	}
+	void ProtectedChildsProtocol::addProtectedChild( Node* child )
+	{
+		if ( child )
+		{
+			auto findIt = std::find( _protectedChilds.begin(), _protectedChilds.end(), child );
+		
+			if ( findIt == _protectedChilds.end() )
+			{
+				child->retain();
+				_protectedChilds.push_back( child );
+			}
+		}
+	}
+	void ProtectedChildsProtocol::removeProtectedChild( Node* child )
+	{
+		if ( child )
+		{
+			auto findIt = std::find( _protectedChilds.begin(), _protectedChilds.end(), child );
+		
+			if ( findIt != _protectedChilds.end() )
+			{
+				_protectedChilds.erase( findIt );
+				child->release();
+			}
+		}
+	}
+	const std::vector<Node*>& ProtectedChildsProtocol::getProtectedChildren() const
+	{
+		return _protectedChilds;
+	}
+	Node* ProtectedChildsProtocol::getProtectedChild( const std::string& childName )
+	{
+		Node* result = nullptr;
+
+		if( !childName.empty() )
+		{
+			auto findIt = std::find_if( _protectedChilds.begin(), _protectedChilds.end(), 
+				[&childName](Node* node) -> bool
+				{
+					return node->getName() == childName;
+				} );
+
+			if ( findIt != _protectedChilds.end() )
+			{
+				result = *findIt;
+			}
+		}
+
+		return result;
+	}
 }

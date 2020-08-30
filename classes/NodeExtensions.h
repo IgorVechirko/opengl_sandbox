@@ -151,6 +151,33 @@ namespace GLSandbox
 
 	};
 
+	class Node;
+	class GLRender;
+	class ProtectedChildsProtocol
+	{
+		std::vector<Node*> _protectedChilds;
+
+	public:
+
+		ProtectedChildsProtocol();
+		virtual ~ProtectedChildsProtocol();
+
+		virtual void visitProtectedChilds( GLRender* render, const Mat4& parentTransform );
+
+		virtual void addProtectedChild( Node* child );
+		virtual void removeProtectedChild( Node* child );
+
+		virtual const std::vector<Node*>& getProtectedChildren() const;
+		virtual Node* getProtectedChild( const std::string& childName );
+
+		template<typename T>
+		T* getProtectedChild( const std::string& childName )
+		{
+			return dynamic_cast<T>( getProtectedChild(childName) );
+		}
+
+	};
+
 }
 
 

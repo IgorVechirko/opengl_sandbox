@@ -25,7 +25,7 @@ namespace GLSandbox
 		glShaderSource(vertexShader, 1, &vertexChar, NULL);
 		glCompileShader(vertexShader);
 
-		GLint logSize;
+		GLint logSize = 0;
 		glGetShaderiv( vertexShader, GL_INFO_LOG_LENGTH, &logSize);
 		if (logSize)
 		{

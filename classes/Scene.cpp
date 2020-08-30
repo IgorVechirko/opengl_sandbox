@@ -25,20 +25,28 @@ namespace GLSandbox
 
 		return true;
 	}
-	void Scene::visit( GLRender* render )
+	void Scene::visit( GLRender* render, const Mat4& parentTransform )
 	{
-		Node::visit( render, Mat4(1.0f) );
+		if ( _camera )
+			_camera->visit( render, parentTransform );
+		
+		for( auto pointLight : _pointLights )
+			pointLight->visit( render, parentTransform );
+
+		for( auto flashLight : _flashlights )
+			flashLight->visit( render, parentTransform );
+
+		Node::visit( render, parentTransform );
 	}
 	void Scene::setDirectionLight( DirectLightSource* directionLight )
 	{
-		if ( directionLight && _directionLight != directionLight )
+		if ( _directionLight != directionLight )
 		{
-			addChild( directionLight );
-		
 			if ( _directionLight )
-			{
-				removeChild( _directionLight );
-			}
+				removeProtectedChild( _directionLight );
+
+			if ( directionLight )
+				addProtectedChild( directionLight );
 
 			_directionLight = directionLight;
 		}
@@ -49,9 +57,9 @@ namespace GLSandbox
 	}
 	void Scene::addPointLight( PointLightSource* light )
 	{
-		if ( _pointLights.size() < _maxPointLights )
+		if ( light && _pointLights.size() < _maxPointLights )
 		{
-			addChild( light );
+			addProtectedChild( light );
 			_pointLights.push_back( light );
 		}
 	}
@@ -61,9 +69,9 @@ namespace GLSandbox
 	}
 	void Scene::addFlashlight( Flashlight* light )
 	{
-		if ( _flashlights.size() < _maxFlashlights )
+		if ( light && _flashlights.size() < _maxFlashlights )
 		{
-			addChild( light );
+			addProtectedChild( light );
 			_flashlights.push_back( light );
 		}
 	}
@@ -75,19 +83,17 @@ namespace GLSandbox
 	{
 		if ( camera && _camera != camera )
 		{
-			auto oldCamera = _camera;
+			if ( _camera )
+				removeProtectedChild( _camera );
 
-			addChild( camera );
+			addProtectedChild( camera );
+
 			_camera = camera;
-
-			if ( oldCamera )
-			{
-				removeChild( oldCamera );
-			}
 		}
 	}
 	Camera* Scene::getCamera()
 	{
+		_ASSERT( _camera );
 		return _camera;
 	}
 

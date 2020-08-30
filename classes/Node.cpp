@@ -129,19 +129,25 @@ namespace GLSandbox
 	}
 	void Node::addChild( Node* child )
 	{
-		if ( _children.end() == std::find( _children.begin(), _children.end(), child ) )
+		if( child )
 		{
-			_children.push_back( child );
-			child->retain();
+			if ( _children.end() == std::find( _children.begin(), _children.end(), child ) )
+			{
+				_children.push_back( child );
+				child->retain();
+			}
 		}
 	}
 	void Node::removeChild( Node* child )
 	{
-		auto findIt = std::find( _children.begin(), _children.end(), child );
-		if ( findIt != _children.end() )
+		if( child )
 		{
-			(*findIt)->release();
-			_children.erase( findIt );
+			auto findIt = std::find( _children.begin(), _children.end(), child );
+			if ( findIt != _children.end() )
+			{
+				(*findIt)->release();
+				_children.erase( findIt );
+			}
 		}
 	}
 	void Node::scheduleUpdate()

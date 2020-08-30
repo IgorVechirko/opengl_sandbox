@@ -2,6 +2,7 @@
 #define Scene_H
 
 #include "Node.h"
+#include "NodeExtensions.h"
 
 namespace GLSandbox
 {
@@ -10,7 +11,9 @@ namespace GLSandbox
 	class DirectLightSource;
 	class PointLightSource;
 	class Flashlight;
-	class Scene : public Node
+	class Scene 
+		: public Node
+		, public ProtectedChildsProtocol
 	{
 		typedef Node Parent;
 
@@ -25,7 +28,6 @@ namespace GLSandbox
 		std::vector<Flashlight*> _flashlights;
 
 
-
 	protected:
 
 		virtual bool onInit() override;
@@ -35,7 +37,7 @@ namespace GLSandbox
 		Scene();
 		virtual ~Scene();
 
-		void visit( GLRender* render );
+		virtual void visit( GLRender* render, const Mat4& parentTransform ) override;
 
 		void setDirectionLight( DirectLightSource* directionLight );
 		DirectLightSource* getDirectionLight();

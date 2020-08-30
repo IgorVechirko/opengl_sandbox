@@ -55,9 +55,11 @@ namespace GLSandbox
 	}
 	GLContext::~GLContext()
 	{
-		_ASSERT(_scene);
-		_scene->release();
-		_scene = nullptr;
+		if ( _scene )
+		{
+			_scene->release();
+			_scene = nullptr;
+		}
 
 		OpenGL::getInstance()->destroyWindow( _window );
 	}

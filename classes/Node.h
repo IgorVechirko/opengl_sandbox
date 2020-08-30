@@ -37,9 +37,6 @@ namespace GLSandbox
 
 		virtual void update( float delatTime ){};
 
-		virtual void visit( GLRender* render, const Mat4& parentTransform );
-		virtual void draw( GLRender* render, const Mat4& transform ){};
-
 	public:
 
 		Node();
@@ -47,6 +44,9 @@ namespace GLSandbox
 		MAKE_UNCOPYABLE(Node);
 
 		bool init();
+
+		virtual void visit( GLRender* render, const Mat4& parentTransform );
+		virtual void draw( GLRender* render, const Mat4& transform ){};
 
 		virtual void setPosition( const Vec3& pos );
 		const Vec3& getPosition() const;
@@ -73,7 +73,7 @@ namespace GLSandbox
 		Node* getChild( const std::string& childName ) const;
 	
 		template<typename T> 
-		T getChild( const std::string& childName ) const
+		T* getChild( const std::string& childName ) const
 		{
 			return dynamic_cast<T>( getChild( childName ) );
 		}
