@@ -153,14 +153,14 @@ namespace GLSandbox
 
 	class Node;
 	class GLRender;
-	class ProtectedChildsProtocol
+	class ProtectedChildrenProtocol
 	{
 		std::vector<Node*> _protectedChilds;
 
 	public:
 
-		ProtectedChildsProtocol();
-		virtual ~ProtectedChildsProtocol();
+		ProtectedChildrenProtocol();
+		virtual ~ProtectedChildrenProtocol();
 
 		virtual void visitProtectedChilds( GLRender* render, const Mat4& parentTransform );
 

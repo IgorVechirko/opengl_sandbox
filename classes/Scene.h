@@ -13,7 +13,7 @@ namespace GLSandbox
 	class Flashlight;
 	class Scene 
 		: public Node
-		, public ProtectedChildsProtocol
+		, public ProtectedChildrenProtocol
 	{
 		typedef Node Parent;
 

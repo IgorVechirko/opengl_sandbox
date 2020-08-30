@@ -152,22 +152,22 @@ namespace GLSandbox
 
 
 
-	ProtectedChildsProtocol::ProtectedChildsProtocol()
+	ProtectedChildrenProtocol::ProtectedChildrenProtocol()
 	{
 	}
-	ProtectedChildsProtocol::~ProtectedChildsProtocol()
+	ProtectedChildrenProtocol::~ProtectedChildrenProtocol()
 	{
 		for( auto child : _protectedChilds )
 			child->release();
 	}
-	void ProtectedChildsProtocol::visitProtectedChilds( GLRender* render, const Mat4& parentTransform )
+	void ProtectedChildrenProtocol::visitProtectedChilds( GLRender* render, const Mat4& parentTransform )
 	{
 		for( auto child : _protectedChilds )
 		{
 			child->visit( render, parentTransform );
 		}
 	}
-	void ProtectedChildsProtocol::addProtectedChild( Node* child )
+	void ProtectedChildrenProtocol::addProtectedChild( Node* child )
 	{
 		if ( child )
 		{
@@ -180,7 +180,7 @@ namespace GLSandbox
 			}
 		}
 	}
-	void ProtectedChildsProtocol::removeProtectedChild( Node* child )
+	void ProtectedChildrenProtocol::removeProtectedChild( Node* child )
 	{
 		if ( child )
 		{
@@ -193,11 +193,11 @@ namespace GLSandbox
 			}
 		}
 	}
-	const std::vector<Node*>& ProtectedChildsProtocol::getProtectedChildren() const
+	const std::vector<Node*>& ProtectedChildrenProtocol::getProtectedChildren() const
 	{
 		return _protectedChilds;
 	}
-	Node* ProtectedChildsProtocol::getProtectedChild( const std::string& childName )
+	Node* ProtectedChildrenProtocol::getProtectedChild( const std::string& childName )
 	{
 		Node* result = nullptr;
 

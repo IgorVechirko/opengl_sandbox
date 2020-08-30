@@ -11,9 +11,6 @@ namespace GLSandbox
 {
 
 	Sprite::Sprite()
-		: _vbo( 0 )
-		, _vao( 0 )
-		, _ebo( 0 )
 	{
 	}
 	Sprite::~Sprite()
@@ -28,6 +25,9 @@ namespace GLSandbox
 		if ( texture )
 		{
 			setTexture2D( texture );
+
+			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("SPRITE_VERTEX"), getResMng()->getResStr("SPRITE_FRAGMENT") ) );
+
 			return true;
 		}
 		else
@@ -35,9 +35,6 @@ namespace GLSandbox
 	}
 	void Sprite::draw( GLRender* render, const Mat4& transform )
 	{
-		if ( getTexture2D() )
-			glBindTexture( GL_TEXTURE_2D, getTexture2D()->getTextureID() );
-
 		if( _shader )
 		{
 			_shader->useProgram();
@@ -49,14 +46,12 @@ namespace GLSandbox
 			glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(transform) );
 			glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
 			glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
+
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 		}
 
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-
-		glBindVertexArray(_vao);
-		glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
+		_arrayBuffer.drawElements( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0, _shader, getTexture2D() );
 	}
 	void Sprite::setTexture2D( Texture2D* texture )
 	{
@@ -67,41 +62,21 @@ namespace GLSandbox
 
 			Size textSize( static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()) );
 
-			_vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-					  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-					  textSize.x, textSize.y, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-					  textSize.x, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+			std::vector<float>vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+										    0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+										    textSize.x, textSize.y, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
+										    textSize.x, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f };
 
-			_indices = { 0, 1, 2,
-						 1, 2, 3 };
+			std::vector<unsigned int>indices = { 0, 1, 2,
+												  1, 2, 3 };
 
-			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("SPRITE_VERTEX"), getResMng()->getResStr("SPRITE_FRAGMENT") ) );
+			
+			_arrayBuffer.setupVBOData( vertices.data(), vertices.size()*sizeof(float) );
+			_arrayBuffer.setupEBOdata( indices.data(), indices.size()*sizeof(unsigned int) );
 
-			glGenVertexArrays(1, &_vao);
-			glGenBuffers(1, &_vbo);
-			glGenBuffers(1, &_ebo);
-
-			glBindVertexArray( _vao );
-
-			const GLfloat* vertices = &_vertices[0];
-			glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*_vertices.size(), vertices, GL_STATIC_DRAW );
-
-			const GLuint* indices = &_indices[0];
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*_indices.size(), indices, GL_STATIC_DRAW );
-
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0);
-			glEnableVertexAttribArray(0);
-
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GLfloat)));
-			glEnableVertexAttribArray(1);
-
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(6*sizeof(GLfloat)));
-			glEnableVertexAttribArray(2);
-
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glBindVertexArray(0);
+			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0 );
+			_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GL_FLOAT)) );
+			_arrayBuffer.setupAttribPointer( 2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(6*sizeof(GL_FLOAT)) );
 		}
 	}
 

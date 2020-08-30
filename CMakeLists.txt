@@ -76,6 +76,8 @@ set( MaterialsAndLightsTypes ${GL_SANDBOX_SRC_DIR}/MaterialsAndLightsTypes.h ${G
 set( Creator ${GL_SANDBOX_SRC_DIR}/Creator.h ${GL_SANDBOX_SRC_DIR}/Creator.cpp )
 set( Allocator ${GL_SANDBOX_SRC_DIR}/Allocator.h ${GL_SANDBOX_SRC_DIR}/Allocator.cpp )
 
+set ( VertexArrayBuffer ${GL_SANDBOX_SRC_DIR}/VertexArrayBuffer.h ${GL_SANDBOX_SRC_DIR}/VertexArrayBuffer.cpp )
+
 set( WorkingScope 
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.h
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.cpp
@@ -109,6 +111,8 @@ source_group( input FILES ${InputListener} )
 source_group( gl FILES ${OpenGL} )
 source_group( gl\\context FILES ${GLContext} )
 source_group( gl\\render FILES ${GLRender} )
+
+source_group( vertices FILES ${VertexArrayBuffer} )
 
 source_group( textures FILES ${Texture2D} )
 
@@ -174,6 +178,7 @@ set( SANDBOX_SRC ${Common}
 				 ${DrawTypes}
 				 ${Creator}
 				 ${Allocator}
+				 ${VertexArrayBuffer}
 )
 
 #setup project
