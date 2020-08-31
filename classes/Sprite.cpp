@@ -35,6 +35,9 @@ namespace GLSandbox
 	}
 	void Sprite::draw( GLRender* render, const Mat4& transform )
 	{
+		if( getTexture2D() )
+			glBindTexture( GL_TEXTURE_2D, getTexture2D()->getTextureID() );
+
 		if( _shader )
 		{
 			_shader->useProgram();
@@ -51,7 +54,7 @@ namespace GLSandbox
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 		}
 
-		_arrayBuffer.drawElements( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0, _shader, getTexture2D() );
+		_arrayBuffer.drawElements( GL_TRIANGLES, GL_UNSIGNED_INT, 0 );
 	}
 	void Sprite::setTexture2D( Texture2D* texture )
 	{
@@ -72,7 +75,7 @@ namespace GLSandbox
 
 			
 			_arrayBuffer.setupVBOData( vertices.data(), vertices.size()*sizeof(float) );
-			_arrayBuffer.setupEBOdata( indices.data(), indices.size()*sizeof(unsigned int) );
+			_arrayBuffer.setupEBOdata( indices );
 
 			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0 );
 			_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GL_FLOAT)) );

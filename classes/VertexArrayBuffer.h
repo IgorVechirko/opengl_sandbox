@@ -13,6 +13,8 @@ namespace GLSandbox
 		GLuint _vbo;
 		GLuint _ebo;
 
+		int _indicesAmount;
+
 
 	public:
 
@@ -20,15 +22,12 @@ namespace GLSandbox
 		virtual ~VertexArrayBuffer();
 
 		void setupVBOData( const void* data, size_t dataSize );
-		void setupEBOdata( const void* data, size_t dataSize );
+		void setupEBOdata( const std::vector<unsigned int>& indices );
 
 		void setupAttribPointer( GLuint indx, GLuint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer );
 
-		void drawArrays( GLenum mode, GLint first, GLsizei count, ShaderProgram* shader, Texture2D* texture );
-		void drawArrays( GLenum mode, GLint first, GLsizei count, ShaderProgram* shader, const std::vector<Texture2D*>& textures );
-
-		void drawElements( GLenum mode, GLsizei count, GLenum type, const void* indices, ShaderProgram* shader, Texture2D* texture );
-		void drawElements( GLenum mode, GLsizei count, GLenum type, const void* indices, ShaderProgram* shader, const std::vector<Texture2D*>& textures );
+		void drawArrays( GLenum mode, GLint first, GLsizei count );
+		void drawElements( GLenum mode, GLenum type, const void* indices );
 
 
 	};

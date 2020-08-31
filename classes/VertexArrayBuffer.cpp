@@ -12,6 +12,7 @@ namespace GLSandbox
 		: _vao( NULL )
 		, _vbo( NULL )
 		, _ebo( NULL )
+		, _indicesAmount( 0 )
 	{
 		glGenVertexArrays( 1, &_vao );
 	}
@@ -41,21 +42,23 @@ namespace GLSandbox
 		glBindVertexArray( 0 );
 
 	}
-	void VertexArrayBuffer::setupEBOdata( const void* data, size_t dataSize )
+	void VertexArrayBuffer::setupEBOdata( const std::vector<unsigned int>& indices )
 	{
 		glBindVertexArray( _vao );
 
 		if( _ebo )
 		{
 			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
-			glBufferSubData( GL_ELEMENT_ARRAY_BUFFER, 0, dataSize, data );
+			glBufferSubData( GL_ELEMENT_ARRAY_BUFFER, 0, indices.size() * sizeof(unsigned int), indices.data() );
 		}
 		else
 		{
 			glGenBuffers( 1, &_ebo );
 			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
-			glBufferData( GL_ELEMENT_ARRAY_BUFFER, dataSize, data, GL_STATIC_DRAW );
+			glBufferData( GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW );
 		}
+
+		_indicesAmount = indices.size();
 
 		glBindVertexArray( 0 );
 	}
@@ -66,46 +69,16 @@ namespace GLSandbox
 		glEnableVertexAttribArray(indx);
 		glBindVertexArray( 0 );
 	}
-	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first, GLsizei count, ShaderProgram* shader, Texture2D* texture )
+	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first, GLsizei count )
 	{
-		drawArrays( mode, first, count, shader, std::vector<Texture2D*>{texture} );
-	}
-	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first, GLsizei count, ShaderProgram* shader, const std::vector<Texture2D*>& textures )
-	{
-		if ( shader )
-			shader->useProgram();
-
-		int textureNum = 0;
-		for( auto texture : textures )
-		{
-			glActiveTexture( GL_TEXTURE0 + textureNum );
-			glBindTexture( GL_TEXTURE_2D, texture->getTextureID() );
-			textureNum++;
-		}
-
 		glBindVertexArray( _vao );
 		glDrawArrays( mode, first, count );
 		glBindVertexArray( 0 );
 	}
-	void VertexArrayBuffer::drawElements( GLenum mode, GLsizei count, GLenum type, const void* indices, ShaderProgram* shader, Texture2D* texture )
+	void VertexArrayBuffer::drawElements( GLenum mode, GLenum type, const void* indices )
 	{
-		drawElements( mode, count, type, indices, shader, std::vector<Texture2D*>{texture} );
-	}
-	void VertexArrayBuffer::drawElements( GLenum mode, GLsizei count, GLenum type, const void* indices, ShaderProgram* shader, const std::vector<Texture2D*>& textures )
-	{
-		if ( shader );
-			shader->useProgram();
-
-		int textureNum = 0;
-		for( auto texture : textures )
-		{
-			glActiveTexture( GL_TEXTURE0 + textureNum );
-			glBindTexture( GL_TEXTURE_2D, texture->getTextureID() );
-			textureNum++;
-		}
-
 		glBindVertexArray( _vao );
-		glDrawElements( mode, count, type, indices );
+		glDrawElements( mode, _indicesAmount, type, indices );
 		glBindVertexArray( 0 );
 	}
 
