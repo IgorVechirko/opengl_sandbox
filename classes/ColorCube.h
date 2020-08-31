@@ -4,6 +4,7 @@
 
 #include "Node.h"
 #include "NodeExtensions.h"
+#include "VertexArrayBuffer.h"
 
 namespace GLSandbox
 {
@@ -15,11 +16,7 @@ namespace GLSandbox
 
 		typedef Node Parent;
 
-		GLuint _vao;
-		GLuint _vbo;
-		GLuint _ebo;
-
-		unsigned _indicesCount;
+		VertexArrayBuffer _arrayBuffer;
 
 		bool _verticesDirty;
 

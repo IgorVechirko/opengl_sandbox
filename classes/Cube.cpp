@@ -6,6 +6,7 @@
 #include "WorkingScope.h"
 #include "Camera.h"
 #include "GLContext.h"
+#include "DrawTypes.h"
 
 #include "ResourcesManager.h"
 
@@ -17,9 +18,8 @@ namespace GLSandbox
 {
 
 	Cube::Cube()
-		: _vbo( 0 )
-		, _vao( 0 )
-		, _ebo( 0 )
+		: _cubeSize( 1.0f )
+		, _verticesDirty( true )
 	{
 	}
 	Cube::~Cube()
@@ -27,29 +27,24 @@ namespace GLSandbox
 	}
 
 
-	bool Cube::initWithFilePath( const std::string& filePath )
+	bool Cube::onInit()
 	{	
-		Node::init();
-	
-		auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, filePath );
+		setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
 
-		if ( texture )
-		{
-			setTexture2D( texture );
-			return true;
-		}
-		else
-			return false;
+		updateVetices();
+
+		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)0 );
+		_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)(3*sizeof(GLfloat)) );
+
+		return true;
 	}
 	void Cube::draw( GLRender* render, const Mat4& transform )
 	{
-		if ( getTexture2D() )
-			glBindTexture(GL_TEXTURE_2D, getTexture2D()->getTextureID() );
-
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-
-		glBindVertexArray(_vao);
+		if ( _verticesDirty )
+		{
+			updateVetices();
+			_verticesDirty = false;
+		}
 
 		if( _shader )
 		{
@@ -164,18 +159,12 @@ namespace GLSandbox
 				}
 
 			}
-
-			glDrawArrays(GL_TRIANGLES, 0, _vertices.size() );
 		}
 
-		//TODO is necessary unbind texture ?
-		//if ( _texture )
-			//glBindTexture(GL_TEXTURE_2D, NULL );
-	
-		glBindVertexArray(0);
+		_arrayBuffer.drawArrays( GL_TRIANGLES, 0 );
 	}
 
-	void Cube::setTexture2D( Texture2D* texture )
+	/*void Cube::setTexture2D( Texture2D* texture )
 	{
 		Texture2DProtocol::setTexture2D( texture );
 
@@ -184,6 +173,16 @@ namespace GLSandbox
 
 			Size textSize( texture->getWidth(), texture->getHeight() );
 
+			std::vector<PosVertex> vertices( 8 );
+
+			vertices[0].pos = Vec3( 0.0f, 0.0f, 0.0f );
+			vertices[1].pos = Vec3( 0.0f, _cubeSize, 0.0f );
+			vertices[2].pos = Vec3( _cubeSize, 0.0f, 0.0f );
+			vertices[3].pos = Vec3( _cubeSize, _cubeSize, 0.0f );
+			vertices[4].pos = Vec3( 0.0f, 0.0f, _cubeSize );
+			vertices[5].pos = Vec3( 0.0f, _cubeSize, _cubeSize );
+			vertices[6].pos = Vec3( _cubeSize, 0.0f, _cubeSize );
+			vertices[7].pos = Vec3( _cubeSize, _cubeSize, _cubeSize );
 
 			_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
 							 textSize.x, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f, 0.0f, -1.0f,
@@ -227,10 +226,7 @@ namespace GLSandbox
 							0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f, 0.0f, 1.0f,  0.0f,
 							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f };
 
-			_indices = { 0, 1, 2,
-						 1, 2, 3 };
-
-			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
+			
 
 			glGenVertexArrays(1, &_vao);
 			glGenBuffers(1, &_vbo);
@@ -258,6 +254,62 @@ namespace GLSandbox
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			glBindVertexArray(0);
 		}
-	}
+	}*/
+	void Cube::updateVetices()
+	{
+		PosNormalVertex vertices[] = {
+			{ Vec3(0.0f, 0.0f, 0.0f), Vec3( 0.0f, 0.0f, -1.0f ) },
+			{ Vec3( _cubeSize, 0.0f, 0.0f ), Vec3( 0.0f, 0.0f, -1.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize, 0.0f),  Vec3( 0.0f, 0.0f, -1.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize, 0.0f),  Vec3( 0.0f, 0.0f, -1.0f ) },
+			{ Vec3( 0.0f,  _cubeSize, 0.0f ), Vec3( 0.0f, 0.0f, -1.0f ) },
+			{ Vec3( 0.0f, 0.0f, 0.0f ), Vec3( 0.0f, 0.0f, -1.0f ) },
 
+			{ Vec3( 0.0f, 0.0f,  _cubeSize ), Vec3( 0.0f,  0.0f,  1.0f ) },
+			{ Vec3( _cubeSize, 0.0f,  _cubeSize ), Vec3( 0.0f,  0.0f,  1.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize,  _cubeSize ), Vec3( 0.0f,  0.0f,  1.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize,  _cubeSize ), Vec3( 0.0f,  0.0f,  1.0f ) },
+			{ Vec3( 0.0f,  _cubeSize,  _cubeSize ), Vec3( 0.0f,  0.0f,  1.0f ) },
+			{ Vec3( 0.0f, 0.0f,  _cubeSize ), Vec3( 0.0f,  0.0f,  1.0f ) },
+
+			{ Vec3( 0.0f,  _cubeSize,  _cubeSize ), Vec3( -1.0f,  0.0f,  0.0f ) },
+			{ Vec3( 0.0f,  _cubeSize, 0.0f ), Vec3( -1.0f,  0.0f,  0.0f ) },
+			{ Vec3( 0.0f, 0.0f, 0.0f ), Vec3( -1.0f,  0.0f,  0.0f ) },
+			{ Vec3( 0.0f, 0.0f, 0.0f ), Vec3( -1.0f,  0.0f,  0.0f ) },
+			{ Vec3( 0.0f, 0.0f,  _cubeSize ), Vec3( -1.0f,  0.0f,  0.0f ) },
+			{ Vec3( 0.0f,  _cubeSize,  _cubeSize ), Vec3( -1.0f,  0.0f,  0.0f ) },
+
+			{ Vec3( _cubeSize,  _cubeSize,  _cubeSize ), Vec3( 1.0f,  0.0f,  0.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize, 0.0f ), Vec3( 1.0f,  0.0f,  0.0f ) },
+			{ Vec3( _cubeSize, 0.0f, 0.0f ), Vec3( 1.0f,  0.0f,  0.0f ) },
+			{ Vec3( _cubeSize, 0.0f, 0.0f ), Vec3( 1.0f,  0.0f,  0.0f ) },
+			{ Vec3( _cubeSize, 0.0f, _cubeSize ), Vec3( 1.0f,  0.0f,  0.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize,  _cubeSize ), Vec3( 1.0f,  0.0f,  0.0f ) },
+
+			{ Vec3( 0.0f, 0.0f, 0.0f ), Vec3( 0.0f, -1.0f,  0.0f ) },
+			{ Vec3( _cubeSize, 0.0f, 0.0f ), Vec3( 0.0f, -1.0f,  0.0f ) },
+			{ Vec3( _cubeSize, 0.0f,  _cubeSize ), Vec3( 0.0f, -1.0f,  0.0f ) },
+			{ Vec3( _cubeSize, 0.0f,  _cubeSize ), Vec3( 0.0f, -1.0f,  0.0f ) },
+			{ Vec3( 0.0f, 0.0f, _cubeSize ), Vec3( 0.0f, -1.0f,  0.0f ) },
+			{ Vec3( 0.0f, 0.0f, 0.0f ), Vec3( 0.0f, -1.0f,  0.0f ) },
+
+			{ Vec3( 0.0f,  _cubeSize, 0.0f ), Vec3( 0.0f, 1.0f,  0.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize, 0.0f ), Vec3( 0.0f, 1.0f,  0.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize,  _cubeSize ), Vec3( 0.0f, 1.0f,  0.0f ) },
+			{ Vec3( _cubeSize,  _cubeSize,  _cubeSize ), Vec3( 0.0f, 1.0f,  0.0f ) },
+			{ Vec3( 0.0f,  _cubeSize,  _cubeSize ), Vec3( 0.0f, 1.0f,  0.0f ) },
+			{ Vec3( 0.0f,  _cubeSize, 0.0f ), Vec3( 0.0f, 1.0f,  0.0f ) }
+		};
+
+		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosNormalVertex), sizeof(vertices)/sizeof(PosNormalVertex) );
+
+	}
+	void Cube::setCubeSize( float size )
+	{
+		if ( size > 0.0f && abs(_cubeSize - size) > FLT_EPSILON  )
+		{
+			_cubeSize = size;
+			_verticesDirty = true;
+		}
+	}
 }

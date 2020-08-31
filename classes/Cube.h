@@ -4,6 +4,7 @@
 
 #include "Node.h"
 #include "NodeExtensions.h"
+#include "VertexArrayBuffer.h"
 
 namespace GLSandbox
 {
@@ -14,20 +15,23 @@ namespace GLSandbox
 		: public Node
 		, public MaterialProtocol
 		, public ShaderProtocol
-		, public Texture2DProtocol
 	{
 		typedef Node Parent;
 
-		std::vector<GLfloat> _vertices;
-		std::vector<GLuint> _indices;
+		VertexArrayBuffer _arrayBuffer;
 
-		GLuint _vbo;
-		GLuint _vao;
-		GLuint _ebo;
+		bool _verticesDirty;
+
+		float _cubeSize;
+
 
 	protected:
 
+		virtual bool onInit() override;
+
 		virtual void draw( GLRender* render, const Mat4& transform ) override;
+
+		void updateVetices();
 
 	public:
 
@@ -35,9 +39,7 @@ namespace GLSandbox
 		virtual ~Cube();
 		MAKE_UNCOPYABLE(Cube);
 
-		bool initWithFilePath( const std::string& filePath );
-
-		virtual void setTexture2D( Texture2D* texture ) override;
+		virtual void setCubeSize( float size );
 	};
 
 

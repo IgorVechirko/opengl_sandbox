@@ -1,7 +1,6 @@
 #version 330 core 
 
 in vec4 outColor;
-in vec2 f_texCoord;
 in vec3 fragmentNormal;
 in vec3 fragPos;
 

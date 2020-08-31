@@ -28,6 +28,15 @@ namespace GLSandbox
 
 			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("SPRITE_VERTEX"), getResMng()->getResStr("SPRITE_FRAGMENT") ) );
 
+			std::vector<unsigned int>indices = { 0, 1, 2,
+												  1, 2, 3 };
+
+			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices.data(), sizeof(unsigned int), indices.size() );
+
+			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0 );
+			_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GLfloat)) );
+			_arrayBuffer.setupAttribPointer( 2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(6*sizeof(GLfloat)) );
+
 			return true;
 		}
 		else
@@ -68,18 +77,10 @@ namespace GLSandbox
 			std::vector<float>vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 										    0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
 										    textSize.x, textSize.y, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-										    textSize.x, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f };
-
-			std::vector<unsigned int>indices = { 0, 1, 2,
-												  1, 2, 3 };
-
+										    textSize.x, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f 
+			};
 			
 			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices.data(), sizeof(float), vertices.size() );
-			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices.data(), sizeof(unsigned int), indices.size() );
-
-			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0 );
-			_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GL_FLOAT)) );
-			_arrayBuffer.setupAttribPointer( 2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(6*sizeof(GL_FLOAT)) );
 		}
 	}
 

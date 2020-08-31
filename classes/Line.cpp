@@ -32,6 +32,8 @@ namespace GLSandbox
 		auto shader = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr( "VERTEX_POS_UCOLOR_VSH" ), getResMng()->getResStr( "VERTEX_POS_UCOLOR_FSH" ) );
 		setShaderProgram( shader );
 
+		updateVertices();
+
 		_arrayBuffer.setupAttribPointer(0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
 
 		return true;

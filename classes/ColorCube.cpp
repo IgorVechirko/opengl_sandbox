@@ -14,11 +14,7 @@ namespace GLSandbox
 
 	ColorCube::ColorCube()
 		: _cubeSize( 1.0f )
-		, _verticesDirty( false )
-		, _vao( 0 )
-		, _vbo( 0 )
-		, _ebo( 0 )
-		, _indicesCount( 0 )
+		, _verticesDirty( true )
 	{
 		setColor( RGBA::WHITE );
 	}
@@ -38,13 +34,9 @@ namespace GLSandbox
 		vertices[6].pos = Vec3( _cubeSize, 0.0f, _cubeSize );
 		vertices[7].pos = Vec3( _cubeSize, _cubeSize, _cubeSize );
 
-		glBindVertexArray( _vao );
-	
-		glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-		glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(PosVertex) * 8, (void*)&vertices[0] );
+		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices.data(), sizeof(PosVertex), vertices.size() );
 
-		glBindBuffer( GL_ARRAY_BUFFER, 0 );
-		glBindVertexArray( 0 );
+		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
 	}
 	bool ColorCube::onInit()
 	{
@@ -53,33 +45,15 @@ namespace GLSandbox
 		if ( shader )
 			setShaderProgram( shader );
 
-		GLuint indices[] = { 0, 1, 2, 1, 2, 3,
-						  4, 5, 6, 5, 6, 7,
-						  2, 3, 6, 3, 6, 7,
-						  0, 1, 4, 1, 4, 5,
-						  0, 4, 2, 4, 2, 6,
-						  1, 5, 3, 5, 3, 7 };
-		_indicesCount = sizeof( indices ) / sizeof( int );
+		std::vector<GLuint> indices { 0, 1, 2, 1, 2, 3,
+									  4, 5, 6, 5, 6, 7,
+									  2, 3, 6, 3, 6, 7,
+									  0, 1, 4, 1, 4, 5,
+									  0, 4, 2, 4, 2, 6,
+									  1, 5, 3, 5, 3, 7
+		};
 
-		glGenVertexArrays( 1, &_vao );
-		glGenBuffers( 1, &_vbo );
-		glGenBuffers( 1, &_ebo );
-
-		glBindVertexArray( _vao );
-	
-		glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-		glBufferData( GL_ARRAY_BUFFER, sizeof(PosVertex) * 8, nullptr, GL_STATIC_DRAW );
-
-		glVertexAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
-		glEnableVertexAttribArray(0);
-
-		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
-		glBufferData( GL_ELEMENT_ARRAY_BUFFER, _indicesCount * sizeof(GLuint), (void*)&indices[0], GL_STATIC_DRAW );
-
-		glBindBuffer( GL_ARRAY_BUFFER, 0 );
-		glBindVertexArray( 0 );
-
-		updateVertices();
+		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices.data(), sizeof(GLuint), indices.size() );
 
 		return true;
 	}
@@ -106,9 +80,7 @@ namespace GLSandbox
 			glProgramUniform4f( _shader->getProgramID(), colorLoc, _color.r, _color.g, _color.b, _color.a );
 		}
 
-		glBindVertexArray( _vao );
-		glDrawElements( GL_TRIANGLES, _indicesCount, GL_UNSIGNED_INT, 0 );
-		glBindVertexArray( 0 );
+		_arrayBuffer.drawElements( GL_TRIANGLES, GL_UNSIGNED_INT, 0 );
 	}
 	void ColorCube::setCubeSize( float size )
 	{

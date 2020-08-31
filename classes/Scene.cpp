@@ -27,14 +27,7 @@ namespace GLSandbox
 	}
 	void Scene::visit( GLRender* render, const Mat4& parentTransform )
 	{
-		if ( _camera )
-			_camera->visit( render, parentTransform );
-		
-		for( auto pointLight : _pointLights )
-			pointLight->visit( render, parentTransform );
-
-		for( auto flashLight : _flashlights )
-			flashLight->visit( render, parentTransform );
+		visitProtectedChilds( render, parentTransform );
 
 		Node::visit( render, parentTransform );
 	}

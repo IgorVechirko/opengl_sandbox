@@ -97,6 +97,7 @@ namespace GLSandbox
 
 		
 		glBindVertexArray( 0 );
+		OpenGL::getInstance()->processGLErrors();
 	}
 	void VertexArrayBuffer::setupAttribPointer( GLuint indx, GLuint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer )
 	{
@@ -104,6 +105,8 @@ namespace GLSandbox
 		glVertexAttribPointer( indx, size, type, normalized, stride, pointer );
 		glEnableVertexAttribArray(indx);
 		glBindVertexArray( 0 );
+
+		OpenGL::getInstance()->processGLErrors();
 	}
 	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first )
 	{
