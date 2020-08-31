@@ -7,13 +7,12 @@
 #include "GLContext.h"
 #include "DrawTypes.h"
 
+
 namespace GLSandbox
 {
 
 	Line::Line()
 		: _verticesDirty( false )
-		, _vao( 0 )
-		, _vbo( 0 )
 	{
 		setColor( RGBA::WHITE );
 	}
@@ -22,40 +21,18 @@ namespace GLSandbox
 	}
 	void Line::updateVertices()
 	{
-		std::vector<PosVertex> vertices( 3 );
+		std::vector<PosVertex> vertices( 2 );
 		vertices[0].pos = Vec3( _startPos.x, _startPos.y, _startPos.z );
 		vertices[1].pos = Vec3( _finishPos.x, _finishPos.y, _finishPos.z );
 
-		glBindVertexArray( _vao );
-	
-		glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-		glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(PosVertex)*2, (void*)(&vertices[0]) );
-		glBindBuffer( GL_ARRAY_BUFFER, 0 );
-
-		glBindVertexArray( 0 );
+		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices.data(), sizeof(PosVertex), vertices.size() );
 	}
 	bool Line::onInit()
 	{
 		auto shader = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr( "VERTEX_POS_UCOLOR_VSH" ), getResMng()->getResStr( "VERTEX_POS_UCOLOR_FSH" ) );
+		setShaderProgram( shader );
 
-		if ( shader )
-			setShaderProgram( shader );
-
-		glGenVertexArrays( 1, &_vao );
-		glGenBuffers( 1, &_vbo );
-
-		glBindVertexArray( _vao );
-
-		glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-		glBufferData( GL_ARRAY_BUFFER, sizeof(PosVertex)*2, nullptr, GL_STATIC_DRAW );
-
-		glVertexAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
-		glEnableVertexAttribArray(0);
-
-		glBindBuffer( GL_ARRAY_BUFFER, 0 );
-		glBindVertexArray( 0 );
-
-		updateVertices();
+		_arrayBuffer.setupAttribPointer(0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
 
 		return true;
 	}
@@ -83,10 +60,7 @@ namespace GLSandbox
 			glProgramUniform4f( _shader->getProgramID(), colorLoc, _color.r, _color.g, _color.b, _color.a );
 		}
 
-		glBindVertexArray( _vao );
-		glDrawArrays( GL_LINE_STRIP, 0, 2 );
-		glBindVertexArray( 0 );
-
+		_arrayBuffer.drawArrays( GL_LINE_STRIP, 0 );
 	} 
 	void Line::setStartPos( const Vec3& pos )
 	{

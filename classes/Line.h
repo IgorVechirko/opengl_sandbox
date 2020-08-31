@@ -3,6 +3,7 @@
 
 #include "Node.h"
 #include "NodeExtensions.h"
+#include "VertexArrayBuffer.h"
 
 namespace GLSandbox
 {
@@ -13,8 +14,7 @@ namespace GLSandbox
 	{
 		typedef Node Parent;
 
-		GLuint _vao;
-		GLuint _vbo;
+		VertexArrayBuffer _arrayBuffer;
 
 		Vec3 _startPos;
 		Vec3 _finishPos;

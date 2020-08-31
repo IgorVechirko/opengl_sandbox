@@ -4,6 +4,7 @@
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
+#include "OpenGL.h"
 
 
 namespace GLSandbox
@@ -13,6 +14,7 @@ namespace GLSandbox
 		, _vbo( NULL )
 		, _ebo( NULL )
 		, _indicesAmount( 0 )
+		, _verticesAmount( 0 )
 	{
 		glGenVertexArrays( 1, &_vao );
 	}
@@ -23,43 +25,77 @@ namespace GLSandbox
 		glDeleteBuffers( 1, &_ebo );
 		glDeleteVertexArrays( 1, &_vao );
 	}
-	void VertexArrayBuffer::setupVBOData( const void* data, size_t dataSize )
+	GLenum VertexArrayBuffer::bufferTypeToGLenum( BufferType type )
 	{
-		glBindVertexArray( _vao );
+		GLenum result = NULL;
 
-		if( _vbo )
+		switch( type )
 		{
-			glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-			glBufferSubData( GL_ARRAY_BUFFER, 0, dataSize, data );
-		}
-		else
-		{
-			glGenBuffers( 1, &_vbo );
-			glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-			glBufferData( GL_ARRAY_BUFFER, dataSize, data, GL_STATIC_DRAW );
+		case BufferType::VERTEX:
+			result = GL_ARRAY_BUFFER;
+			break;
+		case BufferType::ELEMENT:
+			result = GL_ELEMENT_ARRAY_BUFFER;
+			break;
 		}
 
-		glBindVertexArray( 0 );
-
+		return result;
 	}
-	void VertexArrayBuffer::setupEBOdata( const std::vector<unsigned int>& indices )
+	GLuint* VertexArrayBuffer::bufferIDByBufferType( BufferType type )
 	{
+		GLuint* result = nullptr;
+
+		switch( type )
+		{
+		case BufferType::VERTEX:
+			result = &_vbo;
+			break;
+		case BufferType::ELEMENT:
+			result = &_ebo;
+			break;
+		}
+
+		return result;
+	}
+	unsigned int* VertexArrayBuffer::bufferUnitsAmountByBufferType( BufferType type )
+	{
+		unsigned int* result = nullptr;
+
+		switch( type )
+		{
+		case BufferType::VERTEX:
+			result = &_verticesAmount;
+			break;
+		case BufferType::ELEMENT:
+			result = &_indicesAmount;
+			break;
+		}
+
+		return result;
+	}
+	void VertexArrayBuffer::setupBufferData( BufferType type, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount )
+	{
+		auto target = bufferTypeToGLenum( type );
+		auto bufferID = bufferIDByBufferType( type );
+		auto bufferUnitsAmount = bufferUnitsAmountByBufferType( type );
+
 		glBindVertexArray( _vao );
 
-		if( _ebo )
+		if( *bufferID )
 		{
-			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
-			glBufferSubData( GL_ELEMENT_ARRAY_BUFFER, 0, indices.size() * sizeof(unsigned int), indices.data() );
+			glBindBuffer( target, *bufferID );
+			glBufferSubData( target, 0, dataUnitSize*dataUnitsAmount, data );
 		}
 		else
 		{
-			glGenBuffers( 1, &_ebo );
-			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
-			glBufferData( GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW );
+			glGenBuffers( 1, bufferID );
+			glBindBuffer( target, *bufferID );
+			glBufferData( target, dataUnitSize*dataUnitsAmount, data, GL_STATIC_DRAW );
 		}
 
-		_indicesAmount = indices.size();
+		*bufferUnitsAmount = dataUnitsAmount;
 
+		
 		glBindVertexArray( 0 );
 	}
 	void VertexArrayBuffer::setupAttribPointer( GLuint indx, GLuint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer )
@@ -69,17 +105,34 @@ namespace GLSandbox
 		glEnableVertexAttribArray(indx);
 		glBindVertexArray( 0 );
 	}
-	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first, GLsizei count )
+	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first )
 	{
-		glBindVertexArray( _vao );
-		glDrawArrays( mode, first, count );
-		glBindVertexArray( 0 );
+		if( _vbo )
+		{
+			glBindVertexArray( _vao );
+			glBindBuffer( GL_ARRAY_BUFFER, _vbo );
+		
+			OpenGL::getInstance()->processGLErrors();
+
+			glDrawArrays( mode, first, _verticesAmount );
+			
+			glBindVertexArray( 0 );
+		}
 	}
 	void VertexArrayBuffer::drawElements( GLenum mode, GLenum type, const void* indices )
 	{
-		glBindVertexArray( _vao );
-		glDrawElements( mode, _indicesAmount, type, indices );
-		glBindVertexArray( 0 );
+		if( _ebo && _vbo )
+		{
+			glBindVertexArray( _vao );
+			glBindBuffer( GL_ARRAY_BUFFER, _vbo );
+			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
+
+			OpenGL::getInstance()->processGLErrors();
+
+			glDrawElements( mode, _indicesAmount, type, indices );
+			
+			glBindVertexArray( 0 );
+		}
 	}
 
 }

@@ -95,6 +95,14 @@ namespace GLSandbox
 			Console::log( desc, ". Code ", errorCode );
 		}
 	}
+	void OpenGL::processGLErrors()
+	{
+		GLenum error;
+		while( ( error = glGetError() ) != GL_NO_ERROR )
+		{
+			Console::log( "Error: Code = ", error, ", ", glewGetErrorString( error ) );
+		}
+	}
 	void OpenGL::poolEvents()
 	{
 		glfwPollEvents();

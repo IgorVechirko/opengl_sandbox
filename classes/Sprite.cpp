@@ -74,8 +74,8 @@ namespace GLSandbox
 												  1, 2, 3 };
 
 			
-			_arrayBuffer.setupVBOData( vertices.data(), vertices.size()*sizeof(float) );
-			_arrayBuffer.setupEBOdata( indices );
+			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices.data(), sizeof(float), vertices.size() );
+			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices.data(), sizeof(unsigned int), indices.size() );
 
 			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0 );
 			_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GL_FLOAT)) );
