@@ -2,9 +2,7 @@
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
-#include "ResourcesManager.h"
 #include "Scene.h"
-#include "Camera.h"
 #include "GLContext.h"
 #include "DrawTypes.h"
 
@@ -53,10 +51,11 @@ namespace GLSandbox
 		if( _shader )
 		{
 			_shader->useProgram();
+			auto scene = getGLContext()->getScene();
 
 			_shader->setUniformMatrix4fv( "u_model", 1, false, glm::value_ptr( transform ) );
-			_shader->setUniformMatrix4fv( "u_view", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
-			_shader->setUniformMatrix4fv( "u_projection", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
+			scene->setViewToShader( _shader );
+			scene->setProjectionToShader( _shader );
 		}
 
 		_arrayBuffer.drawElements( GL_TRIANGLES, GL_UNSIGNED_INT, 0 );

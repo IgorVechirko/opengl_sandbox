@@ -5,6 +5,7 @@
 #include "DirectLightSource.h"
 #include "PointLightSource.h"
 #include "Flashlight.h"
+#include "ShaderProgram.h"
 
 namespace GLSandbox
 {
@@ -88,6 +89,74 @@ namespace GLSandbox
 	{
 		_ASSERT( _camera );
 		return _camera;
+	}
+	void Scene::setProjectionToShader( ShaderProgram* shader )
+	{
+		if ( shader )
+			shader->setUniformMatrix4fv( "u_projection", 1, false, glm::value_ptr( getCamera()->getProjection() ) );
+	}
+	void Scene::setViewToShader( ShaderProgram* shader )
+	{
+		if ( shader )
+			shader->setUniformMatrix4fv( "u_view", 1, false, glm::value_ptr( getCamera()->getView() ) );
+	}
+	void Scene::setCameraPosToShader( ShaderProgram* shader )
+	{
+		if ( shader )
+		{
+			auto& cameraPos = getCamera()->getPosition();
+			shader->setUniform3f( "u_cameraPos", cameraPos.x, cameraPos.y, cameraPos.z );
+		}
+	}
+	void Scene::setDirectLightPropToShader( ShaderProgram* shader )
+	{
+		if ( shader && _directionLight )
+		{
+			LightProperties lightProperties = _directionLight->getLightProperties();
+			glm::vec3 lightDirection = _directionLight->getDirection();
+
+			shader->setLightPropUniforms( lightProperties, "u_directLight", "ambient", "diffuse", "specular" );
+			shader->setUniform3f( "u_directLight.direction", lightDirection.x, lightDirection.y, lightDirection.z );
+		}
+	}
+	void Scene::setPointLightsPropToShader( ShaderProgram* shader )
+	{
+		if ( shader )
+		{
+			shader->setUniform1i( "u_pointLightsCount", _pointLights.size() );
+
+			for( int lightIndx = 0; lightIndx < _pointLights.size(); lightIndx++ )
+			{
+				const auto& light = _pointLights[lightIndx];
+				const auto& lightPos = light->getPosition();
+
+				shader->setLightPropUniforms( light->getLightProperties(), "u_pointLights[" + std::to_string(lightIndx) + "]", "ambient", "diffuse", "specular" );
+				shader->setAttenuationCoefsUniforms( light->getAttenuation(), "u_pointLights[" + std::to_string(lightIndx) + "]", "constant", "linear", "quadratic" );
+				shader->setUniform3f( "u_pointLights[" + std::to_string(lightIndx) + "].pos", lightPos.x, lightPos.y, lightPos.z );
+			}
+		}
+	}
+	void Scene::setFlashLightsPropToShader( ShaderProgram* shader )
+	{
+		if ( shader )
+		{
+			shader->setUniform1i( "u_flashlightsCount", _flashlights.size() );
+
+			for( int lightIndx = 0; lightIndx < _flashlights.size(); lightIndx++ )
+			{
+				const auto& light = _flashlights[lightIndx];
+				const auto& lightPos = light->getPosition();
+				const auto& lightDirection = light->getDirection();
+
+				shader->setLightPropUniforms( light->getLightProperties(), "u_flashlights[" + std::to_string(lightIndx) + "]", "ambient", "diffuse", "specular" );
+				shader->setAttenuationCoefsUniforms( light->getAttenuation(), "u_flashlights[" + std::to_string(lightIndx) + "]", "constant", "linear", "quadratic" );
+				shader->setUniform3f( "u_flashlights[" + std::to_string(lightIndx) + "].pos", lightPos.x, lightPos.y, lightPos.z );
+
+				shader->setUniform3f( "u_flashlights[" + std::to_string(lightIndx) + "].direction", lightDirection.x, lightDirection.y, lightDirection.z );
+				shader->setUniform1f( "u_flashlights[" + std::to_string(lightIndx) + "].cutOffAngleCos", glm::cos(glm::radians(light->getCutOffAngle())) );
+				shader->setUniform1f( "u_flashlights[" + std::to_string(lightIndx) + "].outerCutOffAngleCos", glm::cos(glm::radians(light->getOuterCutOffAngle())) );
+			}
+		}
 	}
 
 }

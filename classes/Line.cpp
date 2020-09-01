@@ -1,8 +1,6 @@
 #include "Line.h"
 
 #include "ShaderProgram.h"
-#include "ResourcesManager.h"
-#include "Camera.h"
 #include "Scene.h"
 #include "GLContext.h"
 #include "DrawTypes.h"
@@ -52,10 +50,11 @@ namespace GLSandbox
 		if ( _shader )
 		{
 			_shader->useProgram();
+			auto scene = getGLContext()->getScene();
 
 			_shader->setUniformMatrix4fv( "u_model", 1, false, glm::value_ptr( parentTransform ) );
-			_shader->setUniformMatrix4fv( "u_view", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
-			_shader->setUniformMatrix4fv( "u_projection", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
+			scene->setViewToShader( _shader );
+			scene->setProjectionToShader( _shader );
 			
 			_shader->setUniform4f( "u_color", _color.r, _color.g, _color.b, _color.a );
 		}

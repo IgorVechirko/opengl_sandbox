@@ -51,6 +51,13 @@ namespace GLSandbox
 		void setCamera( Camera* camera );
 		Camera* getCamera();
 
+		void setProjectionToShader( ShaderProgram* shader );
+		void setViewToShader( ShaderProgram* shader );
+		void setCameraPosToShader( ShaderProgram* shader );
+		void setDirectLightPropToShader( ShaderProgram* shader );
+		void setPointLightsPropToShader( ShaderProgram* shader );
+		void setFlashLightsPropToShader( ShaderProgram* shader );
+
 	};
 
 }
