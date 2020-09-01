@@ -13,6 +13,8 @@ namespace GLSandbox
 
 	Line::Line()
 		: _verticesDirty( false )
+		, _startPos( 0.0f )
+		, _finishPos( 0.0f )
 	{
 		setColor( RGBA::WHITE );
 	}
@@ -21,20 +23,20 @@ namespace GLSandbox
 	}
 	void Line::updateVertices()
 	{
-		std::vector<PosVertex> vertices( 2 );
-		vertices[0].pos = Vec3( _startPos.x, _startPos.y, _startPos.z );
-		vertices[1].pos = Vec3( _finishPos.x, _finishPos.y, _finishPos.z );
+		PosVertex vertices[] = { { Vec3( _startPos.x, _startPos.y, _startPos.z ) },
+								 { Vec3( _finishPos.x, _finishPos.y, _finishPos.z ) } };
 
-		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices.data(), sizeof(PosVertex), vertices.size() );
+		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosVertex), sizeof(vertices)/sizeof(PosVertex) );
 	}
 	bool Line::onInit()
 	{
 		auto shader = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr( "VERTEX_POS_UCOLOR_VSH" ), getResMng()->getResStr( "VERTEX_POS_UCOLOR_FSH" ) );
 		setShaderProgram( shader );
 
-		updateVertices();
-
+		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
 		_arrayBuffer.setupAttribPointer(0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
+
+		updateVertices();
 
 		return true;
 	}

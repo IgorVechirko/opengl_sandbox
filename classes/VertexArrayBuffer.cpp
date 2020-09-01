@@ -13,6 +13,8 @@ namespace GLSandbox
 		: _vao( NULL )
 		, _vbo( NULL )
 		, _ebo( NULL )
+		, _vboDataSize( 0 )
+		, _eboDataSize( 0 )
 		, _indicesAmount( 0 )
 		, _verticesAmount( 0 )
 	{
@@ -73,35 +75,64 @@ namespace GLSandbox
 
 		return result;
 	}
-	void VertexArrayBuffer::setupBufferData( BufferType type, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount )
+	size_t* VertexArrayBuffer::bufferDatSizebyBufferType( BufferType type )
 	{
-		auto target = bufferTypeToGLenum( type );
-		auto bufferID = bufferIDByBufferType( type );
-		auto bufferUnitsAmount = bufferUnitsAmountByBufferType( type );
+		size_t* result = nullptr;
+
+		switch( type )
+		{
+		case BufferType::VERTEX:
+			result = &_vboDataSize;
+			break;
+		case BufferType::ELEMENT:
+			result = &_eboDataSize;
+			break;
+		}
+
+		return result;
+	}
+	void VertexArrayBuffer::genBuffer( BufferType bufferType )
+	{
+		glBindVertexArray( _vao );
+		glGenBuffers( 1, bufferIDByBufferType( bufferType ) );
+
+		OpenGL::getInstance()->processGLErrors();
+	}
+	void VertexArrayBuffer::setupBufferData( BufferType bufferType, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount )
+	{
+		auto target = bufferTypeToGLenum( bufferType );
+		auto bufferID = bufferIDByBufferType( bufferType );
+		auto bufferUnitsAmount = bufferUnitsAmountByBufferType( bufferType );
+		auto bufferDataSize = bufferDatSizebyBufferType( bufferType );
+
+		size_t newDataSize = dataUnitSize * dataUnitsAmount;
+
+		_ASSERT( *bufferID );
 
 		glBindVertexArray( _vao );
+		glBindBuffer( target, *bufferID );
 
-		if( *bufferID )
+		if ( (*bufferDataSize) >= newDataSize  )
 		{
-			glBindBuffer( target, *bufferID );
-			glBufferSubData( target, 0, dataUnitSize*dataUnitsAmount, data );
+			glBufferSubData( target, 0, newDataSize, data );
 		}
 		else
 		{
-			glGenBuffers( 1, bufferID );
-			glBindBuffer( target, *bufferID );
-			glBufferData( target, dataUnitSize*dataUnitsAmount, data, GL_STATIC_DRAW );
+			glBufferData( target, newDataSize, data, GL_STATIC_DRAW );
+			*bufferDataSize = newDataSize;
 		}
 
 		*bufferUnitsAmount = dataUnitsAmount;
-
 		
 		glBindVertexArray( 0 );
 		OpenGL::getInstance()->processGLErrors();
 	}
 	void VertexArrayBuffer::setupAttribPointer( GLuint indx, GLuint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer )
 	{
+		_ASSERT( _vbo );
+
 		glBindVertexArray( _vao );
+		glBindBuffer( GL_ARRAY_BUFFER, _vbo );
 		glVertexAttribPointer( indx, size, type, normalized, stride, pointer );
 		glEnableVertexAttribArray(indx);
 		glBindVertexArray( 0 );
@@ -110,32 +141,30 @@ namespace GLSandbox
 	}
 	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first )
 	{
-		if( _vbo )
-		{
-			glBindVertexArray( _vao );
-			glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-		
-			OpenGL::getInstance()->processGLErrors();
+		_ASSERT( _vbo );
 
-			glDrawArrays( mode, first, _verticesAmount );
+		glBindVertexArray( _vao );
+		glBindBuffer( GL_ARRAY_BUFFER, _vbo );
+		
+		OpenGL::getInstance()->processGLErrors();
+
+		glDrawArrays( mode, first, _verticesAmount );
 			
-			glBindVertexArray( 0 );
-		}
+		glBindVertexArray( 0 );
 	}
 	void VertexArrayBuffer::drawElements( GLenum mode, GLenum type, const void* indices )
 	{
-		if( _ebo && _vbo )
-		{
-			glBindVertexArray( _vao );
-			glBindBuffer( GL_ARRAY_BUFFER, _vbo );
-			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
+		_ASSERT( _ebo && _vbo );
+		
+		glBindVertexArray( _vao );
+		glBindBuffer( GL_ARRAY_BUFFER, _vbo );
+		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _ebo );
 
-			OpenGL::getInstance()->processGLErrors();
+		OpenGL::getInstance()->processGLErrors();
 
-			glDrawElements( mode, _indicesAmount, type, indices );
+		glDrawElements( mode, _indicesAmount, type, indices );
 			
-			glBindVertexArray( 0 );
-		}
+		glBindVertexArray( 0 );
 	}
 
 }

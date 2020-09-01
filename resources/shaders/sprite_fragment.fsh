@@ -1,6 +1,5 @@
 #version 330 core 
 
-in vec4 outColor;
 in vec2 f_texCoord;
 
 out vec4 color;

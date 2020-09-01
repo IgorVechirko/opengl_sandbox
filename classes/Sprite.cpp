@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "GLContext.h"
+#include "DrawTypes.h"
 
 namespace GLSandbox
 {
@@ -24,18 +25,20 @@ namespace GLSandbox
 
 		if ( texture )
 		{
+			_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
+			_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::ELEMENT );
+
 			setTexture2D( texture );
 
 			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("SPRITE_VERTEX"), getResMng()->getResStr("SPRITE_FRAGMENT") ) );
 
-			std::vector<unsigned int>indices = { 0, 1, 2,
-												  1, 2, 3 };
+			GLuint indices[] = { 0, 1, 2,
+								 1, 2, 3 };
 
-			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices.data(), sizeof(unsigned int), indices.size() );
+			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices, sizeof(unsigned int), sizeof(indices)/sizeof(GLuint) );
 
-			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0 );
-			_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GLfloat)) );
-			_arrayBuffer.setupAttribPointer( 2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(6*sizeof(GLfloat)) );
+			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLvoid*)0 );
+			_arrayBuffer.setupAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLvoid*)(3*sizeof(GLfloat)) );
 
 			return true;
 		}
@@ -74,13 +77,13 @@ namespace GLSandbox
 
 			Size textSize( static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()) );
 
-			std::vector<float>vertices = { 0.0f, textSize.y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-										    0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-										    textSize.x, textSize.y, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-										    textSize.x, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f 
+			PosUVVertex vertices[] = { { Vec3(0.0f, textSize.y, 0.0f ), Vec2( 0.0f, 0.0f ) },
+									   { Vec3( 0.0f, 0.0f, 0.0f ), Vec2( 0.0f, 1.0f ) },
+									   { Vec3( textSize.x, textSize.y, 0.0f ), Vec2( 1.0f, 0.0f ) },
+								   	   { Vec3( textSize.x, 0.0f, 0.0f ), Vec2( 1.0f, 1.0f ) }
 			};
 			
-			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices.data(), sizeof(float), vertices.size() );
+			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosUVVertex), sizeof(vertices)/sizeof(PosUVVertex) );
 		}
 	}
 

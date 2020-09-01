@@ -23,37 +23,38 @@ namespace GLSandbox
 	}
 	void ColorCube::updateVertices()
 	{
-		std::vector<PosVertex> vertices( 8 );
+		PosVertex vertices[] = { Vec3( 0.0f, 0.0f, 0.0f ),
+								 Vec3( 0.0f, _cubeSize, 0.0f ),
+								 Vec3( _cubeSize, 0.0f, 0.0f ),
+								 Vec3( _cubeSize, _cubeSize, 0.0f ),
+								 Vec3( 0.0f, 0.0f, _cubeSize ),
+								 Vec3( 0.0f, _cubeSize, _cubeSize ),
+								 Vec3( _cubeSize, 0.0f, _cubeSize ),
+								 Vec3( _cubeSize, _cubeSize, _cubeSize )
+		};
 
-		vertices[0].pos = Vec3( 0.0f, 0.0f, 0.0f );
-		vertices[1].pos = Vec3( 0.0f, _cubeSize, 0.0f );
-		vertices[2].pos = Vec3( _cubeSize, 0.0f, 0.0f );
-		vertices[3].pos = Vec3( _cubeSize, _cubeSize, 0.0f );
-		vertices[4].pos = Vec3( 0.0f, 0.0f, _cubeSize );
-		vertices[5].pos = Vec3( 0.0f, _cubeSize, _cubeSize );
-		vertices[6].pos = Vec3( _cubeSize, 0.0f, _cubeSize );
-		vertices[7].pos = Vec3( _cubeSize, _cubeSize, _cubeSize );
-
-		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices.data(), sizeof(PosVertex), vertices.size() );
-
-		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
+		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosVertex), sizeof(vertices)/sizeof(PosVertex) );
 	}
 	bool ColorCube::onInit()
 	{
+		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
+		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::ELEMENT );
+		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
+
 		auto shader = createRefWithInitializer<ShaderProgram>( &ShaderProgram::initWithSrc, getResMng()->getResStr( "VERTEX_POS_UCOLOR_VSH" ), getResMng()->getResStr( "VERTEX_POS_UCOLOR_FSH" ) );
 
 		if ( shader )
 			setShaderProgram( shader );
 
-		std::vector<GLuint> indices { 0, 1, 2, 1, 2, 3,
-									  4, 5, 6, 5, 6, 7,
-									  2, 3, 6, 3, 6, 7,
-									  0, 1, 4, 1, 4, 5,
-									  0, 4, 2, 4, 2, 6,
-									  1, 5, 3, 5, 3, 7
+		GLuint indices[] = { 0, 1, 2, 1, 2, 3,
+							 4, 5, 6, 5, 6, 7,
+							 2, 3, 6, 3, 6, 7,
+							 0, 1, 4, 1, 4, 5,
+							 0, 4, 2, 4, 2, 6,
+							 1, 5, 3, 5, 3, 7
 		};
 
-		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices.data(), sizeof(GLuint), indices.size() );
+		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices, sizeof(GLuint), sizeof(indices)/sizeof(GLuint) );
 
 		return true;
 	}

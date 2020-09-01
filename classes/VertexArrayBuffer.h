@@ -22,6 +22,9 @@ namespace GLSandbox
 		GLuint _vbo;
 		GLuint _ebo;
 
+		size_t _vboDataSize;
+		size_t _eboDataSize;
+
 		unsigned int _indicesAmount;
 		unsigned int _verticesAmount;
 
@@ -29,13 +32,15 @@ namespace GLSandbox
 		GLenum bufferTypeToGLenum( BufferType type );
 		GLuint* bufferIDByBufferType( BufferType type );
 		unsigned int* bufferUnitsAmountByBufferType( BufferType type );
+		size_t* bufferDatSizebyBufferType( BufferType type );
 
 	public:
 
 		VertexArrayBuffer();
 		virtual ~VertexArrayBuffer();
 
-		void setupBufferData( BufferType buffer, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount );
+		void genBuffer( BufferType bufferType );
+		void setupBufferData( BufferType bufferType, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount );
 
 		void setupAttribPointer( GLuint indx, GLuint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer );
 

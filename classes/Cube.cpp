@@ -29,12 +29,12 @@ namespace GLSandbox
 
 	bool Cube::onInit()
 	{	
-		setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
-
-		updateVetices();
+		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
 
 		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)0 );
 		_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)(3*sizeof(GLfloat)) );
+
+		setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("CUBE_VERTEX"), getResMng()->getResStr("CUBE_FRAGMENT") ) );
 
 		return true;
 	}
@@ -163,98 +163,6 @@ namespace GLSandbox
 
 		_arrayBuffer.drawArrays( GL_TRIANGLES, 0 );
 	}
-
-	/*void Cube::setTexture2D( Texture2D* texture )
-	{
-		Texture2DProtocol::setTexture2D( texture );
-
-		if ( texture )
-		{
-
-			Size textSize( texture->getWidth(), texture->getHeight() );
-
-			std::vector<PosVertex> vertices( 8 );
-
-			vertices[0].pos = Vec3( 0.0f, 0.0f, 0.0f );
-			vertices[1].pos = Vec3( 0.0f, _cubeSize, 0.0f );
-			vertices[2].pos = Vec3( _cubeSize, 0.0f, 0.0f );
-			vertices[3].pos = Vec3( _cubeSize, _cubeSize, 0.0f );
-			vertices[4].pos = Vec3( 0.0f, 0.0f, _cubeSize );
-			vertices[5].pos = Vec3( 0.0f, _cubeSize, _cubeSize );
-			vertices[6].pos = Vec3( _cubeSize, 0.0f, _cubeSize );
-			vertices[7].pos = Vec3( _cubeSize, _cubeSize, _cubeSize );
-
-			_vertices = {	0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
-							 textSize.x, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f, 0.0f, -1.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
-							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f, 0.0f, 0.0f, -1.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,
-
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
-							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f,  0.0f,  1.0f,
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f,
-							0.0f,  textSize.x,  textSize.x,  0.0f, 1.0f,  0.0f,  0.0f,  1.0f,
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f,
-
-							0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
-							0.0f,  textSize.x, 0.0f,  1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
-							0.0f,  textSize.x,  textSize.x,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
-
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x, 0.0f, 0.0f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x, 0.0f,  textSize.x,  0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-							 textSize.x,  textSize.x,  textSize.x,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
-
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
-							 textSize.x, 0.0f, 0.0f,  1.0f, 1.0f,  0.0f, -1.0f,  0.0f,
-							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
-							 textSize.x, 0.0f,  textSize.x,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f,
-							0.0f, 0.0f,  textSize.x,  0.0f, 0.0f,  0.0f, -1.0f,  0.0f,
-							0.0f, 0.0f, 0.0f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f,
-
-							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
-							 textSize.x,  textSize.x, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,  0.0f,
-							 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
-							 textSize.x,  textSize.x,  textSize.x, 1.0f, 0.0f,  0.0f, 1.0f,  0.0f,
-							0.0f,  textSize.x,  textSize.x,  0.0f, 0.0f, 0.0f, 1.0f,  0.0f,
-							0.0f,  textSize.x, 0.0f,  0.0f, 1.0f,  0.0f, 1.0f,  0.0f };
-
-			
-
-			glGenVertexArrays(1, &_vao);
-			glGenBuffers(1, &_vbo);
-			glGenBuffers(1, &_ebo);
-
-			glBindVertexArray( _vao );
-
-			const GLfloat* vertices = &_vertices[0];
-			glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*_vertices.size(), vertices, GL_STATIC_DRAW );
-
-			const GLuint* indices = &_indices[0];
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*_indices.size(), indices, GL_STATIC_DRAW );
-
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)0);
-			glEnableVertexAttribArray(0);
-
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(3*sizeof(GLfloat)));
-			glEnableVertexAttribArray(1);
-
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*8, (GLvoid*)(5*sizeof(GLfloat)));
-			glEnableVertexAttribArray(2);
-
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glBindVertexArray(0);
-		}
-	}*/
 	void Cube::updateVetices()
 	{
 		PosNormalVertex vertices[] = {
