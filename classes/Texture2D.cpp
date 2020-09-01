@@ -29,9 +29,10 @@ namespace GLSandbox
 
 		return true;
 	}
-	GLuint Texture2D::getTextureID() const
+	void Texture2D::useTexture( unsigned int samplerIndx )
 	{
-		return _textureID;
+		glActiveTexture( GL_TEXTURE0 + samplerIndx );
+		glBindTexture( GL_TEXTURE_2D, _textureID );
 	}
 	int Texture2D::getWidth() const
 	{

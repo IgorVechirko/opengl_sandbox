@@ -46,7 +46,7 @@ namespace GLSandbox
 	void Sprite::draw( GLRender* render, const Mat4& transform )
 	{
 		if( getTexture2D() )
-			glBindTexture( GL_TEXTURE_2D, getTexture2D()->getTextureID() );
+			getTexture2D()->useTexture();
 
 		if( _shader )
 		{

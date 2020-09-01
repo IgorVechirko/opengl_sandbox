@@ -21,7 +21,7 @@ namespace GLSandbox
 
 			bool initWithFilePath( const std::string& filePath );
 
-			GLuint getTextureID() const;
+			void useTexture( unsigned int samplerIndx = 0 );
 
 			int getWidth() const;
 			int getHeight() const;
