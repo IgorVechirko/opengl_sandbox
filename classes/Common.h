@@ -27,6 +27,8 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
+#include "shaders.h"
+
 
 #ifndef TEST_FRIEND
 	#define TEST_FRIEND

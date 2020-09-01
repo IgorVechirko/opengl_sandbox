@@ -86,7 +86,7 @@ set( WorkingScope
 				  ${GL_SANDBOX_SRC_DIR}/ScopeDelegate.h
 )
 
-
+set( shaders ${GL_SANDBOX_SRC_DIR}/shaders.h ${GL_SANDBOX_SRC_DIR}/shaders.cpp )
 
 
 
@@ -108,7 +108,10 @@ source_group( memmory_managment\\allocation FILES ${Allocator} )
 
 source_group( input FILES ${InputListener} )
 
-source_group( gl FILES ${OpenGL} )
+source_group( gl FILES 
+						${OpenGL}
+						${shaders}
+)
 source_group( gl\\context FILES ${GLContext} )
 source_group( gl\\render FILES ${GLRender} )
 source_group( gl\\components FILES 
@@ -178,6 +181,7 @@ set( SANDBOX_SRC ${Common}
 				 ${Creator}
 				 ${Allocator}
 				 ${VertexArrayObject}
+				 ${shaders}
 )
 
 #setup project

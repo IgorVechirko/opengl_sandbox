@@ -30,7 +30,7 @@ namespace GLSandbox
 
 			setTexture2D( texture );
 
-			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr("SPRITE_VERTEX"), getResMng()->getResStr("SPRITE_FRAGMENT") ) );
+			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionUVTexture_vert, positionUVTexture_frag ) );
 
 			GLuint indices[] = { 0, 1, 2,
 								 1, 2, 3 };
@@ -54,9 +54,9 @@ namespace GLSandbox
 		{
 			_shader->useProgram();
 
-			GLuint modelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
-			GLuint viewLoc = glGetUniformLocation( _shader->getProgramID(), "view" );
-			GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
+			GLuint modelLoc = glGetUniformLocation( _shader->getProgramID(), "u_model" );
+			GLuint viewLoc = glGetUniformLocation( _shader->getProgramID(), "u_view" );
+			GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "u_projection" );
 
 			glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(transform) );
 			glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );

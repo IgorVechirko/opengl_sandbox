@@ -30,7 +30,7 @@ namespace GLSandbox
 	}
 	bool Line::onInit()
 	{
-		auto shader = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr( "VERTEX_POS_UCOLOR_VSH" ), getResMng()->getResStr( "VERTEX_POS_UCOLOR_FSH" ) );
+		auto shader = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionUColor_vert, positionUColor_frag );
 		setShaderProgram( shader );
 
 		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::VERTEX );
@@ -53,10 +53,10 @@ namespace GLSandbox
 		{
 			_shader->useProgram();
 
-			auto modelLoc = glGetUniformLocation( _shader->getProgramID(), "model" );
-			auto viewLoc = glGetUniformLocation( _shader->getProgramID(), "view" );
-			auto projectionLoc = glGetUniformLocation( _shader->getProgramID(), "projection" );
-			auto colorLoc = glGetUniformLocation( _shader->getProgramID(), "color" );
+			auto modelLoc = glGetUniformLocation( _shader->getProgramID(), "u_model" );
+			auto viewLoc = glGetUniformLocation( _shader->getProgramID(), "u_view" );
+			auto projectionLoc = glGetUniformLocation( _shader->getProgramID(), "u_projection" );
+			auto colorLoc = glGetUniformLocation( _shader->getProgramID(), "u_color" );
 
 			glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(parentTransform) );
 			glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
