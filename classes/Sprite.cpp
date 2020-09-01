@@ -54,16 +54,9 @@ namespace GLSandbox
 		{
 			_shader->useProgram();
 
-			GLuint modelLoc = glGetUniformLocation( _shader->getProgramID(), "u_model" );
-			GLuint viewLoc = glGetUniformLocation( _shader->getProgramID(), "u_view" );
-			GLuint projectionLoc = glGetUniformLocation( _shader->getProgramID(), "u_projection" );
-
-			glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(transform) );
-			glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
-			glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
-
-			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
-			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+			_shader->setUniformMatrix4fv( "u_model", 1, false, glm::value_ptr( transform ) );
+			_shader->setUniformMatrix4fv( "u_view", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
+			_shader->setUniformMatrix4fv( "u_projection", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
 		}
 
 		_arrayBuffer.drawElements( GL_TRIANGLES, GL_UNSIGNED_INT, 0 );

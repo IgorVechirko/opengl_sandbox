@@ -70,15 +70,11 @@ namespace GLSandbox
 		{
 			_shader->useProgram();
 
-			auto modelLoc = glGetUniformLocation( _shader->getProgramID(), "u_model" );
-			auto viewLoc = glGetUniformLocation( _shader->getProgramID(), "u_view" );
-			auto projectionLoc = glGetUniformLocation( _shader->getProgramID(), "u_projection" );
-			auto colorLoc = glGetUniformLocation( _shader->getProgramID(), "u_color" );
-
-			glProgramUniformMatrix4fv( _shader->getProgramID(), modelLoc, 1, GL_FALSE, glm::value_ptr(parentTransform) );
-			glProgramUniformMatrix4fv( _shader->getProgramID(), viewLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
-			glProgramUniformMatrix4fv( _shader->getProgramID(), projectionLoc, 1, GL_FALSE, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
-			glProgramUniform4f( _shader->getProgramID(), colorLoc, _color.r, _color.g, _color.b, _color.a );
+			_shader->setUniformMatrix4fv( "u_model", 1, false, glm::value_ptr( parentTransform ) );
+			_shader->setUniformMatrix4fv( "u_view", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getView() ) );
+			_shader->setUniformMatrix4fv( "u_projection", 1, false, glm::value_ptr( getGLContext()->getScene()->getCamera()->getProjection() ) );
+			
+			_shader->setUniform4f( "u_color", _color.r, _color.g, _color.b, _color.a );
 		}
 
 		_arrayBuffer.drawElements( GL_TRIANGLES, GL_UNSIGNED_INT, 0 );

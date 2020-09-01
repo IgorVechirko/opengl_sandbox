@@ -43,7 +43,6 @@ namespace GLSandbox
 
 			virtual void setLightProperties( const LightProperties& properties ) override;
 
-
 	};
 
 }
