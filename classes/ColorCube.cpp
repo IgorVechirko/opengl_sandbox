@@ -33,12 +33,12 @@ namespace GLSandbox
 								 Vec3( _cubeSize, _cubeSize, _cubeSize )
 		};
 
-		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosVertex), sizeof(vertices)/sizeof(PosVertex) );
+		_arrayBuffer.setupBufferData( VertexArrayObject::BufferType::VERTEX, vertices, sizeof(PosVertex), sizeof(vertices)/sizeof(PosVertex) );
 	}
 	bool ColorCube::onInit()
 	{
-		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
-		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::ELEMENT );
+		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::VERTEX );
+		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::ELEMENT );
 		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
 
 		auto shader = createRefWithInitializer<ShaderProgram>( &ShaderProgram::initWithSrc, getResMng()->getResStr( "VERTEX_POS_UCOLOR_VSH" ), getResMng()->getResStr( "VERTEX_POS_UCOLOR_FSH" ) );
@@ -54,7 +54,7 @@ namespace GLSandbox
 							 1, 5, 3, 5, 3, 7
 		};
 
-		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices, sizeof(GLuint), sizeof(indices)/sizeof(GLuint) );
+		_arrayBuffer.setupBufferData( VertexArrayObject::BufferType::ELEMENT, indices, sizeof(GLuint), sizeof(indices)/sizeof(GLuint) );
 
 		return true;
 	}

@@ -3,7 +3,7 @@
 
 #include "Node.h"
 #include "NodeExtensions.h"
-#include "VertexArrayBuffer.h"
+#include "VertexArrayObject.h"
 
 namespace GLSandbox
 {
@@ -14,7 +14,7 @@ namespace GLSandbox
 	{
 		typedef Node Parent;
 
-		VertexArrayBuffer _arrayBuffer;
+		VertexArrayObject _arrayBuffer;
 
 		Vec3 _startPos;
 		Vec3 _finishPos;

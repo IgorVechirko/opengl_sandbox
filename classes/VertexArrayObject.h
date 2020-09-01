@@ -1,12 +1,12 @@
-#ifndef VertexArrayBuffer_H
-#define VertexArrayBuffer_H
+#ifndef VertexArrayObject_H
+#define VertexArrayObject_H
 
 #include "Ref.h"
 #include "NodeExtensions.h"
 
 namespace GLSandbox
 {
-	class VertexArrayBuffer
+	class VertexArrayObject
 	{
 
 	public:
@@ -36,8 +36,8 @@ namespace GLSandbox
 
 	public:
 
-		VertexArrayBuffer();
-		virtual ~VertexArrayBuffer();
+		VertexArrayObject();
+		virtual ~VertexArrayObject();
 
 		void genBuffer( BufferType bufferType );
 		void setupBufferData( BufferType bufferType, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount );

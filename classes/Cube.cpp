@@ -29,7 +29,7 @@ namespace GLSandbox
 
 	bool Cube::onInit()
 	{	
-		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
+		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::VERTEX );
 
 		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)0 );
 		_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)(3*sizeof(GLfloat)) );
@@ -209,7 +209,7 @@ namespace GLSandbox
 			{ Vec3( 0.0f,  _cubeSize, 0.0f ), Vec3( 0.0f, 1.0f,  0.0f ) }
 		};
 
-		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosNormalVertex), sizeof(vertices)/sizeof(PosNormalVertex) );
+		_arrayBuffer.setupBufferData( VertexArrayObject::BufferType::VERTEX, vertices, sizeof(PosNormalVertex), sizeof(vertices)/sizeof(PosNormalVertex) );
 
 	}
 	void Cube::setCubeSize( float size )

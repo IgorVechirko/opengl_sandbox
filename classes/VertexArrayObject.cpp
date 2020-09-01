@@ -1,4 +1,4 @@
-#include "VertexArrayBuffer.h"
+#include "VertexArrayObject.h"
 
 
 
@@ -9,7 +9,7 @@
 
 namespace GLSandbox
 {
-	VertexArrayBuffer::VertexArrayBuffer()
+	VertexArrayObject::VertexArrayObject()
 		: _vao( NULL )
 		, _vbo( NULL )
 		, _ebo( NULL )
@@ -20,14 +20,14 @@ namespace GLSandbox
 	{
 		glGenVertexArrays( 1, &_vao );
 	}
-	VertexArrayBuffer::~VertexArrayBuffer()
+	VertexArrayObject::~VertexArrayObject()
 	{
 		glBindVertexArray( _vao );
 		glDeleteBuffers( 1, &_vbo );
 		glDeleteBuffers( 1, &_ebo );
 		glDeleteVertexArrays( 1, &_vao );
 	}
-	GLenum VertexArrayBuffer::bufferTypeToGLenum( BufferType type )
+	GLenum VertexArrayObject::bufferTypeToGLenum( BufferType type )
 	{
 		GLenum result = NULL;
 
@@ -43,7 +43,7 @@ namespace GLSandbox
 
 		return result;
 	}
-	GLuint* VertexArrayBuffer::bufferIDByBufferType( BufferType type )
+	GLuint* VertexArrayObject::bufferIDByBufferType( BufferType type )
 	{
 		GLuint* result = nullptr;
 
@@ -59,7 +59,7 @@ namespace GLSandbox
 
 		return result;
 	}
-	unsigned int* VertexArrayBuffer::bufferUnitsAmountByBufferType( BufferType type )
+	unsigned int* VertexArrayObject::bufferUnitsAmountByBufferType( BufferType type )
 	{
 		unsigned int* result = nullptr;
 
@@ -75,7 +75,7 @@ namespace GLSandbox
 
 		return result;
 	}
-	size_t* VertexArrayBuffer::bufferDatSizebyBufferType( BufferType type )
+	size_t* VertexArrayObject::bufferDatSizebyBufferType( BufferType type )
 	{
 		size_t* result = nullptr;
 
@@ -91,14 +91,14 @@ namespace GLSandbox
 
 		return result;
 	}
-	void VertexArrayBuffer::genBuffer( BufferType bufferType )
+	void VertexArrayObject::genBuffer( BufferType bufferType )
 	{
 		glBindVertexArray( _vao );
 		glGenBuffers( 1, bufferIDByBufferType( bufferType ) );
 
 		OpenGL::getInstance()->processGLErrors();
 	}
-	void VertexArrayBuffer::setupBufferData( BufferType bufferType, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount )
+	void VertexArrayObject::setupBufferData( BufferType bufferType, const void* data, size_t dataUnitSize, unsigned int dataUnitsAmount )
 	{
 		auto target = bufferTypeToGLenum( bufferType );
 		auto bufferID = bufferIDByBufferType( bufferType );
@@ -127,7 +127,7 @@ namespace GLSandbox
 		glBindVertexArray( 0 );
 		OpenGL::getInstance()->processGLErrors();
 	}
-	void VertexArrayBuffer::setupAttribPointer( GLuint indx, GLuint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer )
+	void VertexArrayObject::setupAttribPointer( GLuint indx, GLuint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer )
 	{
 		_ASSERT( _vbo );
 
@@ -139,7 +139,7 @@ namespace GLSandbox
 
 		OpenGL::getInstance()->processGLErrors();
 	}
-	void VertexArrayBuffer::drawArrays( GLenum mode, GLint first )
+	void VertexArrayObject::drawArrays( GLenum mode, GLint first )
 	{
 		_ASSERT( _vbo );
 
@@ -152,7 +152,7 @@ namespace GLSandbox
 			
 		glBindVertexArray( 0 );
 	}
-	void VertexArrayBuffer::drawElements( GLenum mode, GLenum type, const void* indices )
+	void VertexArrayObject::drawElements( GLenum mode, GLenum type, const void* indices )
 	{
 		_ASSERT( _ebo && _vbo );
 		

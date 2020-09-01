@@ -76,7 +76,7 @@ set( MaterialsAndLightsTypes ${GL_SANDBOX_SRC_DIR}/MaterialsAndLightsTypes.h ${G
 set( Creator ${GL_SANDBOX_SRC_DIR}/Creator.h ${GL_SANDBOX_SRC_DIR}/Creator.cpp )
 set( Allocator ${GL_SANDBOX_SRC_DIR}/Allocator.h ${GL_SANDBOX_SRC_DIR}/Allocator.cpp )
 
-set ( VertexArrayBuffer ${GL_SANDBOX_SRC_DIR}/VertexArrayBuffer.h ${GL_SANDBOX_SRC_DIR}/VertexArrayBuffer.cpp )
+set ( VertexArrayObject ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.h ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.cpp )
 
 set( WorkingScope 
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.h
@@ -111,12 +111,11 @@ source_group( input FILES ${InputListener} )
 source_group( gl FILES ${OpenGL} )
 source_group( gl\\context FILES ${GLContext} )
 source_group( gl\\render FILES ${GLRender} )
-
-source_group( vertices FILES ${VertexArrayBuffer} )
-
-source_group( textures FILES ${Texture2D} )
-
-source_group( shader FILES ${ShaderProgram} )
+source_group( gl\\components FILES 
+									${VertexArrayObject}
+									${ShaderProgram}
+									${Texture2D}
+)
 
 source_group( camera FILES ${Camera} )
 
@@ -178,7 +177,7 @@ set( SANDBOX_SRC ${Common}
 				 ${DrawTypes}
 				 ${Creator}
 				 ${Allocator}
-				 ${VertexArrayBuffer}
+				 ${VertexArrayObject}
 )
 
 #setup project

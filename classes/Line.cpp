@@ -26,14 +26,14 @@ namespace GLSandbox
 		PosVertex vertices[] = { { Vec3( _startPos.x, _startPos.y, _startPos.z ) },
 								 { Vec3( _finishPos.x, _finishPos.y, _finishPos.z ) } };
 
-		_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosVertex), sizeof(vertices)/sizeof(PosVertex) );
+		_arrayBuffer.setupBufferData( VertexArrayObject::BufferType::VERTEX, vertices, sizeof(PosVertex), sizeof(vertices)/sizeof(PosVertex) );
 	}
 	bool Line::onInit()
 	{
 		auto shader = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, getResMng()->getResStr( "VERTEX_POS_UCOLOR_VSH" ), getResMng()->getResStr( "VERTEX_POS_UCOLOR_FSH" ) );
 		setShaderProgram( shader );
 
-		_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
+		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::VERTEX );
 		_arrayBuffer.setupAttribPointer(0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
 
 		updateVertices();

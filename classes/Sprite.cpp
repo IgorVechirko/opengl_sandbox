@@ -25,8 +25,8 @@ namespace GLSandbox
 
 		if ( texture )
 		{
-			_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::VERTEX );
-			_arrayBuffer.genBuffer( VertexArrayBuffer::BufferType::ELEMENT );
+			_arrayBuffer.genBuffer( VertexArrayObject::BufferType::VERTEX );
+			_arrayBuffer.genBuffer( VertexArrayObject::BufferType::ELEMENT );
 
 			setTexture2D( texture );
 
@@ -35,7 +35,7 @@ namespace GLSandbox
 			GLuint indices[] = { 0, 1, 2,
 								 1, 2, 3 };
 
-			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::ELEMENT, indices, sizeof(unsigned int), sizeof(indices)/sizeof(GLuint) );
+			_arrayBuffer.setupBufferData( VertexArrayObject::BufferType::ELEMENT, indices, sizeof(unsigned int), sizeof(indices)/sizeof(GLuint) );
 
 			_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLvoid*)0 );
 			_arrayBuffer.setupAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLvoid*)(3*sizeof(GLfloat)) );
@@ -83,7 +83,7 @@ namespace GLSandbox
 								   	   { Vec3( textSize.x, 0.0f, 0.0f ), Vec2( 1.0f, 1.0f ) }
 			};
 			
-			_arrayBuffer.setupBufferData( VertexArrayBuffer::BufferType::VERTEX, vertices, sizeof(PosUVVertex), sizeof(vertices)/sizeof(PosUVVertex) );
+			_arrayBuffer.setupBufferData( VertexArrayObject::BufferType::VERTEX, vertices, sizeof(PosUVVertex), sizeof(vertices)/sizeof(PosUVVertex) );
 		}
 	}
 
