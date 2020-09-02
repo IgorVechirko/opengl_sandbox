@@ -29,6 +29,8 @@ namespace GLSandbox
 
 			void useProgram();
 
+			GLint getUniformLocation( const std::string& uniformName );
+
 			void setUniform1d( const std::string& uniformName, GLdouble x );
 			void setUniform1dv( const std::string& uniformName, GLsizei size, const GLdouble* val );
 			void setUniform1f( const std::string& uniformName, GLfloat x );

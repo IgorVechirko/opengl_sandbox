@@ -23,6 +23,13 @@ namespace GLSandbox
 		Vec2 uv;
 	};
 
+	struct PosUVNormalVertex
+	{
+		Vec3 pos;
+		Vec2 uv;
+		Vec3 normal;
+	};
+
 
 }
 

@@ -62,8 +62,9 @@ set( NodeExtensions ${GL_SANDBOX_SRC_DIR}/NodeExtensions.h ${GL_SANDBOX_SRC_DIR}
 set( AxisesOrigin ${GL_SANDBOX_SRC_DIR}/AxisesOrigin.h ${GL_SANDBOX_SRC_DIR}/AxisesOrigin.cpp )
 set( ColorCube ${GL_SANDBOX_SRC_DIR}/ColorCube.h ${GL_SANDBOX_SRC_DIR}/ColorCube.cpp )
 set( Cube ${GL_SANDBOX_SRC_DIR}/Cube.h ${GL_SANDBOX_SRC_DIR}/Cube.cpp )
+
 set( Line ${GL_SANDBOX_SRC_DIR}/Line.h ${GL_SANDBOX_SRC_DIR}/Line.cpp )
-set( Mesh ${GL_SANDBOX_SRC_DIR}/Mesh.h ${GL_SANDBOX_SRC_DIR}/Mesh.cpp )
+
 set( Model ${GL_SANDBOX_SRC_DIR}/Model.h ${GL_SANDBOX_SRC_DIR}/Model.cpp )
 set( Sprite ${GL_SANDBOX_SRC_DIR}/Sprite.h ${GL_SANDBOX_SRC_DIR}/Sprite.cpp )
 
@@ -126,9 +127,8 @@ source_group( nodes FILES ${AxisesOrigin}
 						  ${ColorCube} 
 						  ${Cube} 
 						  ${Line} 
-						  ${Mesh} 
-						  ${Model} 
-						  ${Sprite} 
+						  ${Sprite}
+						  ${Model}
 )
 source_group( nodes\\base FILES 
 								${Node} 
@@ -137,7 +137,7 @@ source_group( nodes\\base FILES
 source_group( nodes\\light FILES 
 						${DirectLightSource} 
 						${Flashlight} 
-						${PointLightSource} 
+						${PointLightSource}
 )
 source_group( nodes\\scene FILES ${Scene} )
 
@@ -172,7 +172,6 @@ set( SANDBOX_SRC ${Common}
 				 ${ColorCube}
 				 ${Cube}
 				 ${Line}
-				 ${Mesh}
 				 ${Model}
 				 ${Sprite}
 				 ${WorkingScope}

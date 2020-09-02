@@ -84,304 +84,310 @@ namespace GLSandbox
 	{
 		glUseProgram(_programID);
 	}
+	GLint ShaderProgram::getUniformLocation( const std::string& uniformName )
+	{
+		GLint result = glGetUniformLocation( _programID, uniformName.c_str() );
+		//_ASSERT( result >= 0 );
+		return result;
+	}
 	void ShaderProgram::setUniform1d( const std::string& uniformName, GLdouble x )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+
 		glProgramUniform1d( _programID, location, x );
 	}
 	void ShaderProgram::setUniform1dv( const std::string& uniformName, GLsizei size, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform1dv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform1f( const std::string& uniformName, GLfloat x )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform1f( _programID, location, x );
 	}
 	void ShaderProgram::setUniform1fv( const std::string& uniformName, GLsizei size, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform1fv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform1i( const std::string& uniformName, GLint x )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform1i( _programID, location, x );
 	}
 	void ShaderProgram::setUniform1iv( const std::string& uniformName, GLsizei size, const GLint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform1iv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform1ui( const std::string& uniformName, GLuint x )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform1ui( _programID, location, x );
 	}
 	void ShaderProgram::setUniform1uiv( const std::string& uniformName, GLsizei size, const GLuint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform1uiv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform2d( const std::string& uniformName, GLdouble x, GLdouble y )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2d( _programID, location, x, y );
 	}
 	void ShaderProgram::setUniform2dv( const std::string& uniformName, GLsizei size, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2dv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform2f( const std::string& uniformName, GLfloat x, GLfloat y )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2f( _programID, location, x, y );
 	}
 	void ShaderProgram::setUniform2fv( const std::string& uniformName, GLsizei size, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2fv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform2i( const std::string& uniformName, GLint x, GLint y )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2i( _programID, location, x, y );
 	}
 	void ShaderProgram::setUniform2iv( const std::string& uniformName, GLsizei size, const GLint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2iv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform2ui( const std::string& uniformName, GLuint x, GLuint y )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2ui( _programID, location, x, y );
 	}
 	void ShaderProgram::setUniform2uiv( const std::string& uniformName, GLsizei size, const GLuint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform2uiv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform3d( const std::string& uniformName, GLdouble x, GLdouble y, GLdouble z )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3d( _programID, location, x, y, z );
 	}
 	void ShaderProgram::setUniform3dv( const std::string& uniformName, GLsizei size, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3dv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform3f( const std::string& uniformName, GLfloat x, GLfloat y, GLfloat z )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3f( _programID, location, x, y, z );
 	}
 	void ShaderProgram::setUniform3fv( const std::string& uniformName, GLsizei size, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3fv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform3i( const std::string& uniformName, GLint x, GLint y, GLint z )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3i( _programID, location, x, y, z );
 	}
 	void ShaderProgram::setUniform3iv( const std::string& uniformName, GLsizei size, const GLint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3iv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform3ui( const std::string& uniformName, GLuint x, GLuint y, GLuint z )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3ui( _programID, location, x, y, z );
 	}
 	void ShaderProgram::setUniform3uiv( const std::string& uniformName, GLsizei size, const GLuint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform3uiv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform4d( const std::string& uniformName, GLdouble x, GLdouble y, GLdouble z, GLdouble w )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4d( _programID, location, x, y, z, w );
 	}
 	void ShaderProgram::setUniform4dv( const std::string& uniformName, GLsizei size, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4dv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform4f( const std::string& uniformName, GLfloat x, GLfloat y, GLfloat z, GLfloat w )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4f( _programID, location, x, y, z, w );
 	}
 	void ShaderProgram::setUniform4fv( const std::string& uniformName, GLsizei size, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4fv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform4i( const std::string& uniformName, GLint x, GLint y, GLint z, GLint w )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4i( _programID, location, x, y, z, w );
 	}
 	void ShaderProgram::setUniform4iv( const std::string& uniformName, GLsizei size, const GLint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4iv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniform4ui( const std::string& uniformName, GLuint x, GLuint y, GLuint z, GLuint w )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4ui( _programID, location, x, y, z, w );
 	}
 	void ShaderProgram::setUniform4uiv( const std::string& uniformName, GLsizei size, const GLuint* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniform4uiv( _programID, location, size, val );
 	}
 	void ShaderProgram::setUniformMatrix2dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix2dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix2fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix2fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix2x3dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix2x3dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix2x3fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix2x3fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix2x4dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix2x4dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix2x4fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix2x4fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix3dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix3dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix3fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix3fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix3x2dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix3x2dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix3x2fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix3x2fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix3x4dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix3x4dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix3x4fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix3x4fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix4dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix4dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix4fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix4fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix4x2dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix4x2dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix4x2fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix4x2fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix4x3dv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLdouble* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix4x3dv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setUniformMatrix4x3fv( const std::string& uniformName, GLsizei count, GLboolean transpose, const GLfloat* val )
 	{
-		auto location = glGetUniformLocation( _programID, uniformName.c_str() );
-		_ASSERT( location != -1 );
+		auto location = getUniformLocation( uniformName );
+		
 		glProgramUniformMatrix4x3fv( _programID, location, count, transpose, val );
 	}
 	void ShaderProgram::setMaterialUniforms( const Material& material, const std::string& strName, const std::string& ambMemName, const std::string& diffMemName, const std::string& specMemName, const std::string& shineMemeName )

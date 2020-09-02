@@ -1,153 +1,204 @@
 #include "Model.h"
 
+#include "DrawTypes.h"
+#include "Texture2D.h"
+#include "GLContext.h"
+#include "Scene.h"
+#include "ShaderProgram.h"
+
 
 
 namespace GLSandbox
 {
-
 
 	Model::Model()
 	{
 	}
 	Model::~Model()
 	{
+		for( auto& mesh : _meshes )
+		{
+			if (mesh.diffuseMap)
+			{
+				mesh.diffuseMap->release();
+				mesh.diffuseMap = nullptr;
+			}
+
+			if (mesh.specularMap)
+			{
+				mesh.specularMap->release();
+				mesh.specularMap = nullptr;
+			}
+		}
 	}
-	void Model::loadModel( const std::string& path )
+	bool Model::initWithFilePath( const std::string& filePath )
 	{
 		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile( path, aiProcess_Triangulate | aiProcess_FlipUVs );
+		const aiScene* scene = importer.ReadFile( filePath, aiProcess_Triangulate | aiProcess_FlipUVs );
 
-		//if ( !scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || scene->mRootNode )
+		if ( !scene )
 		{
-			//LOG( "ERROR::ASSIMP::%s", importer.GetErrorString() );
-			//return;
+			Console::log( "ERROR::ASSIMP::", importer.GetErrorString() );
+			return false;
 		}
-		_directory = path.substr( 0, path.find_last_of( '/' ) );
+		std::string directory = filePath.substr( 0, filePath.find_last_of( '/' ) );
 
-		processNode( scene->mRootNode, scene );
-	}
-	void Model::processNode( aiNode* node, const aiScene* scene )
-	{
-		for( unsigned int i = 0; i < node->mNumMeshes; i++ )
-		{
-			aiMesh* mesh = scene->mMeshes[ node->mMeshes[i]];
-			_meshes.push_back( processMesh( mesh, scene ) );
-		}
-	
-		for( unsigned int i = 0; i < node->mNumChildren; i++ )
-		{
-			processNode(node->mChildren[i], scene);
-		}
-	}
-	Mesh Model::processMesh( aiMesh* mesh, const aiScene* scene )
-	{
-		std::vector<PosNormaTextCordVertex> vertices;
-		std::vector<unsigned int> indices;
-		std::vector<Texture> textures;
-
-		for( unsigned int i = 0; i < mesh->mNumVertices; i++ )
-		{
-			PosNormaTextCordVertex vertex;
-			vertex.pos = Vec3( mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z );
-			vertex.normal = Vec3( mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z );
-
-			if ( mesh->mTextureCoords[0] )
-			{
-				vertex.textCord = glm::vec2( mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y );
-			}
-			else
-			{
-				vertex.textCord = glm::vec2( 0.0f );
-			}
+		processModelSceneTree( scene->mRootNode, scene, directory );
 		
-			vertices.push_back( vertex );
-		}
+		setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, posUVNormalLightProp_vert, posUVNormalLightProp_frag ) );
 
-		for( unsigned int i = 0; i < mesh->mNumFaces; i++ )
+		return true;
+	}
+	void Model::processModelSceneTree( aiNode* node, const aiScene* scene, const std::string& directory )
+	{
+		_meshes.resize( node->mNumMeshes );
+
+		for( unsigned int meshIndx = 0; meshIndx < node->mNumMeshes; meshIndx++ )
 		{
-			aiFace face = mesh->mFaces[i];
-			for( unsigned int j = 0; j < face.mNumIndices; j++ )
+			auto mesh = scene->mMeshes[ node->mMeshes[meshIndx]];
+			
+			auto& meshInfo = _meshes[meshIndx];
+			meshInfo.arrayObject.genBuffer( VertexArrayObject::BufferType::VERTEX );
+			meshInfo.arrayObject.genBuffer( VertexArrayObject::BufferType::ELEMENT );
+			meshInfo.arrayObject.setupAttribPointer( 0, 3, GL_FLOAT, false, sizeof(PosUVNormalVertex), (GLvoid*)0 );
+			meshInfo.arrayObject.setupAttribPointer( 1, 2, GL_FLOAT, false, sizeof(PosUVNormalVertex), (GLvoid*)(3*sizeof(GLfloat)) );
+			meshInfo.arrayObject.setupAttribPointer( 2, 3, GL_FLOAT, false, sizeof(PosUVNormalVertex), (GLvoid*)(5*sizeof(GLfloat)) );
+
+
+			std::vector<PosUVNormalVertex> vertices( mesh->mNumVertices );
+
+			float _cubeSize = 100.0f;
+			
+			for( unsigned int vertIndx = 0; vertIndx < mesh->mNumVertices; vertIndx++ )
 			{
-				indices.push_back( face.mIndices[j] );
+				auto& vertex = vertices[vertIndx];
+				vertex.pos = Vec3( mesh->mVertices[vertIndx].x, mesh->mVertices[vertIndx].y, mesh->mVertices[vertIndx].z );
+				vertex.normal = Vec3( mesh->mNormals[vertIndx].x, mesh->mNormals[vertIndx].y, mesh->mNormals[vertIndx].z );
+
+				if ( mesh->mTextureCoords[0] )
+				{
+					vertex.uv = Vec( mesh->mTextureCoords[0][vertIndx].x, mesh->mTextureCoords[0][vertIndx].y );
+				}
+				else
+				{
+					vertex.uv = Vec( 0.0f );
+				}
+			}
+
+			meshInfo.arrayObject.setupBufferData( VertexArrayObject::BufferType::VERTEX, vertices.data(), sizeof(PosUVNormalVertex), vertices.size() );
+
+			std::vector<GLuint> indices;
+
+			for( unsigned int i = 0; i < mesh->mNumFaces; i++ )
+			{
+				const auto& face = mesh->mFaces[i];
+				for( unsigned int j = 0; j < face.mNumIndices; j++ )
+				{
+					indices.push_back( face.mIndices[j] );
+				}
+			}
+
+			meshInfo.arrayObject.setupBufferData( VertexArrayObject::BufferType::ELEMENT, indices.data(), sizeof(GLuint), indices.size() );
+
+
+			{
+				aiMaterial* material = scene->mMaterials[ mesh->mMaterialIndex ];
+
+				if( material->GetTextureCount( aiTextureType_DIFFUSE ) > 0 )
+				{
+					aiString str;
+					material->GetTexture( aiTextureType_DIFFUSE, 0, &str );
+					auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
+					
+					if ( texture )
+					{
+						texture->retain();
+						meshInfo.diffuseMap = texture;
+					}
+				}
+
+				if (  material->GetTextureCount( aiTextureType_SPECULAR ) > 0 )
+				{
+					aiString str;
+					material->GetTexture( aiTextureType_SPECULAR, 0, &str );
+					auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
+					
+					if ( texture )
+					{
+						texture->retain();
+						meshInfo.specularMap = texture;
+					}
+				}
 			}
 		}
 
-		if (mesh->mMaterialIndex >= 0 )
-		{
-			aiMaterial* material = scene->mMaterials[ mesh->mMaterialIndex ];
-
-			std::vector<Texture> diffuseMaps = loadMatertialTextures( material, aiTextureType_DIFFUSE, eTextureType::DIFFUSE_LIHGT_MAP );
-			textures.insert( textures.end(), diffuseMaps.begin(), diffuseMaps.end() );
-
-			std::vector<Texture> specularMaps = loadMatertialTextures( material, aiTextureType_SPECULAR, eTextureType::SPECULAR_LIHGT_MAP );
-			textures.insert( textures.begin(), specularMaps.begin(), specularMaps.end() );
-		}
-
-		return Mesh( getScope(), vertices, indices, textures );
-	}
-	std::vector<Texture> Model::loadMatertialTextures( aiMaterial* mat, aiTextureType type, eTextureType textureType )
-	{
-		std::vector<Texture> result;
-		result.resize( mat->GetTextureCount(type) );
 	
-		for( unsigned int i = 0; i < mat->GetTextureCount(type); i++ )
+		for( unsigned int nodeIndx = 0; nodeIndx < node->mNumChildren; nodeIndx++ )
 		{
-			aiString str;
-			mat->GetTexture( type, i, &str );
-			Texture& texture = result[ i ];
-			texture.id = textureFromFile(str.C_Str(), _directory);
-			texture.type = textureType;
+			auto subMode = createNode<Model>();
+			addProtectedChild( subMode );
+			_subModels.push_back( subMode );
+			subMode->processModelSceneTree( node->mChildren[nodeIndx], scene, directory );
 		}
-
-		return result;
 	}
-	GLuint Model::textureFromFile( const char* path, const std::string& directory )
+	void Model::setShaderProgram( ShaderProgram* shader )
 	{
-		unsigned int result = 0;
+		ShaderProtocol::setShaderProgram( shader );
 
-		std::string filename = directory + '/' + std::string(path);
+		for( auto subModel : _subModels )
+			subModel->setShaderProgram( shader );
+	}
+	void Model::visit( GLRender* render, const Mat4& parentTransform )
+	{
+		Node::visit( render, parentTransform );
 
-		glGenTextures(1, &result);
-
-		int width, height, nrComponents;
-		unsigned char* image = SOIL_load_image( filename.c_str(), &width, &height, &nrComponents, 0 );
-	
-		if (image)
-		{
-			GLenum format;
-			if (nrComponents == 1)
-				format = GL_RED;
-			else if (nrComponents == 3)
-				format = GL_RGB;
-			else if (nrComponents == 4)
-				format = GL_RGBA;
-
-			glBindTexture(GL_TEXTURE_2D, result);
-			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image);
-			glGenerateMipmap(GL_TEXTURE_2D);
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-			SOIL_free_image_data(image);
-			glBindTexture( GL_TEXTURE_2D, 0 );
-		}
-		else
-		{
-			//LOG( "Texture failed to load at path: %s", filename.c_str() );
-			SOIL_free_image_data(image);
-		}
-
-		return result;
+		auto transform = getTransform() * parentTransform;
+		visitProtectedChilds( render, transform );
 	}
 	void Model::draw( GLRender* render, const Mat4& transform )
 	{
 		for( auto& mesh : _meshes )
 		{
-			mesh.draw( getShaderProgram(), transform );
+			if ( _shader )
+			{
+				_shader->useProgram();
+				auto scene = getGLContext()->getScene();
+
+				_shader->setUniformMatrix4fv( "u_model", 1, false, glm::value_ptr(transform) );
+				scene->setProjectionToShader( _shader );
+				scene->setViewToShader( _shader );
+
+				scene->setCameraPosToShader( _shader );
+				scene->setDirectLightPropToShader( _shader );
+				scene->setPointLightsPropToShader( _shader );
+				scene->setFlashLightsPropToShader( _shader );
+
+				_shader->setMaterialUniforms( getMaterial(), "u_material", "ambient", "diffuse", "specular", "shininess" );
+				_shader->setUniform1i( "u_diffText", 0 );
+				_shader->setUniform1i( "u_specText", 1 );
+			}
+
+			if ( mesh.diffuseMap )
+			{
+				mesh.diffuseMap->useTexture(0);
+			}
+			else
+			{
+				glActiveTexture( GL_TEXTURE0 );
+				glBindTexture( GL_TEXTURE_2D, 0 );
+			}
+
+			if ( mesh.specularMap )
+			{
+				mesh.specularMap->useTexture(1);
+			}
+			else
+			{
+				glActiveTexture( GL_TEXTURE1 );
+				glBindTexture( GL_TEXTURE_2D, 0 );
+			}
+
+			mesh.arrayObject.drawElements( GL_TRIANGLES, GL_UNSIGNED_INT, 0 );
 		}
 	}
-
 }

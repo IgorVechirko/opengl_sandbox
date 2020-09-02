@@ -28,9 +28,10 @@ namespace GLSandbox
 	}
 	void Scene::visit( GLRender* render, const Mat4& parentTransform )
 	{
-		visitProtectedChilds( render, parentTransform );
-
 		Node::visit( render, parentTransform );
+
+		auto transform = parentTransform * getTransform();
+		visitProtectedChilds( render, transform );
 	}
 	void Scene::setDirectionLight( DirectLightSource* directionLight )
 	{

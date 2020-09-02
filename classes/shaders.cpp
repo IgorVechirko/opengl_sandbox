@@ -4,3 +4,5 @@
 #include "shaders/positionNormalLightProp.frag"
 #include "shaders/positionUVTexture.vert"
 #include "shaders/positionUVTexture.frag"
+#include "shaders/posUVNormalLightProp.vert"
+#include "shaders/posUVNormalLightProp.frag"

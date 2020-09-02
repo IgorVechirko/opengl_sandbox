@@ -1,9 +1,9 @@
 #ifndef Model_H
 #define Model_H
 
-#include "Mesh.h"
 #include "Node.h"
 #include "NodeExtensions.h"
+#include "VertexArrayObject.h"
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
@@ -13,35 +13,43 @@
 namespace GLSandbox
 {
 
-
-	class ShaderProgram;
-	class Model : public Node
-				, public ShaderProtocol
+	class Model
+		: public Node
+		, public ShaderProtocol
+		, public ProtectedChildrenProtocol
+		, public MaterialProtocol
 	{
-		typedef Node Parent;
 
+		struct Mesh
+		{
+			VertexArrayObject arrayObject;
+			Texture2D* diffuseMap;
+			Texture2D* specularMap;
+
+			Mesh()
+				: diffuseMap( nullptr )
+				, specularMap( nullptr )
+			{}
+		};
+
+
+		std::vector<Model*> _subModels;
 		std::vector<Mesh> _meshes;
-		std::string _directory;
 
 
-		void processNode( aiNode* node, const aiScene* scene );
-		Mesh processMesh( aiMesh* mesh, const aiScene* scene );
-		std::vector<Texture> loadMatertialTextures( aiMaterial* mao, aiTextureType type, eTextureType textureType );
-
-		GLuint textureFromFile( const char* path, const std::string& directory );
-
-	private: 
-
-		virtual void draw( GLRender* render, const Mat4& transform ) override;
-
+		void processModelSceneTree( aiNode* node, const aiScene* scene, const std::string& directory );
 
 	public:
 
 		Model();
 		virtual ~Model();
-		MAKE_UNCOPYABLE( Model );
 
-		void loadModel( const std::string& path );
+		bool initWithFilePath( const std::string& filePath );
+
+		virtual void setShaderProgram( ShaderProgram* shader ) override;
+
+		virtual void visit( GLRender* render, const Mat4& parentTransform ) override;
+		virtual void draw( GLRender* resnder, const Mat4& transform ) override; 
 
 	};
 
