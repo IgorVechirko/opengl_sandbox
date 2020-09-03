@@ -11,7 +11,6 @@ namespace GLSandbox
 		TEST_FRIEND
 
 		unsigned int _refCount;
-		bool _autorelesed;
 
 		AutoReleasePool* _pool;
 
