@@ -5,6 +5,7 @@
 #include "GLContext.h"
 #include "Scene.h"
 #include "ShaderProgram.h"
+#include "TexturesCache.h"
 
 
 
@@ -135,7 +136,7 @@ namespace GLSandbox
 			{
 				aiString str;
 				material->GetTexture( aiTextureType_DIFFUSE, 0, &str );
-				auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
+				auto texture = getTexturesCache()->createTexture2D( directory + "/" + str.C_Str() );
 					
 				if ( texture )
 				{
@@ -148,7 +149,7 @@ namespace GLSandbox
 			{
 				aiString str;
 				material->GetTexture( aiTextureType_SPECULAR, 0, &str );
-				auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
+				auto texture = getTexturesCache()->createTexture2D( directory + "/" + str.C_Str() );
 					
 				if ( texture )
 				{

@@ -5,13 +5,17 @@
 
 namespace GLSandbox
 {
-
+	class TexturesCache;
 	class Texture2D : public Ref
 	{
+		friend TexturesCache;
+
 		int _width;
 		int _height;
 
 		GLuint _textureID;
+
+		bool _allwaysCached;
 
 		public:
 
@@ -25,6 +29,9 @@ namespace GLSandbox
 
 			int getWidth() const;
 			int getHeight() const;
+
+			void setAllwaysCached( bool allwaysCached );
+			bool isAllwaysCached() const;
 	};
 
 }

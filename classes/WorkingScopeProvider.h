@@ -13,6 +13,7 @@ namespace GLSandbox
 	class GLContext;
 	class WorkingScope;
 	class Creator;
+	class TexturesCache;
 	class WorkingScopeProvider
 	{
 		TEST_FRIEND
@@ -36,6 +37,8 @@ namespace GLSandbox
 		AutoReleasePool* getReleasePool();
 
 		TimeScheduler* getTimeScheduler();
+
+		TexturesCache* getTexturesCache();
 
 		Creator* getCreator();
 

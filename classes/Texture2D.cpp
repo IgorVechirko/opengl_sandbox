@@ -8,6 +8,7 @@ namespace GLSandbox
 		: _textureID( 0 )
 		, _width( 0 )
 		, _height( 0 )
+		, _allwaysCached( false )
 	{
 	}
 	Texture2D::~Texture2D()
@@ -58,5 +59,12 @@ namespace GLSandbox
 	{
 		return _height;
 	}
-
+	void Texture2D::setAllwaysCached( bool allwaysCached )
+	{
+		_allwaysCached = allwaysCached;
+	}
+	bool Texture2D::isAllwaysCached() const
+	{
+		return _allwaysCached;
+	}
 }

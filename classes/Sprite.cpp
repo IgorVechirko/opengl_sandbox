@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "GLContext.h"
 #include "DrawTypes.h"
+#include "TexturesCache.h"
 
 namespace GLSandbox
 {
@@ -19,7 +20,7 @@ namespace GLSandbox
 	{	
 		Node::init();
 
-		auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, filePath );
+		auto texture = getTexturesCache()->createTexture2D( filePath );
 
 		if ( texture )
 		{
