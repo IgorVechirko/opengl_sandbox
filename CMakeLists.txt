@@ -220,7 +220,7 @@ endif()
 
 
 
-#wokign tests project 
+#functional tests project 
 
 set( WORKING_TESTS_SRC_DIR ${GL_SANDBOX_DIR}/func_tests_src )
 
@@ -231,6 +231,8 @@ set( CameraMovementController ${WORKING_TESTS_SRC_DIR}/CameraMovementController.
 
 set( FunctionalTestsDelegate ${WORKING_TESTS_SRC_DIR}/FunctionalTestsDelegate.h ${WORKING_TESTS_SRC_DIR}/FunctionalTestsDelegate.cpp )
 
+set( ResMngTest ${WORKING_TESTS_SRC_DIR}/ResMngTest.h ${WORKING_TESTS_SRC_DIR}/ResMngTest.cpp )
+
 source_group( content FILES 
 							${TestScene} 
 							${TestScopeDelegat} 
@@ -238,6 +240,7 @@ source_group( content FILES
 							${FunctionalTestsDelegate}
 )
 source_group( content\\tests FILES
+									${ResMngTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -248,6 +251,7 @@ set( WOKING_TESTS_SRC
 					${func_tests_main}
 					${CameraMovementController}
 					${FunctionalTestsDelegate}
+					${ResMngTest}
 )
 
 

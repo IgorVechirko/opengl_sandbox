@@ -1,8 +1,11 @@
 #include "FunctionalTestsDelegate.h"
 
 #include "GLContext.h"
-#include "TestScene.h"
 #include "ResourcesManager.h"
+
+//test scenes
+#include "TestScene.h"
+#include "ResMngTest.h"
 
 using namespace GLSandbox;
 
@@ -22,7 +25,7 @@ namespace FuncTests
 
 		_testsCreateFuncs = { 
 			std::bind( &Creator::createNode<Scene>, getCreator() ),
-			std::bind( &Creator::createNode<FuncTests::TestScene>, getCreator() )
+			std::bind( &Creator::createNode<ResMngTest>, getCreator() )
 		};
 
 		_currentTest = 0;
