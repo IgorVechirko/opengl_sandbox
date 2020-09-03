@@ -4,7 +4,7 @@
 #include "Texture2D.h"
 #include "Scene.h"
 #include "GLContext.h"
-#include "DrawTypes.h"
+#include "ShadersCache.h"
 #include "TexturesCache.h"
 
 namespace GLSandbox
@@ -29,7 +29,7 @@ namespace GLSandbox
 
 			setTexture2D( texture );
 
-			setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionUVTexture_vert, positionUVTexture_frag ) );
+			setShaderProgram( getShadersCache()->getStandartShader( StandartShaderType::POS_UV_TEXTURE ) );
 
 			GLuint indices[] = { 0, 1, 2,
 								 1, 2, 3 };

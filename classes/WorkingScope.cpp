@@ -9,6 +9,7 @@
 #include "ScopeDelegate.h"
 #include "Creator.h"
 #include "TexturesCache.h"
+#include "ShadersCache.h"
 
 namespace GLSandbox
 {
@@ -21,6 +22,7 @@ namespace GLSandbox
 		, _timeScheduler( nullptr )
 		, _delegate( nullptr )
 		, _texturesCache( nullptr )
+		, _shadersCache( nullptr )
 	{
 		_creator.setScope( this );
 
@@ -40,6 +42,9 @@ namespace GLSandbox
 
 		_texturesCache = std::shared_ptr<TexturesCache>( new TexturesCache);
 		_texturesCache->setScope( this );
+
+		_shadersCache = std::shared_ptr<ShadersCache>( new ShadersCache);
+		_shadersCache->setScope( this );
 
 	}
 	WorkingScope::~WorkingScope()
@@ -76,6 +81,11 @@ namespace GLSandbox
 		_ASSERT( _texturesCache.get() );
 		return _texturesCache.get();
 	}
+	ShadersCache* WorkingScope::getShadersCache()
+	{
+		_ASSERT( _shadersCache.get() );
+		return _shadersCache.get();
+	}
 	Creator* WorkingScope::getCreator()
 	{
 		return &_creator;
@@ -83,6 +93,7 @@ namespace GLSandbox
 	void WorkingScope::startWithDelegate( ScopeDelegate* delegate )
 	{
 		_texturesCache->init();
+		_shadersCache->init();
 
 		if ( delegate )
 		{

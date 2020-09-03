@@ -3,7 +3,7 @@
 #include "ShaderProgram.h"
 #include "Scene.h"
 #include "GLContext.h"
-#include "DrawTypes.h"
+#include "ShadersCache.h"
 
 
 namespace GLSandbox
@@ -28,8 +28,7 @@ namespace GLSandbox
 	}
 	bool Line::onInit()
 	{
-		auto shader = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionUColor_vert, positionUColor_frag );
-		setShaderProgram( shader );
+		setShaderProgram( getShadersCache()->getStandartShader( StandartShaderType::POS_UCOLOR ) );
 
 		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::VERTEX );
 		_arrayBuffer.setupAttribPointer(0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );

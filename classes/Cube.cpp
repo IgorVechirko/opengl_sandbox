@@ -3,7 +3,7 @@
 #include "ShaderProgram.h"
 #include "Scene.h"
 #include "GLContext.h"
-#include "DrawTypes.h"
+#include "ShadersCache.h"
 
 
 namespace GLSandbox
@@ -26,7 +26,7 @@ namespace GLSandbox
 		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)0 );
 		_arrayBuffer.setupAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*6, (GLvoid*)(3*sizeof(GLfloat)) );
 
-		setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionNormalLightProp_vert, positionNormalLightProp_frag) );
+		setShaderProgram( getShadersCache()->getStandartShader( StandartShaderType::POS_NORMAL_LIGHT_PROP ) );
 
 		return true;
 	}

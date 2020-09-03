@@ -52,6 +52,7 @@ set( Texture2D ${GL_SANDBOX_SRC_DIR}/Texture2D.h ${GL_SANDBOX_SRC_DIR}/Texture2D
 set( TexturesCache ${GL_SANDBOX_SRC_DIR}/TexturesCache.h ${GL_SANDBOX_SRC_DIR}/TexturesCache.cpp )
 
 set( ShaderProgram ${GL_SANDBOX_SRC_DIR}/ShaderProgram.h ${GL_SANDBOX_SRC_DIR}/ShaderProgram.cpp )
+set( ShadersCache ${GL_SANDBOX_SRC_DIR}/ShadersCache.h ${GL_SANDBOX_SRC_DIR}/ShadersCache.cpp )
 
 set( Camera ${GL_SANDBOX_SRC_DIR}/Camera.h ${GL_SANDBOX_SRC_DIR}/Camera.cpp )
 
@@ -112,17 +113,22 @@ source_group( input FILES ${InputListener} )
 
 source_group( gl FILES 
 						${OpenGL}
-						${shaders}
 )
 source_group( gl\\context FILES ${GLContext} )
 source_group( gl\\render FILES ${GLRender} )
 source_group( gl\\components FILES 
 									${VertexArrayObject}
-									${ShaderProgram}
 )
-source_group( gl\\components\\textures FILES 
-											${TexturesCache}
-											${Texture2D} 
+
+source_group( shaders FILES 
+							${shaders}
+							${ShadersCache}
+							${ShaderProgram}
+)
+
+source_group( textures FILES 
+							${TexturesCache}
+							${Texture2D} 
 )
 
 source_group( camera FILES ${Camera} )
@@ -186,6 +192,7 @@ set( SANDBOX_SRC ${Common}
 				 ${VertexArrayObject}
 				 ${shaders}
 				 ${TexturesCache}
+				 ${ShadersCache}
 )
 
 #setup project

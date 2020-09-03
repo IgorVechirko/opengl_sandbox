@@ -56,6 +56,11 @@ namespace GLSandbox
 		_ASSERT( _providedScope != nullptr );
 		return _providedScope->getTexturesCache();
 	}
+	ShadersCache* WorkingScopeProvider::getShadersCache()
+	{
+		_ASSERT( _providedScope );
+		return _providedScope->getShadersCache();
+	}
 	Creator* WorkingScopeProvider::getCreator()
 	{
 		_ASSERT( _providedScope != nullptr );

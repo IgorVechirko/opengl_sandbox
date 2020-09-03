@@ -1,6 +1,6 @@
 #include "Model.h"
 
-#include "DrawTypes.h"
+#include "ShadersCache.h"
 #include "Texture2D.h"
 #include "GLContext.h"
 #include "Scene.h"
@@ -46,7 +46,7 @@ namespace GLSandbox
 
 		processModelSceneTree( scene->mRootNode, scene, directory );
 		
-		setShaderProgram( createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, posUVNormalLightProp_vert, posUVNormalLightProp_frag ) );
+		setShaderProgram( getShadersCache()->getStandartShader( StandartShaderType::POS_UV_NORMAL_LIGHT_PORP ) );
 
 		return true;
 	}

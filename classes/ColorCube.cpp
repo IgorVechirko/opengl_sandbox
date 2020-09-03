@@ -4,7 +4,7 @@
 #include "ShaderProgram.h"
 #include "Scene.h"
 #include "GLContext.h"
-#include "DrawTypes.h"
+#include "ShadersCache.h"
 
 namespace GLSandbox
 {
@@ -39,10 +39,7 @@ namespace GLSandbox
 		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::ELEMENT );
 		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, false, 0, (GLvoid*)0 );
 
-		auto shader = createRefWithInitializer<ShaderProgram>( &ShaderProgram::initWithSrc, positionUColor_vert, positionUColor_frag );
-
-		if ( shader )
-			setShaderProgram( shader );
+		setShaderProgram( getShadersCache()->getStandartShader( StandartShaderType::POS_UCOLOR ) );
 
 		GLuint indices[] = { 0, 1, 2, 1, 2, 3,
 							 4, 5, 6, 5, 6, 7,

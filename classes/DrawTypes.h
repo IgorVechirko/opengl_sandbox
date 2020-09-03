@@ -6,6 +6,14 @@
 namespace GLSandbox
 {
 
+	enum class StandartShaderType
+	{
+		POS_UCOLOR,
+		POS_NORMAL_LIGHT_PROP,
+		POS_UV_TEXTURE,
+		POS_UV_NORMAL_LIGHT_PORP
+	};
+
 	struct PosVertex
 	{
 		Vec3 pos;

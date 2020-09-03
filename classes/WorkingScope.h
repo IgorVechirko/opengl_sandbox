@@ -16,6 +16,7 @@ namespace GLSandbox
 	class ScopeDelegate;
 	class Creator;
 	class TexturesCache;
+	class ShadersCache;
 	class WorkingScope
 	{
 		Creator _creator;
@@ -30,6 +31,8 @@ namespace GLSandbox
 		std::shared_ptr<TimeScheduler> _timeScheduler;
 
 		std::shared_ptr<TexturesCache> _texturesCache;
+
+		std::shared_ptr<ShadersCache> _shadersCache;
 
 		ScopeDelegate* _delegate;
 		std::shared_ptr<ScopeDelegate> _defaultDelegate;
@@ -51,6 +54,8 @@ namespace GLSandbox
 		TimeScheduler* getTimeScheduler();
 
 		TexturesCache* getTexturesCache();
+
+		ShadersCache* getShadersCache();
 
 		Creator* getCreator();
 

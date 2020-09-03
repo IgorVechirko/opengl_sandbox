@@ -22,6 +22,7 @@ namespace GLSandbox
 
 		TexturesCache();
 		virtual ~TexturesCache();
+		MAKE_UNCOPYABLE( TexturesCache );
 
 		void init();
 

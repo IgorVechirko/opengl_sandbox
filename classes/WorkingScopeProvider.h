@@ -40,6 +40,8 @@ namespace GLSandbox
 
 		TexturesCache* getTexturesCache();
 
+		ShadersCache* getShadersCache();
+
 		Creator* getCreator();
 
 
