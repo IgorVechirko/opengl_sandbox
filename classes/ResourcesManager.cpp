@@ -41,7 +41,8 @@ namespace GLSandbox
 		}
 		else
 		{
-			return std::move(std::string(""));
+			static std::string emptyResult( "" );
+			return emptyResult;
 		}
 	}
 	std::string ResourcesManager::getResStr( const std::string& resID )
