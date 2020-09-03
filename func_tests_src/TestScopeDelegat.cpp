@@ -4,7 +4,7 @@
 #include "TestScene.h"
 #include "ResourcesManager.h"
 
-namespace WorkingTests
+namespace FuncTests
 {
 
 	void TestScopeDelegat::init()

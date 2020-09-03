@@ -18,7 +18,7 @@
 
 using namespace GLSandbox;
 
-namespace WorkingTests
+namespace FuncTests
 {
 
 	TestScene::TestScene()

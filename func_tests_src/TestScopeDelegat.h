@@ -3,7 +3,7 @@
 
 #include "ScopeDelegate.h"
 
-namespace WorkingTests
+namespace FuncTests
 {
 
 	class TestScopeDelegat : public GLSandbox::ScopeDelegate

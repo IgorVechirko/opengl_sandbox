@@ -5,7 +5,7 @@
 #include "CameraMovementController.h"
 #include "Sprite.h"
 
-namespace WorkingTests
+namespace FuncTests
 {
 	class TestScene : public GLSandbox::Scene
 	{

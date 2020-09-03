@@ -5,7 +5,7 @@
 #include "WorkingScopeProvider.h"
 #include "Camera.h"
 
-namespace WorkingTests
+namespace FuncTests
 {
 	class CameraMovementController
 		: public GLSandbox::InputListener

@@ -81,6 +81,7 @@ set( Allocator ${GL_SANDBOX_SRC_DIR}/Allocator.h ${GL_SANDBOX_SRC_DIR}/Allocator
 
 set ( VertexArrayObject ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.h ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.cpp )
 
+
 set( WorkingScope 
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.h
 				  ${GL_SANDBOX_SRC_DIR}/WorkingScope.cpp
@@ -221,14 +222,23 @@ endif()
 
 #wokign tests project 
 
-set( WOKING_TESTS_SRC_DIR ${GL_SANDBOX_DIR}/func_tests_src )
+set( WORKING_TESTS_SRC_DIR ${GL_SANDBOX_DIR}/func_tests_src )
 
-set( TestScene ${WOKING_TESTS_SRC_DIR}/TestScene.h ${WOKING_TESTS_SRC_DIR}/TestScene.cpp )
-set( TestScopeDelegat ${WOKING_TESTS_SRC_DIR}/TestScopeDelegat.h ${WOKING_TESTS_SRC_DIR}/TestScopeDelegat.cpp )
-set( func_tests_main ${WOKING_TESTS_SRC_DIR}/func_tests_main.cpp )
-set( CameraMovementController ${WOKING_TESTS_SRC_DIR}/CameraMovementController.h ${WOKING_TESTS_SRC_DIR}/CameraMovementController.cpp )
+set( TestScene ${WORKING_TESTS_SRC_DIR}/TestScene.h ${WORKING_TESTS_SRC_DIR}/TestScene.cpp )
+set( TestScopeDelegat ${WORKING_TESTS_SRC_DIR}/TestScopeDelegat.h ${WORKING_TESTS_SRC_DIR}/TestScopeDelegat.cpp )
+set( func_tests_main ${WORKING_TESTS_SRC_DIR}/func_tests_main.cpp )
+set( CameraMovementController ${WORKING_TESTS_SRC_DIR}/CameraMovementController.h ${WORKING_TESTS_SRC_DIR}/CameraMovementController.cpp )
 
-source_group( content FILES ${TestScene} ${TestScopeDelegat} ${CameraMovementController} )
+set( FunctionalTestsDelegate ${WORKING_TESTS_SRC_DIR}/FunctionalTestsDelegate.h ${WORKING_TESTS_SRC_DIR}/FunctionalTestsDelegate.cpp )
+
+source_group( content FILES 
+							${TestScene} 
+							${TestScopeDelegat} 
+							${CameraMovementController}
+							${FunctionalTestsDelegate}
+)
+source_group( content\\tests FILES
+)
 
 source_group( woking_main ${func_tests_main} )
 
@@ -237,6 +247,7 @@ set( WOKING_TESTS_SRC
 					${TestScopeDelegat} 
 					${func_tests_main}
 					${CameraMovementController}
+					${FunctionalTestsDelegate}
 )
 
 
@@ -244,7 +255,7 @@ add_executable( func_tests ${WOKING_TESTS_SRC} )
 
 target_link_libraries( func_tests gl_sandbox )
 
-target_include_directories( func_tests PRIVATE ${WOKING_TESTS_SRC_DIR} )
+target_include_directories( func_tests PRIVATE ${WORKING_TESTS_SRC_DIR} )
 
 if ( MSVC )
 	set_target_properties(

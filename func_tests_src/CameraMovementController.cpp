@@ -4,7 +4,7 @@
 #include "TimeScheduler.h"
 
 
-namespace WorkingTests
+namespace FuncTests
 {
 	CameraMovementController::CameraMovementController()
 		: _cameraMoveSpeed( 500.0f )
