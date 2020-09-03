@@ -160,11 +160,11 @@ namespace GLSandbox
 		for( auto child : _protectedChilds )
 			child->release();
 	}
-	void ProtectedChildrenProtocol::visitProtectedChilds( GLRender* render, const Mat4& parentTransform )
+	void ProtectedChildrenProtocol::drawTraversalProtectedChildren( const Mat4& parentTransform )
 	{
 		for( auto child : _protectedChilds )
 		{
-			child->visit( render, parentTransform );
+			child->drawTraversal( parentTransform );
 		}
 	}
 	void ProtectedChildrenProtocol::addProtectedChild( Node* child )

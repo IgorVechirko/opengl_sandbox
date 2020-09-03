@@ -28,6 +28,8 @@ namespace GLSandbox
 
 		std::vector<Node*> _children;
 
+		bool _visible;
+
 	protected:
 
 		const glm::mat4& getTransform() const;
@@ -45,8 +47,8 @@ namespace GLSandbox
 
 		bool init();
 
-		virtual void visit( GLRender* render, const Mat4& parentTransform );
-		virtual void draw( GLRender* render, const Mat4& transform ){};
+		virtual void drawTraversal( const Mat4& parentTransform );
+		virtual void draw( const Mat4& transform ){};
 
 		virtual void setPosition( const Vec3& pos );
 		const Vec3& getPosition() const;
@@ -56,6 +58,9 @@ namespace GLSandbox
 
 		virtual void setScale( const Vec3& scale );
 		const Vec3& getScale() const;
+
+		virtual void setVisbile( bool visible );
+		virtual bool getVisible() const;
 
 		void setName( const std::string& name );
 		const std::string& getName() const;

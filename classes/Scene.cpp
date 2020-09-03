@@ -26,12 +26,13 @@ namespace GLSandbox
 
 		return true;
 	}
-	void Scene::visit( GLRender* render, const Mat4& parentTransform )
+	void Scene::drawTraversal( const Mat4& parentTransform )
 	{
-		Node::visit( render, parentTransform );
-
 		auto transform = parentTransform * getTransform();
-		visitProtectedChilds( render, transform );
+
+		drawTraversalProtectedChildren( transform );
+
+		Node::drawTraversal( parentTransform );
 	}
 	void Scene::setDirectionLight( DirectLightSource* directionLight )
 	{

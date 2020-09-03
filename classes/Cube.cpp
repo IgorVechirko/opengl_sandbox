@@ -30,7 +30,7 @@ namespace GLSandbox
 
 		return true;
 	}
-	void Cube::draw( GLRender* render, const Mat4& transform )
+	void Cube::draw( const Mat4& transform )
 	{
 		if ( _verticesDirty )
 		{

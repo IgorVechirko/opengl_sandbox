@@ -162,7 +162,7 @@ namespace GLSandbox
 		ProtectedChildrenProtocol();
 		virtual ~ProtectedChildrenProtocol();
 
-		virtual void visitProtectedChilds( GLRender* render, const Mat4& parentTransform );
+		virtual void drawTraversalProtectedChildren( const Mat4& parentTransform );
 
 		virtual void addProtectedChild( Node* child );
 		virtual void removeProtectedChild( Node* child );

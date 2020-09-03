@@ -56,7 +56,7 @@ namespace GLSandbox
 
 		return true;
 	}
-	void ColorCube::draw( GLRender* render, const Mat4& parentTransform )
+	void ColorCube::draw( const Mat4& parentTransform )
 	{
 		if ( _verticesDirty )
 		{

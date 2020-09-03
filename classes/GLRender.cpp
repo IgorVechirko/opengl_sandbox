@@ -28,7 +28,7 @@ namespace GLSandbox
 		glClear( GL_COLOR_BUFFER_BIT );
 
 		OpenGL::getInstance()->processGLErrors();
-		scene->visit( this, Mat4(1.0f) );
+		scene->drawTraversal( Mat4(1.0f) );
 
 		getGLContext()->swapBuffers();
 

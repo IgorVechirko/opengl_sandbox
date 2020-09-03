@@ -54,7 +54,7 @@ namespace GLSandbox
 
 		virtual void setShaderProgram( ShaderProgram* shader ) override;
 
-		virtual void draw( GLRender* resnder, const Mat4& transform ) override; 
+		virtual void draw( const Mat4& transform ) override; 
 
 		const std::vector<Model*>& getSubModels();
 

@@ -43,7 +43,7 @@ namespace GLSandbox
 		else
 			return false;
 	}
-	void Sprite::draw( GLRender* render, const Mat4& transform )
+	void Sprite::draw( const Mat4& transform )
 	{
 		if( getTexture2D() )
 			getTexture2D()->useTexture();

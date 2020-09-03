@@ -19,10 +19,6 @@ namespace GLSandbox
 		VertexArrayObject _arrayBuffer;
 
 
-	protected:
-
-		virtual void draw( GLRender* render, const Mat4& transform ) override;
-
 	public:
 
 		Sprite();
@@ -30,6 +26,8 @@ namespace GLSandbox
 		MAKE_UNCOPYABLE(Sprite);
 
 		bool initWithFilePath( const std::string& filePath );
+
+		virtual void draw( const Mat4& transform ) override;
 
 		virtual void setTexture2D( Texture2D* texture ) override;
 

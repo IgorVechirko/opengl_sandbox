@@ -28,7 +28,7 @@ namespace GLSandbox
 
 		virtual bool onInit() override;
 
-		virtual void draw( GLRender* render, const Mat4& transform ) override;
+		virtual void draw( const Mat4& transform ) override;
 
 
 	public:

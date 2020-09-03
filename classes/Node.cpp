@@ -12,6 +12,7 @@ namespace GLSandbox
 		, _pos( 0.0f, 0.0f, 0.0f )
 		, _scale( 1.0f, 1.0, 1.0f )
 		, _originShift( 0.0f, 0.0f, 0.0f )
+		, _visible( true )
 	{
 	}
 	Node::~Node()
@@ -60,16 +61,19 @@ namespace GLSandbox
 	{
 		return onInit();
 	}
-	void Node::visit( GLRender* render, const Mat4& parentTransform )
+	void Node::drawTraversal( const Mat4& parentTransform )
 	{
 		auto transform = parentTransform * getTransform();
 
-		for( auto child :_children )
+		for( auto child : _children )
 		{
-			child->visit( render, transform );
+			if( child->getVisible() )
+			{
+				child->drawTraversal( transform );
+			}
 		}
 
-		draw( render, transform );
+		draw( transform );
 	}
 	void Node::setPosition( const Vec3& pos )
 	{
@@ -106,6 +110,14 @@ namespace GLSandbox
 	const Vec3& Node::getScale() const
 	{
 		return _scale;
+	}
+	void Node::setVisbile( bool visible )
+	{
+		_visible = visible;
+	}
+	bool Node::getVisible() const
+	{
+		return _visible;
 	}
 	void Node::setName( const std::string& name )
 	{

@@ -165,7 +165,7 @@ namespace GLSandbox
 		for( auto subModel : _subModels )
 			subModel->setShaderProgram( shader );
 	}
-	void Model::draw( GLRender* render, const Mat4& transform )
+	void Model::draw( const Mat4& transform )
 	{
 		for( auto& mesh : _meshes )
 		{

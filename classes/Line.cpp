@@ -38,7 +38,7 @@ namespace GLSandbox
 
 		return true;
 	}
-	void Line::draw( GLRender* render, const Mat4& parentTransform )
+	void Line::draw( const Mat4& parentTransform )
 	{
 		if ( _verticesDirty )
 		{
