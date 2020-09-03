@@ -8,6 +8,7 @@
 #include "ResMngTest.h"
 #include "DrawPrimitivesTest.h"
 #include "DrawSpriteTest.h"
+#include "MoveViewTest.h"
 
 using namespace GLSandbox;
 
@@ -29,7 +30,8 @@ namespace FuncTests
 			std::bind( &Creator::createNode<Scene>, getCreator() ),
 			std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() )
+			std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
+			std::bind( &Creator::createNode<MoveViewTest>, getCreator() )
 		};
 
 		_currentTest = 0;
@@ -38,7 +40,7 @@ namespace FuncTests
 	}
 	void FunctionalTestsDelegate::showNextTest()
 	{
-		if ( _currentTest > -1 && _currentTest < _testsCreateFuncs.size() )
+		if ( _currentTest > -1 && _currentTest < (int)_testsCreateFuncs.size() )
 		{
 			std::function<Scene*(void)> nextTestCreateFunc = nullptr;;
 			
@@ -58,7 +60,7 @@ namespace FuncTests
 	}
 	void FunctionalTestsDelegate::showPrevTest()
 	{
-		if ( _currentTest > -1 && _currentTest < _testsCreateFuncs.size() )
+		if ( _currentTest > -1 && _currentTest < (int)_testsCreateFuncs.size() )
 		{
 			std::function<Scene*(void)> nextTestCreateFunc = nullptr;;
 			
