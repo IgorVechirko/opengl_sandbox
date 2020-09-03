@@ -233,6 +233,7 @@ set( FunctionalTestsDelegate ${WORKING_TESTS_SRC_DIR}/FunctionalTestsDelegate.h 
 
 set( ResMngTest ${WORKING_TESTS_SRC_DIR}/ResMngTest.h ${WORKING_TESTS_SRC_DIR}/ResMngTest.cpp )
 set( DrawPrimitivesTest ${WORKING_TESTS_SRC_DIR}/DrawPrimitivesTest.h ${WORKING_TESTS_SRC_DIR}/DrawPrimitivesTest.cpp )
+set( DrawSpriteTest ${WORKING_TESTS_SRC_DIR}/DrawSpriteTest.h ${WORKING_TESTS_SRC_DIR}/DrawSpriteTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -243,6 +244,7 @@ source_group( content FILES
 source_group( tests FILES
 									${ResMngTest}
 									${DrawPrimitivesTest}
+									${DrawSpriteTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -255,6 +257,7 @@ set( WOKING_TESTS_SRC
 					${FunctionalTestsDelegate}
 					${ResMngTest}
 					${DrawPrimitivesTest}
+					${DrawSpriteTest}
 )
 
 
