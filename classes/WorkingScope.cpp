@@ -95,6 +95,8 @@ namespace GLSandbox
 		_texturesCache->init();
 		_shadersCache->init();
 
+		_glContext->setScene( createNode<Scene>() );
+
 		if ( delegate )
 		{
 			_delegate = delegate;
@@ -106,10 +108,7 @@ namespace GLSandbox
 		}
 
 		_delegate->setScope( this );
-
-		_resMng->init();
-
-		_glContext->setScene( _delegate->getStartScene() );
+		_delegate->init();
 
 		while( !_glContext->windowShouldClose() )
 		{

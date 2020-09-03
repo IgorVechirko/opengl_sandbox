@@ -18,8 +18,6 @@ namespace GLSandbox
 		virtual ~ResourcesManager();
 
 
-		void init();
-
 		void parseResConfig( const std::string& aConfigPath );
 
 		const std::string& getResPath( const std::string& aResID ) const;

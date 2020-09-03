@@ -14,10 +14,6 @@ namespace GLSandbox
 	ResourcesManager::~ResourcesManager()
 	{
 	}
-	void ResourcesManager::init()
-	{
-		parseResConfig( "resdb/resources.json" );
-	}
 	void ResourcesManager::parseResConfig( const std::string& aConfigPath )
 	{
 		std::string fileStr = getFileUtils()->getStringFromFile( aConfigPath );

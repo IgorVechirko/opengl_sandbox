@@ -16,7 +16,7 @@ namespace GLSandbox
 
 	public:
 
-		virtual Scene* getStartScene(){return createNode<Scene>();};
+		virtual void init() {};
 
 	};
 

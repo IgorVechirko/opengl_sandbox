@@ -9,7 +9,7 @@ namespace WorkingTests
 	class TestScopeDelegat : public GLSandbox::ScopeDelegate
 	{
 
-		virtual GLSandbox::Scene* getStartScene() override;
+		virtual void init() override;
 
 	};
 

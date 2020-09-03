@@ -2,13 +2,15 @@
 
 #include "GLContext.h"
 #include "TestScene.h"
+#include "ResourcesManager.h"
 
 namespace WorkingTests
 {
 
-	GLSandbox::Scene* TestScopeDelegat::getStartScene()
+	void TestScopeDelegat::init()
 	{
-		return createNode<TestScene>();
+		getResMng()->parseResConfig( "resdb/resources.json" );
+		getGLContext()->setScene( createNode<TestScene>() );
 	}
 
 }

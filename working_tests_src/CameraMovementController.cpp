@@ -7,7 +7,7 @@
 namespace WorkingTests
 {
 	CameraMovementController::CameraMovementController()
-		: _cameraMoveSpeed( 5.0f )
+		: _cameraMoveSpeed( 500.0f )
 		, _cameraRotateSensitivity( 0.1f )
 		, _mousePos( 0.0f, 0.0f )
 		, _mousePosInited( false )
@@ -213,7 +213,7 @@ namespace WorkingTests
 		{
 			_camera->setProjection( projection );
 
-			_camera->setPosition(GLSandbox:: Vec3( 0.0f, 0.0f, 10.0f ) );
+			_camera->setPosition(GLSandbox:: Vec3( 0.0f, 0.0f, 27.0f ) );
 		}
 
 		getTimeScheduler()->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );

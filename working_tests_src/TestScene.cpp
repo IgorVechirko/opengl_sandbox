@@ -33,7 +33,7 @@ namespace WorkingTests
 	{
 		Parent::onInit();
 
-		if ( false )
+		if ( true )
 		{
 			_mySprite = createScopedRefWithInitializer<GLSandbox::Sprite>(&GLSandbox::Sprite::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
 			if ( _mySprite )
@@ -42,7 +42,7 @@ namespace WorkingTests
 			}
 		}
 
-		if ( false && _mySprite )
+		if ( true  && _mySprite )
 		{
 			auto line = createNode<GLSandbox::Line>();
 			if ( line )
@@ -55,7 +55,7 @@ namespace WorkingTests
 			}
 		}
 
-		if( false )
+		if( true )
 		{
 			auto origin = createNode<GLSandbox::AxisesOrigin>();
 			addChild( origin );
@@ -119,7 +119,7 @@ namespace WorkingTests
 			}
 		}*/
 
-		if( false )
+		if( true )
 		{
 			auto cube = createNode<GLSandbox::Cube>();
 			cube->setCubeSize( 100.0f );
@@ -132,7 +132,7 @@ namespace WorkingTests
 			//_cube = cube;
 		}
 
-		if ( false )
+		if ( true )
 		{
 			auto colorCube = createNode<GLSandbox::ColorCube>();
 
@@ -158,11 +158,11 @@ namespace WorkingTests
 		attenuation.quadratic = 0.0000007f;
 
 	
-		if ( false )
+		if ( true )
 		{
 			GLSandbox::DirectLightSource* directionLight = createNode<GLSandbox::DirectLightSource>();
 			directionLight->setPosition( GLSandbox::Vec3( 0.0f, 0.0f, 1000.0f ) );
-			directionLight->setDirection( GLSandbox::Vec3( 1.0f, 0.0f, 0.0f ) );
+			directionLight->setDirection( GLSandbox::Vec3( 0.0f, 0.0f, -1.0f ) );
 
 		
 			directionLight->setLightProperties( lightProperties );
@@ -170,7 +170,7 @@ namespace WorkingTests
 			setDirectionLight( directionLight );
 		}
 
-		if ( false )
+		if ( true )
 		{
 			float dist = 400.0f;
 			std::vector<GLSandbox::Vec3> lightsPositions;
