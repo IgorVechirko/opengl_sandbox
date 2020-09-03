@@ -20,8 +20,24 @@ namespace GLSandbox
 		glGenTextures( 1, &_textureID );
 		glBindTexture( GL_TEXTURE_2D, _textureID );
 
-		unsigned char* image = SOIL_load_image( filePath.c_str(), &_width, &_height, 0, SOIL_LOAD_RGB );
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, image );
+		int chanels = 0;
+		unsigned char* image = SOIL_load_image( filePath.c_str(), &_width, &_height, &chanels, SOIL_LOAD_RGB );
+
+		GLenum format;
+		switch(chanels)
+		{
+		case 1:
+            format = GL_RED;
+			break;
+		case 3:
+            format = GL_RGB;
+			break;
+		case 4:
+            format = GL_RGBA;
+			break;
+		}
+
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, format, GL_UNSIGNED_BYTE, image );
 		glGenerateMipmap( GL_TEXTURE_2D );
 
 		SOIL_free_image_data(image);
