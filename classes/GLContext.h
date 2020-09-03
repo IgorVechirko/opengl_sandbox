@@ -15,7 +15,7 @@ namespace GLSandbox
 		GLuint _windowWidth;
 		GLuint _windowHeight;
 
-		std::vector<InputListener*> _inputListeners;
+		std::list<InputListener*> _inputListeners;
 
 		Scene* _scene;
 		GLRender _render;
