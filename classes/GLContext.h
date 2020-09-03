@@ -15,7 +15,7 @@ namespace GLSandbox
 		GLuint _windowWidth;
 		GLuint _windowHeight;
 
-		InputListener* _inputListener;
+		std::vector<InputListener*> _inputListeners;
 
 		Scene* _scene;
 		GLRender _render;
@@ -38,8 +38,8 @@ namespace GLSandbox
 
 		void makeCurrent();
 
-		void setInputListener( InputListener* lst );
-		InputListener* getInputListener();
+		void addInputListener( InputListener* lst );
+		void delInputListener( InputListener* lst );
 
 		void setWindowShouldClose();
 		bool windowShouldClose();

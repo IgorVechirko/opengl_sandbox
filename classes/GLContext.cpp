@@ -65,37 +65,33 @@ namespace GLSandbox
 	}
 	void GLContext::onKeyPressed( int keyCode, int scancode, int action, int modifiers )
 	{
-		if ( _inputListener )
+		switch (action)
 		{
-			switch (action)
-			{
-			case GLFW_PRESS:
-				_inputListener->onKeyPressed( keyCode );
-				break;
-			case GLFW_REPEAT:
-				_inputListener->onKeyPressRepeate( keyCode );
-				break;
-			case GLFW_RELEASE:
-				_inputListener->onKeyReleased( keyCode );
-				break;
-			default:
-				break;
-			}
+		case GLFW_PRESS:
+			for( auto listener : _inputListeners )
+				listener->onKeyPressed( keyCode );
+			break;
+		case GLFW_REPEAT:
+			for( auto listener : _inputListeners )
+				listener->onKeyPressRepeate( keyCode );
+			break;
+		case GLFW_RELEASE:
+			for( auto listener : _inputListeners )
+				listener->onKeyReleased( keyCode );
+			break;
+		default:
+			break;
 		}
 	}
 	void GLContext::onMouseMoved( double posX, double posY )
 	{
-		if ( _inputListener )
-		{
-			_inputListener->onMouseMoved( posX, posY );
-		}
+		for( auto listener : _inputListeners )
+			listener->onMouseMoved( posX, posY );
 	}
 	void GLContext::onWheelScrolled( double xoffset, double yoffset )
 	{
-		if ( _inputListener )
-		{
-			_inputListener->onWheelScrolled( static_cast<float>(xoffset), static_cast<float>(yoffset) );
-		}
+		for( auto listener : _inputListeners )
+			listener->onWheelScrolled( static_cast<float>(xoffset), static_cast<float>(yoffset) );
 	}
 	bool GLContext::initWithWndSize( GLuint wndWidth, GLuint wndHeight )
 	{
@@ -151,13 +147,27 @@ namespace GLSandbox
 	{
 		glfwSwapBuffers( _window );
 	}
-	void GLContext::setInputListener( InputListener* lst )
+	void GLContext::addInputListener( InputListener* lst )
 	{
-		_inputListener = lst;
+		if ( lst )
+		{
+			auto findIt = std::find( _inputListeners.begin(), _inputListeners.end(), lst );
+			if ( findIt == _inputListeners.end() )
+			{
+				_inputListeners.push_back( lst );
+			}
+		}
 	}
-	InputListener* GLContext::getInputListener()
+	void GLContext::delInputListener( InputListener* lst )
 	{
-		return _inputListener;
+		if ( lst )
+		{
+			auto findIt = std::find( _inputListeners.begin(), _inputListeners.end(), lst );
+			if ( findIt != _inputListeners.end() )
+			{
+				_inputListeners.erase( findIt );
+			}
+		}
 	}
 	void GLContext::poolEvents()
 	{

@@ -20,10 +20,7 @@ namespace WorkingTests
 	}
 	CameraMovementController::~CameraMovementController()
 	{
-		if( getGLContext()->getInputListener() == this )
-		{
-			getGLContext()->setInputListener( nullptr );
-		}
+		getGLContext()->delInputListener( this );
 
 		getTimeScheduler()->delUpdateFunc( this );
 	}
@@ -218,7 +215,7 @@ namespace WorkingTests
 
 		getTimeScheduler()->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );
 
-		getGLContext()->setInputListener( this );
+		getGLContext()->addInputListener( this );
 	}
 
 }
