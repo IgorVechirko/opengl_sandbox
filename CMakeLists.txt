@@ -221,38 +221,38 @@ endif()
 
 #wokign tests project 
 
-set( WOKING_TESTS_SRC_DIR ${GL_SANDBOX_DIR}/working_tests_src )
+set( WOKING_TESTS_SRC_DIR ${GL_SANDBOX_DIR}/func_tests_src )
 
 set( TestScene ${WOKING_TESTS_SRC_DIR}/TestScene.h ${WOKING_TESTS_SRC_DIR}/TestScene.cpp )
 set( TestScopeDelegat ${WOKING_TESTS_SRC_DIR}/TestScopeDelegat.h ${WOKING_TESTS_SRC_DIR}/TestScopeDelegat.cpp )
-set( working_tests_main ${WOKING_TESTS_SRC_DIR}/working_tests_main.cpp )
+set( func_tests_main ${WOKING_TESTS_SRC_DIR}/func_tests_main.cpp )
 set( CameraMovementController ${WOKING_TESTS_SRC_DIR}/CameraMovementController.h ${WOKING_TESTS_SRC_DIR}/CameraMovementController.cpp )
 
 source_group( content FILES ${TestScene} ${TestScopeDelegat} ${CameraMovementController} )
 
-source_group( woking_main ${working_tests_main} )
+source_group( woking_main ${func_tests_main} )
 
 set( WOKING_TESTS_SRC 
 					${TestScene} 
 					${TestScopeDelegat} 
-					${working_tests_main}
+					${func_tests_main}
 					${CameraMovementController}
 )
 
 
-add_executable( working_tests ${WOKING_TESTS_SRC} )
+add_executable( func_tests ${WOKING_TESTS_SRC} )
 
-target_link_libraries( working_tests gl_sandbox )
+target_link_libraries( func_tests gl_sandbox )
 
-target_include_directories( working_tests PRIVATE ${WOKING_TESTS_SRC_DIR} )
+target_include_directories( func_tests PRIVATE ${WOKING_TESTS_SRC_DIR} )
 
 if ( MSVC )
 	set_target_properties(
-		working_tests PROPERTIES
+		func_tests PROPERTIES
 		VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/resources"
 	)
 
-    target_compile_options( working_tests PRIVATE /MP )
+    target_compile_options( func_tests PRIVATE /MP )
 endif()
 
 
@@ -293,10 +293,5 @@ target_include_directories( unit_tests PRIVATE ${UNIT_TESTS_SRC_DIR} )
 #include_directories( ${GL_SANDBOX_SRC_DIR} )
 
 if ( MSVC )
-	set_target_properties(
-		unit_tests PROPERTIES
-		VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/resources"
-	)
-
 	target_compile_options( unit_tests PRIVATE /MP )
 endif()
