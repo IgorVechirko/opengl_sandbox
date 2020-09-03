@@ -9,6 +9,7 @@
 #include "DrawPrimitivesTest.h"
 #include "DrawSpriteTest.h"
 #include "MoveViewTest.h"
+#include "DirectLightTest.h"
 
 using namespace GLSandbox;
 
@@ -31,7 +32,8 @@ namespace FuncTests
 			std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
-			std::bind( &Creator::createNode<MoveViewTest>, getCreator() )
+			std::bind( &Creator::createNode<MoveViewTest>, getCreator() ),
+			std::bind( &Creator::createNode<DirectLightTest>, getCreator() )
 		};
 
 		_currentTest = 0;
