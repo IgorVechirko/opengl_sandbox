@@ -239,6 +239,7 @@ set( DirectLightTest ${WORKING_TESTS_SRC_DIR}/DirectLightTest.h ${WORKING_TESTS_
 set( PointLightTest ${WORKING_TESTS_SRC_DIR}/PointLightTest.h ${WORKING_TESTS_SRC_DIR}/PointLightTest.cpp )
 set( FlashlightTest ${WORKING_TESTS_SRC_DIR}/FlashlightTest.h ${WORKING_TESTS_SRC_DIR}/FlashlightTest.cpp )
 set( DrawModelTest ${WORKING_TESTS_SRC_DIR}/DrawModelTest.h ${WORKING_TESTS_SRC_DIR}/DrawModelTest.cpp )
+set( DrawLightningModelTest ${WORKING_TESTS_SRC_DIR}/DrawLightningModelTest.h ${WORKING_TESTS_SRC_DIR}/DrawLightningModelTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -255,6 +256,7 @@ source_group( tests FILES
 									${PointLightTest}
 									${FlashlightTest}
 									${DrawModelTest}
+									${DrawLightningModelTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -273,6 +275,7 @@ set( WOKING_TESTS_SRC
 					${PointLightTest}
 					${FlashlightTest}
 					${DrawModelTest}
+					${DrawLightningModelTest}
 )
 
 

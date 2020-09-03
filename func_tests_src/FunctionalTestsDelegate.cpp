@@ -13,6 +13,7 @@
 #include "PointLightTest.h"
 #include "FlashlightTest.h"
 #include "DrawModelTest.h"
+#include "DrawLightningModelTest.h"
 
 using namespace GLSandbox;
 
@@ -39,7 +40,8 @@ namespace FuncTests
 			std::bind( &Creator::createNode<DirectLightTest>, getCreator() ),
 			std::bind( &Creator::createNode<PointLightTest>, getCreator() ),
 			std::bind( &Creator::createNode<FlashlightTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawModelTest>, getCreator() )
+			std::bind( &Creator::createNode<DrawModelTest>, getCreator() ),
+			std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() )
 		};
 
 		_currentTest = 0;
