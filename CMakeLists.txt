@@ -232,6 +232,7 @@ set( CameraMovementController ${WORKING_TESTS_SRC_DIR}/CameraMovementController.
 set( FunctionalTestsDelegate ${WORKING_TESTS_SRC_DIR}/FunctionalTestsDelegate.h ${WORKING_TESTS_SRC_DIR}/FunctionalTestsDelegate.cpp )
 
 set( ResMngTest ${WORKING_TESTS_SRC_DIR}/ResMngTest.h ${WORKING_TESTS_SRC_DIR}/ResMngTest.cpp )
+set( DrawPrimitivesTest ${WORKING_TESTS_SRC_DIR}/DrawPrimitivesTest.h ${WORKING_TESTS_SRC_DIR}/DrawPrimitivesTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -239,8 +240,9 @@ source_group( content FILES
 							${CameraMovementController}
 							${FunctionalTestsDelegate}
 )
-source_group( content\\tests FILES
+source_group( tests FILES
 									${ResMngTest}
+									${DrawPrimitivesTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -252,6 +254,7 @@ set( WOKING_TESTS_SRC
 					${CameraMovementController}
 					${FunctionalTestsDelegate}
 					${ResMngTest}
+					${DrawPrimitivesTest}
 )
 
 

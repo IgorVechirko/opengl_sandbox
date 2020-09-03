@@ -6,6 +6,7 @@
 //test scenes
 #include "TestScene.h"
 #include "ResMngTest.h"
+#include "DrawPrimitivesTest.h"
 
 using namespace GLSandbox;
 
@@ -25,7 +26,8 @@ namespace FuncTests
 
 		_testsCreateFuncs = { 
 			std::bind( &Creator::createNode<Scene>, getCreator() ),
-			std::bind( &Creator::createNode<ResMngTest>, getCreator() )
+			std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
+			std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() )
 		};
 
 		_currentTest = 0;

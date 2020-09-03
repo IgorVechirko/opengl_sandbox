@@ -14,6 +14,8 @@ namespace FuncTests
 	}
 	bool ResMngTest::onInit()
 	{
+		Scene::onInit();
+
 		setName( "ResMngTest" );
 
 		const auto& resPath = getResMng()->getResPath( "MOUNTAIN" );
