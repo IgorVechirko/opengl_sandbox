@@ -5,13 +5,14 @@
 #define TEST_FRIEND friend UnitTests::TimeSchedulerTest;
 #include "TimeScheduler.h"
 
+
 namespace UnitTests
 {
 
 	void TimeSchedulerTest::membersInit()
 	{
 
-		GLSandbox::TimeScheduler scheduler(nullptr);
+		GLSandbox::TimeScheduler scheduler;
 
 		BOOST_TEST( scheduler._providedScope == nullptr, "working scope wrong init" );
 
@@ -22,7 +23,7 @@ namespace UnitTests
 	void TimeSchedulerTest::addUpdateFuncMethodWork()
 	{
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 
 			struct SchedulerTest
 			{
@@ -38,7 +39,7 @@ namespace UnitTests
 		}
 		
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 
 			struct SchedulerTest
 			{
@@ -54,7 +55,7 @@ namespace UnitTests
 		}
 
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 			scheduler.addUpdateFunc( nullptr, nullptr );
 
 			auto findIt = scheduler._updateFunctions.find( nullptr );
@@ -73,7 +74,7 @@ namespace UnitTests
 		}
 
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 
 			struct SchedulerTest
 			{
@@ -89,7 +90,7 @@ namespace UnitTests
 		}
 
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 
 			struct SchedulerTest
 			{
@@ -128,7 +129,7 @@ namespace UnitTests
 	void TimeSchedulerTest::delUpdateFuncMethodWork()
 	{
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 
 			struct SchedulerTest
 			{
@@ -145,7 +146,7 @@ namespace UnitTests
 		}
 
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 
 			struct SchedulerTest
 			{
@@ -188,7 +189,7 @@ namespace UnitTests
 	void TimeSchedulerTest::doMainTickMethodWork()
 	{
 		{
-			GLSandbox::TimeScheduler scheduler(nullptr);
+			GLSandbox::TimeScheduler scheduler;
 
 			struct SchedulerTest
 			{

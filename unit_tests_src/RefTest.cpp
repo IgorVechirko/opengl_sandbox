@@ -13,7 +13,6 @@ namespace UnitTests
 		GLSandbox::Ref ref;
 
 		BOOST_TEST( ref._refCount == 0, "_refCout wrong init" );
-		BOOST_TEST( ref._autorelesed == false, "_autorelesed wrong init" );
 		BOOST_TEST( ref._pool == nullptr, "_pool wrong init" );
 	}
 
