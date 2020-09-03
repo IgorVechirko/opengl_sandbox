@@ -8,7 +8,6 @@ namespace GLSandbox
 	class TexturesCache;
 	class Texture2D : public Ref
 	{
-		friend TexturesCache;
 
 		int _width;
 		int _height;
