@@ -24,6 +24,11 @@ namespace GLSandbox
 		int chanels = 0;
 		unsigned char* image = SOIL_load_image( filePath.c_str(), &_width, &_height, &chanels, SOIL_LOAD_RGB );
 
+		if ( !image )
+		{
+			return false;
+		}
+
 		GLenum format;
 		switch(chanels)
 		{
