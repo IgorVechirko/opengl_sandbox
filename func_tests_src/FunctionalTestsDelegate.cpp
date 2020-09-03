@@ -11,6 +11,7 @@
 #include "MoveViewTest.h"
 #include "DirectLightTest.h"
 #include "PointLightTest.h"
+#include "FlashlightTest.h"
 
 using namespace GLSandbox;
 
@@ -35,7 +36,8 @@ namespace FuncTests
 			std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
 			std::bind( &Creator::createNode<MoveViewTest>, getCreator() ),
 			std::bind( &Creator::createNode<DirectLightTest>, getCreator() ),
-			std::bind( &Creator::createNode<PointLightTest>, getCreator() )
+			std::bind( &Creator::createNode<PointLightTest>, getCreator() ),
+			std::bind( &Creator::createNode<FlashlightTest>, getCreator() )
 		};
 
 		_currentTest = 0;

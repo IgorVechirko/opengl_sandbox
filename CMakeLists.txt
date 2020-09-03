@@ -237,6 +237,7 @@ set( DrawSpriteTest ${WORKING_TESTS_SRC_DIR}/DrawSpriteTest.h ${WORKING_TESTS_SR
 set( MoveViewTest ${WORKING_TESTS_SRC_DIR}/MoveViewTest.h ${WORKING_TESTS_SRC_DIR}/MoveViewTest.cpp )
 set( DirectLightTest ${WORKING_TESTS_SRC_DIR}/DirectLightTest.h ${WORKING_TESTS_SRC_DIR}/DirectLightTest.cpp )
 set( PointLightTest ${WORKING_TESTS_SRC_DIR}/PointLightTest.h ${WORKING_TESTS_SRC_DIR}/PointLightTest.cpp )
+set( FlashlightTest ${WORKING_TESTS_SRC_DIR}/FlashlightTest.h ${WORKING_TESTS_SRC_DIR}/FlashlightTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -251,6 +252,7 @@ source_group( tests FILES
 									${MoveViewTest}
 									${DirectLightTest}
 									${PointLightTest}
+									${FlashlightTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -267,6 +269,7 @@ set( WOKING_TESTS_SRC
 					${MoveViewTest}
 					${DirectLightTest}
 					${PointLightTest}
+					${FlashlightTest}
 )
 
 
