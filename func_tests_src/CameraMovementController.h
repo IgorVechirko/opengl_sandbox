@@ -55,6 +55,8 @@ namespace FuncTests
 
 		void initWithCamera( GLSandbox::Camera* camera );
 
+		void setMovementSpeed( float speed );
+
 	};
 
 

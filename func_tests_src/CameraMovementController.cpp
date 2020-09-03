@@ -217,5 +217,9 @@ namespace FuncTests
 
 		getGLContext()->addInputListener( this );
 	}
+	void CameraMovementController::setMovementSpeed( float speed )
+	{
+		_cameraMoveSpeed = speed;
+	}
 
 }
