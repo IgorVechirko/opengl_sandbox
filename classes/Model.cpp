@@ -51,33 +51,52 @@ namespace GLSandbox
 	}
 	void Model::processModelSceneTree( aiNode* node, const aiScene* scene, const std::string& directory )
 	{
+		setName( node->mName.C_Str() );
+
 		_meshes.resize( node->mNumMeshes );
 
 		for( unsigned int meshIndx = 0; meshIndx < node->mNumMeshes; meshIndx++ )
 		{
 			auto mesh = scene->mMeshes[ node->mMeshes[meshIndx]];
-			
 			auto& meshInfo = _meshes[meshIndx];
+
+			meshInfo.name = mesh->mName.C_Str();
+
 			meshInfo.arrayObject.genBuffer( VertexArrayObject::BufferType::VERTEX );
 			meshInfo.arrayObject.genBuffer( VertexArrayObject::BufferType::ELEMENT );
 			meshInfo.arrayObject.setupAttribPointer( 0, 3, GL_FLOAT, false, sizeof(PosUVNormalVertex), (GLvoid*)0 );
 			meshInfo.arrayObject.setupAttribPointer( 1, 2, GL_FLOAT, false, sizeof(PosUVNormalVertex), (GLvoid*)(3*sizeof(GLfloat)) );
 			meshInfo.arrayObject.setupAttribPointer( 2, 3, GL_FLOAT, false, sizeof(PosUVNormalVertex), (GLvoid*)(5*sizeof(GLfloat)) );
 
+			processMeshVertices( meshInfo, mesh );
+			processMeshIndices( meshInfo, mesh );
+			processMeshMaterial( meshInfo, mesh, scene, directory );
+		}
 
-			std::vector<PosUVNormalVertex> vertices( mesh->mNumVertices );
-
-			float _cubeSize = 100.0f;
+	
+		for( unsigned int nodeIndx = 0; nodeIndx < node->mNumChildren; nodeIndx++ )
+		{
+			auto subMode = createNode<Model>();
+			addChild( subMode );
+			_subModels.push_back( subMode );
+			subMode->processModelSceneTree( node->mChildren[nodeIndx], scene, directory );
+		}
+	}
+	void Model::processMeshVertices( Mesh& meshInfo, const aiMesh* processingMesh )
+	{
+		if ( processingMesh )
+		{
+			std::vector<PosUVNormalVertex> vertices( processingMesh->mNumVertices );
 			
-			for( unsigned int vertIndx = 0; vertIndx < mesh->mNumVertices; vertIndx++ )
+			for( unsigned int vertIndx = 0; vertIndx < processingMesh->mNumVertices; vertIndx++ )
 			{
 				auto& vertex = vertices[vertIndx];
-				vertex.pos = Vec3( mesh->mVertices[vertIndx].x, mesh->mVertices[vertIndx].y, mesh->mVertices[vertIndx].z );
-				vertex.normal = Vec3( mesh->mNormals[vertIndx].x, mesh->mNormals[vertIndx].y, mesh->mNormals[vertIndx].z );
+				vertex.pos = Vec3( processingMesh->mVertices[vertIndx].x, processingMesh->mVertices[vertIndx].y, processingMesh->mVertices[vertIndx].z );
+				vertex.normal = Vec3( processingMesh->mNormals[vertIndx].x, processingMesh->mNormals[vertIndx].y, processingMesh->mNormals[vertIndx].z );
 
-				if ( mesh->mTextureCoords[0] )
+				if ( processingMesh->mTextureCoords[0] )
 				{
-					vertex.uv = Vec( mesh->mTextureCoords[0][vertIndx].x, mesh->mTextureCoords[0][vertIndx].y );
+					vertex.uv = Vec( processingMesh->mTextureCoords[0][vertIndx].x, processingMesh->mTextureCoords[0][vertIndx].y );
 				}
 				else
 				{
@@ -86,12 +105,17 @@ namespace GLSandbox
 			}
 
 			meshInfo.arrayObject.setupBufferData( VertexArrayObject::BufferType::VERTEX, vertices.data(), sizeof(PosUVNormalVertex), vertices.size() );
-
+		}
+	}
+	void Model::processMeshIndices( Mesh& meshInfo, const aiMesh* processingMesh )
+	{
+		if ( processingMesh )
+		{
 			std::vector<GLuint> indices;
 
-			for( unsigned int i = 0; i < mesh->mNumFaces; i++ )
+			for( unsigned int i = 0; i < processingMesh->mNumFaces; i++ )
 			{
-				const auto& face = mesh->mFaces[i];
+				const auto& face = processingMesh->mFaces[i];
 				for( unsigned int j = 0; j < face.mNumIndices; j++ )
 				{
 					indices.push_back( face.mIndices[j] );
@@ -99,46 +123,39 @@ namespace GLSandbox
 			}
 
 			meshInfo.arrayObject.setupBufferData( VertexArrayObject::BufferType::ELEMENT, indices.data(), sizeof(GLuint), indices.size() );
+		}
+	}
+	void Model::processMeshMaterial( Mesh& meshInfo, const aiMesh* processingMesh, const aiScene* scene, const std::string& directory )
+	{
+		if ( processingMesh && scene )
+		{
+			aiMaterial* material = scene->mMaterials[ processingMesh->mMaterialIndex ];
 
-
+			if( material->GetTextureCount( aiTextureType_DIFFUSE ) > 0 )
 			{
-				aiMaterial* material = scene->mMaterials[ mesh->mMaterialIndex ];
-
-				if( material->GetTextureCount( aiTextureType_DIFFUSE ) > 0 )
-				{
-					aiString str;
-					material->GetTexture( aiTextureType_DIFFUSE, 0, &str );
-					auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
+				aiString str;
+				material->GetTexture( aiTextureType_DIFFUSE, 0, &str );
+				auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
 					
-					if ( texture )
-					{
-						texture->retain();
-						meshInfo.diffuseMap = texture;
-					}
-				}
-
-				if (  material->GetTextureCount( aiTextureType_SPECULAR ) > 0 )
+				if ( texture )
 				{
-					aiString str;
-					material->GetTexture( aiTextureType_SPECULAR, 0, &str );
-					auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
-					
-					if ( texture )
-					{
-						texture->retain();
-						meshInfo.specularMap = texture;
-					}
+					texture->retain();
+					meshInfo.diffuseMap = texture;
 				}
 			}
-		}
 
-	
-		for( unsigned int nodeIndx = 0; nodeIndx < node->mNumChildren; nodeIndx++ )
-		{
-			auto subMode = createNode<Model>();
-			addProtectedChild( subMode );
-			_subModels.push_back( subMode );
-			subMode->processModelSceneTree( node->mChildren[nodeIndx], scene, directory );
+			if (  material->GetTextureCount( aiTextureType_SPECULAR ) > 0 )
+			{
+				aiString str;
+				material->GetTexture( aiTextureType_SPECULAR, 0, &str );
+				auto texture = createRefWithInitializer<Texture2D>(&Texture2D::initWithFilePath, directory + "/" + str.C_Str() );
+					
+				if ( texture )
+				{
+					texture->retain();
+					meshInfo.specularMap = texture;
+				}
+			}
 		}
 	}
 	void Model::setShaderProgram( ShaderProgram* shader )
@@ -147,13 +164,6 @@ namespace GLSandbox
 
 		for( auto subModel : _subModels )
 			subModel->setShaderProgram( shader );
-	}
-	void Model::visit( GLRender* render, const Mat4& parentTransform )
-	{
-		Node::visit( render, parentTransform );
-
-		auto transform = getTransform() * parentTransform;
-		visitProtectedChilds( render, transform );
 	}
 	void Model::draw( GLRender* render, const Mat4& transform )
 	{
@@ -200,5 +210,9 @@ namespace GLSandbox
 
 			mesh.arrayObject.drawElements( GL_TRIANGLES, GL_UNSIGNED_INT, 0 );
 		}
+	}
+	const std::vector<Model*>& Model::getSubModels()
+	{
+		return _subModels;
 	}
 }

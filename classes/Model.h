@@ -16,7 +16,6 @@ namespace GLSandbox
 	class Model
 		: public Node
 		, public ShaderProtocol
-		, public ProtectedChildrenProtocol
 		, public MaterialProtocol
 	{
 
@@ -25,6 +24,8 @@ namespace GLSandbox
 			VertexArrayObject arrayObject;
 			Texture2D* diffuseMap;
 			Texture2D* specularMap;
+
+			std::string name;
 
 			Mesh()
 				: diffuseMap( nullptr )
@@ -39,6 +40,11 @@ namespace GLSandbox
 
 		void processModelSceneTree( aiNode* node, const aiScene* scene, const std::string& directory );
 
+		void processMeshVertices( Mesh& meshInfo, const aiMesh* processingMesh );
+		void processMeshIndices( Mesh& meshInfo, const aiMesh* processingMesh );
+		void processMeshMaterial( Mesh& meshInfo, const aiMesh* processingMesh, const aiScene* scene, const std::string& directory );
+
+
 	public:
 
 		Model();
@@ -48,8 +54,9 @@ namespace GLSandbox
 
 		virtual void setShaderProgram( ShaderProgram* shader ) override;
 
-		virtual void visit( GLRender* render, const Mat4& parentTransform ) override;
 		virtual void draw( GLRender* resnder, const Mat4& transform ) override; 
+
+		const std::vector<Model*>& getSubModels();
 
 	};
 
