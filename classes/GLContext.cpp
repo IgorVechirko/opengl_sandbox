@@ -7,7 +7,7 @@
 namespace GLSandbox
 {
 
-	void GLSandbox::keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers )
+	void keyPressed( GLFWwindow* window, int keyCode, int scancode, int action, int modifiers )
 	{
 		if ( window )
 		{
@@ -19,7 +19,7 @@ namespace GLSandbox
 			}
 		}
 	}
-	void GLSandbox::mouseMoved( GLFWwindow* window, double posX, double posY )
+	void mouseMoved( GLFWwindow* window, double posX, double posY )
 	{
 		if ( window )
 		{
@@ -31,7 +31,7 @@ namespace GLSandbox
 			}
 		}
 	}
-	void GLSandbox::wheelScrolled( GLFWwindow* window, double xoffset, double yoffset )
+	void wheelScrolled( GLFWwindow* window, double xoffset, double yoffset )
 	{
 		if ( window )
 		{

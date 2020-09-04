@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <queue>
+#include <list>
 #include <stack>
 #include <deque>
 #include <array>
@@ -14,6 +15,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <functional>
+#include <memory>
+#include <algorithm>
 
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
@@ -28,6 +31,8 @@
 #include "GLFW/glfw3.h"
 
 #include "shaders.h"
+
+#define _ASSERT( __arg__ ) assert( __arg__ );
 
 
 #ifndef TEST_FRIEND

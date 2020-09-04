@@ -11,7 +11,7 @@ namespace GLSandbox
 	}
 	Allocator::~Allocator()
 	{
-		_ASSERT( _allocationsCount == 0, "ATENTION!!! memory leack" );
+		_ASSERT( _allocationsCount == 0 && "ATENTION!!! memory leack" );
 	}
 	void* Allocator::allocate( size_t size )
 	{

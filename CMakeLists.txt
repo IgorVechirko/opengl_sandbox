@@ -5,8 +5,6 @@ project( opengl_sandbox VERSION 0.1.0.0	LANGUAGES CXX )
 
 set( GL_SANDBOX_DIR ${CMAKE_CURRENT_SOURCE_DIR} )
 
-
-
 #externals
 add_subdirectory( ${GL_SANDBOX_DIR}/externals/glew/build/cmake EXCLUDE_FROM_ALL )
 set( GLEW_INCLUDE_DIR ${GL_SANDBOX_DIR}/externals/glew/include )
