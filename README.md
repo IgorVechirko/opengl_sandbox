@@ -9,6 +9,9 @@ Using libraries:
 5. For load 3D models using assimp library
 
 For easier way to create different render entity and make possibility do some trivial tasks faster and comfortable in project were add next classes:
+* WorkingScope - class contain pointers to all main objects. Has interface for run main loop from external.
+* Creator - class has uniform interface for create all kine of objects.
+* Allocator - Creator class member. Provide memory allocation counting logic for detect memory leacks issues.
 * GLContext - entity response for all interaction with created window and linked with window context.
 * ResourcesManager - class allow access to resource path throw this resource unique ID, relation (ID:path) write in separate json config.
 * AutoReleasePool - class for monitoring and deleting objects which was create with auto release functionality ( Ref object ).
