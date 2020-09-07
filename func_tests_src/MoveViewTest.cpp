@@ -16,6 +16,8 @@ namespace FuncTests
 	bool MoveViewTest::onInit()
 	{
 		Scene::onInit();
+		setName( "MoveViewTest" );
+		Console::log( getName(), ": test scene run. Please use a,w,s,d,r,f for move and mouse for rotate camera." );
 
 		auto line = createNode<Line>();
 		if ( line )

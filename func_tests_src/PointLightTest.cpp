@@ -18,6 +18,8 @@ namespace FuncTests
 	bool PointLightTest::onInit()
 	{
 		Scene::onInit();
+		setName( "PointLightTest" );
+		Console::log( getName(), ": test scene run. Please use a,w,s,d,r,f for move and mouse for rotate camera." );
 
 		auto pointLight = createNode<PointLightSource>();
 		if ( pointLight )

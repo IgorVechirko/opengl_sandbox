@@ -17,6 +17,8 @@ namespace FuncTests
 	bool DrawModelTest::onInit()
 	{
 		Scene::onInit();
+		setName( "DrawModelTest" );
+		Console::log( getName(), ": test scene run. Please use a,w,s,d,r,f for move and mouse for rotate camera." );
 
 		auto model = createScopedRefWithInitializer<Model>(&Model::initWithFilePath, getResMng()->getResPath( "GUN" ) );
 		if ( model )

@@ -16,6 +16,8 @@ namespace FuncTests
 	bool DrawSpriteTest::onInit()
 	{
 		Scene::onInit();
+		setName( "DrawSpriteTest" );
+		Console::log( getName(), ": test scene run." );
 
 		auto sprite = createScopedRefWithInitializer<Sprite>( &Sprite::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
 		if ( sprite )

@@ -17,6 +17,7 @@ namespace FuncTests
 		Scene::onInit();
 
 		setName( "ResMngTest" );
+		Console::log( getName(), ": test scene run." );
 
 		const auto& resPath = getResMng()->getResPath( "MOUNTAIN" );
 		if ( resPath.empty() )

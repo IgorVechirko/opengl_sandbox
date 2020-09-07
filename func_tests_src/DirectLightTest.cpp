@@ -19,6 +19,10 @@ namespace FuncTests
 	{
 		Scene::onInit();
 
+		setName( "DirectLightTest" );
+		Console::log( getName(), ": test scene run. Please use a,w,s,d,r,f for move and mouse for rotate camera." );
+
+
 		auto directLight = createNode<DirectLightSource>();
 		if ( directLight )
 		{

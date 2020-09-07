@@ -18,6 +18,8 @@ namespace FuncTests
 	bool FlashlightTest::onInit()
 	{
 		Scene::onInit();
+		setName( "FlashlightTest" );
+		Console::log( getName(), ": test scene run. Please use a,w,s,d,r,f for move and mouse for rotate camera." );
 
 		auto flashlight = createNode<Flashlight>();
 		if ( flashlight )

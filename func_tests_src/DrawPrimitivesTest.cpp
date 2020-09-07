@@ -16,6 +16,8 @@ namespace FuncTests
 	bool DrawPrimitivesTest::onInit()
 	{
 		Scene::onInit();
+		setName( "DrawPrimitivesTest" );
+		Console::log( getName(), ": test scene run." );
 
 		auto line = createNode<Line>();
 		if ( line )
