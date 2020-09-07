@@ -1,3 +1,4 @@
 proj.cmake/
 build/
 .vscode/
+externals/glew/glew.pc
