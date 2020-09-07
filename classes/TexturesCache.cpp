@@ -66,6 +66,10 @@ namespace GLSandbox
 
 		return result;
 	}
+	const std::map<std::string, Texture2D*>& TexturesCache::getCachedTextures()
+	{
+		return _cachedTextures;
+	}
 	void TexturesCache::removeAlwaysCachedTexture()
 	{
 		for( auto textIt = _cachedTextures.begin(); textIt != _cachedTextures.end(); )

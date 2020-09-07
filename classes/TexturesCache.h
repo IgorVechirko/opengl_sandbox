@@ -29,6 +29,8 @@ namespace GLSandbox
 		Texture2D* createTexture2D( const std::string& filePath );
 		Texture2D* getTexture2D( const std::string& filePath );
 
+		const std::map<std::string, Texture2D*>& getCachedTextures();
+
 		void removeAlwaysCachedTexture();
 
 	};
