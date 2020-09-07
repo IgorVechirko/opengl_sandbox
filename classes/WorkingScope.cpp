@@ -26,24 +26,24 @@ namespace GLSandbox
 	{
 		_creator.setScope( this );
 
-		_releasePool = std::shared_ptr<AutoReleasePool>(new AutoReleasePool);
+		_releasePool = std::unique_ptr<AutoReleasePool>(new AutoReleasePool);
 		_releasePool->setScope( this );
 
-		_fileUtils = std::shared_ptr<FileUtils>(new FileUtils);
+		_fileUtils = std::unique_ptr<FileUtils>(new FileUtils);
 		_fileUtils->setScope( this );
 
-		_resMng = std::shared_ptr<ResourcesManager>(new ResourcesManager);
+		_resMng = std::unique_ptr<ResourcesManager>(new ResourcesManager);
 		_resMng->setScope( this );
 
 		_glContext = _creator.createScopedWithInitializer<GLContext>(&GLContext::initWithWndSize, 1024, 768 );
 
-		_timeScheduler = std::shared_ptr<TimeScheduler>(new TimeScheduler);
+		_timeScheduler = std::unique_ptr<TimeScheduler>(new TimeScheduler);
 		_timeScheduler->setScope( this );
 
-		_texturesCache = std::shared_ptr<TexturesCache>( new TexturesCache);
+		_texturesCache = std::unique_ptr<TexturesCache>( new TexturesCache);
 		_texturesCache->setScope( this );
 
-		_shadersCache = std::shared_ptr<ShadersCache>( new ShadersCache);
+		_shadersCache = std::unique_ptr<ShadersCache>( new ShadersCache);
 		_shadersCache->setScope( this );
 
 	}
@@ -103,7 +103,7 @@ namespace GLSandbox
 		}
 		else
 		{
-			_defaultDelegate = std::shared_ptr<ScopeDelegate>(createScoped<ScopeDelegate>());
+			_defaultDelegate = std::unique_ptr<ScopeDelegate>(createScoped<ScopeDelegate>());
 			_delegate = _defaultDelegate.get();
 		}
 

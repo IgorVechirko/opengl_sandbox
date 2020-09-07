@@ -21,21 +21,21 @@ namespace GLSandbox
 	{
 		Creator _creator;
 
-		std::shared_ptr<AutoReleasePool> _releasePool;
+		std::unique_ptr<AutoReleasePool> _releasePool;
 
 		GLContext* _glContext;
 
-		std::shared_ptr<FileUtils> _fileUtils;
-		std::shared_ptr<ResourcesManager> _resMng;
+		std::unique_ptr<FileUtils> _fileUtils;
+		std::unique_ptr<ResourcesManager> _resMng;
 
-		std::shared_ptr<TimeScheduler> _timeScheduler;
+		std::unique_ptr<TimeScheduler> _timeScheduler;
 
-		std::shared_ptr<TexturesCache> _texturesCache;
+		std::unique_ptr<TexturesCache> _texturesCache;
 
-		std::shared_ptr<ShadersCache> _shadersCache;
+		std::unique_ptr<ShadersCache> _shadersCache;
 
 		ScopeDelegate* _delegate;
-		std::shared_ptr<ScopeDelegate> _defaultDelegate;
+		std::unique_ptr<ScopeDelegate> _defaultDelegate;
 
 	public:
 
