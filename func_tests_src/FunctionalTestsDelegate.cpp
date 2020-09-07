@@ -15,6 +15,10 @@
 #include "DrawModelTest.h"
 #include "DrawLightningModelTest.h"
 
+#include "Texture2D.h"
+#include "Model.h"
+#include "TexturesCache.h"
+
 using namespace GLSandbox;
 
 namespace FuncTests
@@ -31,9 +35,20 @@ namespace FuncTests
 	{
 		getResMng()->parseResConfig( "resdb/resources.json" );
 
+		Console::log( "Please use keys <- and -> to switch through tests scenes" );
+
+#ifdef _WIN32
+
+		auto spriteTexture = createRefWithInitializer<Texture2D>( &Texture2D::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
+		auto model = createScopedRefWithInitializer<Model>( &Model::initWithFilePath, getResMng()->getResPath( "GUN" ) );
+	
+		for( const auto& texturePair : getTexturesCache()->getCachedTextures() )
+			texturePair.second->setAllwaysCached( true );
+
+
 		_testsCreateFuncs = { 
-			std::bind( &Creator::createNode<Scene>, getCreator() ),
-			std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
+			//std::bind( &Creator::createNode<Scene>, getCreator() ),
+			//std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
 			std::bind( &Creator::createNode<MoveViewTest>, getCreator() ),
@@ -43,8 +58,23 @@ namespace FuncTests
 			std::bind( &Creator::createNode<DrawModelTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() )
 		};
+#else
+		_testsCreateFuncs = { 
+			//std::bind( &Creator::createNode<Scene>, getCreator() ),
+			//std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
+			std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() ),
+			//std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
+			std::bind( &Creator::createNode<MoveViewTest>, getCreator() ),
+			std::bind( &Creator::createNode<DirectLightTest>, getCreator() ),
+			std::bind( &Creator::createNode<PointLightTest>, getCreator() ),
+			std::bind( &Creator::createNode<FlashlightTest>, getCreator() ),
+			//std::bind( &Creator::createNode<DrawModelTest>, getCreator() ),
+			//std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() )
+		};
+#endif
 
 		_currentTest = 0;
+		showScene( _testsCreateFuncs[0] );
 
 		getGLContext()->addInputListener( this );
 	}

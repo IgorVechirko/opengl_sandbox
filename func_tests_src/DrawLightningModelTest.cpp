@@ -36,6 +36,23 @@ namespace FuncTests
 		auto model = createScopedRefWithInitializer<Model>(&Model::initWithFilePath, getResMng()->getResPath( "GUN" ) );
 		if ( model )
 		{
+			std::vector<std::string> invisibleModels = { 
+			"bullet_Cube.005",
+			//"Cube.002_Cube.003",
+			"hulle_Cube",
+			//"Gun_Cube.001",
+			//"Cube.005_Cube.000",
+			"muzzle_fire_Plane.002",
+			//"Gun_trigger_Cube.002"
+				};
+
+			for( const auto& modelName : invisibleModels )
+			{
+				auto subModel = model->getChild( modelName );
+				if ( subModel )
+					subModel->setVisbile( false );
+			}
+
 			addChild( model );
 		}
 
