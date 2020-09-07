@@ -37,13 +37,10 @@ namespace GLSandbox
 
 			if ( ret )
 			{
-				if( initializer )
+				if ( !(ret->*initializer)( initArgs...) )
 				{
-					if ( !(ret->*initializer)( initArgs...) )
-					{
-						_allocator.deallocate( ret );
-						ret = nullptr;
-					}
+					_allocator.deallocate( ret );
+					ret = nullptr;
 				}
 			}
 			else
@@ -82,13 +79,10 @@ namespace GLSandbox
 			{
 				ret->setScope( getScope() );
 
-				if( initializer )
+				if ( !(ret->*initializer)( initArgs...) )
 				{
-					if ( !(ret->*initializer)( initArgs...) )
-					{
-						_allocator.deallocate( ret );
-						ret = nullptr;
-					}
+					_allocator.deallocate( ret );
+					ret = nullptr;
 				}
 			}
 			else
@@ -123,18 +117,9 @@ namespace GLSandbox
 		{
 			ObjType* ret = createObj<ObjType>();
 
-			if ( ret )
+			if ( ret && (ret->*initializer)( initArgs...) )
 			{
 				ret->setupReleasePool( _scope->getReleasePool() );
-
-				if( initializer )
-				{
-					if ( !(ret->*initializer)( initArgs...) )
-					{
-						_allocator.deallocate( ret );
-						ret = nullptr;
-					}
-				}
 			}
 			else
 			{
@@ -171,16 +156,16 @@ namespace GLSandbox
 
 			if ( ret )
 			{
-				ret->setupReleasePool(_scope->getReleasePool());
 				ret->setScope( getScope() );
 
-				if ( initializer )
+				if ( (ret->*initializer)( initArgs... ) )
 				{
-					if ( !(ret->*initializer)( initArgs... ) )
-					{
-						_allocator.deallocate( ret );
-						ret = nullptr;
-					}
+					ret->setupReleasePool(_scope->getReleasePool());
+				}
+				else
+				{
+					_allocator.deallocate( ret );
+					ret = nullptr;
 				}
 			}
 			else
@@ -199,10 +184,13 @@ namespace GLSandbox
 
 			if ( ret )
 			{
-				ret->setupReleasePool(_scope->getReleasePool());
 				ret->setScope( getScope() );
 
-				if ( !ret->init() )
+				if ( ret->init() )
+				{
+					ret->setupReleasePool(_scope->getReleasePool());
+				}
+				else
 				{
 					_allocator.deallocate( ret );
 					ret = nullptr;

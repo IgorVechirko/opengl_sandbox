@@ -18,8 +18,9 @@ namespace GLSandbox
 			auto findIt = std::find( _refs.begin(), _refs.end(), ref );
 			if ( findIt != _refs.end() )
 			{
-				destoryObj( *findIt );
+				auto obj = (*findIt);
 				_refs.erase( findIt );
+				destoryObj( obj );
 			}
 		}
 	}
