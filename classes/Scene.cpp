@@ -112,13 +112,25 @@ namespace GLSandbox
 	}
 	void Scene::setDirectLightPropToShader( ShaderProgram* shader )
 	{
-		if ( shader && _directionLight )
+		if ( shader )
 		{
-			LightProperties lightProperties = _directionLight->getLightProperties();
-			glm::vec3 lightDirection = _directionLight->getDirection();
+			if ( _directionLight )
+			{
 
-			shader->setLightPropUniforms( lightProperties, "u_directLight", "ambient", "diffuse", "specular" );
-			shader->setUniform3f( "u_directLight.direction", lightDirection.x, lightDirection.y, lightDirection.z );
+				const auto& lightProperties = _directionLight->getLightProperties();
+				auto lightDirection = _directionLight->getDirection();
+
+				shader->setLightPropUniforms( lightProperties, "u_directLight", "ambient", "diffuse", "specular" );
+				shader->setUniform3f( "u_directLight.direction", lightDirection.x, lightDirection.y, lightDirection.z );
+			}
+			else
+			{
+				LightProperties lightProp;
+				lightProp.ambient = Vec3( 0.0f );
+				lightProp.diffuse= Vec3( 0.0f );
+				lightProp.specular = Vec3( 0.0f );
+				shader->setLightPropUniforms( lightProp, "u_directLight", "ambient", "diffuse", "specular" );
+			}
 		}
 	}
 	void Scene::setPointLightsPropToShader( ShaderProgram* shader )
