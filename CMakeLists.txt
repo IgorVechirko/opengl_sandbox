@@ -67,6 +67,7 @@ set( Line ${GL_SANDBOX_SRC_DIR}/Line.h ${GL_SANDBOX_SRC_DIR}/Line.cpp )
 
 set( Model ${GL_SANDBOX_SRC_DIR}/Model.h ${GL_SANDBOX_SRC_DIR}/Model.cpp )
 set( Sprite ${GL_SANDBOX_SRC_DIR}/Sprite.h ${GL_SANDBOX_SRC_DIR}/Sprite.cpp )
+set( Point ${GL_SANDBOX_SRC_DIR}/Point.h ${GL_SANDBOX_SRC_DIR}/Point.cpp )
 
 set( TestScene ${GL_SANDBOX_SRC_DIR}/TestScene.h ${GL_SANDBOX_SRC_DIR}/TestScene.cpp )
 set( Main ${GL_SANDBOX_SRC_DIR}/main.cpp )
@@ -138,6 +139,7 @@ source_group( nodes FILES ${AxisesOrigin}
 						  ${Line} 
 						  ${Sprite}
 						  ${Model}
+						  ${Point}
 )
 source_group( nodes\\base FILES 
 								${Node} 
@@ -192,6 +194,7 @@ set( SANDBOX_SRC ${Common}
 				 ${shaders}
 				 ${TexturesCache}
 				 ${ShadersCache}
+				 ${Point}
 )
 
 #setup project
@@ -238,6 +241,7 @@ set( PointLightTest ${WORKING_TESTS_SRC_DIR}/PointLightTest.h ${WORKING_TESTS_SR
 set( FlashlightTest ${WORKING_TESTS_SRC_DIR}/FlashlightTest.h ${WORKING_TESTS_SRC_DIR}/FlashlightTest.cpp )
 set( DrawModelTest ${WORKING_TESTS_SRC_DIR}/DrawModelTest.h ${WORKING_TESTS_SRC_DIR}/DrawModelTest.cpp )
 set( DrawLightningModelTest ${WORKING_TESTS_SRC_DIR}/DrawLightningModelTest.h ${WORKING_TESTS_SRC_DIR}/DrawLightningModelTest.cpp )
+set( DrawPointTest ${WORKING_TESTS_SRC_DIR}/DrawPointTest.h ${WORKING_TESTS_SRC_DIR}/DrawPointTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -255,6 +259,7 @@ source_group( tests FILES
 									${FlashlightTest}
 									${DrawModelTest}
 									${DrawLightningModelTest}
+									${DrawPointTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -274,6 +279,7 @@ set( WOKING_TESTS_SRC
 					${FlashlightTest}
 					${DrawModelTest}
 					${DrawLightningModelTest}
+					${DrawPointTest}
 )
 
 

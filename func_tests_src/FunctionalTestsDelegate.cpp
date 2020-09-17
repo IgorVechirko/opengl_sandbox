@@ -14,6 +14,7 @@
 #include "FlashlightTest.h"
 #include "DrawModelTest.h"
 #include "DrawLightningModelTest.h"
+#include "DrawPointTest.h"
 
 #include "Texture2D.h"
 #include "Model.h"
@@ -47,8 +48,8 @@ namespace FuncTests
 
 
 		_testsCreateFuncs = { 
-			//std::bind( &Creator::createNode<Scene>, getCreator() ),
-			//std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
+			std::bind( &Creator::createNode<Scene>, getCreator() ),
+			std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
 			std::bind( &Creator::createNode<MoveViewTest>, getCreator() ),
@@ -56,7 +57,8 @@ namespace FuncTests
 			std::bind( &Creator::createNode<PointLightTest>, getCreator() ),
 			std::bind( &Creator::createNode<FlashlightTest>, getCreator() ),
 			std::bind( &Creator::createNode<DrawModelTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() )
+			std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() ),
+			std::bind( &Creator::createNode<DrawPointTest>, getCreator() )
 		};
 #else
 		_testsCreateFuncs = { 
