@@ -10,7 +10,7 @@ namespace GLSandbox
 	class AutoReleasePool : public WorkingScopeProvider
 	{
 
-		std::vector<Ref*> _refs;
+		std::list<Ref*> _refs;
 
 
 	public:

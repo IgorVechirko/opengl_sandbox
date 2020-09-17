@@ -38,8 +38,9 @@ namespace GLSandbox
 		{
 			if ( (*refIt)->getRefCount() == 0 )
 			{
-				destoryObj(*refIt);
+				auto obj = (*refIt);
 				refIt = _refs.erase( refIt );
+				destoryObj( obj );
 			}
 			else
 			{
