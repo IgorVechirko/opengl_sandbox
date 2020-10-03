@@ -14,6 +14,7 @@
 	"SMILE" : "textures/smile.png",
 	"MOUNTAIN" : "textures/mountain.jpg",
 	"SMALL_IMAGE" : "textures/small_image.png",
+	"GRASS" : "textures/grass.png",
 
 	"VERTEX_POS_UCOLOR_VSH" : "shaders/vertex_pos_ucolor.vsh",
 	"VERTEX_POS_UCOLOR_FSH" : "shaders/vertex_pos_ucolor.fsh",
