@@ -22,7 +22,7 @@ namespace GLSandbox
 		glBindTexture( GL_TEXTURE_2D, _textureID );
 
 		int chanels = 0;
-		unsigned char* image = SOIL_load_image( filePath.c_str(), &_width, &_height, &chanels, SOIL_LOAD_RGB );
+		unsigned char* image = SOIL_load_image( filePath.c_str(), &_width, &_height, &chanels, SOIL_LOAD_RGBA );
 
 		if ( !image )
 		{
@@ -43,7 +43,7 @@ namespace GLSandbox
 			break;
 		}
 
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, format, GL_UNSIGNED_BYTE, image );
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, format, GL_UNSIGNED_BYTE, image );
 		glGenerateMipmap( GL_TEXTURE_2D );
 
 		SOIL_free_image_data(image);
