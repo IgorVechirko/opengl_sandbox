@@ -18,14 +18,19 @@ namespace GLSandbox
 	}
 	void GLRender::init()
 	{
+		glEnable(GL_DEPTH_TEST);
+
+		glEnable( GL_STENCIL_TEST );
+		glStencilMask( 0x00 );
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+		glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );
 	}
 	void GLRender::drawScene( Scene* scene )
 	{
-		glEnable(GL_DEPTH_TEST);
-		glClear( GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT );
-
-		glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );
-		glClear( GL_COLOR_BUFFER_BIT );
+		glStencilMask( 0xFF );
+		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );	
+		glStencilMask( 0x00 );
 
 		OpenGL::getInstance()->processGLErrors();
 		scene->drawTraversal( Mat4(1.0f) );

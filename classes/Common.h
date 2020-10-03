@@ -88,6 +88,7 @@ namespace GLSandbox
 		static const RGBA RED;
 		static const RGBA BLACK;
 		static const RGBA GREEN;
+		static const RGBA GRAY;
 	};
 
 	

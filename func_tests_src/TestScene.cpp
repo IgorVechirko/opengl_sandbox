@@ -15,6 +15,7 @@
 #include "ResourcesManager.h"
 #include "FileUtils.h"
 #include "Texture2D.h"
+#include "OutlineSprite.h"
 
 using namespace GLSandbox;
 
@@ -35,6 +36,27 @@ namespace FuncTests
 
 		if ( true )
 		{
+			auto outlineSprite1 = createScopedRefWithInitializer<OutlineSprite>( &OutlineSprite::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
+			if ( outlineSprite1 )
+			{
+				outlineSprite1->setName( "1" );
+				outlineSprite1->setOriginShift( Vec3( -outlineSprite1->getTexture2D()->getWidth()/2.0f, -outlineSprite1->getTexture2D()->getHeight()/2.0f, -1.0f ) );
+				addChild( outlineSprite1 );
+			}
+
+			auto outlineSprite2 = createScopedRefWithInitializer<OutlineSprite>( &OutlineSprite::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
+			if ( outlineSprite2 )
+			{
+				outlineSprite2->setName( "2" );
+				outlineSprite2->setOriginShift( Vec3( -outlineSprite2->getTexture2D()->getWidth()/2.0f, -outlineSprite2->getTexture2D()->getHeight()/2.0f, -1.0f ) );
+				outlineSprite2->setPosition( Vec3( 100.0f, -25.0f, 100.0f ) );
+				addChild( outlineSprite2 );
+			}
+		}
+
+
+		if ( false )
+		{
 			_mySprite = createScopedRefWithInitializer<GLSandbox::Sprite>(&GLSandbox::Sprite::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
 			if ( _mySprite )
 			{
@@ -42,7 +64,7 @@ namespace FuncTests
 			}
 		}
 
-		if ( true  && _mySprite )
+		if ( false  && _mySprite )
 		{
 			auto line = createNode<GLSandbox::Line>();
 			if ( line )
@@ -61,7 +83,7 @@ namespace FuncTests
 			addChild( origin );
 		}
 
-		if ( true )
+		if ( false )
 		{
 			auto newModel = createScopedRefWithInitializer<GLSandbox::Model>(&GLSandbox::Model::initWithFilePath, getResMng()->getResPath( "GUN" ) );
 			if ( newModel )
@@ -119,7 +141,7 @@ namespace FuncTests
 			}
 		}*/
 
-		if( true )
+		if( false )
 		{
 			auto cube = createNode<GLSandbox::Cube>();
 			cube->setCubeSize( 100.0f );
@@ -132,7 +154,7 @@ namespace FuncTests
 			//_cube = cube;
 		}
 
-		if ( true )
+		if ( false )
 		{
 			auto colorCube = createNode<GLSandbox::ColorCube>();
 
@@ -158,7 +180,7 @@ namespace FuncTests
 		attenuation.quadratic = 0.0000007f;
 
 	
-		if ( true )
+		if ( false )
 		{
 			GLSandbox::DirectLightSource* directionLight = createNode<GLSandbox::DirectLightSource>();
 			directionLight->setPosition( GLSandbox::Vec3( 0.0f, 0.0f, 1000.0f ) );
@@ -170,7 +192,7 @@ namespace FuncTests
 			setDirectionLight( directionLight );
 		}
 
-		if ( true )
+		if ( false )
 		{
 			float dist = 400.0f;
 			std::vector<GLSandbox::Vec3> lightsPositions;
@@ -194,7 +216,7 @@ namespace FuncTests
 			}
 		}
 
-		if ( true )
+		if ( false )
 		{
 			auto light = createNode<GLSandbox::Flashlight>();
 
@@ -211,6 +233,7 @@ namespace FuncTests
 		_cameraMovementController.setScope( getScope() );
 		_cameraMovementController.initWithCamera( getCamera() );
 
+		getCamera()->setPosition( Vec3( getCamera()->getPosition().x, getCamera()->getPosition().y, 1000.0f ) );
 		scheduleUpdate();
 
 		return true;

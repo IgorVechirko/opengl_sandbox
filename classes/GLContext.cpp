@@ -113,6 +113,7 @@ namespace GLSandbox
 			glfwSetInputMode( _window, GLFW_CURSOR, GLFW_CURSOR_DISABLED );
 
 			_render.setScope( getScope() );
+			_render.init();
 		}
 		else
 		{

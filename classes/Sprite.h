@@ -16,6 +16,9 @@ namespace GLSandbox
 	{
 		typedef Node Parent;
 
+
+	protected:
+
 		VertexArrayObject _arrayBuffer;
 
 

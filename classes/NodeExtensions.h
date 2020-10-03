@@ -36,12 +36,9 @@ namespace GLSandbox
 
 		ShaderProgram* _shader;
 
-	protected:
-
-		ShaderProtocol();
-
 	public:
 
+		ShaderProtocol();
 		virtual ~ShaderProtocol();
 
 		virtual void setShaderProgram( ShaderProgram* program );

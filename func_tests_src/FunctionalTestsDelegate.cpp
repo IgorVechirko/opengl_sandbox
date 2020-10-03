@@ -15,6 +15,8 @@
 #include "DrawModelTest.h"
 #include "DrawLightningModelTest.h"
 #include "DrawPointTest.h"
+#include "OutlineSpriteTest.h"
+#include "TestScene.h"
 
 #include "Texture2D.h"
 #include "Model.h"
@@ -46,20 +48,27 @@ namespace FuncTests
 		for( const auto& texturePair : getTexturesCache()->getCachedTextures() )
 			texturePair.second->setAllwaysCached( true );
 
-
-		_testsCreateFuncs = { 
-			std::bind( &Creator::createNode<Scene>, getCreator() ),
-			std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
-			std::bind( &Creator::createNode<MoveViewTest>, getCreator() ),
-			std::bind( &Creator::createNode<DirectLightTest>, getCreator() ),
-			std::bind( &Creator::createNode<PointLightTest>, getCreator() ),
-			std::bind( &Creator::createNode<FlashlightTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawModelTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() ),
-			std::bind( &Creator::createNode<DrawPointTest>, getCreator() )
-		};
+		if ( false )
+		{
+			_testsCreateFuncs = { std::bind( &Creator::createNode<OutlineSpriteTest>, getCreator() ) };
+		}
+		else
+		{
+			_testsCreateFuncs = { 
+				std::bind( &Creator::createNode<Scene>, getCreator() ),
+				std::bind( &Creator::createNode<ResMngTest>, getCreator() ),
+				std::bind( &Creator::createNode<DrawPrimitivesTest>, getCreator() ),
+				std::bind( &Creator::createNode<DrawSpriteTest>, getCreator() ),
+				std::bind( &Creator::createNode<MoveViewTest>, getCreator() ),
+				std::bind( &Creator::createNode<DirectLightTest>, getCreator() ),
+				std::bind( &Creator::createNode<PointLightTest>, getCreator() ),
+				std::bind( &Creator::createNode<FlashlightTest>, getCreator() ),
+				std::bind( &Creator::createNode<DrawModelTest>, getCreator() ),
+				std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() ),
+				std::bind( &Creator::createNode<DrawPointTest>, getCreator() ),
+				std::bind( &Creator::createNode<OutlineSpriteTest>, getCreator() )
+			};
+		}
 #else
 		_testsCreateFuncs = { 
 			//std::bind( &Creator::createNode<Scene>, getCreator() ),
@@ -137,5 +146,7 @@ namespace FuncTests
 			showPrevTest();
 		else if ( keyCode == GLFW_KEY_ESCAPE )
 			getGLContext()->setWindowShouldClose();
+		//else
+			//Console::log( "key code = ", keyCode );
 	}
 }
