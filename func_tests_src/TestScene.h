@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "CameraMovementController.h"
 #include "Sprite.h"
+#include "CustomFrameBuffer.h"
 
 namespace FuncTests
 {
@@ -11,6 +12,8 @@ namespace FuncTests
 	{
 
 		typedef Scene Parent;
+
+		GLSandbox::CustomFrameBuffer* _frameBuffer;
 
 		CameraMovementController _cameraMovementController;
 
@@ -21,7 +24,11 @@ namespace FuncTests
 
 		virtual bool onInit() override;
 
+		virtual void onBeforeDraw() override;
+
 		virtual void update( float deltaTime ) override;
+
+		virtual void drawTraversal( const GLSandbox::Mat4& parentTransform ) override;
 
 
 	public:

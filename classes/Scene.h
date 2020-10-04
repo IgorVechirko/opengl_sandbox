@@ -37,6 +37,9 @@ namespace GLSandbox
 		Scene();
 		virtual ~Scene();
 
+		virtual void onBeforeDraw(){};
+		virtual void onAfterDraw(){};
+
 		virtual void drawTraversal( const Mat4& parentTransform ) override;
 
 		void setDirectionLight( DirectLightSource* directionLight );

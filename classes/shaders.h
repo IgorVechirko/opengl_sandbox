@@ -12,6 +12,7 @@ namespace GLSandbox
 	extern const char* positionUVTexture_frag;
 	extern const char* posUVNormalLightProp_vert;
 	extern const char* posUVNormalLightProp_frag;
+	extern const char* positionUVNoMVP_vert;
 }
 
 

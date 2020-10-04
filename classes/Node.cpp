@@ -63,17 +63,17 @@ namespace GLSandbox
 	}
 	void Node::drawTraversal( const Mat4& parentTransform )
 	{
-		auto transform = parentTransform * getTransform();
-
-		for( auto child : _children )
+		if ( _visible )
 		{
-			if( child->getVisible() )
+			auto transform = parentTransform * getTransform();
+
+			for( auto child : _children )
 			{
 				child->drawTraversal( transform );
 			}
-		}
 
-		draw( transform );
+			draw( transform );
+		}
 	}
 	void Node::setPosition( const Vec3& pos )
 	{

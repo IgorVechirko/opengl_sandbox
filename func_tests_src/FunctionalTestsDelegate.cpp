@@ -16,6 +16,8 @@
 #include "DrawLightningModelTest.h"
 #include "DrawPointTest.h"
 #include "OutlineSpriteTest.h"
+#include "FrameBufferTest.h"
+
 #include "TestScene.h"
 
 #include "Texture2D.h"
@@ -50,7 +52,7 @@ namespace FuncTests
 
 		if ( false )
 		{
-			_testsCreateFuncs = { std::bind( &Creator::createNode<OutlineSpriteTest>, getCreator() ) };
+			_testsCreateFuncs = { std::bind( &Creator::createNode<TestScene>, getCreator() ) };
 		}
 		else
 		{
@@ -66,7 +68,8 @@ namespace FuncTests
 				std::bind( &Creator::createNode<DrawModelTest>, getCreator() ),
 				std::bind( &Creator::createNode<DrawLightningModelTest>, getCreator() ),
 				std::bind( &Creator::createNode<DrawPointTest>, getCreator() ),
-				std::bind( &Creator::createNode<OutlineSpriteTest>, getCreator() )
+				std::bind( &Creator::createNode<OutlineSpriteTest>, getCreator() ),
+				std::bind( &Creator::createNode<FrameBufferTest>, getCreator() )
 			};
 		}
 #else

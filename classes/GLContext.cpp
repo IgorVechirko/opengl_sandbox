@@ -200,7 +200,10 @@ namespace GLSandbox
 	void GLContext::drawScene()
 	{
 		_ASSERT(_scene);
+
+		_scene->onBeforeDraw();
 		_render.drawScene( _scene );
+		_scene->onAfterDraw();
 	}
 
 }

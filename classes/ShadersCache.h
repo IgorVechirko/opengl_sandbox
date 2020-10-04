@@ -26,8 +26,6 @@ namespace GLSandbox
 		ShaderProgram* getStandartShader( StandartShaderType type );
 		
 		ShaderProgram* createShader( const std::string& vertPath, const std::string& fragPath );
-
-
 	};
 
 }

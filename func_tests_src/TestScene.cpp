@@ -17,6 +17,7 @@
 #include "Texture2D.h"
 #include "OutlineSprite.h"
 
+
 using namespace GLSandbox;
 
 namespace FuncTests
@@ -25,14 +26,24 @@ namespace FuncTests
 	TestScene::TestScene()
 		: _mySprite( nullptr )
 		, _cube( nullptr )
+		, _frameBuffer( nullptr )
 	{
 	}
 	TestScene::~TestScene()
 	{
+		if ( _frameBuffer )
+			_frameBuffer->release();
 	}
 	bool TestScene::onInit()
 	{
 		Parent::onInit();
+
+		_frameBuffer = createNode<CustomFrameBuffer>();
+		if ( _frameBuffer )
+		{
+			_frameBuffer->retain();
+			//addChild( _frameBuffer );
+		}
 
 		if ( true )
 		{
@@ -238,6 +249,17 @@ namespace FuncTests
 
 		return true;
 	}
+	void TestScene::onBeforeDraw()
+	{
+		if ( _frameBuffer )
+		{
+			_frameBuffer->bind();
+			_frameBuffer->onBeforeStartDraw();
+			Scene::drawTraversal( Mat4(1.0f) );
+			_frameBuffer->onDrawFinish();
+			_frameBuffer->unbind();
+		}
+	}
 	void TestScene::update( float deltaTime )
 	{	
 		if( _cube )
@@ -251,6 +273,34 @@ namespace FuncTests
 
 			*/_cube->setRotate( _cube->getRotate() + GLSandbox::Vec3( 20.0f, 0.0f, 20.0f ) * deltaTime );
 		}
+	}
+	void TestScene::drawTraversal( const Mat4& parentTransform )
+	{
+		if ( _frameBuffer && true )
+			_frameBuffer->Node::drawTraversal( parentTransform );
+		else
+			Scene::drawTraversal( parentTransform );
+
+		/*static bool is = false;
+
+		if ( _frameBuffer && is )
+		{
+			is = false;
+
+			_frameBuffer->bind();
+			_frameBuffer->onBeforeStartDraw();
+			Scene::drawTraversal( parentTransform );
+			_frameBuffer->onDrawFinish();
+			_frameBuffer->unbind();
+
+			_frameBuffer->Node::draw( parentTransform );
+
+			_frameBuffer->setVisbile( false );
+		}
+		else
+		{
+			Scene::drawTraversal( parentTransform );
+		}*/
 	}
 
 }

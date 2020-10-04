@@ -80,6 +80,7 @@ set( Creator ${GL_SANDBOX_SRC_DIR}/Creator.h ${GL_SANDBOX_SRC_DIR}/Creator.cpp )
 set( Allocator ${GL_SANDBOX_SRC_DIR}/Allocator.h ${GL_SANDBOX_SRC_DIR}/Allocator.cpp )
 
 set ( VertexArrayObject ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.h ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.cpp )
+set ( CustomFrameBuffer ${GL_SANDBOX_SRC_DIR}/CustomFrameBuffer.h ${GL_SANDBOX_SRC_DIR}/CustomFrameBuffer.cpp )
 
 
 set( WorkingScope 
@@ -119,6 +120,7 @@ source_group( gl\\context FILES ${GLContext} )
 source_group( gl\\render FILES ${GLRender} )
 source_group( gl\\components FILES 
 									${VertexArrayObject}
+									${CustomFrameBuffer}
 )
 
 source_group( shaders FILES 
@@ -198,6 +200,7 @@ set( SANDBOX_SRC ${Common}
 				 ${ShadersCache}
 				 ${Point}
 				 ${OutlineSprite}
+				 ${CustomFrameBuffer}
 )
 
 #setup project
@@ -246,6 +249,7 @@ set( DrawModelTest ${WORKING_TESTS_SRC_DIR}/DrawModelTest.h ${WORKING_TESTS_SRC_
 set( DrawLightningModelTest ${WORKING_TESTS_SRC_DIR}/DrawLightningModelTest.h ${WORKING_TESTS_SRC_DIR}/DrawLightningModelTest.cpp )
 set( DrawPointTest ${WORKING_TESTS_SRC_DIR}/DrawPointTest.h ${WORKING_TESTS_SRC_DIR}/DrawPointTest.cpp )
 set( OutlineSpriteTest ${WORKING_TESTS_SRC_DIR}/OutlineSpriteTest.h ${WORKING_TESTS_SRC_DIR}/OutlineSpriteTest.cpp )
+set( FrameBufferTest ${WORKING_TESTS_SRC_DIR}/FrameBufferTest.h ${WORKING_TESTS_SRC_DIR}/FrameBufferTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -265,6 +269,7 @@ source_group( tests FILES
 									${DrawLightningModelTest}
 									${DrawPointTest}
 									${OutlineSpriteTest}
+									${FrameBufferTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -286,6 +291,7 @@ set( WOKING_TESTS_SRC
 					${DrawLightningModelTest}
 					${DrawPointTest}
 					${OutlineSpriteTest}
+					${FrameBufferTest}
 )
 
 

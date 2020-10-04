@@ -22,7 +22,7 @@ namespace GLSandbox
 		glBindTexture( GL_TEXTURE_2D, _textureID );
 
 		int chanels = 0;
-		unsigned char* image = SOIL_load_image( filePath.c_str(), &_width, &_height, &chanels, SOIL_LOAD_RGBA );
+		unsigned char* image = SOIL_load_image( filePath.c_str(), &_width, &_height, &chanels, SOIL_LOAD_AUTO );
 
 		if ( !image )
 		{
