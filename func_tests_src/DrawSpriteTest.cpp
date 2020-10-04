@@ -19,7 +19,7 @@ namespace FuncTests
 		setName( "DrawSpriteTest" );
 		Console::log( getName(), ": test scene run." );
 
-		auto sprite = createScopedRefWithInitializer<Sprite>( &Sprite::initWithFilePath, getResMng()->getResPath( "MOUNTAIN" ) );
+		auto sprite = createScopedRefWithInitializer<Sprite>( &Sprite::initWithFilePath, getResMng()->getResPath( "GRASS" ) );
 		if ( sprite )
 		{
 			addChild( sprite );
