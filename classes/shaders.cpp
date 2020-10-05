@@ -7,3 +7,5 @@
 #include "shaders/posUVNormalLightProp.vert"
 #include "shaders/posUVNormalLightProp.frag"
 #include "shaders/positionUVNoMVP.vert"
+#include "shaders/positionNoModel.vert"
+#include "shaders/cubemapSampler.frag"

@@ -67,6 +67,27 @@ namespace GLSandbox
 
 	};
 
+	class CubeMap;
+	class CubeMapProtocol
+	{
+
+	protected:
+
+		CubeMap* _cubeMap;
+
+	protected:
+
+		CubeMapProtocol();
+
+	public:
+
+		virtual ~CubeMapProtocol();
+
+		virtual void setCubeMap( CubeMap* cubeMap );
+		virtual CubeMap* getCubeMap() const;
+
+	};
+
 	class ColorProtocol
 	{
 

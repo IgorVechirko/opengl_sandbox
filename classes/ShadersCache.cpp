@@ -25,6 +25,7 @@ namespace GLSandbox
 		_standartShaders[ StandartShaderType::POS_UV_TEXTURE ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionUVTexture_vert, positionUVTexture_frag );
 		_standartShaders[ StandartShaderType::POS_UV_NORMAL_LIGHT_PORP ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, posUVNormalLightProp_vert, posUVNormalLightProp_frag );
 		_standartShaders[ StandartShaderType::NO_MVP_POS_UV_TEXTURE ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionUVNoMVP_vert, positionUVTexture_frag );
+		_standartShaders[ StandartShaderType::NO_MODEL_CUBE_SAMPLER ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionNoModel_vert, cubebapSampler_frag );
 
 		for( auto& shaderPair : _standartShaders )
 			shaderPair.second->retain();

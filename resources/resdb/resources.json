@@ -20,5 +20,12 @@
 	"VERTEX_POS_UCOLOR_FSH" : "shaders/vertex_pos_ucolor.fsh",
 
 	"NANO_SUIT" : "models/nano_suit/KSR-29 sniper rifle new_obj.obj",
-	"GUN" : "models/gun/Handgun_obj.obj"
+	"GUN" : "models/gun/Handgun_obj.obj",
+
+	"SKY_BOX_RIGHT" : "textures/skybox/right.jpg",
+	"SKY_BOX_LEFT" : "textures/skybox/left.jpg",
+	"SKY_BOX_TOP" : "textures/skybox/top.jpg",
+	"SKY_BOX_BOTTOM" : "textures/skybox/bottom.jpg",
+	"SKY_BOX_FRONT" : "textures/skybox/front.jpg",
+	"SKY_BOX_BACK" : "textures/skybox/back.jpg"
 }

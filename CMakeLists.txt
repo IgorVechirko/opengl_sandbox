@@ -48,6 +48,7 @@ set( OpenGL ${GL_SANDBOX_SRC_DIR}/OpenGL.h ${GL_SANDBOX_SRC_DIR}/OpenGL.cpp )
 
 set( Texture2D ${GL_SANDBOX_SRC_DIR}/Texture2D.h ${GL_SANDBOX_SRC_DIR}/Texture2D.cpp )
 set( TexturesCache ${GL_SANDBOX_SRC_DIR}/TexturesCache.h ${GL_SANDBOX_SRC_DIR}/TexturesCache.cpp )
+set( CubeMap ${GL_SANDBOX_SRC_DIR}/CubeMap.h ${GL_SANDBOX_SRC_DIR}/CubeMap.cpp )
 
 set( ShaderProgram ${GL_SANDBOX_SRC_DIR}/ShaderProgram.h ${GL_SANDBOX_SRC_DIR}/ShaderProgram.cpp )
 set( ShadersCache ${GL_SANDBOX_SRC_DIR}/ShadersCache.h ${GL_SANDBOX_SRC_DIR}/ShadersCache.cpp )
@@ -81,6 +82,8 @@ set( Allocator ${GL_SANDBOX_SRC_DIR}/Allocator.h ${GL_SANDBOX_SRC_DIR}/Allocator
 
 set ( VertexArrayObject ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.h ${GL_SANDBOX_SRC_DIR}/VertexArrayObject.cpp )
 set ( CustomFrameBuffer ${GL_SANDBOX_SRC_DIR}/CustomFrameBuffer.h ${GL_SANDBOX_SRC_DIR}/CustomFrameBuffer.cpp )
+
+set ( Skybox ${GL_SANDBOX_SRC_DIR}/Skybox.h ${GL_SANDBOX_SRC_DIR}/Skybox.cpp )
 
 
 set( WorkingScope 
@@ -131,7 +134,8 @@ source_group( shaders FILES
 
 source_group( textures FILES 
 							${TexturesCache}
-							${Texture2D} 
+							${Texture2D}
+							${CubeMap}
 )
 
 source_group( camera FILES ${Camera} )
@@ -149,12 +153,15 @@ source_group( nodes\\base FILES
 								${Node} 
 								${NodeExtensions} 
 )
-source_group( nodes\\light FILES 
+source_group( nodes\\scene FILES ${Scene} )
+source_group( nodes\\scene\\light FILES 
 						${DirectLightSource} 
 						${Flashlight} 
 						${PointLightSource}
 )
-source_group( nodes\\scene FILES ${Scene} )
+source_group( nodes\\scene\\skybox FILES
+	${Skybox}
+)
 
 source_group( working_scope FILES ${WorkingScope} )
 
@@ -201,6 +208,8 @@ set( SANDBOX_SRC ${Common}
 				 ${Point}
 				 ${OutlineSprite}
 				 ${CustomFrameBuffer}
+				 ${Skybox}
+				 ${CubeMap}
 )
 
 #setup project
@@ -250,6 +259,7 @@ set( DrawLightningModelTest ${WORKING_TESTS_SRC_DIR}/DrawLightningModelTest.h ${
 set( DrawPointTest ${WORKING_TESTS_SRC_DIR}/DrawPointTest.h ${WORKING_TESTS_SRC_DIR}/DrawPointTest.cpp )
 set( OutlineSpriteTest ${WORKING_TESTS_SRC_DIR}/OutlineSpriteTest.h ${WORKING_TESTS_SRC_DIR}/OutlineSpriteTest.cpp )
 set( FrameBufferTest ${WORKING_TESTS_SRC_DIR}/FrameBufferTest.h ${WORKING_TESTS_SRC_DIR}/FrameBufferTest.cpp )
+set( SkyboxTest ${WORKING_TESTS_SRC_DIR}/SkyboxTest.h ${WORKING_TESTS_SRC_DIR}/SkyboxTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -270,6 +280,7 @@ source_group( tests FILES
 									${DrawPointTest}
 									${OutlineSpriteTest}
 									${FrameBufferTest}
+									${SkyboxTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -292,6 +303,7 @@ set( WOKING_TESTS_SRC
 					${DrawPointTest}
 					${OutlineSpriteTest}
 					${FrameBufferTest}
+					${SkyboxTest}
 )
 
 

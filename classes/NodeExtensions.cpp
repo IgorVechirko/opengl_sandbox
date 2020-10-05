@@ -4,6 +4,7 @@
 #include "Texture2D.h"
 #include "GLRender.h"
 #include "Node.h"
+#include "CubeMap.h"
 
 namespace GLSandbox
 {
@@ -78,6 +79,33 @@ namespace GLSandbox
 	Texture2D* Texture2DProtocol::getTexture2D() const
 	{
 		return _texture2D;
+	}
+
+
+	CubeMapProtocol::CubeMapProtocol()
+		: _cubeMap( nullptr )
+	{
+	}
+	CubeMapProtocol::~CubeMapProtocol()
+	{
+		setCubeMap( nullptr );
+	}
+	void CubeMapProtocol::setCubeMap( CubeMap* cubeMap )
+	{
+		if ( cubeMap != _cubeMap )
+		{
+			if ( _cubeMap )
+				_cubeMap->release();
+
+			_cubeMap = cubeMap;
+
+			if ( _cubeMap )
+				_cubeMap->retain();
+		}
+	}
+	CubeMap* CubeMapProtocol::getCubeMap() const
+	{
+		return _cubeMap;
 	}
 
 

@@ -7,6 +7,7 @@
 namespace GLSandbox
 {
 
+	class Skybox;
 	class Camera;
 	class DirectLightSource;
 	class PointLightSource;
@@ -26,6 +27,8 @@ namespace GLSandbox
 
 		const int _maxFlashlights;
 		std::vector<Flashlight*> _flashlights;
+
+		Skybox* _skybox;
 
 
 	protected:
@@ -53,6 +56,10 @@ namespace GLSandbox
 
 		void setCamera( Camera* camera );
 		Camera* getCamera();
+
+		void setSkybox( Skybox* skybox );
+		Skybox* getSkybox();
+
 
 		void setProjectionToShader( ShaderProgram* shader );
 		void setViewToShader( ShaderProgram* shader );

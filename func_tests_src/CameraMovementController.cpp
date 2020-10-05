@@ -210,7 +210,7 @@ namespace FuncTests
 		{
 			_camera->setProjection( projection );
 
-			_camera->setPosition(GLSandbox:: Vec3( 0.0f, 0.0f, 27.0f ) );
+			_camera->setPosition(GLSandbox:: Vec3( 0.0f, 0.0f, 0.0f ) );
 		}
 
 		getTimeScheduler()->addUpdateFunc( std::bind( &CameraMovementController::updaeTime, this, std::placeholders::_1 ), this );

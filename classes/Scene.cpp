@@ -6,6 +6,7 @@
 #include "PointLightSource.h"
 #include "Flashlight.h"
 #include "ShaderProgram.h"
+#include "Skybox.h"
 
 namespace GLSandbox
 {
@@ -15,10 +16,16 @@ namespace GLSandbox
 		, _camera( nullptr )
 		, _maxPointLights( 10 )
 		, _maxFlashlights( 10 )
+		, _skybox( nullptr )
 	{
 	}
 	Scene::~Scene()
 	{
+		if (_skybox)
+		{
+			_skybox->release();
+			_skybox = nullptr;
+		}
 	}
 	bool Scene::onInit()
 	{
@@ -33,6 +40,9 @@ namespace GLSandbox
 		drawTraversalProtectedChildren( transform );
 
 		Node::drawTraversal( parentTransform );
+
+		if ( _skybox )
+			_skybox->draw();
 	}
 	void Scene::setDirectionLight( DirectLightSource* directionLight )
 	{
@@ -91,6 +101,24 @@ namespace GLSandbox
 	{
 		_ASSERT( _camera );
 		return _camera;
+	}
+	void Scene::setSkybox( Skybox* skybox )
+	{
+		if ( _skybox )
+		{
+			_skybox->release();
+			_skybox = nullptr;
+		}
+
+		_skybox = skybox;
+
+		if ( _skybox )
+			_skybox->retain();
+
+	}
+	Skybox* Scene::getSkybox()
+	{
+		return _skybox;
 	}
 	void Scene::setProjectionToShader( ShaderProgram* shader )
 	{

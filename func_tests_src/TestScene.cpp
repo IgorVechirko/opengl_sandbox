@@ -16,6 +16,7 @@
 #include "FileUtils.h"
 #include "Texture2D.h"
 #include "OutlineSprite.h"
+#include "Skybox.h"
 
 
 using namespace GLSandbox;
@@ -38,11 +39,25 @@ namespace FuncTests
 	{
 		Parent::onInit();
 
-		_frameBuffer = createNode<CustomFrameBuffer>();
+		std::array<std::string,6> cubeMapPlatesPaths = {
+			getResMng()->getResPath( "SKY_BOX_RIGHT" ),
+			getResMng()->getResPath( "SKY_BOX_LEFT" ),
+			getResMng()->getResPath( "SKY_BOX_TOP" ),
+			getResMng()->getResPath( "SKY_BOX_BOTTOM" ),
+			getResMng()->getResPath( "SKY_BOX_FRONT" ),
+			getResMng()->getResPath( "SKY_BOX_BACK" )
+		};
+
+		auto skybox = createScopedRefWithInitializer<Skybox>(&Skybox::initWithPlanesPaths,cubeMapPlatesPaths );
+		if ( true && skybox )
+		{
+			setSkybox( skybox );
+		}
+
+		//_frameBuffer = createNode<CustomFrameBuffer>();
 		if ( _frameBuffer )
 		{
 			_frameBuffer->retain();
-			//addChild( _frameBuffer );
 		}
 
 		if ( true )
@@ -91,7 +106,8 @@ namespace FuncTests
 		if( true )
 		{
 			auto origin = createNode<GLSandbox::AxisesOrigin>();
-			addChild( origin );
+			if ( origin )
+				addChild( origin );
 		}
 
 		if ( false )
