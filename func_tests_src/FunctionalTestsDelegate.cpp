@@ -19,6 +19,7 @@
 #include "FrameBufferTest.h"
 #include "SkyboxTest.h"
 #include "ReflectionCubeTest.h"
+#include "RefractionCubeTest.h"
 
 #include "TestScene.h"
 
@@ -73,7 +74,8 @@ namespace FuncTests
 				std::bind( &Creator::createNode<OutlineSpriteTest>, getCreator() ),
 				std::bind( &Creator::createNode<FrameBufferTest>, getCreator() ),
 				std::bind( &Creator::createNode<SkyboxTest>, getCreator() ),
-				std::bind( &Creator::createNode<ReflectionCubeTest>, getCreator() )
+				std::bind( &Creator::createNode<ReflectionCubeTest>, getCreator() ),
+				std::bind( &Creator::createNode<RefractionCubeTest>, getCreator() )
 			};
 		}
 #else

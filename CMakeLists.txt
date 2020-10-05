@@ -64,6 +64,7 @@ set( AxisesOrigin ${GL_SANDBOX_SRC_DIR}/AxisesOrigin.h ${GL_SANDBOX_SRC_DIR}/Axi
 set( ColorCube ${GL_SANDBOX_SRC_DIR}/ColorCube.h ${GL_SANDBOX_SRC_DIR}/ColorCube.cpp )
 set( Cube ${GL_SANDBOX_SRC_DIR}/Cube.h ${GL_SANDBOX_SRC_DIR}/Cube.cpp )
 set( ReflectionCube ${GL_SANDBOX_SRC_DIR}/ReflectionCube.h ${GL_SANDBOX_SRC_DIR}/ReflectionCube.cpp )
+set( RefractionCube ${GL_SANDBOX_SRC_DIR}/RefractionCube.h ${GL_SANDBOX_SRC_DIR}/RefractionCube.cpp )
 
 set( Line ${GL_SANDBOX_SRC_DIR}/Line.h ${GL_SANDBOX_SRC_DIR}/Line.cpp )
 
@@ -150,6 +151,7 @@ source_group( nodes FILES ${AxisesOrigin}
 						  ${Point}
 						  ${OutlineSprite}
 						  ${ReflectionCube}
+						  ${RefractionCube}
 )
 source_group( nodes\\base FILES 
 								${Node} 
@@ -213,6 +215,7 @@ set( SANDBOX_SRC ${Common}
 				 ${Skybox}
 				 ${CubeMap}
 				 ${ReflectionCube}
+				 ${RefractionCube}
 )
 
 #setup project
@@ -264,6 +267,7 @@ set( OutlineSpriteTest ${WORKING_TESTS_SRC_DIR}/OutlineSpriteTest.h ${WORKING_TE
 set( FrameBufferTest ${WORKING_TESTS_SRC_DIR}/FrameBufferTest.h ${WORKING_TESTS_SRC_DIR}/FrameBufferTest.cpp )
 set( SkyboxTest ${WORKING_TESTS_SRC_DIR}/SkyboxTest.h ${WORKING_TESTS_SRC_DIR}/SkyboxTest.cpp )
 set( ReflectionCubeTest ${WORKING_TESTS_SRC_DIR}/ReflectionCubeTest.h ${WORKING_TESTS_SRC_DIR}/ReflectionCubeTest.cpp )
+set( RefractionCubeTest ${WORKING_TESTS_SRC_DIR}/RefractionCubeTest.h ${WORKING_TESTS_SRC_DIR}/RefractionCubeTest.cpp )
 
 source_group( content FILES 
 							${TestScene} 
@@ -286,6 +290,7 @@ source_group( tests FILES
 									${FrameBufferTest}
 									${SkyboxTest}
 									${ReflectionCubeTest}
+									${RefractionCubeTest}
 )
 
 source_group( woking_main ${func_tests_main} )
@@ -310,6 +315,7 @@ set( WOKING_TESTS_SRC
 					${FrameBufferTest}
 					${SkyboxTest}
 					${ReflectionCubeTest}
+					${RefractionCubeTest}
 )
 
 

@@ -18,6 +18,7 @@
 #include "OutlineSprite.h"
 #include "Skybox.h"
 #include "ReflectionCube.h"
+#include "RefractionCube.h"
 
 
 using namespace GLSandbox;
@@ -184,9 +185,11 @@ namespace FuncTests
 
 		if ( true )
 		{
-			auto colorCube = createNode<GLSandbox::ReflectionCube>();
+			auto colorCube = createNode<GLSandbox::RefractionCube>();
 
-			colorCube->setReflectionCubeSize( 100.0f );
+			colorCube->setRefractionCubeSize( 100.0f );
+			colorCube->setRefractCoef( 1.33f );
+
 			colorCube->setOriginShift( GLSandbox::Vec3( -50.0f, -50.0f, -50.0f ) );
 			colorCube->setPosition ( GLSandbox::Vec3( 100.0f, 100.0f, 100.0f ) );
 			//colorCube->setScale( Vec3( 0.5f, 0.5f, 0.5f ) );
