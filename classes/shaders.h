@@ -15,6 +15,7 @@ namespace GLSandbox
 	extern const char* positionUVNoMVP_vert;
 	extern const char* positionNoModel_vert;
 	extern const char* cubebapSampler_frag;
+	extern const char* skyboxReflection_frag;
 }
 
 
