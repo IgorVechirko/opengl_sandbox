@@ -21,7 +21,7 @@ namespace GLSandbox
 		_arrayBuffer.genBuffer( VertexArrayObject::BufferType::VERTEX );
 		_arrayBuffer.setupAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0 );
 
-		setShaderProgram( getShadersCache()->getStandartShader( StandartShaderType::POS_UCOLOR ) );
+		setShaderProgram( getShadersCache()->getStandartShader( StandartShaderType::POS_UCOLOR_ROUND_POINT ) );
 
 		std::vector<PosVertex> vertices = { {Vec3(0.0f)} };
 		_arrayBuffer.setupBufferData( VertexArrayObject::BufferType::VERTEX, vertices.data(), sizeof(PosVertex), vertices.size() );

@@ -23,6 +23,7 @@ namespace GLSandbox
 			MAKE_UNCOPYABLE(ShaderProgram);
 
 			bool initWithSrc( const std::string& verSrc, const std::string& fragSrc );
+			bool initWithSrcGeometry( const std::string& verSrc, const std::string& fragSrc, const std::string& gmrtSrc );
 
 			[[deprecated]] 
 			GLuint getProgramID() const;

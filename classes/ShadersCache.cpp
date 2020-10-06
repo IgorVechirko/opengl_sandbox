@@ -28,6 +28,7 @@ namespace GLSandbox
 		_standartShaders[ StandartShaderType::NO_MODEL_CUBE_SAMPLER ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionNoModel_vert, cubebapSampler_frag );
 		_standartShaders[ StandartShaderType::POS_NORMAL_SKYBOX_REFLECTION ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionNormalLightProp_vert, skyboxReflection_frag );
 		_standartShaders[ StandartShaderType::POS_NORMAL_SKYBOX_REFRACTION ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrc, positionNormalLightProp_vert, skyboxRefraction_frag );
+		_standartShaders[ StandartShaderType::POS_UCOLOR_ROUND_POINT ] = createRefWithInitializer<ShaderProgram>(&ShaderProgram::initWithSrcGeometry, positionUColor_vert, positionUColor_frag, dotToRound_gmtr );
 
 		for( auto& shaderPair : _standartShaders )
 			shaderPair.second->retain();

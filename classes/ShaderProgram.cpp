@@ -76,6 +76,103 @@ namespace GLSandbox
 
 		return true;
 	}
+	bool ShaderProgram::initWithSrcGeometry( const std::string& verSrc, const std::string& fragSrc, const std::string& gmrtSrc )
+	{
+		bool result = true;
+
+		if ( verSrc.empty() || fragSrc.empty() )
+			return false;
+		else if ( gmrtSrc.empty() )
+			return initWithSrc( verSrc, fragSrc );
+
+		if ( verSrc.empty() || fragSrc.empty() )
+			return false;
+
+		const char* vertexChar = verSrc.c_str();
+		const char* fragmentChar = fragSrc.c_str();
+		const char* geomertyChar = gmrtSrc.c_str();
+
+		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertexShader, 1, &vertexChar, NULL);
+		glCompileShader(vertexShader);
+
+		GLint logSize = 0;
+		glGetShaderiv( vertexShader, GL_INFO_LOG_LENGTH, &logSize);
+		if (logSize)
+		{
+			auto infoLog = std::unique_ptr<GLchar>(new GLchar[logSize]);
+			glGetShaderInfoLog(vertexShader, logSize, NULL, infoLog.get());
+			Console::log( "vertex shader compile error:\n", verSrc, "\n", infoLog.get() );
+			logSize = 0;
+
+			glDeleteShader(vertexShader);
+
+			return false;
+		}
+
+
+		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragmentShader, 1, &fragmentChar, NULL);
+		glCompileShader(fragmentShader);
+
+		glGetShaderiv( fragmentShader, GL_INFO_LOG_LENGTH, &logSize);
+		if (logSize)
+		{
+			auto infoLog = std::unique_ptr<GLchar>(new GLchar[logSize]);
+			glGetShaderInfoLog(fragmentShader, logSize, NULL, infoLog.get());
+			Console::log( "fragment shader compile error:\n", fragSrc, "\n", infoLog.get() );
+			logSize = 0;
+
+			glDeleteShader(vertexShader);
+			glDeleteShader(fragmentShader);
+
+			return false;
+		}
+
+		GLint geomentryShader = glCreateShader( GL_GEOMETRY_SHADER );
+		glShaderSource( geomentryShader, 1, &geomertyChar, NULL );
+		glCompileShader(geomentryShader);
+
+		glGetShaderiv( geomentryShader, GL_INFO_LOG_LENGTH, &logSize );
+		if ( logSize )
+		{
+			auto infoLog = std::unique_ptr<GLchar>( new GLchar[logSize] );
+			glGetShaderInfoLog( geomentryShader, logSize, NULL, infoLog.get() );
+			Console::log( "geometry shader compile error:\n", gmrtSrc, "\n", infoLog.get() );
+			logSize = 0;
+
+			glDeleteShader(vertexShader);
+			glDeleteShader(fragmentShader);
+			glDeleteShader(geomentryShader);
+
+			return false;
+		}
+
+
+		_programID = glCreateProgram();
+		glAttachShader(_programID, vertexShader);
+		glAttachShader(_programID, fragmentShader);
+		glAttachShader(_programID, geomentryShader );
+		glLinkProgram(_programID);
+
+		glGetProgramiv( _programID, GL_INFO_LOG_LENGTH, &logSize );
+		if ( logSize )
+		{
+			auto infoLog = std::unique_ptr<GLchar>(new GLchar[logSize]);
+			glGetProgramInfoLog( _programID, logSize, NULL, infoLog.get() );
+			Console::log( "program compile error: ", infoLog.get() );
+
+			glDeleteShader(vertexShader);
+			glDeleteShader(fragmentShader);
+			glDeleteShader(geomentryShader);
+
+			return false;
+		}
+
+		
+
+		return true;
+	}
 	GLuint ShaderProgram::getProgramID() const
 	{
 		return _programID;

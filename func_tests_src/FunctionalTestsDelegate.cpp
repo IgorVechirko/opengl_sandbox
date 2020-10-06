@@ -53,9 +53,9 @@ namespace FuncTests
 		for( const auto& texturePair : getTexturesCache()->getCachedTextures() )
 			texturePair.second->setAllwaysCached( true );
 
-		if ( false )
+		if ( true )
 		{
-			_testsCreateFuncs = { std::bind( &Creator::createNode<TestScene>, getCreator() ) };
+			_testsCreateFuncs = { std::bind( &Creator::createNode<DrawPointTest>, getCreator() ) };
 		}
 		else
 		{

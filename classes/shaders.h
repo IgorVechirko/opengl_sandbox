@@ -17,6 +17,7 @@ namespace GLSandbox
 	extern const char* cubebapSampler_frag;
 	extern const char* skyboxReflection_frag;
 	extern const char* skyboxRefraction_frag;
+	extern const char* dotToRound_gmtr;
 }
 
 
