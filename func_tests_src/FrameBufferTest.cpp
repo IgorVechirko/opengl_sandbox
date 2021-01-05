@@ -22,6 +22,9 @@ namespace FuncTests
 	{
 		Scene::onInit();
 
+		setName( "FrameBufferTest" );
+		Console::log( getName(), ": test scene run." );
+
 		_frameBuffer = createNode<CustomFrameBuffer>();
 		if ( _frameBuffer )
 		{
